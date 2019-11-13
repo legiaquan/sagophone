@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class SanPham extends Model
 {
-    //lien ket voi bang sanpham trong csdl
-    protected $table = "sanpham";
-    public $timestamps = false;
-
-    public function loaisanpham()
+    //
+    protected $table = "tbsanpham";
+    public function hangdt()
     {
-    	return $this->belongsTo('App\LoaiSanPham','id_loaisanpham','id');
+    	return $this->belongsTo('App\HangDT','id_hangdt','id');
     }
-    
+    public function nhomsp()
+    {
+    	return $this->belongsTo('App\NhomSanPham','id_nhom','id');
+    }
 }
