@@ -1,43 +1,24 @@
-<!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Admin - SagoPhone</a>
-            </div>
-            <!-- /.navbar-header -->
-
-            <ul class="nav navbar-top-links navbar-right">
-                <!-- /.dropdown -->
-               
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        
-                        @if(isset($admin_login))
-                        
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> {{ $admin_login->name }}</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                         @endif
-                    </ul>
-                    <!-- /.dropdown-user -->
+<nav class="navbar navbar-expand-lg navbar-light bg-faded header-navbar">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            
+          </div>
+          <div class="navbar-container">
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+              <ul class="navbar-nav">
+                
+                <li class="dropdown nav-item">
+                  <a class="nav-link position-relative">Xin chào bạn Quân!</a>
                 </li>
-               
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
-
-            @include('admin.layout.menu')
-            <!-- /.navbar-static-side -->
-        </nav>
+                
+                <li class="dropdown nav-item"><a id="dropdownBasic3" href="#" data-toggle="dropdown" class="nav-link position-relative dropdown-toggle"><i class="ft-user font-medium-3 blue-grey darken-4"></i>
+                    <p class="d-none">User Settings</p></a>
+                  <div ngbdropdownmenu="" aria-labelledby="dropdownBasic3" class="dropdown-menu text-left dropdown-menu-right"><a href="javascript:;" class="dropdown-item py-1"><i class="ft-settings mr-2"></i><span>Settings</span></a><a href="javascript:;" class="dropdown-item py-1"><i class="ft-edit mr-2"></i><span>Edit Profile</span></a><a href="javascript:;" class="dropdown-item py-1"><i class="ft-mail mr-2"></i><span>My Inbox</span></a>
+                    <div class="dropdown-divider"></div><a href="javascript:;" class="dropdown-item"><i class="ft-power mr-2"></i><span>Logout</span></a>
+                  </div>
+                </li>
+                
+            </div>
+          </div>
+        </div>
+      </nav>

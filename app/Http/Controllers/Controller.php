@@ -29,7 +29,7 @@ class Controller extends BaseController
     		view()->share('admin_login',Auth::admin());
     	}
         else{
-            echo 'khong ton tai';
+            //echo 'khong ton tai';
             //$a = Auth::guard('admin')->check();
             //var_dump($a);
             //$b = Auth::guard('admin');

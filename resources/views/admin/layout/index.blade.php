@@ -1,70 +1,92 @@
- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
+<!DOCTYPE html>
+<html lang="en" class="loading">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Admin - SagoPhone">
-    <meta name="author" content="">
-    <title>Admin - SagoPhone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Apex admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Apex admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
     <base href="{{ asset('') }}">
-     <!-- Bootstrap Core CSS -->
-    <link href="admin_asset/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Sagophone - Admin</title>
+    <link rel="apple-touch-icon" sizes="60x60" href="admin_asset/app-assets/img/ico/apple-icon-60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="admin_asset/app-assets/img/ico/apple-icon-76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="admin_asset/app-assets/img/ico/apple-icon-120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="admin_asset/app-assets/img/ico/apple-icon-152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="admin_asset/app-assets/img/ico/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="admin_asset/app-assets/img/ico/favicon-32.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900|Montserrat:300,400,500,600,700,800,900" rel="stylesheet">
+    <!-- BEGIN VENDOR CSS-->
+    <!-- font icons-->
+    <link rel="stylesheet" type="text/css" href="admin_asset/app-assets/fonts/feather/style.min.css">
+    <link rel="stylesheet" type="text/css" href="admin_asset/app-assets/fonts/simple-line-icons/style.css">
+    <link rel="stylesheet" type="text/css" href="admin_asset/app-assets/fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="admin_asset/app-assets/vendors/css/perfect-scrollbar.min.css">
+    <link rel="stylesheet" type="text/css" href="admin_asset/app-assets/vendors/css/prism.min.css">
+    <link rel="stylesheet" type="text/css" href="admin_asset/app-assets/vendors/css/chartist.min.css">
+    <!-- END VENDOR CSS-->
+    <!-- BEGIN APEX CSS-->
+    <link rel="stylesheet" type="text/css" href="admin_asset/app-assets/css/app.css">
+    <!-- END APEX CSS-->
+    <!-- BEGIN Page Level CSS-->
+    <!-- END Page Level CSS-->
+  </head>
+  <body data-col="2-columns" class=" 2-columns ">
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <div class="wrapper nav-collapsed menu-collapsed">
 
-    <!-- MetisMenu CSS -->
-    <link href="admin_asset/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="admin_asset/dist/css/sb-admin-2.css" rel="stylesheet">
+      <!-- main menu-->
+      @include('admin.layout.menu')
+      <!-- / main menu-->
 
-    <!-- Custom Fonts -->
-    <link href="admin_asset/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- DataTables CSS -->
-    <link href="admin_asset/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+      <!-- Navbar (Header) Starts-->
+      @include('admin.layout.header')
+      <!-- Navbar (Header) Ends-->
 
-    <!-- DataTables Responsive CSS -->
-    <link href="admin_asset/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-    <div id="wrapper">
-
-        @include('admin.layout.header')
+      <div class="main-panel">
+        <div class="main-content">
+          <div class="content-wrapper"><!--Statistics cards Starts-->
 
         @yield('content')
 
+          </div>
+        </div>
+
+        <footer class="footer footer-static footer-light">
+          <p class="clearfix text-muted text-sm-center px-2"><span>Copyright  &copy; 2019 <a href="#" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">Sagophone </a>, Xây dựng website bán điện thoại di động<br> LÊ GIA QUÂN <a><i class="ft-github" ></i></a> NGUYỄN MINH TRƯỜNG </span></p>
+        </footer>
+
+      </div>
     </div>
-    <!-- /#wrapper -->
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-    <!-- jQuery -->
-    <script src="admin_asset/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="admin_asset/js/jquery-3.4.1.min.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="admin_asset/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="admin_asset/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="admin_asset/dist/js/sb-admin-2.js"></script>
-    
-    <!-- DataTables JavaScript -->
-    <script src="admin_asset/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
-    <script src="admin_asset/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-    
-    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
-        });
-    });
-    </script>
-    
-    @yield('script')
-</body>
-
+    <!-- END Notification Sidebar-->
+    <!-- BEGIN VENDOR JS-->
+    <script src="admin_asset/app-assets/vendors/js/core/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="admin_asset/app-assets/vendors/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="admin_asset/app-assets/vendors/js/core/bootstrap.min.js" type="text/javascript"></script>
+    <script src="admin_asset/app-assets/vendors/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+    <script src="admin_asset/app-assets/vendors/js/prism.min.js" type="text/javascript"></script>
+    <script src="admin_asset/app-assets/vendors/js/jquery.matchHeight-min.js" type="text/javascript"></script>
+    <script src="admin_asset/app-assets/vendors/js/screenfull.min.js" type="text/javascript"></script>
+    <script src="admin_asset/app-assets/vendors/js/pace/pace.min.js" type="text/javascript"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="admin_asset/app-assets/vendors/js/chartist.min.js" type="text/javascript"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN APEX JS-->
+    <script src="admin_asset/app-assets/js/app-sidebar.js" type="text/javascript"></script>
+    <script src="admin_asset/app-assets/js/notification-sidebar.js" type="text/javascript"></script>
+    <script src="admin_asset/app-assets/js/customizer.js" type="text/javascript"></script>
+    <!-- END APEX JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="admin_asset/app-assets/js/dashboard1.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL JS-->
+  </body>
 </html>

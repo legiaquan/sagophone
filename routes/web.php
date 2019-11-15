@@ -12,8 +12,8 @@
 */
 use App\NhomSanPham;
 use App\HangDt;
-use App\ChiTietHoaDon;
-use App\HoaDon;
+use App\ChiTietDonHang;
+use App\DonHang;
 use App\ThanhVien;
 Route::get('/', function () {
     return view('welcome');
@@ -24,7 +24,7 @@ Route::get('admin/dangnhap','AdminController@getLogin');
 Route::post('admin/dangnhap','AdminController@postLogin');
 
 Route::group(['prefix'=>'admin'],function(){
-
+	Route::get('trang-chu.html','AdminController@index');
 	/*Hang dien thoai*/
 	Route::group(['prefix'=>'hangdt'],function(){
 		// admin/hangdt/danhsach
@@ -40,19 +40,19 @@ Route::group(['prefix'=>'admin'],function(){
 	});
 
 	/*Chi tiet hoa don*/
-	Route::group(['prefix'=>'chitiethoadon'],function(){
-		// admin/ChiTietHoaDon/danhsach
-		Route::get('danhsach','ChiTietHoaDonController@getDanhSach');
-		Route::get('sua','ChiTietHoaDonController@getSua');
-		Route::get('them','ChiTietHoaDonController@getThem');
+	Route::group(['prefix'=>'chitietdonhang'],function(){
+		// admin/ChiTietDonHang/danhsach
+		Route::get('danhsach','ChiTietDonHangController@getDanhSach');
+		Route::get('sua','ChiTietDonHangController@getSua');
+		Route::get('them','ChiTietDonHangController@getThem');
 	});
 
 	/*Hoa don*/
-	Route::group(['prefix'=>'hoadon'],function(){
-		// admin/hoadon/danhsach
-		Route::get('danhsach','HoaDonController@getDanhSach');
-		Route::get('sua','HoaDonController@getSua');
-		Route::get('them','HoaDonController@getThem');
+	Route::group(['prefix'=>'donhang'],function(){
+		// admin/donhang/danhsach
+		Route::get('danhsach','DonHangController@getDanhSach');
+		Route::get('sua','DonHangController@getSua');
+		Route::get('them','DonHangController@getThem');
 	});
 
 	/*Nhom san pham*/
@@ -98,20 +98,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::get('xoa/{id}','ThanhVienController@getXoa');
 	});
 
-	//quanlydonhang
-	Route::group(['prefix'=>'quanlydonhang'],function(){
-		// admin/quanlydonhang/danhsach
-		Route::get('danhsach','QuanLyDonHangController@getDanhSach');
-
-		Route::get('sua/{id}','QuanLyDonHangController@getSua');
-		Route::post('sua/{id}','QuanLyDonHangController@postSua');
-		
-		Route::get('them','QuanLyDonHangController@getThem');
-		Route::post('them','QuanLyDonHangController@postThem');
-
-		Route::get('xoa/{id}','QuanLyDonHangController@getXoa');
-	});
-
+	
 });
 Auth::routes();
 
