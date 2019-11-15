@@ -16,8 +16,8 @@
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-pocket"></i><span data-i18n="" class="menu-title">Hãng điện thoại</span></a>
                 <ul class="menu-content">
-                  <li><a href="forgot-password-page.html" class="menu-item">Danh sách</a></li>
-                  <li><a href="horizontal-timeline-page.html" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-copy"></i><span data-i18n="" class="menu-title">Nhóm sản phẩm</span></a>

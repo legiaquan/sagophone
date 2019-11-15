@@ -63,10 +63,15 @@ class HangDTController extends Controller
     	$hangdt->save();
     	return redirect('admin/hangdt/sua/'.$id)->with('thongbao','Sửa thành công!');
     }
-
     public function getXoa($id)
     {
+        $id_hangdt = HangDT::find($id);
+        return view('admin.hangdt.xoa',['id_hangdt'=>$id_hangdt]);
+    }
+    public function postXoa($id)
+    {
     	$hangdt = HangDT::find($id);
+        
     	$hangdt->delete();
     	return redirect('admin/hangdt/danhsach')->with('thongbao','Bạn đã xóa thành công '.$hangdt->tenhang);
     }

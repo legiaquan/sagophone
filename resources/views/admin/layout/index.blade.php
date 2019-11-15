@@ -27,6 +27,8 @@
     <link rel="stylesheet" type="text/css" href="admin_asset/app-assets/vendors/css/perfect-scrollbar.min.css">
     <link rel="stylesheet" type="text/css" href="admin_asset/app-assets/vendors/css/prism.min.css">
     <link rel="stylesheet" type="text/css" href="admin_asset/app-assets/vendors/css/chartist.min.css">
+    <link rel="stylesheet" type="text/css" href="admin_asset/app-assets/vendors/css/tables/datatable/datatables.min.css">
+
     <!-- END VENDOR CSS-->
     <!-- BEGIN APEX CSS-->
     <link rel="stylesheet" type="text/css" href="admin_asset/app-assets/css/app.css">
@@ -58,7 +60,7 @@
         </div>
 
         <footer class="footer footer-static footer-light">
-          <p class="clearfix text-muted text-sm-center px-2"><span>Copyright  &copy; 2019 <a href="#" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">Sagophone </a>, Xây dựng website bán điện thoại di động<br> LÊ GIA QUÂN <a><i class="ft-github" ></i></a> NGUYỄN MINH TRƯỜNG </span></p>
+          <p class="clearfix text-muted text-sm-center px-2"><span>Copyright  &copy; 2019 <a href="#" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">Sagophone </a>, Xây dựng website bán điện thoại di động<br> LÊ GIA QUÂN <a><i class="ft-github" ></i></a>NGUYỄN MINH TRƯỜNG </span></p>
         </footer>
 
       </div>
@@ -79,6 +81,7 @@
     <!-- BEGIN VENDOR JS-->
     <!-- BEGIN PAGE VENDOR JS-->
     <script src="admin_asset/app-assets/vendors/js/chartist.min.js" type="text/javascript"></script>
+    <script src="admin_asset/app-assets/vendors/js/datatable/datatables.min.js" type="text/javascript"></script>
     <!-- END PAGE VENDOR JS-->
     <!-- BEGIN APEX JS-->
     <script src="admin_asset/app-assets/js/app-sidebar.js" type="text/javascript"></script>
@@ -87,6 +90,7 @@
     <!-- END APEX JS-->
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="admin_asset/app-assets/js/dashboard1.js" type="text/javascript"></script>
+    <script src="admin_asset/app-assets/js/data-tables/datatable-basic.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
   </body>
 </html>

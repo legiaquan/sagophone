@@ -37,6 +37,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('them','HangDTController@postThem');
 
 		Route::get('xoa/{id}','HangDTController@getXoa');
+		Route::post('xoa/{id}','HangDTController@postXoa');
 	});
 
 	/*Chi tiet hoa don*/
