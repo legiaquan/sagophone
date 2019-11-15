@@ -25,11 +25,11 @@ class Controller extends BaseController
         $auth = Auth::guard('admin');
     	if($auth->check())
     	{
-            echo 'tồn tại';
+            
     		view()->share('admin_login',Auth::admin());
     	}
         else{
-            echo 'khong ton tai';
+          
             //$a = Auth::guard('admin')->check();
             //var_dump($a);
             //$b = Auth::guard('admin');

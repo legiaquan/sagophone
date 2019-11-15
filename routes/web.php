@@ -116,3 +116,20 @@ Route::group(['prefix'=>'admin'],function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//FRONTEND
+Route::get('trangchu','PageController@trangchu');
+
+Route::get('dangnhap','PageController@getDangNhap');
+
+Route::post('dangnhap','PageController@postDangNhap');
+
+Route::get('dangky','PageController@getDangKy');
+
+Route::post('dangky','PageController@postDangKy');
+
+Route::get('loaitin','PageController@loaitin');
+
+Route::get('tintuc/{id}','PageController@tintuc');
+
+Route::get('danhmuc','PageController@danhmuc');
