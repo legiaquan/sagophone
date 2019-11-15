@@ -12,7 +12,7 @@ class ChiTietDonHang extends Model
     
     // public function sanpham()
     // {
-    // 	return $this->belongsTo('App\SanPham','id_sanpham','id_sanpham');
+    // 	return $this->belongsTo('App\SanPham','id','id_sanpham');
     // }
     public function donhang()
     {
