@@ -1,0 +1,52 @@
+// ================================================================================================
+//  File Name: custom-rtl.scss
+//  Description: Modern RTL support SCSS file.
+//  ----------------------------------------------------------------------------------------------
+//  Item Name: Modern Admin - Clean Bootstrap 4 Dashboard HTML Template
+//  Version: 1.0
+//  Author: PIXINVENT
+//  Author URL: http://www.themeforest.net/user/pixinvent
+// ================================================================================================
+
+body{
+    direction: rtl;
+}
+// Toastr
+div.hopscotch-bubble .hopscotch-bubble-arrow-container.left {
+    left: -34px;
+}
+
+// Tags Input
+.tagging .tag{
+    padding: 7px 0px 7px 24px;
+}
+.tagging .tag span{
+    border-radius: 0 2px 2px 0;
+}
+.tagging .tag .tag-i{
+    right: auto;
+    left: 8px;
+}
+
+// Wizard
+.main-panel {
+    transform: none;
+}
+.main-content .wizard > .steps > ul > li:before{
+    left: auto;
+    right: 0;
+}
+.main-content .wizard > .steps > ul > li:after{
+    right: auto !important;
+    left: 0;
+}
+
+// Image Cropper
+.cropper-container{
+    direction: ltr !important;
+}
+
+#rtl-icon{
+    top: 43%;
+    left: -1px;
+}
