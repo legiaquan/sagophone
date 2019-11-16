@@ -45,6 +45,7 @@
 									<label for="issueinput1">Mã màu</label>
 									<input type="color" name="txtMamau" value="black">
 								</div>
+								
 							<div class="form-actions">
 								
 								<button type="reset" class="btn btn-raised btn-warning mr-1">

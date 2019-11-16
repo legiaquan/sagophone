@@ -13,8 +13,8 @@
     <link rel="apple-touch-icon" sizes="76x76" href="admin_asset/app-assets/img/ico/apple-icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="admin_asset/app-assets/img/ico/apple-icon-120.png">
     <link rel="apple-touch-icon" sizes="152x152" href="admin_asset/app-assets/img/ico/apple-icon-152.png">
-    <link rel="shortcut icon" type="image/x-icon" href="admin_asset/app-assets/img/ico/favicon.ico">
-    <link rel="shortcut icon" type="image/png" href="admin_asset/app-assets/img/ico/favicon-32.png">
+    <link rel="shortcut icon" type="image/x-icon" href="admin_asset/app-assets/img/ico/sago.ico">
+    <link rel="shortcut icon" type="image/png" href="admin_asset/app-assets/img/ico/sago-32.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">

@@ -8,7 +8,7 @@ class Level extends Model
 {
     //
     protected $table = "tblevel";
-
+    public $timestamps = false;
     public function admins()
     {
     	return $this->hasMany('App\Admin','id_level','id');
