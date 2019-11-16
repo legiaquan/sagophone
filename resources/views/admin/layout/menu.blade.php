@@ -22,62 +22,62 @@
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-copy"></i><span data-i18n="" class="menu-title">Nhóm sản phẩm</span></a>
                 <ul class="menu-content">
-                  <li><a href="forgot-password-page.html" class="menu-item">Danh sách</a></li>
-                  <li><a href="horizontal-timeline-page.html" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/nhomsanpham/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/nhomsanpham/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-image"></i><span data-i18n="" class="menu-title">Bảng màu</span></a>
                 <ul class="menu-content">
-                  <li><a href="forgot-password-page.html" class="menu-item">Danh sách</a></li>
-                  <li><a href="horizontal-timeline-page.html" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-smartphone"></i><span data-i18n="" class="menu-title">Sản phẩm</span></a>
                 <ul class="menu-content">
-                  <li><a href="forgot-password-page.html" class="menu-item">Danh sách</a></li>
-                  <li><a href="horizontal-timeline-page.html" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-bookmark"></i><span data-i18n="" class="menu-title">Banner</span></a>
                 <ul class="menu-content">
-                  <li><a href="forgot-password-page.html" class="menu-item">Danh sách</a></li>
-                  <li><a href="horizontal-timeline-page.html" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-shopping-cart"></i><span data-i18n="" class="menu-title">Đơn hàng</span></a>
                 <ul class="menu-content">
-                  <li><a href="forgot-password-page.html" class="menu-item">Danh sách</a></li>
-                  <li><a href="horizontal-timeline-page.html" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Loại tin</span></a>
                 <ul class="menu-content">
-                  <li><a href="forgot-password-page.html" class="menu-item">Danh sách</a></li>
-                  <li><a href="horizontal-timeline-page.html" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Tin tức</span></a>
                 <ul class="menu-content">
-                  <li><a href="forgot-password-page.html" class="menu-item">Danh sách</a></li>
-                  <li><a href="horizontal-timeline-page.html" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-users"></i><span data-i18n="" class="menu-title">Thành viên</span></a>
                 <ul class="menu-content">
-                  <li><a href="forgot-password-page.html" class="menu-item">Danh sách</a></li>
-                  <li><a href="horizontal-timeline-page.html" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-award"></i><span data-i18n="" class="menu-title">Chức vụ</span></a>
                 <ul class="menu-content">
-                  <li><a href="forgot-password-page.html" class="menu-item">Danh sách</a></li>
-                  <li><a href="horizontal-timeline-page.html" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-user"></i><span data-i18n="" class="menu-title">Nhân viên</span></a>
                 <ul class="menu-content">
-                  <li><a href="forgot-password-page.html" class="menu-item">Danh sách</a></li>
-                  <li><a href="horizontal-timeline-page.html" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
               

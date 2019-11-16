@@ -3,7 +3,7 @@
 <section id="basic-form-layouts">
 	<div class="row">
         <div class="col-sm-12">
-            <div class="content-header">Hãng</div>
+            <div class="content-header">Nhóm sản phẩm</div>
         </div>
     </div>
 	
@@ -15,9 +15,10 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
-					<h4 class="card-title" id="basic-layout-tooltip">Sửa - {{ $hangdt->tenhang }}</h4>
+					<h4 class="card-title" id="basic-layout-tooltip">Sửa - {{ $nhomsanpham->tennhom }}</h4>
+
 					<p class="mb-12"></p>
-					<a href="admin/hangdt/danhsach" ><span class="badge badge-success mr-2"><i class="ft-corner-down-left"></i> Danh sách</span></a>
+					<a href="admin/nhomsanpham/danhsach" ><span class="badge badge-success mr-2"><i class="ft-corner-down-left"></i> Danh sách</span></a>
 				</div>
 				<div class="card-body">
 					<div class="px-3">
@@ -29,12 +30,12 @@
                             </div>
                         @endif
 
-						<form class="form" action="admin/hangdt/sua/{{ $hangdt->id }}" method="POST">
+						<form class="form" action="admin/nhomsanpham/sua/{{ $nhomsanpham->id }}" method="POST">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="form-body">
 								<div class="form-group">
 									<label for="issueinput1">Tên hãng điện thoại</label>
-									<input type="text" id="issueinput1" class="form-control"  name="txtTen" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Issue Title" placeholder="Vui lòng nhập tên hãng điện thoại" value="{{ $hangdt->tenhang }}">
+									<input type="text" id="issueinput1" class="form-control"  name="txtTen" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Issue Title" placeholder="Vui lòng nhập tên hãng điện thoại" value="{{ $nhomsanpham->tennhom }}">
 								</div>
 							<div class="form-actions">
 <!-- 								<button type="button" class="btn btn-raised btn-secondary mr-1" onclick="quayve()">

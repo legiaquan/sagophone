@@ -17,6 +17,7 @@
 				<div class="card-header">
 					<h4 class="card-title" id="basic-layout-tooltip">Sửa</h4>
 					<p class="mb-12"></p>
+					<a href="admin/hangdt/danhsach" ><span class="badge badge-success mr-2"><i class="ft-corner-down-left"></i> Danh sách</span></a>
 				</div>
 				<div class="card-body">
 					<div class="px-3">

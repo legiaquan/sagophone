@@ -42,32 +42,44 @@ class NhomSanPhamController extends Controller
 
     public function getSua($id)
     {
-        $id_nhomsp = NhomSanPham::find($id);
-        return view('admin.nhomsanpham.sua',['id_nhomsp'=>$id_nhomsp]);
+        $nhomsanpham = NhomSanPham::find($id);
+        return view('admin.nhomsanpham.sua',['nhomsanpham'=>$nhomsanpham]);
     }
 
     public function postSua(Request $request,$id)
     {
-        $nhomsp = NhomSanPham::find($id);
+        $nhomsanpham = NhomSanPham::find($id);
         $this->validate($request,
         [
             'txtTen'=>'required|unique:tbnhomsanpham,tennhom|min:2|max:50'
         ],
         [
-            'txtTen.required'=>'Bạn chưa nhập tên hãng',
-            'txtTen.unique'=>'Tên thể loại đã tồn tại',
-            'txtTen.min'=>'Tên hãng phải có độ dài từ 2 cho đến 50 ký tự',
-            'txtTen.max'=>'Tên hãng phải có độ dài từ 2 cho đến 50 ký tự',
+            'txtTen.required'=>'Bạn chưa nhập tên nhóm',
+            'txtTen.unique'=>'Tên nhóm đã tồn tại',
+            'txtTen.min'=>'Tên nhóm phải có độ dài từ 2 cho đến 50 ký tự',
+            'txtTen.max'=>'Tên nhóm phải có độ dài từ 2 cho đến 50 ký tự',
         ]);
-        $nhomsp->tennhom = $request->txtTen;
-        $nhomsp->save();
+        $nhomsanpham->tennhom = $request->txtTen;
+        $nhomsanpham->save();
         return redirect('admin/nhomsanpham/sua/'.$id)->with('thongbao','Sửa thành công!');
     }
 
     public function getXoa($id)
     {
-        $nhomsp = NhomSanPham::find($id);
-        $nhomsp->delete();
-        return redirect('admin/nhomsanpham/danhsach')->with('thongbao','Bạn đã xóa thành công '.$nhomsp->tennhom);
+        $nhomsanpham = NhomSanPham::find($id);
+        return view('admin.nhomsanpham.xoa',['nhomsanpham'=>$nhomsanpham]);
+    }
+    public function postXoa(Request $request, $id)
+    {
+        $nhomsanpham = NhomSanPham::find($id);
+        $this->validate($request,
+        [
+            'confirm'=>'required'
+        ],
+        [
+            'confirm.required'=>'Bạn chưa check vào "Tôi đồng ý"'
+        ]);
+        $nhomsanpham->delete();
+        return redirect('admin/nhomsanpham/danhsach')->with('thongbao','Bạn đã xóa thành công '.$nhomsanpham->tennhom);
     }
 }

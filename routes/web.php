@@ -19,6 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*=============================================
+=            Admin Route START                =
+=============================================*/
 
 Route::get('admin/dangnhap','AdminController@getLogin');
 Route::post('admin/dangnhap','AdminController@postLogin');
@@ -68,6 +71,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('them','NhomSanPhamController@postThem');
 
 		Route::get('xoa/{id}','NhomSanPhamController@getXoa');
+		Route::post('xoa/{id}','NhomSanPhamController@postXoa');
 	
 	});
 
@@ -101,6 +105,9 @@ Route::group(['prefix'=>'admin'],function(){
 
 	
 });
+
+/*=====  End of Admin Route  ======*/
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
