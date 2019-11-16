@@ -10,6 +10,7 @@
                             </div>
                             <div class="card-body collapse show">
                                 <div class="card-block card-dashboard">
+                                    <a href="admin/hangdt/them" ><span class="badge badge-success mr-2">Thêm</span></a>
                                     <p class="card-text">
                                         @if(session('thongbao'))
                                             <div class="alert alert-success">
