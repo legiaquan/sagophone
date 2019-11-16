@@ -6,7 +6,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">DANH SÁCH - BẢNG MÀU <i class="ft-copy"></i></h4>
+                                <h4 class="card-title">DANH SÁCH - BẢNG MÀU <i class="ft-image"></i></h4>
                             </div>
                             <div class="card-body collapse show">
                                 <div class="card-block card-dashboard">
