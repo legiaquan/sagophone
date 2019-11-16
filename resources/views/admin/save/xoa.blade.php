@@ -15,7 +15,7 @@
                       <p>Bạn có chắc chắn muốn xóa?</p>
 
                       <form class="form" action="admin/hangdt/xoa/id" method="POST">
-
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <p>
                           Tôi đồng ý: <input type="checkbox" name="confirm" value="1">
                         </p>

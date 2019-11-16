@@ -92,5 +92,10 @@
     <script src="admin_asset/app-assets/js/dashboard1.js" type="text/javascript"></script>
     <script src="admin_asset/app-assets/js/data-tables/datatable-basic.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
+    <script>
+      function quayve(){
+          history.back();
+      }
+  </script>
   </body>
 </html>

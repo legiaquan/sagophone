@@ -88,10 +88,13 @@
 							</div>
 
 							<div class="form-actions">
+<!-- 								<button type="button" class="btn btn-raised btn-secondary mr-1" onclick="quayve()">
+	<i class="ft-corner-down-left"></i> Quay lại
+</button> -->
 								<button type="reset" class="btn btn-raised btn-warning mr-1">
-									<i class="ft-x"></i> Làm mới
-								</button>
-								<button type="button" class="btn btn-raised btn-primary">
+									<i class="ft-refresh-ccw"></i> Làm mới
+								</button>							
+								<button type="submit" class="btn btn-raised btn-primary">
 									<i class="fa fa-check-square-o"></i> Thêm
 								</button>
 							</div>

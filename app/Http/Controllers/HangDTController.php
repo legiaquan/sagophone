@@ -42,8 +42,8 @@ class HangDTController extends Controller
 
     public function getSua($id)
     {
-    	$id_hangdt = HangDT::find($id);
-    	return view('admin.hangdt.sua',['id_hangdt'=>$id_hangdt]);
+    	$hangdt = HangDT::find($id);
+    	return view('admin.hangdt.sua',['hangdt'=>$hangdt]);
     }
 
     public function postSua(Request $request,$id)
@@ -65,13 +65,20 @@ class HangDTController extends Controller
     }
     public function getXoa($id)
     {
-        $id_hangdt = HangDT::find($id);
-        return view('admin.hangdt.xoa',['id_hangdt'=>$id_hangdt]);
+        $hangdt = HangDT::find($id);
+
+        return view('admin.hangdt.xoa',['hangdt'=>$hangdt]);
     }
-    public function postXoa($id)
+    public function postXoa(Request $request, $id)
     {
     	$hangdt = HangDT::find($id);
-        
+        $this->validate($request,
+        [
+            'confirm'=>'required'
+        ],
+        [
+            'confirm.required'=>'Bạn chưa check vào "Tôi đồng ý"'
+        ]);
     	$hangdt->delete();
     	return redirect('admin/hangdt/danhsach')->with('thongbao','Bạn đã xóa thành công '.$hangdt->tenhang);
     }

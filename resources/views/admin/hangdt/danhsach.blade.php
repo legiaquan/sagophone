@@ -6,7 +6,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">DANH SÁCH - HÃNG ĐIỆN THOẠI</h4>
+                                <h4 class="card-title">DANH SÁCH - HÃNG ĐIỆN THOẠI <i class="ft-pocket"></i></h4>
                             </div>
                             <div class="card-body collapse show">
                                 <div class="card-block card-dashboard">
