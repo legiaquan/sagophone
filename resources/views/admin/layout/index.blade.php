@@ -91,11 +91,13 @@
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="admin_asset/app-assets/js/dashboard1.js" type="text/javascript"></script>
     <script src="admin_asset/app-assets/js/data-tables/datatable-basic.js" type="text/javascript"></script>
+
+    <script language="javascript" src="admin_asset/ckeditor/ckeditor.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
     <script>
       function quayve(){
           history.back();
       }
-  </script>
+    </script>
   </body>
 </html>

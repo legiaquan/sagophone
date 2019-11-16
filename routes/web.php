@@ -103,6 +103,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('them','SanPhamController@postThem');
 		
 		Route::get('xoa/{id}','SanPhamController@getXoa');
+		Route::post('xoa/{id}','SanPhamController@postXoa');
 	});
 
 	//thanhvien

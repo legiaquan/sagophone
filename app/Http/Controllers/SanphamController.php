@@ -26,27 +26,21 @@ class SanPhamController extends Controller
     {
         $this->validate($request,
         [
-            'txtTenSP'=>'required|min:3|unique:tbsanpham,tensp',
-            'txtGia'=>'required',
-            'txtMoTa'=>'required'
+            'txtTen'=>'required|min:3|unique:tbsanpham,tensp',
+            'txtMota'=>'required'
             
         ],
         [
-            'txtTenSP.required'=>'Bạn chưa nhập tên sản phẩm',
-            'txtTenSP.unique'=>'Tên sản phẩm đã tồn tại',
-            'txtTenSP.min'=>'Tên sản phẩm phải có ít nhất 3 ký tự',
-            'txtGia.required'=>'Bạn chưa nhập giá',
-            'txtMoTa.required'=>'Bạn chưa nhập mô tả sản phẩm'
+            'txtTen.required'=>'Bạn chưa nhập tên sản phẩm',
+            'txtTen.unique'=>'Tên sản phẩm đã tồn tại',
+            'txtTen.min'=>'Tên sản phẩm phải có ít nhất 3 ký tự',
+            'txtMota.required'=>'Bạn chưa nhập mô tả sản phẩm'
         ]);
 
         $sanpham = new SanPham;
-        $sanpham->tensp = $request->txtTenSP;
-        $sanpham->id_hangdt = $request->HangDT;
-        $sanpham->id_nhom = $request->NhomSP;
-        $sanpham->gia = $request->txtGia;
-        $sanpham->soluong = $request->txtSL;
-        $sanpham->khuyenmai = $request->txtKM;
-
+        $sanpham->tensp = $request->txtTen;
+        $sanpham->id_hangdt = $request->txtHangDT;
+        $sanpham->id_nhom = $request->txtNhomSP;
         //$sanpham->hinhsp = $request->flHinh;
         
         if($request->hasFile('flHinh'))
@@ -61,7 +55,7 @@ class SanPhamController extends Controller
         	$Hinh = str_random(4)."_".$namefile;
         	while (file_exists("upload/imgSanPham/".$Hinh)) {
         		# code...
-        		$Hinh = str_random(4)."_".$namefile;
+        		$Hinh = str_random(4)."-".$namefile."-sago";
         	}
         	$file->move("upload/imgSanPham",$Hinh);
         	$sanpham->hinhsp = $Hinh;
@@ -70,10 +64,15 @@ class SanPhamController extends Controller
         {
         	$sanpham->hinhsp = "";
         }
+        $sanpham->manhinh = $request->txtManhinh;
+        $sanpham->hedieuhanh = $request->txtHedieuhanh;
+        $sanpham->camtruoc = $request->txtCamtruoc;
+        $sanpham->camsau = $request->txtCamsau;
+        $sanpham->cpu = $request->txtCPU;
+        $sanpham->thesim = $request->txtThesim;
+        $sanpham->dungluongpin = $request->txtPin;
+        $sanpham->mota = $request->txtMota;
 
-        $sanpham->mota = $request->txtMoTa;
-        $sanpham->new = $request->rdoNew;
-        $sanpham->seo = $request->rdoSeo;
 
         $sanpham->save();
 
@@ -82,74 +81,85 @@ class SanPhamController extends Controller
 
     public function getSua($id)
     {
-        $id_sanpham = SanPham::find($id);
+        $sanpham = SanPham::find($id);
         $hangdt = HangDT::all();
     	$nhomsp = NhomSanPham::all();
-        return view('admin.sanpham.sua',['id_sanpham' => $id_sanpham, 'hangdt'=>$hangdt, 'nhomsp' => $nhomsp]);
+        return view('admin.sanpham.sua',['sanpham' => $sanpham, 'hangdt'=>$hangdt, 'nhomsp' => $nhomsp]);
     }
 
     public function postSua(Request $request,$id)
     {
-        $sanpham = SanPham::find($id);
         $this->validate($request,
         [
-            'txtTenSP'=>'required|min:3',
-            'txtGia'=>'required',
-            'txtMoTa'=>'required'
+            'txtTen'=>'required|min:3',
+            'txtMota'=>'required'
             
         ],
         [
-            'txtTenSP.required'=>'Bạn chưa nhập tên sản phẩm',
-           
-            'txtTenSP.min'=>'Tên sản phẩm phải có ít nhất 3 ký tự',
-            'txtGia.required'=>'Bạn chưa nhập giá',
-            'txtMoTa.required'=>'Bạn chưa nhập mô tả sản phẩm'
+            'txtTen.required'=>'Bạn chưa nhập tên sản phẩm',
+            'txtTen.unique'=>'Tên sản phẩm đã tồn tại',
+            'txtTen.min'=>'Tên sản phẩm phải có ít nhất 3 ký tự',
+            'txtMota.required'=>'Bạn chưa nhập mô tả sản phẩm'
         ]);
 
-        
-        $sanpham->tensp = $request->txtTenSP;
-        $sanpham->id_hangdt = $request->HangDT;
-        $sanpham->id_nhom = $request->NhomSP;
-        $sanpham->gia = $request->txtGia;
-        $sanpham->soluong = $request->txtSL;
-        $sanpham->khuyenmai = $request->txtKM;
-     
-
+        $sanpham = SanPham::find($id);
+        $sanpham->tensp = $request->txtTen;
+        $sanpham->id_hangdt = $request->txtHangDT;
+        $sanpham->id_nhom = $request->txtNhomSP;
         //$sanpham->hinhsp = $request->flHinh;
         
-        if($request->hasFile('flHinh'))
+       if($request->hasFile('flHinh'))
         {
-        	$file = $request->file('flHinh');
-        	$duoi = $file->getClientOriginalExtension();
-        	if($duoi != 'jpg' && $duoi != 'png' && $duoi != 'jpeg')
-        	{
-        		return redirect('admin/sanpham/them')->with('loi','Bạn chỉ được chọn file có đuôi là jpg, png, jpeg');
-        	}
-        	$namefile = $file->getClientOriginalName();
-        	$Hinh = str_random(4)."_".$namefile;
-        	while (file_exists("upload/imgSanPham/".$Hinh)) {
-        		# code...
-        		$Hinh = str_random(4)."_".$namefile;
-        	}
+            $file = $request->file('flHinh');
+            $duoi = $file->getClientOriginalExtension();
+            if($duoi != 'jpg' && $duoi != 'png' && $duoi != 'jpeg')
+            {
+                return redirect('admin/sanpham/them')->with('loi','Bạn chỉ được chọn file có đuôi là jpg, png, jpeg');
+            }
+            $namefile = $file->getClientOriginalName();
+            $Hinh = str_random(4)."_".$namefile;
+            while (file_exists("upload/imgSanPham/".$Hinh)) {
+                # code...
+                $Hinh = str_random(4)."-".$namefile."-sago";
+            }
 
-        	$file->move("upload/imgSanPham",$Hinh);
-        	unlink("upload/imgSanPham/".$sanpham->Hinh);
-        	$sanpham->hinhsp = $Hinh;
+            $file->move("upload/imgSanPham",$Hinh);
+            // unlink("upload/imgSanPham/".$sanpham->Hinh);
+            $sanpham->hinhsp = $Hinh;
         }
+        else
+        {
+            $sanpham->hinhsp = $sanpham->hinhsp;
+        }
+        $sanpham->manhinh = $request->txtManhinh;
+        $sanpham->hedieuhanh = $request->txtHedieuhanh;
+        $sanpham->camtruoc = $request->txtCamtruoc;
+        $sanpham->camsau = $request->txtCamsau;
+        $sanpham->cpu = $request->txtCPU;
+        $sanpham->thesim = $request->txtThesim;
+        $sanpham->dungluongpin = $request->txtPin;
+        $sanpham->mota = $request->txtMota;
 
-
-        $sanpham->mota = $request->txtMoTa;
-        $sanpham->new = $request->rdoNew;
-        $sanpham->seo = $request->rdoSeo;
 
         $sanpham->save();
        
         return redirect('admin/sanpham/sua/'.$id)->with('thongbao','Sửa thành công!');
     }
-
     public function getXoa($id)
     {
         $sanpham = SanPham::find($id);
+        return view('admin.sanpham.xoa',['sanpham'=>$sanpham]);
+    }
+    public function postXoa(Request $request,$id)
+    {
+        $sanpham = SanPham::find($id);
+        $this->validate($request,
+        [
+            'confirm'=>'required'
+        ],
+        [
+            'confirm.required'=>'Bạn chưa check vào "Tôi đồng ý"'
+        ]);
         $sanpham->delete();
         return redirect('admin/sanpham/danhsach')->with('thongbao','Bạn đã xóa thành công '.$sanpham->tensp);
     }

@@ -14,60 +14,84 @@
             <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
               <li class="nav-item"><a href="admin/trang-chu.html"><i class="ft-home"></i><span data-i18n="" class="menu-title">Trang chủ</span></a>
               </li>
-              <li class="has-sub nav-item"><a ><i class="ft-pocket"></i><span data-i18n="" class="menu-title">Hãng điện thoại</span></a>
+              <!-- Quản lý sản phẩm -->
+              <li class="has-sub nav-item"><a><i class="ft-aperture"></i><span data-i18n="" class="menu-title">Quản lý sản phẩm</span></a>
                 <ul class="menu-content">
-                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                  <li class="has-sub"><a ><i class="ft-pocket"></i><span data-i18n="" class="menu-title">Hãng ĐT</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-sub"><a ><i class="ft-copy"></i><span data-i18n="" class="menu-title">Nhóm SP</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/nhomsanpham/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/nhomsanpham/them" class="menu-item">Thêm</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-sub"><a ><i class="ft-image"></i><span data-i18n="" class="menu-title">Bảng màu</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/mau/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/mau/them" class="menu-item">Thêm</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-sub"><a ><i class="ft-smartphone"></i><span data-i18n="" class="menu-title">Sản phẩm</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/sanpham/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/sanpham/them" class="menu-item">Thêm</a></li>
+                    </ul>
+                  </li>                 
                 </ul>
               </li>
-              <li class="has-sub nav-item"><a ><i class="ft-copy"></i><span data-i18n="" class="menu-title">Nhóm sản phẩm</span></a>
-                <ul class="menu-content">
-                  <li><a href="admin/nhomsanpham/danhsach" class="menu-item">Danh sách</a></li>
-                  <li><a href="admin/nhomsanpham/them" class="menu-item">Thêm</a></li>
-                </ul>
+              <!-- End of Quản lý sản phẩm -->
+
+              <!-- Khuyến mãi -->
+              <li class="has-sub"><a ><i class="ft-bookmark"></i><span data-i18n="" class="menu-title">Khuyến mãi</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                    </ul>
               </li>
-              <li class="has-sub nav-item"><a ><i class="ft-image"></i><span data-i18n="" class="menu-title">Bảng màu</span></a>
-                <ul class="menu-content">
-                  <li><a href="admin/mau/danhsach" class="menu-item">Danh sách</a></li>
-                  <li><a href="admin/mau/them" class="menu-item">Thêm</a></li>
-                </ul>
-              </li>
-              <li class="has-sub nav-item"><a ><i class="ft-smartphone"></i><span data-i18n="" class="menu-title">Sản phẩm</span></a>
-                <ul class="menu-content">
-                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
-                </ul>
-              </li>
-              <li class="has-sub nav-item"><a ><i class="ft-bookmark"></i><span data-i18n="" class="menu-title">Banner</span></a>
-                <ul class="menu-content">
-                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
-                </ul>
-              </li>
+              <!-- End of Khuyến mãi -->
+
+              <!-- Đơn hàng -->
               <li class="has-sub nav-item"><a ><i class="ft-shopping-cart"></i><span data-i18n="" class="menu-title">Đơn hàng</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                    </ul>
+                  </li>
+              <!-- End of Đơn hàng -->
+              <li class="has-sub nav-item"><a><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Quản lý tin tức</span></a>
                 <ul class="menu-content">
-                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                  
+                  <!-- Tin tức -->
+                  <li class="has-sub"><a ><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Loại tin</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-sub"><a ><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Tin tức</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                    </ul>
+                  </li>
                 </ul>
               </li>
-              <li class="has-sub nav-item"><a ><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Loại tin</span></a>
-                <ul class="menu-content">
-                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
-                </ul>
-              </li>
-              <li class="has-sub nav-item"><a ><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Tin tức</span></a>
-                <ul class="menu-content">
-                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
-                </ul>
-              </li>
+              <!-- End of Tin tức -->
+
+              <!-- Thành viên -->
               <li class="has-sub nav-item"><a ><i class="ft-users"></i><span data-i18n="" class="menu-title">Thành viên</span></a>
                 <ul class="menu-content">
                   <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
                   <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
+              <!-- End of Thành viên -->
+
+              <!-- Nhân viên -->
               <li class="has-sub nav-item"><a ><i class="ft-award"></i><span data-i18n="" class="menu-title">Chức vụ</span></a>
                 <ul class="menu-content">
                   <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
@@ -80,8 +104,7 @@
                   <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
-              
-
+              <!-- End of Nhân viên -->
             
             </ul>
           </div>
