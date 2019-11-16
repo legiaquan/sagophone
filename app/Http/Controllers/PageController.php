@@ -12,6 +12,14 @@ use App\SanPham;
 
 use App\HangDT;
 
+use App\DanhSachBanner;
+
+use App\Banner;
+
+use App\Mau;
+
+use App\SoLuongMauSP;
+
 class PageController extends Controller
 {
 
@@ -20,9 +28,12 @@ class PageController extends Controller
 		$nhomsanpham = NhomSanPham::all();
 		$sanpham = SanPham::all();
 		$hangdt = HangDT::all();
-		//$sanphammoi = SanPham::where('NEW','KHÔNG')->take(5)->get();
+		$sanphammoi = DanhSachBanner::where('id_banner','3')->take(5)->get();
+		$sanphambanchay = DanhSachBanner::where('id_banner','4')->get();
 		view()->share('nhomsanpham',$nhomsanpham);
 		view()->share('hangdt',$hangdt);
+		view()->share('sanphammoi',$sanphammoi);
+		view()->share('sanphambanchay',$sanphambanchay);
 	}
 
     public function trangchu()

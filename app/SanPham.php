@@ -22,4 +22,8 @@ class SanPham extends Model
         return $this->hasMany('App\DanhSachBanner','id_sanpham','id');
     }
     
+    public function soluongmausp()
+    {
+        return $this->hasMany('App\SoLuongMauSP','id_sanpham','id');
+    }
 }
