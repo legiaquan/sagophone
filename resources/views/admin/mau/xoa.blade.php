@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">XÓA MÀU <a style="color: tomato">{{ $mau->tennhom }}</a></h4>
+                    <h4 class="card-title">XÓA MÀU <a style="color: tomato">{{ $mau->mau }}</a></h4>
                 </div>
                 <div class="card-body collapse show">
                     <div class="card-block card-dashboard">
