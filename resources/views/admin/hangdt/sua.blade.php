@@ -28,7 +28,11 @@
                                 @endforeach
                             </div>
                         @endif
-
+						@if(session('thongbao'))
+                            <div class="alert alert-success">
+                                {{ session('thongbao') }}
+                            </div>
+                        @endif
 						<form class="form" action="admin/hangdt/sua/{{ $hangdt->id }}" method="POST">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="form-body">

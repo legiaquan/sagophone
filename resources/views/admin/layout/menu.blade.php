@@ -28,8 +28,8 @@
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-image"></i><span data-i18n="" class="menu-title">Bảng màu</span></a>
                 <ul class="menu-content">
-                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/mau/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/mau/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
               <li class="has-sub nav-item"><a ><i class="ft-smartphone"></i><span data-i18n="" class="menu-title">Sản phẩm</span></a>

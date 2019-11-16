@@ -43,6 +43,22 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('xoa/{id}','HangDTController@postXoa');
 	});
 
+	/*Mau sp*/
+	Route::group(['prefix'=>'mau'],function(){
+		// admin/hangdt/danhsach
+		Route::get('danhsach','MauController@getDanhSach');
+
+		Route::get('sua/{id}','MauController@getSua');
+		Route::post('sua/{id}','MauController@postSua');
+
+		Route::get('them','MauController@getThem');
+		Route::post('them','MauController@postThem');
+
+		Route::get('xoa/{id}','MauController@getXoa');
+		Route::post('xoa/{id}','MauController@postXoa');
+	});
+
+
 	/*Chi tiet hoa don*/
 	Route::group(['prefix'=>'chitietdonhang'],function(){
 		// admin/ChiTietDonHang/danhsach

@@ -23,7 +23,7 @@
                             </div>
                         @endif
                       <strong>Lưu ý!</strong>
-                      <p>Hệ thống sẽ xóa tất cả bài viết, và bình luận liên quan tới nhóm này.</p>
+                      <p>Hệ thống sẽ xóa tất cả sản phẩm liên quan tới hãng điện thoại này này.</p>
                       <p>Bạn có chắc chắn muốn xóa?</p>
 
                       <form class="form" action="admin/hangdt/xoa/{{ $hangdt->id }}" method="POST">

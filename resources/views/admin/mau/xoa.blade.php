@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">XÓA NHÓM SẢN PHẨM <a style="color: tomato">{{ $nhomsanpham->tennhom }}</a></h4>
+                    <h4 class="card-title">XÓA MÀU <a style="color: tomato">{{ $mau->tennhom }}</a></h4>
                 </div>
                 <div class="card-body collapse show">
                     <div class="card-block card-dashboard">
@@ -23,10 +23,10 @@
                             </div>
                         @endif
                       <strong>Lưu ý!</strong>
-                      <p>Hệ thống sẽ xóa tất cả bài viết, và bình luận liên quan tới nhóm này.</p>
+                      <p>Hệ thống sẽ xóa tất cả danh sách sản phẩm, giá liên quan tới màu này.</p>
                       <p>Bạn có chắc chắn muốn xóa?</p>
 
-                      <form class="form" action="admin/nhomsanpham/xoa/{{ $nhomsanpham->id }}" method="POST">
+                      <form class="form" action="admin/mau/xoa/{{ $mau->id }}" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <p>
                           Tôi đồng ý: <input type="checkbox" name="confirm" value="1">

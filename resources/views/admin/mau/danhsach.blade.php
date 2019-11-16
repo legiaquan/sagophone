@@ -6,11 +6,11 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">DANH SÁCH - NHÓM SẢN PHẨM <i class="ft-copy"></i></h4>
+                                <h4 class="card-title">DANH SÁCH - BẢNG MÀU <i class="ft-copy"></i></h4>
                             </div>
                             <div class="card-body collapse show">
                                 <div class="card-block card-dashboard">
-                                    <a href="admin/nhomsanpham/them" ><span class="badge badge-success mr-2">Thêm</span></a>
+                                    <a href="admin/mau/them" ><span class="badge badge-success mr-2">Thêm</span></a>
                                     <p class="card-text">
                                         @if(session('thongbao'))
                                             <div class="alert alert-success">
@@ -22,18 +22,20 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Tên hãng</th>
+                                                <th>Tên màu</th>
+                                                <th>Mã màu</th>
                                                 <th>Xử lý</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($nhomsanpham as $row)
+                                            @foreach($mau as $row)
                                             <tr>
                                                 <td>{{ $row->id }}</td>
-                                                <td>{{ $row->tennhom }}</td>
+                                                <td>{{ $row->mau }}</td>
+                                                <td style="background-color: {{ $row->mamau }}"></td>
                                                 <td>
-                                                    <a href="admin/nhomsanpham/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a>- 
-                                                    <a href="admin/nhomsanpham/xoa/{{ $row->id }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2">Xóa</i></span></a>
+                                                    <a href="admin/mau/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a>- 
+                                                    <a href="admin/mau/xoa/{{ $row->id }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2">Xóa</i></span></a>
                                                 </td>
                                                 
                                             </tr>
@@ -42,7 +44,8 @@
                                         <tfoot>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Tên hãng</th>
+                                                <th>Tên màu</th>
+                                                <th>Mã màu</th>
                                                 <th>Xử lý</th>
                                             </tr>
                                         </tfoot>

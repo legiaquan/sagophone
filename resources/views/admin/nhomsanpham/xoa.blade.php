@@ -23,7 +23,7 @@
                             </div>
                         @endif
                       <strong>Lưu ý!</strong>
-                      <p>Hệ thống sẽ xóa tất cả bài viết, và bình luận liên quan tới nhóm này.</p>
+                      <p>Hệ thống sẽ xóa tất cả sản phẩm liên quan tới nhóm sản phẩm này.</p>
                       <p>Bạn có chắc chắn muốn xóa?</p>
 
                       <form class="form" action="admin/nhomsanpham/xoa/{{ $nhomsanpham->id }}" method="POST">
