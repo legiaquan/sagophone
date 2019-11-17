@@ -87,6 +87,81 @@
 					<!-- section title -->
 					<div class="col-md-12">
 						<div class="section-title">
+							<h3 class="title">Sản Phẩm Hot Deals</h3>
+							{{-- <div class="section-nav">
+								<ul class="section-tab-nav tab-nav">
+									<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
+									<li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
+									<li><a data-toggle="tab" href="#tab2">Cameras</a></li>
+									<li><a data-toggle="tab" href="#tab2">Accessories</a></li>
+								</ul>
+							</div> --}}
+						</div>
+					</div>
+					<!-- /section title -->
+
+					<!-- Products tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="products-tabs">
+								<!-- tab -->
+								<div id="tab2" class="tab-pane fade in active">
+									<div class="products-slick" data-nav="#slick-nav-2">
+										@foreach($sanphamhotdeals as $sphd)
+										<!-- product -->
+										<div class="product">
+											<div class="product-img">
+												<img src="./upload/imgSanPham/{{$sphd->sanpham->hinhsp}}" alt="">
+												<div class="product-label">
+													<span class="sale">-30%</span>												
+												</div>
+											</div>
+											
+											<div class="product-body">
+												<p class="product-category">{{$sphd->sanpham->hangdt->tenhang}}</p>
+												<h3 class="product-name"><a href="#">{{$sphd->sanpham->tensp}}</a></h3>
+												<h4 class="product-price">{{-- {{$sphd->sanpham->mau->soluongmausp->soluong}} --}}1</h4>
+												<div class="product-rating">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+												</div>											
+											</div>
+											<div class="add-to-cart">
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+											</div>
+										
+										</div>
+										<!-- /product -->
+										@endforeach
+										
+									</div>
+									<div id="slick-nav-2" class="products-slick-nav"></div>
+								</div>
+								<!-- /tab -->
+							</div>
+						</div>
+					</div>
+					<!-- /Products tab & slick -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<!-- section title -->
+					<div class="col-md-12">
+						<div class="section-title">
 							<h3 class="title">Sản Phẩm Mới</h3>
 							{{-- <div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
@@ -112,7 +187,7 @@
 											<div class="product-img">
 												<img src="./upload/imgSanPham/{{$spm->sanpham->hinhsp}}" alt="">
 												<div class="product-label">
-													<span class="sale">-30%</span>
+													{{-- <span class="sale">-30%</span> --}}
 													<span class="new">NEW</span>
 												</div>
 											</div>
@@ -168,14 +243,14 @@
 					<div class="col-md-12">
 						<div class="section-title">
 							<h3 class="title">Sản Phẩm Bán Chạy</h3>
-							<div class="section-nav">
+							{{-- <div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
 									<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
 									<li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
 									<li><a data-toggle="tab" href="#tab2">Cameras</a></li>
 									<li><a data-toggle="tab" href="#tab2">Accessories</a></li>
 								</ul>
-							</div>
+							</div> --}}
 						</div>
 					</div>
 					<!-- /section title -->
@@ -193,8 +268,8 @@
 											<div class="product-img">
 												<img src="./upload/imgSanPham/{{$spbc->sanpham->hinhsp}}" alt="">
 												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
+													{{-- <span class="sale">-30%</span> --}}
+													<span class="new">HOT</span>
 												</div>
 											</div>
 											
@@ -240,7 +315,7 @@
 				<div class="row">
 					<div class="col-md-4 col-xs-6">
 						<div class="section-title">
-							<h4 class="title">Sản Phẩm Bán Chạy</h4>
+							<h4 class="title">Sản Phẩm Hot Deals</h4>
 							<div class="section-nav">
 								<div id="slick-nav-3" class="products-slick-nav"></div>
 							</div>
@@ -249,177 +324,77 @@
 						<div class="products-widget-slick" data-nav="#slick-nav-3">
 							<div>
 								<!-- product widget -->
+								@foreach($sanphamhotdeals1 as $sphd1)
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="./img/product07.png" alt="">
+										<img src="upload/imgSanPham/{{$sphd1->sanpham->hinhsp}}" alt="">
 									</div>
 									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
+										<p class="product-category">{{$sphd1->sanpham->hangdt->tenhang}}</p>
+										<h3 class="product-name"><a href="#">{{$sphd1->sanpham->tensp}}</a></h3>
 										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product08.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product09.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- product widget -->
+								@endforeach				
+								<!-- /product widget -->			
 							</div>
-
 							<div>
 								<!-- product widget -->
+								@foreach($sanphamhotdeals2 as $sphd2)
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="./img/product01.png" alt="">
+										<img src="upload/imgSanPham/{{$sphd2->sanpham->hinhsp}}" alt="">
 									</div>
 									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
+										<p class="product-category">{{$sphd2->sanpham->hangdt->tenhang}}</p>
+										<h3 class="product-name"><a href="#">{{$sphd2->sanpham->tensp}}</a></h3>
 										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product02.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product03.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- product widget -->
+								@endforeach				
+								<!-- /product widget -->			
 							</div>
 						</div>
 					</div>
 
 					<div class="col-md-4 col-xs-6">
 						<div class="section-title">
-							<h4 class="title">Sản Phẩm Bán Chạy</h4>
+							<h4 class="title">Sản Phẩm Mới</h4>
 							<div class="section-nav">
 								<div id="slick-nav-4" class="products-slick-nav"></div>
 							</div>
 						</div>
 
-						<div class="products-widget-slick" data-nav="#slick-nav-4">
+						<div class="products-widget-slick" data-nav="#slick-nav-4">						
 							<div>
 								<!-- product widget -->
+								@foreach($sanphammoi1 as $spm1)
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="./img/product04.png" alt="">
+										<img src="upload/imgSanPham/{{$spm1->sanpham->hinhsp}}" alt="">
 									</div>
 									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
+										<p class="product-category">{{$spm1->sanpham->hangdt->tenhang}}</p>
+										<h3 class="product-name"><a href="#">{{$spm1->sanpham->tensp}}</a></h3>
 										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product05.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product06.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- product widget -->
+								@endforeach							
 							</div>
-
 							<div>
 								<!-- product widget -->
+								@foreach($sanphammoi2 as $spm2)
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="./img/product07.png" alt="">
+										<img src="upload/imgSanPham/{{$spm2->sanpham->hinhsp}}" alt="">
 									</div>
 									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
+										<p class="product-category">{{$spm2->sanpham->hangdt->tenhang}}</p>
+										<h3 class="product-name"><a href="#">{{$spm2->sanpham->tensp}}</a></h3>
 										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product08.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product09.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- product widget -->
+								@endforeach							
 							</div>
 						</div>
 					</div>
@@ -437,84 +412,34 @@
 						<div class="products-widget-slick" data-nav="#slick-nav-5">
 							<div>
 								<!-- product widget -->
+								@foreach($sanphambanchay1 as $spbc1)
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="./img/product01.png" alt="">
+										<img src="upload/imgSanPham/{{$spbc1->sanpham->hinhsp}}" alt="">
 									</div>
 									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
+										<p class="product-category">{{$spbc1->sanpham->hangdt->tenhang}}</p>
+										<h3 class="product-name"><a href="#">{{$spbc1->sanpham->tensp}}</a></h3>
 										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product02.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product03.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- product widget -->
+								@endforeach							
 							</div>
-
 							<div>
 								<!-- product widget -->
+								@foreach($sanphambanchay2 as $spbc2)
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="./img/product04.png" alt="">
+										<img src="upload/imgSanPham/{{$spbc2->sanpham->hinhsp}}" alt="">
 									</div>
 									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
+										<p class="product-category">{{$spbc2->sanpham->hangdt->tenhang}}</p>
+										<h3 class="product-name"><a href="#">{{$spbc2->sanpham->tensp}}</a></h3>
 										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product05.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product06.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
-								<!-- product widget -->
+								@endforeach							
+							</div>
 							</div>
 						</div>
 					</div>
