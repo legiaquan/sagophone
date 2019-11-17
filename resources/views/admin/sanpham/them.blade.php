@@ -77,6 +77,38 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
+											<label for="projectinput5">RAM</label>
+											<select id="projectinput5" name="txtRam" class="form-control">D	
+												<option value="1" >1GB</option>
+												<option value="2" >2GB</option>
+												<option value="3" >3GB</option>
+												<option value="4" selected="" >4GB</option>
+												<option value="6" >6GB</option>
+												<option value="8" >8GB</option>
+												<option value="10" >10GB</option>
+												<option value="12" >12GB</option>
+												<option value="12" >16GB</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="projectinput5">ROM</label>
+											<select id="projectinput5" name="txtRom" class="form-control">D	
+												<option value="16" >16GB</option>
+												<option value="32" >32GB</option>
+												<option value="64" selected="" >64GB</option>
+												<option value="128" >128B</option>
+												<option value="256" >256GB</option>
+												<option value="512" >512GB</option>
+												<option value="1024" >1T</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
 											<label for="projectinput3">Màn hình</label>
 											<input type="text" id="projectinput3" class="form-control"  name="txtManhinh">
 										</div>

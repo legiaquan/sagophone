@@ -9,7 +9,19 @@
                 </div>
                 <div class="card-body collapse show">
                     <div class="card-block card-dashboard">
+                      @if(count($errors)>0)
+                            <div class="alert alert-danger">
+                                @foreach($errors->all() as $err)
+                                    {{ $err }}<br>
+                                @endforeach
+                            </div>
+                        @endif
 
+                        @if(session('thongbao'))
+                            <div class="alert alert-success">
+                                {{ session('thongbao') }}
+                            </div>
+                        @endif
                       <strong>Lưu ý!</strong>
                       <p>Hệ thống sẽ xóa tất cả bài viết, và bình luận liên quan tới nhóm này.</p>
                       <p>Bạn có chắc chắn muốn xóa?</p>

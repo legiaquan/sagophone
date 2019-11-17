@@ -21,11 +21,10 @@
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Hãng</th>
-                                                <th>Nhóm</th>
                                                 <th>Tên sp</th>
-                                                <th>Mô tả</th>
+                                                <th>Hãng</th>
+                                                <th>Nhóm</th>                            
+                                                <!-- <th>Mô tả</th> -->
                                                 <th>Màn hình</th>
                                                 <th>OS</th>
                                                 <th>Camera</th>
@@ -37,19 +36,18 @@
                                         <tbody>
                                             @foreach($sanpham as $row)
                                             <tr>
-                                                <td>{{ $row->id }}</td>
+                                                <td>
+                                                    {{ $row->tensp }} - {{ $row->ram }}/{{ $row->rom }}GB<br/><img width="90px" src="upload/imgSanPham/{{ $row->hinhsp }}"/>
+                                                </td>   
                                                 <td>{{ $row->hangdt->tenhang }}</td>
                                                 <td>{{ $row->nhomsp->tennhom }}</td>
-                                                <td>
-                                                    {{ $row->tensp }}<br/><img width="90px" src="upload/imgSanPham/{{ $row->hinhsp }}"/>
-                                                </td>   
-                                                <td>
-                                                    @if(strlen($row->mota)<=100)
-                                                        {{ $row->mota }}
-                                                    @else
-                                                        {{ mb_substr($row->mota,0,100-3,'UTF-8').'...' }}
-                                                    @endif
-                                                </td>
+                                            <!-- <td>
+                                                     @if(strlen($row->mota)<=100)
+                                                         {{ $row->mota }}
+                                                     @else
+                                                         {{ mb_substr($row->mota,0,100-3,'UTF-8').'...' }}
+                                                     @endif
+                                                 </td> -->
                                                 <td>{{ $row->manhinh }}</td>
                                                 <td>{{ $row->hedieuhanh }}</td>
                                                 <td>Trước:{{ $row->camtruoc }}<br/>Sau:{{ $row->camsau }}</td>
@@ -57,8 +55,9 @@
 
                                                 <td>{{ $row->thesim }}</td>                                                                  
                                                 <td align="center">
-                                                    <a href="admin/sanpham/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a>
-                                                    <a href="admin/sanpham/xoa/{{ $row->id }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2">Xóa</i></span></a>
+                                                    <a href="admin/sanpham/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a><br>
+                                                    <a href="admin/sanpham/xoa/{{ $row->id }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2">Xóa</i></span></a><br>
+                                                    <a href="admin/soluongmausp/them/{{ $row->id }}"><span class="badge badge-success mr-2"><i class="ft-eye mr-1"></i>Thêm<br> hiện thị</span></a>
                                                 </td>
                                                 
                                             </tr>
@@ -66,11 +65,10 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>Tên sp</th>
                                                 <th>Hãng</th>
                                                 <th>Nhóm</th>
-                                                <th>Tên sp</th>
-                                                <th>Mô tả</th>
+                                                <!-- <th>Mô tả</th> -->
                                                 <th>Màn hình</th>
                                                 <th>OS</th>
                                                 <th>Camera</th>

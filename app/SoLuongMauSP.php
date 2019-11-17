@@ -8,7 +8,7 @@ class SoLuongMauSP extends Model
 {
     //
     protected $table = "tbsoluongmausp";
-
+    public $timestamps = false;
     public function mau()
     {
     	return $this->belongsTo('App\Mau','id_mau','id');

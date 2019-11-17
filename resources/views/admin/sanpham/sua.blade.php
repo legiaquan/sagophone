@@ -86,6 +86,38 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
+											<label for="projectinput5">RAM<span style="color: red">*</span></label>
+											<select id="projectinput5" name="txtRam" class="form-control">D	
+												<option @if($sanpham->ram==1){{ 'selected' }} @endif value="1" >1GB</option>
+												<option @if($sanpham->ram==2){{ 'selected' }} @endif value="2" >2GB</option>
+												<option @if($sanpham->ram==3){{ 'selected' }} @endif value="3" >3GB</option>
+												<option @if($sanpham->ram==4){{ 'selected' }} @endif value="4" >4GB</option>
+												<option @if($sanpham->ram==6){{ 'selected' }} @endif value="6" >6GB</option>
+												<option @if($sanpham->ram==8){{ 'selected' }} @endif value="8" >8GB</option>
+												<option @if($sanpham->ram==10){{ 'selected' }} @endif value="10" >10GB</option>
+												<option @if($sanpham->ram==12){{ 'selected' }} @endif value="12" >12GB</option>
+												<option @if($sanpham->ram==16){{ 'selected' }} @endif value="12" >16GB</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="projectinput5">ROM<span style="color: red">*</span></label>
+											<select id="projectinput5" name="txtRom" class="form-control">D	
+												<option @if($sanpham->rom==16){{ 'selected' }} @endif value="16" >16GB</option>
+												<option @if($sanpham->rom==32){{ 'selected' }} @endif value="32" >32GB</option>
+												<option @if($sanpham->rom==64){{ 'selected' }} @endif value="64" >64GB</option>
+												<option @if($sanpham->rom==128){{ 'selected' }} @endif value="128" >128B</option>
+												<option @if($sanpham->rom==256){{ 'selected' }} @endif value="256" >256GB</option>
+												<option @if($sanpham->rom==512){{ 'selected' }} @endif value="512" >512GB</option>
+												<option @if($sanpham->rom==1024){{ 'selected' }} @endif value="1024" >1T</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
 											<label for="projectinput3">Màn hình</label>
 											<input type="text" id="projectinput3" class="form-control"  name="txtManhinh" value="{{ $sanpham->manhinh }}">
 										</div>

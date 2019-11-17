@@ -11,7 +11,7 @@ class SanPhamController extends Controller
     //
     public function getDanhSach()
     {
-        $sanpham = SanPham::orderBy('id','DESC')->get();
+        $sanpham = SanPham::all();
         return view('admin.sanpham.danhsach',['sanpham'=>$sanpham]);
     }
 
@@ -26,13 +26,11 @@ class SanPhamController extends Controller
     {
         $this->validate($request,
         [
-            'txtTen'=>'required|min:3|unique:tbsanpham,tensp',
+            'txtTen'=>'required|min:3',
             'txtMota'=>'required'
-            
         ],
         [
             'txtTen.required'=>'Bạn chưa nhập tên sản phẩm',
-            'txtTen.unique'=>'Tên sản phẩm đã tồn tại',
             'txtTen.min'=>'Tên sản phẩm phải có ít nhất 3 ký tự',
             'txtMota.required'=>'Bạn chưa nhập mô tả sản phẩm'
         ]);
@@ -72,11 +70,12 @@ class SanPhamController extends Controller
         $sanpham->thesim = $request->txtThesim;
         $sanpham->dungluongpin = $request->txtPin;
         $sanpham->mota = $request->txtMota;
-
+        $sanpham->ram = $request->txtRam;
+        $sanpham->rom = $request->txtRom;
 
         $sanpham->save();
 
-        return redirect('admin/sanpham/them')->with('thongbao','Thêm thành công '.$sanpham->tensp. ' vào CSDL!');
+        return redirect('admin/sanpham/them')->with('thongbao','Thêm thành công '.$sanpham->tensp.' - '.$sanpham->ram.'/'.$sanpham->rom.'GB'.' vào CSDL!');
     }
 
     public function getSua($id)
@@ -139,11 +138,12 @@ class SanPhamController extends Controller
         $sanpham->thesim = $request->txtThesim;
         $sanpham->dungluongpin = $request->txtPin;
         $sanpham->mota = $request->txtMota;
-
+        $sanpham->ram = $request->txtRam;
+        $sanpham->rom = $request->txtRom;
 
         $sanpham->save();
        
-        return redirect('admin/sanpham/sua/'.$id)->with('thongbao','Sửa thành công!');
+        return redirect('admin/sanpham/sua/'.$id)->with('thongbao','Sửa thành công '.$sanpham->tensp.' - '.$sanpham->ram.'/'.$sanpham->rom.'GB'.' vào CSDL!');
     }
     public function getXoa($id)
     {

@@ -58,6 +58,20 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('xoa/{id}','MauController@postXoa');
 	});
 
+	/*So luong mau sp*/
+	Route::group(['prefix'=>'soluongmausp'],function(){
+		// admin/hangdt/danhsach
+		Route::get('danhsach','SoLuongMauSPController@getDanhSach');
+
+		Route::get('sua/{id}/{id_mau}','SoLuongMauSPController@getSua');
+		Route::post('sua/{id}/{id_mau}','SoLuongMauSPController@postSua');
+
+		Route::get('them/{id}','SoLuongMauSPController@getThem');
+		Route::post('them/{id}','SoLuongMauSPController@postThem');
+
+		Route::get('xoa/{id}/{id_mau}','SoLuongMauSPController@getXoa');
+		Route::post('xoa/{id}/{id_mau}','SoLuongMauSPController@postXoa');
+	});
 
 	/*Chi tiet hoa don*/
 	Route::group(['prefix'=>'chitietdonhang'],function(){

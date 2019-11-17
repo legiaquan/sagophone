@@ -40,7 +40,10 @@
                       <li><a href="admin/sanpham/danhsach" class="menu-item">Danh sách</a></li>
                       <li><a href="admin/sanpham/them" class="menu-item">Thêm</a></li>
                     </ul>
-                  </li>                 
+                  </li>
+                  <li class="nav-item"><a href="admin/soluongmausp/danhsach"><i class="ft-eye"></i><span data-i18n="" class="menu-title">Hiển thị SP</span></a>
+                    
+                  </li>
                 </ul>
               </li>
               <!-- End of Quản lý sản phẩm -->
