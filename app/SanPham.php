@@ -12,7 +12,7 @@ class SanPham extends Model
     {
     	return $this->belongsTo('App\HangDT','id_hangdt','id');
     }
-    public function nhomsp()
+    public function nhomsanpham()
     {
     	return $this->belongsTo('App\NhomSanPham','id_nhom','id');
     }

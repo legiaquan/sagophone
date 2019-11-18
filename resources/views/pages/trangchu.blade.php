@@ -111,7 +111,7 @@
 										<!-- product -->
 										<div class="product">
 											<div class="product-img">
-												<img src="./upload/imgSanPham/{{$sphd->sanpham->hinhsp}}" alt="">
+												<img width="250px" height="250px" src="./upload/imgSanPham/{{$sphd->sanpham->hinhsp}}" alt="">
 												<div class="product-label">
 													<span class="sale">-30%</span>												
 												</div>
@@ -185,7 +185,7 @@
 										<!-- product -->
 										<div class="product">
 											<div class="product-img">
-												<img src="./upload/imgSanPham/{{$spm->sanpham->hinhsp}}" alt="">
+												<img width="250px" height="250px" src="./upload/imgSanPham/{{$spm->sanpham->hinhsp}}" alt="">
 												<div class="product-label">
 													{{-- <span class="sale">-30%</span> --}}
 													<span class="new">NEW</span>
@@ -266,7 +266,7 @@
 										<!-- product -->
 										<div class="product">
 											<div class="product-img">
-												<img src="./upload/imgSanPham/{{$spbc->sanpham->hinhsp}}" alt="">
+												<img width="250px" height="250px" src="./upload/imgSanPham/{{$spbc->sanpham->hinhsp}}" alt="">
 												<div class="product-label">
 													{{-- <span class="sale">-30%</span> --}}
 													<span class="new">HOT</span>
