@@ -21,22 +21,22 @@ class LevelController extends Controller
     {
     	$this->validate($request,
     	[
-    		'txtTen'=>'required|unique:tblevel,tenhang|min:2|max:50'
+    		'txtTen'=>'required|unique:level,tenlevel|min:2|max:50'
     	],
     	[
-    		'txtTen.required'=>'Bạn chưa nhập tên hãng',
-    		'txtTen.unique'=>'Tên hãng đã tồn tại',
-    		'txtTen.min'=>'Tên hãng phải có độ dài từ 2 cho đến 50 ký tự',
-    		'txtTen.max'=>'Tên hãng phải có độ dài từ 2 cho đến 50 ký tự',
+    		'txtTen.required'=>'Bạn chưa nhập tên chức vụ',
+    		'txtTen.unique'=>'Tên chức vụ đã tồn tại',
+    		'txtTen.min'=>'Tên chức vụ phải có độ dài từ 2 cho đến 50 ký tự',
+    		'txtTen.max'=>'Tên chức vụ phải có độ dài từ 2 cho đến 50 ký tự',
     	]);
 
-    	$level = new level;
-    	$level->tenhang = $request->txtTen;
+    	$level = new Level;
+    	$level->tenlevel = $request->txtTen;
     	//đổi có dấu thành không dấu
     	//echo changeTitle($request->txtTen);
     	$level->save();
 
-    	return redirect('admin/level/them')->with('thongbao','Thêm thành công '.$level->tenhang. ' vào CSDL!');
+    	return redirect('admin/level/them')->with('thongbao','Thêm thành công '.$level->tenlevel. ' vào CSDL!');
     }
 
     public function getSua($id)
@@ -50,15 +50,15 @@ class LevelController extends Controller
     	$level = Level::find($id);
     	$this->validate($request,
     	[
-    		'txtTen'=>'required|unique:tblevel,tenhang|min:2|max:50'
+    		'txtTen'=>'required|unique:level,tenlevel|min:2|max:50'
     	],
     	[
     		'txtTen.required'=>'Bạn chưa nhập tên hãng',
-    		'txtTen.unique'=>'Tên thể loại đã tồn tại',
-    		'txtTen.min'=>'Tên hãng phải có độ dài từ 2 cho đến 50 ký tự',
-    		'txtTen.max'=>'Tên hãng phải có độ dài từ 2 cho đến 50 ký tự',
+    		'txtTen.unique'=>'Tên chức vụ đã tồn tại',
+    		'txtTen.min'=>'Tên chức vụ phải có độ dài từ 2 cho đến 50 ký tự',
+    		'txtTen.max'=>'Tên chức vụ phải có độ dài từ 2 cho đến 50 ký tự',
     	]);
-    	$level->tenhang = $request->txtTen;
+    	$level->tenlevel = $request->txtTen;
     	$level->save();
     	return redirect('admin/level/sua/'.$id)->with('thongbao','Sửa thành công!');
     }
