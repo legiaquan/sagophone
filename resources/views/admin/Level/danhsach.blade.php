@@ -10,7 +10,7 @@
                             </div>
                             <div class="card-body collapse show">
                                 <div class="card-block card-dashboard">
-                                    <a href="admin/hangdt/them" ><span class="badge badge-success mr-2">Thêm</span></a>
+                                    <a href="admin/level/them" ><span class="badge badge-success mr-2">Thêm</span></a>
                                     <p class="card-text">
                                         @if(session('thongbao'))
                                             <div class="alert alert-success">
@@ -32,8 +32,8 @@
                                                 <td>{{ $row->id }}</td>
                                                 <td>{{ $row->tenlevel }}</td>
                                                 <td>
-                                                    <a href="admin/hangdt/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a> - 
-                                                    <a href="admin/hangdt/xoa/{{ $row->id }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2"> Xóa</i></span></a>
+                                                    <a href="admin/level/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a> - 
+                                                    <a href="admin/level/xoa/{{ $row->id }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2"> Xóa</i></span></a>
                                                 </td>
                                             </tr>
                                             @endforeach
