@@ -120,7 +120,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('xoa/{id}','SanPhamController@postXoa');
 	});
 
-	//thanhvien
+	/*thanhvien*/
 	Route::group(['prefix'=>'thanhvien'],function(){
 		// admin/thanhvien/danhsach
 		Route::get('danhsach','ThanhVienController@getDanhSach');
@@ -132,6 +132,21 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('them','ThanhVienController@postThem');
 
 		Route::get('xoa/{id}','ThanhVienController@getXoa');
+	});
+
+	/*Level*/
+	Route::group(['prefix'=>'level'],function(){
+		// admin/level/danhsach
+		Route::get('danhsach','LevelController@getDanhSach');
+
+		Route::get('sua/{id}','LevelController@getSua');
+		Route::post('sua/{id}','LevelController@postSua');
+		
+		Route::get('them','LevelController@getThem');
+		Route::post('them','LevelController@postThem');
+
+		Route::get('xoa/{id}','LevelController@getXoa');
+		Route::post('xoa/{id}','LevelController@postXoa');
 	});
 
 	

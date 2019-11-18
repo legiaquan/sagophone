@@ -39,8 +39,8 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="issueinput1">Tên sản phẩm {{ $soluongmausp->mau->mau }}</label>
-											<input type="text" id="issueinput1" class="form-control"  name="txtTen" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Issue Title" disabled="" value="{{ $soluongmausp->sanpham->tensp }}">
+											<label for="issueinput1">Tên sản phẩm </label>
+											<input type="text" id="issueinput1" class="form-control"  name="txtTen" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Issue Title" disabled="" value="{{ $soluongmausp->sanpham->tensp }} {{ $soluongmausp->mau->mau }}">
 										</div>
 									</div>
 									
@@ -53,7 +53,18 @@
 												@if($soluongmausp->id_mau == $row->id)
 													{{ 'selected' }}
 												@endif
-												value="{{ $row->id }}" style="background-color: {{ $row->mamau }}">{{ $row->mau }}</option>
+												@foreach($dshienthi as $ht)
+														@if($ht->id_mau == $row->id && $soluongmausp->id_mau != $row->id)
+															{{ 'disabled' }}
+														@endif
+													@endforeach
+												value="{{ $row->id }}" style="background-color: {{ $row->mamau }}">{{ $row->mau }}
+												@foreach($dshienthi as $ht)
+														@if($ht->id_mau == $row->id)
+															{{ '(Sản phẩm đã có màu này)' }}
+														@endif
+													@endforeach
+												</option>
 												@endforeach
 											</select>
 										</div>

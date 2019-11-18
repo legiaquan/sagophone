@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Level extends Model
 {
     //
-    protected $table = "tblevel";
+    protected $table = "level";
     public $timestamps = false;
     public function admins()
     {

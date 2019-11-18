@@ -51,8 +51,10 @@
               <!-- Khuyến mãi -->
               <li class="has-sub"><a ><i class="ft-bookmark"></i><span data-i18n="" class="menu-title">Khuyến mãi</span></a>
                     <ul class="menu-content">
-                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                      <li><a href="admin/hangdt/danhsach" class="menu-item">Banner</a></li>
+                      <li><a href="admin/hangdt/them" class="menu-item">Thêm banner</a></li>
+                      <li><a href="admin/hangdt/them" class="menu-item">DS Khuyến mãi</a></li>
+                      
                     </ul>
               </li>
               <!-- End of Khuyến mãi -->
@@ -86,6 +88,7 @@
               <!-- End of Tin tức -->
 
               <!-- Thành viên -->
+
               <li class="has-sub nav-item"><a ><i class="ft-users"></i><span data-i18n="" class="menu-title">Thành viên</span></a>
                 <ul class="menu-content">
                   <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
@@ -95,16 +98,20 @@
               <!-- End of Thành viên -->
 
               <!-- Nhân viên -->
-              <li class="has-sub nav-item"><a ><i class="ft-award"></i><span data-i18n="" class="menu-title">Chức vụ</span></a>
+              <li class="has-sub nav-item"><a><i class="ft-gitlab"></i><span data-i18n="" class="menu-title">Quản lý nhân viên</span></a>
                 <ul class="menu-content">
-                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
-                </ul>
-              </li>
-              <li class="has-sub nav-item"><a ><i class="ft-user"></i><span data-i18n="" class="menu-title">Nhân viên</span></a>
-                <ul class="menu-content">
-                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                  <li class="has-sub nav-item"><a ><i class="ft-award"></i><span data-i18n="" class="menu-title">Chức vụ</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/level/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/level/them" class="menu-item">Thêm</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-sub nav-item"><a ><i class="ft-user"></i><span data-i18n="" class="menu-title">Nhân viên</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                    </ul>
+                  </li>
                 </ul>
               </li>
               <!-- End of Nhân viên -->

@@ -20,6 +20,7 @@ class SoLuongMauSPController extends Controller
     	$sanpham = SanPham::find($id);
     	$mau = Mau::all();
     	$soluongmausp = DB::table('tbsoluongmausp')->where('id_sanpham',$id)->get();
+        //var_dump($soluongmausp);
         return view('admin.soluongmausp.them',['sanpham'=>$sanpham,'mau'=>$mau,'soluongmausp'=>$soluongmausp]);
     }
 
@@ -53,10 +54,11 @@ class SoLuongMauSPController extends Controller
     public function getSua($id,$id_mau)
     {
         $soluongmausp = SoLuongMauSP::where('id_sanpham',$id)->where('id_mau',$id_mau)->first();
+        $dshienthi = DB::table('tbsoluongmausp')->where('id_sanpham',$id)->get();
     	$mau = Mau::all();
     	//echo $soluongmausp->gia;
     	//var_dump($soluongmausp);
-        return view('admin.soluongmausp.sua',['soluongmausp'=>$soluongmausp,'mau'=>$mau]);
+        return view('admin.soluongmausp.sua',['soluongmausp'=>$soluongmausp,'mau'=>$mau,'dshienthi'=>$dshienthi]);
     }
 
     public function postSua($id,$id_mau, Request $request)

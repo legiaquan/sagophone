@@ -3,7 +3,7 @@
 <section id="basic-form-layouts">
 	<div class="row">
         <div class="col-sm-12">
-            <div class="content-header">Nhóm sản phẩm</div>
+            <div class="content-header">Sản phẩm</div>
         </div>
     </div>
 	
@@ -163,7 +163,7 @@
 								</div>
 								<div class="form-group">
 									<label for="projectinput8">Mô tả</label>
-									<textarea id="projectinput8" rows="5" class="ckeditor" name="txtMota" ></textarea>
+									<textarea id="projectinput8" rows="5" class="ckeditor" name="txtMota" >Đang cập nhật!</textarea>
 								</div>
 
 							<div class="form-actions">

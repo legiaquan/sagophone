@@ -26,12 +26,13 @@ class SanPhamController extends Controller
     {
         $this->validate($request,
         [
-            'txtTen'=>'required|min:3',
+            'txtTen'=>'required|min:3|unique:tbsanpham,tensp',
             'txtMota'=>'required'
         ],
         [
             'txtTen.required'=>'Bạn chưa nhập tên sản phẩm',
             'txtTen.min'=>'Tên sản phẩm phải có ít nhất 3 ký tự',
+            'txtTen.unique'=>'Tên sản phẩm đã tồn tại',
             'txtMota.required'=>'Bạn chưa nhập mô tả sản phẩm'
         ]);
 

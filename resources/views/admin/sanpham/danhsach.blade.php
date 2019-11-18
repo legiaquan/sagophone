@@ -37,7 +37,7 @@
                                             @foreach($sanpham as $row)
                                             <tr>
                                                 <td>
-                                                    {{ $row->tensp }} - {{ $row->ram }}/{{ $row->rom }}GB<br/><img width="90px" src="upload/imgSanPham/{{ $row->hinhsp }}"/>
+                                                    {{ $row->tensp }} <br/><img width="90px" src="upload/imgSanPham/{{ $row->hinhsp }}"/>
                                                 </td>   
                                                 <td>{{ $row->hangdt->tenhang }}</td>
                                                 <td>{{ $row->nhomsp->tennhom }}</td>
