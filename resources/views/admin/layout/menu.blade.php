@@ -108,8 +108,8 @@
                   </li>
                   <li class="has-sub nav-item"><a ><i class="ft-user"></i><span data-i18n="" class="menu-title">Nhân viên</span></a>
                     <ul class="menu-content">
-                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                      <li><a href="admin/nhanvien/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/nhanvien/them" class="menu-item">Thêm</a></li>
                     </ul>
                   </li>
                 </ul>

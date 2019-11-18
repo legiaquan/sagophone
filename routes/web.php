@@ -149,6 +149,21 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('xoa/{id}','LevelController@postXoa');
 	});
 
+	/*Admin*/
+	Route::group(['prefix'=>'nhanvien'],function(){
+		// admin/level/danhsach
+		Route::get('danhsach','NhanVienController@getDanhSach');
+
+		Route::get('sua/{id}','NhanVienController@getSua');
+		Route::post('sua/{id}','NhanVienController@postSua');
+		
+		Route::get('them','NhanVienController@getThem');
+		Route::post('them','NhanVienController@postThem');
+
+		Route::get('xoa/{id}','NhanVienController@getXoa');
+		Route::post('xoa/{id}','NhanVienController@postXoa');
+	});
+
 	
 });
 

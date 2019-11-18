@@ -52,7 +52,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="projectinput6">Nhóm sản phẩm <span style="color: red">*</span></label>
-											<select id="projectinput6" name="txtNhomSP" class="form-control">			
+											<select id="NhomSanPham" name="txtNhomSP" class="form-control">			
 												@foreach($nhomsp as $row)
 												<option value="{{ $row->id }}">{{ $row->tennhom }}</option>
 												@endforeach
@@ -183,4 +183,20 @@
 
 		
 <!--form them end-->
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function(){
+            $("#changePass").change(function(){
+                if($(this).is(":checked"))
+                {
+                    $(".txtPassword").removeAttr('disabled');
+                }
+                else
+                {
+                    $(".txtPassword").attr('disabled','');
+                }
+            });
+        });
+    </script>
 @endsection
