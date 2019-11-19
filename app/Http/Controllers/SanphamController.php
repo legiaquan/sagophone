@@ -51,10 +51,10 @@ class SanPhamController extends Controller
         		return redirect('admin/sanpham/them')->with('loi','Bạn chỉ được chọn file có đuôi là jpg, png, jpeg');
         	}
         	$namefile = $file->getClientOriginalName();
-        	$Hinh = str_random(4)."_".$namefile;
+        	$Hinh = str_random(4)."-sago-".$namefile;
         	while (file_exists("upload/imgSanPham/".$Hinh)) {
         		# code...
-        		$Hinh = str_random(4)."-".$namefile."-sago";
+        		$Hinh = str_random(4)."-".$namefile;
         	}
         	$file->move("upload/imgSanPham",$Hinh);
         	$sanpham->hinhsp = $Hinh;

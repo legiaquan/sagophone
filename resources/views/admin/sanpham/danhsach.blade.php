@@ -40,7 +40,7 @@
                                                     {{ $row->tensp }} <br/><img width="90px" src="upload/imgSanPham/{{ $row->hinhsp }}"/>
                                                 </td>   
                                                 <td>{{ $row->hangdt->tenhang }}</td>
-                                                <td>{{ $row->nhomsp->tennhom }}</td>
+                                                <td>{{ $row->nhomsanpham->tennhom }}</td>
                                             <!-- <td>
                                                      @if(strlen($row->mota)<=100)
                                                          {{ $row->mota }}

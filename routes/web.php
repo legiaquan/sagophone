@@ -164,7 +164,36 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('xoa/{id}','NhanVienController@postXoa');
 	});
 
-	
+	/*Banner*/
+	Route::group(['prefix'=>'banner'],function(){
+		// admin/level/danhsach
+		Route::get('danhsach','BannerController@getDanhSach');
+
+		Route::get('sua/{id}','BannerController@getSua');
+		Route::post('sua/{id}','BannerController@postSua');
+		
+		Route::get('them','BannerController@getThem');
+		Route::post('them','BannerController@postThem');
+
+		Route::get('xoa/{id}','BannerController@getXoa');
+		Route::post('xoa/{id}','BannerController@postXoa');
+	});
+
+	/*So danh sách banner*/
+	Route::group(['prefix'=>'danhsachbanner'],function(){
+		// admin/hangdt/danhsach
+		Route::get('danhsach/{id}','DanhSachBannerController@getDanhSach');
+
+		Route::get('sua/{id}/{id_sanpham}','DanhSachBannerController@getSua');
+		Route::post('sua/{id}/{id_sanpham}','DanhSachBannerController@postSua');
+
+		Route::get('them/{id}','DanhSachBannerController@getThem');
+		Route::get('them/{id}/{id_sanpham}','DanhSachBannerController@activeThem');
+
+		Route::get('xoa/{id}/{id_sanpham}','DanhSachBannerController@getXoa');
+		Route::post('xoa/{id}/{id_sanpham}','DanhSachBannerController@postXoa');
+	});
+
 });
 
 /*=====  End of Admin Route  ======*/

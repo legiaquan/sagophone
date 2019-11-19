@@ -8,7 +8,7 @@ class DanhSachBanner extends Model
 {
     //
     protected $table = "tbdanhsachbanner";
-
+    public $timestamps = false;
     public function sanpham()
     {
     	return $this->belongsTo('App\SanPham','id_sanpham','id');
