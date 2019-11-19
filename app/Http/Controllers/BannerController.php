@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Banner;
+use App\DanhSachBanner;
+use Illuminate\Support\Facades\DB;
+
 class BannerController extends Controller
 {
      public function getDanhSach()
     {
     	$banner = Banner::all();
-    	return view('admin.banner.danhsach',['banner'=>$banner]);
+        $dembanner= DB::table('tbdanhsachbanner')->get();
+        //var_dump($dembanner);
+    	return view('admin.banner.danhsach',['banner'=>$banner,'dembanner'=>$dembanner]);
     }
 
     public function getThem()

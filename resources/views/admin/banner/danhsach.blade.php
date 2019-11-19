@@ -33,7 +33,13 @@
                                             @foreach($banner as $row)
                                             <tr>
                                                 <!-- <td>{{-- {{ $row->id }} --}}</td> -->
-                                                <td align="center"><span  ><b>{{ $row->tenbanner }}</b></span><br><img width="550px"  src="upload/imgKhuyenMai/{{ $row->hinhbanner }}"/>
+                                                <?php $dem = 0;?>
+                                                @foreach($dembanner as $row_dem)
+                                                    @if($row_dem->id_banner ==$row->id)
+                                                        <?php $dem++; ?>
+                                                    @endif
+                                                @endforeach
+                                                <td align="center"><span  ><b>{{ $row->tenbanner }}</b> - hiện có ({{ $dem }}) sp</span><br><img width="550px"  src="upload/imgKhuyenMai/{{ $row->hinhbanner }}"/>
                                                 </td>
                                                 <td>{{ $row->admins->username }}</td>
                                                 <td>{{ $row->ngaybatdau }}</td>

@@ -59,7 +59,7 @@
 											<select id="projectinput6" name="txtNhomSP" class="form-control">			
 												@foreach($nhomsp as $row)
 												<option 
-													@if($sanpham->nhomsp->id==$row->id)
+													@if($sanpham->nhomsanpham->id==$row->id)
 	                                        		{{ "selected" }}
 	                                    			@endif
                                      			value="{{ $row->id }}">{{ $row->tennhom }}</option>

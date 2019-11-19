@@ -17,7 +17,7 @@
 				<div class="card-header">
 					<h4 class="card-title" id="basic-layout-tooltip">Thêm</h4>
 					<p class="mb-12"></p>
-					<a href="admin/soluongmausp/danhsach" ><span class="badge badge-success mr-2"><i class="ft-corner-down-left"></i> Danh sách</span></a>
+					<a href="admin/sanpham/danhsach" ><span class="badge badge-success mr-2"><i class="ft-corner-down-left"></i> Danh sách</span></a>
 				</div>
 				<div class="card-body">
 					<div class="px-3">

@@ -21,6 +21,7 @@
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
+                                                <th>ID</th>
                                                 <th>Tên sp</th>
                                                 <th>Hãng</th>
                                                 <th>Nhóm</th>                            
@@ -36,6 +37,7 @@
                                         <tbody>
                                             @foreach($sanpham as $row)
                                             <tr>
+                                                <td>{{ $row->id }}</td>
                                                 <td>
                                                     {{ $row->tensp }} <br/><img width="90px" src="upload/imgSanPham/{{ $row->hinhsp }}"/>
                                                 </td>   
