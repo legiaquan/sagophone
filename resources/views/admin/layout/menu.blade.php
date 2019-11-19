@@ -53,7 +53,6 @@
                     <ul class="menu-content">
                       <li><a href="admin/banner/danhsach" class="menu-item">Banner</a></li>
                       <li><a href="admin/banner/them" class="menu-item">Thêm banner</a></li>
-                      <li><a href="admin/danhsachkhuyenmai/them" class="menu-item">DS Khuyến mãi</a></li>
                       
                     </ul>
               </li>
