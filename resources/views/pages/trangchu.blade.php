@@ -120,7 +120,7 @@
 											<div class="product-body">
 												<p class="product-category">{{$sphd->sanpham->hangdt->tenhang}}</p>
 												<h3 class="product-name"><a href="#">{{$sphd->sanpham->tensp}}</a></h3>
-												<h4 class="product-price">{{-- {{$sphd->sanpham->mau->soluongmausp->soluong}} --}}1</h4>
+												<h4 class="product-price">{{$sphd->gia}}<del class="product-old-price">>{{$sphd->gia * 0.8}}</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
@@ -185,7 +185,7 @@
 										<!-- product -->
 										<div class="product">
 											<div class="product-img">
-												<img width="250px" height="250px" src="./upload/imgSanPham/{{$spm->sanpham->hinhsp}}" alt="">
+												<a href="chitiet/{{$spm->id}}/{{$spm->tensp}}"><img width="250px" height="250px" src="./upload/imgSanPham/{{$spm->sanpham->hinhsp}}" alt=""></a>
 												<div class="product-label">
 													{{-- <span class="sale">-30%</span> --}}
 													<span class="new">NEW</span>
@@ -194,8 +194,8 @@
 											
 											<div class="product-body">
 												<p class="product-category">{{$spm->sanpham->hangdt->tenhang}}</p>
-												<h3 class="product-name"><a href="#">{{$spm->sanpham->tensp}}</a></h3>
-												<h4 class="product-price">{{-- >{{$spm->sanpham->soluongmausp->gia}} --}}1</h4>
+												<h3 class="product-name"><a href="chitiet/{{$spm->id}}/{{$spm->tensp}}">{{$spm->sanpham->tensp}}</a></h3>
+												<h4 class="product-price">{{$spm->gia}}</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
@@ -276,7 +276,7 @@
 											<div class="product-body">
 												<p class="product-category">{{$spbc->sanpham->hangdt->tenhang}}</p>
 												<h3 class="product-name"><a href="#">{{$spbc->sanpham->tensp}}</a></h3>
-												<h4 class="product-price">{{-- >{{$spbc->sanpham->soluongmausp->gia}} --}}1</h4>
+												<h4 class="product-price">{{$spbc->gia}}</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
@@ -332,7 +332,7 @@
 									<div class="product-body">
 										<p class="product-category">{{$sphd1->sanpham->hangdt->tenhang}}</p>
 										<h3 class="product-name"><a href="#">{{$sphd1->sanpham->tensp}}</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+										<h4 class="product-price">{{$sphd1->gia}}<del class="product-old-price">>{{$sphd1->gia * 0.8}}</del></h4>
 									</div>
 								</div>
 								@endforeach				
@@ -348,7 +348,7 @@
 									<div class="product-body">
 										<p class="product-category">{{$sphd2->sanpham->hangdt->tenhang}}</p>
 										<h3 class="product-name"><a href="#">{{$sphd2->sanpham->tensp}}</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+										<h4 class="product-price">{{$sphd2->gia}}<del class="product-old-price">>{{$sphd2->gia * 0.8}}</del></h4>
 									</div>
 								</div>
 								@endforeach				

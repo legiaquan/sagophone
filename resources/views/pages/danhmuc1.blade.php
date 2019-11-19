@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 @section('content')
-<!-- NAVIGATION -->
+	<!-- NAVIGATION -->
 		<nav id="navigation">
 			<!-- container -->
 			<div class="container">
@@ -33,8 +33,8 @@
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="trangchu">Trang Chủ</a></li>
-							<li><a href="danhmuc">Tất Cả Danh Mục</a></li>	
-
+							<li><a href="danhmuc">Tất Cả Danh Mục</a></li>
+							<li><a href="danhmuc/{{$danhmuc->id}}/{{$danhmuc->tennhom}}">{{$danhmuc->tennhom}}</a></li>							
 						</ul>
 					</div>
 				</div>
@@ -111,38 +111,32 @@
 
 						<!-- aside Widget -->
 						<div class="aside">
-							<h3 class="aside-title">Sản Phẩm Mới</h3>
-							<div class="products-widget-slick" data-nav="#slick-nav-5">
-							<div>
-								<!-- product widget -->
-								@foreach($sanphammoi1 as $spbc1)
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="upload/imgSanPham/{{$spbc1->sanpham->hinhsp}}" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">{{$spbc1->sanpham->hangdt->tenhang}}</p>
-										<h3 class="product-name"><a href="#">{{$spbc1->sanpham->tensp}}</a></h3>
-										<h4 class="product-price">{{$spbc1->gia}}<del class="product-old-price">{{$spbc1->gia*0.3}}</h4>
-									</div>
+							<h3 class="aside-title"><a href="danhmuc" style="font-weight: bolder;">THƯƠNG HIỆU</a></h3>
+							<div class="">
+								@foreach($hangdt as $hdt)
+								<div class="">
+									<label>
+										<a href="danhmuc/{{$hdt->id}}}/{{$danhmuc->tennhom}}/{{$hdt->tenhang}}">
+											{{$hdt->tenhang}}
+										</a>
+									</label>
+									
+									@if($hdt->id == 1)
+										<small>({{count($sanphamapple)}})</small>
+									@elseif($hdt->id == 2)
+										<small>({{count($sanphamsamsung)}})</small>
+									@elseif($hdt->id == 3)
+										<small>({{count($sanphamsony)}})</small>
+									@elseif($hdt->id == 4)
+										<small>({{count($sanphamnokia)}})</small>
+									@else
+										<small>({{count($sanphamvsmart)}})</small>
+									@endif
+
+									<span></span>
+										
 								</div>
 								@endforeach							
-							</div>
-							<div>
-								<!-- product widget -->
-								@foreach($sanphammoi2 as $spbc2)
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="upload/imgSanPham/{{$spbc2->sanpham->hinhsp}}" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">{{$spbc2->sanpham->hangdt->tenhang}}</p>
-										<h3 class="product-name"><a href="#">{{$spbc2->sanpham->tensp}}</a></h3>
-										<h4 class="product-price">{{$spbc2->gia}}<del class="product-old-price">{{$spbc2->gia*0.3}}</h4>
-									</div>
-								</div>
-								@endforeach							
-							</div>
 							</div>
 						</div>
 						<!-- /aside Widget -->
@@ -161,7 +155,7 @@
 									<div class="product-body">
 										<p class="product-category">{{$spbc1->sanpham->hangdt->tenhang}}</p>
 										<h3 class="product-name"><a href="#">{{$spbc1->sanpham->tensp}}</a></h3>
-										<h4 class="product-price">{{$spbc1->gia}}<del class="product-old-price">{{$spbc1->gia*0.3}}</del></h4>
+										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
 								@endforeach							
@@ -176,7 +170,7 @@
 									<div class="product-body">
 										<p class="product-category">{{$spbc2->sanpham->hangdt->tenhang}}</p>
 										<h3 class="product-name"><a href="#">{{$spbc2->sanpham->tensp}}</a></h3>
-										<h4 class="product-price">{{$spbc2->gia}}<del class="product-old-price">{{$spbc2->gia*0.3}}</h4>
+										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
 								@endforeach							
@@ -186,7 +180,9 @@
 						<!-- /aside Widget -->
 					</div>
 					<!-- /ASIDE -->
-
+					<h2>
+						{{$danhmuc->tennhom}}
+					</h2>
 					<!-- STORE -->
 					<div id="store" class="col-md-9">
 						<!-- store top filter -->
@@ -218,7 +214,7 @@
 						<!-- store products -->
 						<div class="row">
 							<!-- product -->
-							@foreach($sanpham as $sp)
+							@foreach($sanphamdanhmuc as $sp)
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
@@ -232,7 +228,7 @@
 									<div class="product-body">
 										<p class="product-category">{{$sp->tenhang}}</p>
 										<h3 class="product-name"><a href="#">{{$sp->tensp}}</a></h3>
-										<h4 class="product-price">{{$sp->gia}}<del class="product-old-price">{{$sp->gia*0.3}}</del></h4>
+										<h4 class="product-price">{{$sp->gia}}<del class="product-old-price">$990.00</del></h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
@@ -260,7 +256,7 @@
 						<br>
 						<!-- store bottom filter -->
 						<div class="store-filter clearfix">
-							{{$sanpham->links()}}
+							{{$sanphamdanhmuc->links()}}
 						</div>
 						<!-- /store bottom filter -->
 					</div>
@@ -271,5 +267,4 @@
 			<!-- /container -->
 </div>
 <!-- /SECTION -->
-
 @endsection
