@@ -189,3 +189,9 @@ Route::get('loaitin','PageController@loaitin');
 Route::get('tintuc/{id}','PageController@tintuc');
 
 Route::get('danhmuc','PageController@danhmuc');
+
+Route::get('danhmuc/{id}/{tennhom}','PageController@danhmuc1');
+
+Route::get('danhmuc/{id}/{tennhom}/{tenhang}','PageController@danhmuc2');
+
+Route::get('chitiet/{id}','PageController@chitiet');
