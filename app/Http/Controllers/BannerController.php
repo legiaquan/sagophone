@@ -11,7 +11,7 @@ class BannerController extends Controller
 {
      public function getDanhSach()
     {
-    	$banner = Banner::all();
+    	$banner = Banner::orderBy('ngaybatdau','asc')->get();
         $dembanner= DB::table('tbdanhsachbanner')->get();
         //var_dump($dembanner);
     	return view('admin.banner.danhsach',['banner'=>$banner,'dembanner'=>$dembanner]);

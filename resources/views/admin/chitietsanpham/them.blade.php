@@ -34,7 +34,7 @@
                                 {{ session('thongbao') }}
                             </div>
                         @endif
-						<form class="form" action="admin/soluongmausp/them/{{ $sanpham->id }}" method="POST">
+						<form class="form" action="admin/chitietsanpham/them/{{ $sanpham->id }}" method="POST">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="form-body">
 								<div class="row">
@@ -50,13 +50,13 @@
 											<select id="projectinput5" name="txtMau" class="form-control">	
 												@foreach($mau as $row)
 												<option value="{{ $row->id }}"
-													@foreach($soluongmausp as $sl)
+													@foreach($chitietsanpham as $sl)
 														@if($sl->id_mau == $row->id)
 															{{ 'disabled' }}
 														@endif
 													@endforeach
 												style="background-color: {{ $row->mamau }}">{{ $row->mau }}
-													@foreach($soluongmausp as $sl)
+													@foreach($chitietsanpham as $sl)
 														@if($sl->id_mau == $row->id)
 															{{ '(Sản phẩm đã có màu này)' }}
 														@endif

@@ -21,18 +21,20 @@
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
-                                                <!-- <th>ID</th> -->
+                                                <th>ID</th>
                                                 <th>Tên banner & Hình banner</th>
                                                 <th>Admin thêm</th>
+                                                <th>Trạng thái</th>
                                                 <th>Ngày bắt đầu</th>
                                                 <th>Ngày kết thúc</th>
+
                                                 <th>Xử lý</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($banner as $row)
                                             <tr>
-                                                <!-- <td>{{-- {{ $row->id }} --}}</td> -->
+                                                <td><i class="ft-eye"></i></td>
                                                 <?php $dem = 0;?>
                                                 @foreach($dembanner as $row_dem)
                                                     @if($row_dem->id_banner ==$row->id)
@@ -42,6 +44,13 @@
                                                 <td align="center"><span  ><b>{{ $row->tenbanner }}</b> - hiện có ({{ $dem }}) sp</span><br><img width="550px"  src="upload/imgKhuyenMai/{{ $row->hinhbanner }}"/>
                                                 </td>
                                                 <td>{{ $row->admins->username }}</td>
+                                                <td>
+                                                    @if($row->trangthai=='show')
+                                                    <span class="badge badge-primary ">{{ $row->trangthai }}</span>
+                                                    @else
+                                                    <span class=" badge badge-dark">{{ $row->trangthai }}</span>
+                                                    @endif
+                                                </td>
                                                 <td>{{ $row->ngaybatdau }}</td>
                                                 <td>{{ $row->ngayketthuc }}</td>
                                                 <td width="100px" align="center">
@@ -56,9 +65,10 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <!-- <th>ID</th> -->
+                                                <th>ID</th>
                                                 <th>Tên banner & Hình banner</th>
                                                 <th>Admin thêm</th>
+                                                <th>Trạng thái</th>
                                                 <th>Ngày bắt đầu</th>
                                                 <th>Ngày kết thúc</th>
                                                 <th>Xử lý</th>

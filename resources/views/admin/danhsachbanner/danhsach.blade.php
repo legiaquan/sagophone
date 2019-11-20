@@ -28,7 +28,9 @@
                                                 <th>Tên sản phẩm</th>
                                                 <th>Ram</th>
                                                 <th>Rom</th>
-                                                <th>Khuyến mãi</th>
+                                                <th>Giá</th>
+                                                <th>KM %</th>
+                                                <th>Giá mới</th>
                                                 <th>Xử lý</th>
                                             </tr>
                                         </thead>
@@ -36,13 +38,23 @@
                                             @foreach($danhsachbanner as $row)
                                             <tr>
                                                 
-                                                <td width="500px" align="center"><b>{{ $row->sanpham->tensp }}</b> <br> <img width="100px" src="upload/imgSanPham/{{ $row->sanpham->hinhsp }}" /></td>
+                                                <td width="400px" align="center"><b>{{ $row->sanpham->tensp }}</b> <br> <img width="100px" src="upload/imgSanPham/{{ $row->sanpham->hinhsp }}" /></td>
                                                 <td align="center">{{ $row->sanpham->ram }}GB</td>
                                                 <td align="center">{{ $row->sanpham->rom }}GB</td>
-                                                <td align="center"><b>{{ $row->phantramkhuyenmai }} 
+                                                <td><?php $arrGia = getAllGia($row->id_sanpham) ?>
+                                                    @foreach($arrGia as $giasp)
+                                                        <span style="background: {{ $giasp->mamau }};color:#a6a6a6">{{ $giasp->mau }}:</span> {{ number_format($giasp->gia) }}₫<br>
+                                                    @endforeach
+                                                </td>
+                                                <td align="center" width="110px"><b>{{ $row->phantramkhuyenmai }} 
                                                     @if(isset($row->phantramkhuyenmai)==false)
-                                                        <span class="badge badge-warning mr-2" >Chưa nhập khuyến mãi <br>Vui lòng chọn sửa để thêm</span> 
+                                                        <span class="badge badge-warning mr-2" >Chưa nhập<br> khuyến mãi<br> Vui lòng chọn<br> sửa để <br>thêm</span> 
                                                     @endif%</b>
+                                                </td>
+                                                <td>
+                                                    @foreach($arrGia as $giasp)
+                                                        <span style="background: {{ $giasp->mamau }};color:#a6a6a6">{{ $giasp->mau }}:</span> {{ number_format(giaKhuyenMai($giasp->gia,$row->phantramkhuyenmai)) }}₫<br>
+                                                    @endforeach
                                                 </td>
                                                 <td align="center">
                                                     <a href="admin/danhsachbanner/sua/{{ $row->id_banner }}/{{ $row->id_sanpham }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a> <br>
@@ -57,7 +69,9 @@
                                                 <th>Tên sản phẩm</th>
                                                 <th>Ram</th>
                                                 <th>Rom</th>
+                                                <th>Giá</th>
                                                 <th>Khuyến mãi</th>
+                                                <th>Giá mới</th>
                                                 <th>Xử lý</th>
                                             </tr>
                                         </tfoot>

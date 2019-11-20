@@ -26,7 +26,7 @@
                       <p>Hệ thống sẽ xóa giá, số lượng, màu của {{ $sanpham->tensp}} {{ $mau->mau }}.</p>
                       <p>Bạn có chắc chắn muốn xóa?</p>
 
-                      <form class="form" action="admin/soluongmausp/xoa/{{ $sanpham->id }}/{{ $mau->id }}" method="POST">
+                      <form class="form" action="admin/chitietsanpham/xoa/{{ $sanpham->id }}/{{ $mau->id }}" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <p>
                           Tôi đồng ý: <input type="checkbox" name="confirm" value="1">

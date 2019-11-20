@@ -41,7 +41,7 @@
                       <li><a href="admin/sanpham/them" class="menu-item">Thêm</a></li>
                     </ul>
                   </li>
-                  <li class="nav-item"><a href="admin/soluongmausp/danhsach"><i class="ft-eye"></i><span data-i18n="" class="menu-title">Hiển thị SP</span></a>
+                  <li class="nav-item"><a href="admin/chitietsanpham/danhsach"><i class="ft-eye"></i><span data-i18n="" class="menu-title">Hiển thị SP</span></a>
                     
                   </li>
                 </ul>

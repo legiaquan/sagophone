@@ -16,7 +16,7 @@
 				<div class="card-header">
 					<h4 class="card-title" id="basic-layout-tooltip">Sửa</h4>
 					<p class="mb-12"></p>
-					<a href="admin/soluongmausp/danhsach" ><span class="badge badge-success mr-2"><i class="ft-corner-down-left"></i> Danh sách</span></a>
+					<a href="admin/chitietsanpham/danhsach" ><span class="badge badge-success mr-2"><i class="ft-corner-down-left"></i> Danh sách</span></a>
 				</div>
 				<div class="card-body">
 					<div class="px-3">
@@ -33,14 +33,14 @@
                                 {{ session('thongbao') }}
                             </div>
                         @endif
-						<form class="form" action="admin/soluongmausp/sua/{{ $soluongmausp->id_sanpham }}/{{ $soluongmausp->id_mau }}" method="POST">
+						<form class="form" action="admin/chitietsanpham/sua/{{ $chitietsanpham->id_sanpham }}/{{ $chitietsanpham->id_mau }}" method="POST">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="form-body">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="issueinput1">Tên sản phẩm </label>
-											<input type="text" id="issueinput1" class="form-control"  name="txtTen" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Issue Title" disabled="" value="{{ $soluongmausp->sanpham->tensp }} {{ $soluongmausp->mau->mau }}">
+											<input type="text" id="issueinput1" class="form-control"  name="txtTen" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Issue Title" disabled="" value="{{ $chitietsanpham->sanpham->tensp }} {{ $chitietsanpham->mau->mau }}">
 										</div>
 									</div>
 									
@@ -50,11 +50,11 @@
 											<select id="projectinput5" name="txtMau" class="form-control">	
 												@foreach($mau as $row)
 												<option
-												@if($soluongmausp->id_mau == $row->id)
+												@if($chitietsanpham->id_mau == $row->id)
 													{{ 'selected' }}
 												@endif
 												@foreach($dshienthi as $ht)
-														@if($ht->id_mau == $row->id && $soluongmausp->id_mau != $row->id)
+														@if($ht->id_mau == $row->id && $chitietsanpham->id_mau != $row->id)
 															{{ 'disabled' }}
 														@endif
 													@endforeach
@@ -75,14 +75,14 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="issueinput3">Số lượng</label>
-											<input type="number" id="issueinput3" class="form-control" name="txtSoluong" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Date Opened" placeholder="Vui lòng nhập tên hãng" value="{{ $soluongmausp->soluong }}">
+											<input type="number" id="issueinput3" class="form-control" name="txtSoluong" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Date Opened" placeholder="Vui lòng nhập tên hãng" value="{{ $chitietsanpham->soluong }}">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="issueinput4">Giá</label>
 											<div class="input-group">										
-												<input type="number" name="txtGia" class="form-control" value="{{ $soluongmausp->gia }}" />
+												<input type="number" name="txtGia" class="form-control" value="{{ $chitietsanpham->gia }}" />
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">VNĐ</span>
                                                 </div>

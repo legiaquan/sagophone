@@ -58,19 +58,19 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('xoa/{id}','MauController@postXoa');
 	});
 
-	/*So luong mau sp*/
-	Route::group(['prefix'=>'soluongmausp'],function(){
+	/*Chi tiết sản phẩm*/
+	Route::group(['prefix'=>'chitietsanpham'],function(){
 		// admin/hangdt/danhsach
-		Route::get('danhsach','SoLuongMauSPController@getDanhSach');
+		Route::get('danhsach','ChiTietSanPhamController@getDanhSach');
 
-		Route::get('sua/{id}/{id_mau}','SoLuongMauSPController@getSua');
-		Route::post('sua/{id}/{id_mau}','SoLuongMauSPController@postSua');
+		Route::get('sua/{id}/{id_mau}','ChiTietSanPhamController@getSua');
+		Route::post('sua/{id}/{id_mau}','ChiTietSanPhamController@postSua');
 
-		Route::get('them/{id}','SoLuongMauSPController@getThem');
-		Route::post('them/{id}','SoLuongMauSPController@postThem');
+		Route::get('them/{id}','ChiTietSanPhamController@getThem');
+		Route::post('them/{id}','ChiTietSanPhamController@postThem');
 
-		Route::get('xoa/{id}/{id_mau}','SoLuongMauSPController@getXoa');
-		Route::post('xoa/{id}/{id_mau}','SoLuongMauSPController@postXoa');
+		Route::get('xoa/{id}/{id_mau}','ChiTietSanPhamController@getXoa');
+		Route::post('xoa/{id}/{id_mau}','ChiTietSanPhamController@postXoa');
 	});
 
 	/*Chi tiet hoa don*/

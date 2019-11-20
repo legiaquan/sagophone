@@ -16,13 +16,11 @@ class SanPham extends Model
     {
     	return $this->belongsTo('App\NhomSanPham','id_nhom','id');
     }
-
     public function dsbanner()
     {
         return $this->hasMany('App\DanhSachBanner','id_sanpham','id');
     }
-    
-    public function soluongmausp()
+    public function chitietsanpham()
     {
         return $this->hasMany('App\SoLuongMauSP','id_sanpham','id');
     }

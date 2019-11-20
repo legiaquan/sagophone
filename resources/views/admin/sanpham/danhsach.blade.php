@@ -59,7 +59,7 @@
                                                 <td align="center">
                                                     <a href="admin/sanpham/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a><br>
                                                     <a href="admin/sanpham/xoa/{{ $row->id }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2">Xóa</i></span></a><br>
-                                                    <a href="admin/soluongmausp/them/{{ $row->id }}"><span class="badge badge-success mr-2"><i class="ft-eye mr-1"></i>Thêm<br> hiện thị</span></a>
+                                                    <a href="admin/chitietsanpham/them/{{ $row->id }}"><span class="badge badge-success mr-2"><i class="ft-eye mr-1"></i>Thêm<br> hiện thị</span></a>
                                                 </td>
                                                 
                                             </tr>

@@ -9,7 +9,7 @@ class Mau extends Model
     //
     protected $table = "tbmau";
 
-    public function soluongmausp()
+    public function chitietsanpham()
     {
     	return $this->hasMany('App\SoLuongMauSP','id_mau','id');
     }

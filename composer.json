@@ -22,7 +22,8 @@
             "App\\": "app/"
         },
         "files": [
-        "app/function/function.php"
+            "app/function/function.php",
+            "app/helpers.php"
         ]
     },
     "autoload-dev": {
