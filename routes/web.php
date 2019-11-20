@@ -28,8 +28,13 @@ Route::post('admin/dangnhap','AdminController@postLogin');
 
 Route::group(['prefix'=>'admin'],function(){
 	Route::get('trang-chu.html','AdminController@index');
+	/*=============================================
+	=            Quan ly san pham                 =
+	=============================================*/
+
 	/*Hang dien thoai*/
 	Route::group(['prefix'=>'hangdt'],function(){
+		
 		// admin/hangdt/danhsach
 		Route::get('danhsach','HangDTController@getDanhSach');
 
@@ -72,23 +77,6 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::get('xoa/{id}/{id_mau}','ChiTietSanPhamController@getXoa');
 		Route::post('xoa/{id}/{id_mau}','ChiTietSanPhamController@postXoa');
 	});
-
-	/*Chi tiet hoa don*/
-	Route::group(['prefix'=>'chitietdonhang'],function(){
-		// admin/ChiTietDonHang/danhsach
-		Route::get('danhsach','ChiTietDonHangController@getDanhSach');
-		Route::get('sua','ChiTietDonHangController@getSua');
-		Route::get('them','ChiTietDonHangController@getThem');
-	});
-
-	/*Hoa don*/
-	Route::group(['prefix'=>'donhang'],function(){
-		// admin/donhang/danhsach
-		Route::get('danhsach','DonHangController@getDanhSach');
-		Route::get('sua','DonHangController@getSua');
-		Route::get('them','DonHangController@getThem');
-	});
-
 	/*Nhom san pham*/
 	Route::group(['prefix'=>'nhomsanpham'],function(){
 		// admin/nhomsanpham/danhsach
@@ -119,6 +107,63 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::get('xoa/{id}','SanPhamController@getXoa');
 		Route::post('xoa/{id}','SanPhamController@postXoa');
 	});
+	/*=============================================
+	=            End of Quan ly san pham          =
+	=============================================*/
+
+	/*=============================================
+	=               Quan ly don hang              =
+	=============================================*/
+	/*Chi tiet hoa don*/
+	Route::group(['prefix'=>'chitietdonhang'],function(){
+		// admin/ChiTietDonHang/danhsach
+		Route::get('danhsach','ChiTietDonHangController@getDanhSach');
+		Route::get('sua','ChiTietDonHangController@getSua');
+		Route::get('them','ChiTietDonHangController@getThem');
+	});
+	
+
+	/*Hoa don*/
+	Route::group(['prefix'=>'donhang'],function(){
+		// admin/donhang/danhsach
+		Route::get('danhsach','DonHangController@getDanhSach');
+		Route::get('sua','DonHangController@getSua');
+		Route::get('them','DonHangController@getThem');
+	});
+	/*=============================================
+	=            End of Quan ly don hang          =
+	=============================================*/
+	
+	/*Nhom loai tin*/
+	Route::group(['prefix'=>'loaitin'],function(){
+		// admin/loaitin/danhsach
+		Route::get('danhsach','LoaiTinController@getDanhSach');
+
+		Route::get('sua/{id}','LoaiTinController@getSua');
+		Route::post('sua/{id}','LoaiTinController@postSua');
+
+		Route::get('them','LoaiTinController@getThem');
+		Route::post('them','LoaiTinController@postThem');
+
+		Route::get('xoa/{id}','LoaiTinController@getXoa');
+		Route::post('xoa/{id}','LoaiTinController@postXoa');
+	
+	});
+
+	/*tin tuc*/
+	Route::group(['prefix'=>'tintuc'],function(){
+		// admin/tintuc/danhsach
+		Route::get('danhsach','TinTucController@getDanhSach');
+
+		Route::get('sua/{id}','TinTucController@getSua');
+		Route::post('sua/{id}','TinTucController@postSua');
+
+		Route::get('them','TinTucController@getThem');
+		Route::post('them','TinTucController@postThem');
+		
+		Route::get('xoa/{id}','TinTucController@getXoa');
+		Route::post('xoa/{id}','TinTucController@postXoa');
+	});
 
 	/*thanhvien*/
 	Route::group(['prefix'=>'thanhvien'],function(){
@@ -132,6 +177,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('them','ThanhVienController@postThem');
 
 		Route::get('xoa/{id}','ThanhVienController@getXoa');
+		Route::post('xoa/{id}','ThanhVienController@postXoa');
 	});
 
 	/*Level*/
@@ -164,7 +210,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('xoa/{id}','NhanVienController@postXoa');
 	});
 
-		/*Banner*/
+	/*Banner*/
 	Route::group(['prefix'=>'banner'],function(){
 		// admin/level/danhsach
 		Route::get('danhsach','BannerController@getDanhSach');

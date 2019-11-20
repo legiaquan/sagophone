@@ -9,9 +9,9 @@ class TinTuc extends Model
     //
     protected $table = "tbtintuc";
 
-    public function admins()
+    public function nhanvien()
     {
-    	return $this->belongsTo('App\Admin','id_tintuc','id');
+    	return $this->belongsTo('App\NhanVien','id_admins','id');
     }
 
     public function loaitin()
