@@ -13,7 +13,7 @@
 						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
 						<li class="active"><a href="danhmuc">Danh Mục</a></li>
-						<li><a href="smartphones">Smartphones</a></li>									
+						<li><a href="smartphones">Điện Thoại</a></li>									
 						<li><a href="phukien">Phụ Kiện</a></li>
 					</ul>
 					<!-- /NAV -->

@@ -13,7 +13,7 @@
 						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
 						<li class="active"><a href="danhmuc">Danh Mục</a></li>
-						<li><a href="smartphones">Smartphones</a></li>									
+						<li><a href="smartphones">Điện Thoại</a></li>									
 						<li><a href="phukien">Phụ Kiện</a></li>
 					</ul>
 					<!-- /NAV -->
@@ -155,7 +155,7 @@
 									<div class="product-body">
 										<p class="product-category">{{$spbc1->sanpham->hangdt->tenhang}}</p>
 										<h3 class="product-name"><a href="#">{{$spbc1->sanpham->tensp}}</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+										<h4 class="product-price">{{$spbc1->gia}}</del></h4>
 									</div>
 								</div>
 								@endforeach							
@@ -170,7 +170,7 @@
 									<div class="product-body">
 										<p class="product-category">{{$spbc2->sanpham->hangdt->tenhang}}</p>
 										<h3 class="product-name"><a href="#">{{$spbc2->sanpham->tensp}}</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+										<h4 class="product-price">{{$spbc2->gia}}</del></h4>
 									</div>
 								</div>
 								@endforeach							
@@ -228,7 +228,7 @@
 									<div class="product-body">
 										<p class="product-category">{{$sp->tenhang}}</p>
 										<h3 class="product-name"><a href="#">{{$sp->tensp}}</a></h3>
-										<h4 class="product-price">{{$sp->gia}}<del class="product-old-price">$990.00</del></h4>
+										<h4 class="product-price">{{$sp->chitietsanpham->gia}}<del class="product-old-price">{{$sp->gia * 0.5}}</del></h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
