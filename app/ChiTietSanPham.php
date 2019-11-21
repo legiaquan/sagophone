@@ -18,11 +18,7 @@ class ChiTietSanPham extends Model
     {
     	return $this->belongsTo('App\SanPham','id_sanpham','id');
     }
-        public function dsbanner()
-    {
-        return $this->hasMany('App\DanhSachBanner','id_chitietsanpham','id');
-    }
-        public function chitietsanpham()
+    public function dsbanner()
     {
         return $this->hasMany('App\DanhSachBanner','id_chitietsanpham','id');
     }

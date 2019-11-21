@@ -225,4 +225,4 @@ Route::get('danhmuc/{id}/{tennhom}/{tenhang}','PageController@danhmuc2');
 
 Route::get('chitiet/{id}/{tennhom}', 'PageController@chitietsp');
 
-Route::get('test','PageController@test');
+Route::get('hotdeals','PageController@hotdeals');

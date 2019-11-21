@@ -18,7 +18,7 @@ use App\Banner;
 
 use App\Mau;
 
-use App\SoLuongMauSP;
+use App\ChiTietSanPham;
 
 use DB;
 
@@ -29,27 +29,66 @@ class PageController extends Controller
 	{
 		$nhomsanpham = NhomSanPham::all();
 		$hangdt = HangDT::all();
-		$sanphammoi = DanhSachBanner::where('id_banner','3')->join('tbsanpham','id_sanpham','id')->join('tbsoluongmausp','tbsanpham.id','tbsoluongmausp.id_sanpham')->get();
-		$sanphambanchay = DanhSachBanner::where('id_banner','4')->join('tbsanpham','id_sanpham','id')->join('tbsoluongmausp','tbsanpham.id','tbsoluongmausp.id_sanpham')->get();
-		$sanphamhotdeals = DanhSachBanner::where('id_banner','2')->join('tbsanpham','id_sanpham','id')->join('tbsoluongmausp','tbsanpham.id','tbsoluongmausp.id_sanpham')->get();
-		$sanphambanchay1 = DanhSachBanner::where('id_banner','4')->take(3)
-		->join('tbsanpham','id_sanpham','id')->join('tbsoluongmausp','tbsanpham.id','tbsoluongmausp.id_sanpham')
-		->get();
-		$sanphambanchay2 = DanhSachBanner::where('id_banner','4')->skip(3)->take(3)
-		->join('tbsanpham','id_sanpham','id')->join('tbsoluongmausp','tbsanpham.id','tbsoluongmausp.id_sanpham')
-		->get();
-		$sanphammoi1 = DanhSachBanner::where('id_banner','3')->take(3)
-		->join('tbsanpham','id_sanpham','id')->join('tbsoluongmausp','tbsanpham.id','tbsoluongmausp.id_sanpham')
-		->get();
-		$sanphammoi2 = DanhSachBanner::where('id_banner','3')->skip(3)->take(3)
-		->join('tbsanpham','id_sanpham','id')->join('tbsoluongmausp','tbsanpham.id','tbsoluongmausp.id_sanpham')
-		->get();
-		$sanphamhotdeals1 = DanhSachBanner::where('id_banner','2')
-		->join('tbsanpham','id_sanpham','id')->join('tbsoluongmausp','tbsanpham.id','tbsoluongmausp.id_sanpham')
-		->take(3)->get();
-		$sanphamhotdeals2 = DanhSachBanner::where('id_banner','2')	
-		->join('tbsanpham','id_sanpham','id')->join('tbsoluongmausp','tbsanpham.id','tbsoluongmausp.id_sanpham')
-		->skip(3)->take(3)->get();
+		$sanphammoi = DB::table('tbsanpham')
+        ->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
+        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+        ->where('tbdanhsachbanner.id_banner','3')
+        ->get();
+		$sanphambanchay = DB::table('tbsanpham')
+        ->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
+        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+        ->where('tbdanhsachbanner.id_banner','4')
+        ->get();
+		$sanphamhotdeals =DB::table('tbsanpham')
+        ->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
+        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+        ->where('tbdanhsachbanner.id_banner','2')
+        ->get();
+		$sanphambanchay1 =  DB::table('tbsanpham')
+        ->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
+        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+        ->where('tbdanhsachbanner.id_banner','4')
+        ->orderBy('tbsanpham.id','desc')
+        ->take(3)->get();
+		$sanphambanchay2 = DB::table('tbsanpham')
+        ->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
+        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+        ->where('tbdanhsachbanner.id_banner','4')
+        ->orderBy('tbsanpham.id','asc')
+        ->take(3)->get();
+		$sanphammoi1 = DB::table('tbsanpham')
+        ->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
+        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+        ->where('tbdanhsachbanner.id_banner','3')
+        ->orderBy('tbsanpham.id','desc')
+        ->take(3)->get();
+		$sanphammoi2 = DB::table('tbsanpham')
+        ->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
+        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+        ->where('tbdanhsachbanner.id_banner','3')
+        ->orderBy('tbsanpham.id','asc')
+        ->take(3)->get();
+		$sanphamhotdeals1 = DB::table('tbsanpham')
+    	->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
+    	->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+    	->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+    	->where('tbdanhsachbanner.id_banner','2')
+    	->orderBy('tbsanpham.id','desc')
+    	->take(3)->get();
+		$sanphamhotdeals2 = DB::table('tbsanpham')
+    	->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
+    	->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+    	->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+    	->where('tbdanhsachbanner.id_banner','2')
+    	->orderBy('tbsanpham.id','asc')
+    	->take(3)->get();
 		view()->share('nhomsanpham',$nhomsanpham);
 		view()->share('hangdt',$hangdt);
 		view()->share('sanphammoi',$sanphammoi);
@@ -66,9 +105,15 @@ class PageController extends Controller
 
     public function trangchu()
     {
-		
+        // $sanphamhotdeals =DB::table('tbsanpham')
+        // ->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
+        // ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        // ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+        // ->where('tbdanhsachbanner.id_banner','2')
+        // ->get();
+        // var_dump($sanphamhotdeals).'<br>';
     	return view('pages/trangchu');
-
+    	
     }
 
     public function getDangNhap()
@@ -111,7 +156,7 @@ class PageController extends Controller
     	$sanphamnokia = SanPham::where('id_hangdt','4')->get();
     	$sanphamvsmart = SanPham::where('id_hangdt','5')->get();
     	$sanpham = DB::table('tbsanpham')->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-    	->join('tbsoluongmausp','tbsanpham.id','tbsoluongmausp.id_sanpham')
+    	->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
     	->paginate(6);
     	return view('pages/danhmuc',
     		['sanpham' => $sanpham,
@@ -135,7 +180,12 @@ class PageController extends Controller
     	$sanphamnokia = SanPham::where('id_hangdt','4')->get();
     	$sanphamvsmart = SanPham::where('id_hangdt','5')->get();
     	$danhmuc = NhomSanPham::find($id);
-    	$sanphamdanhmuc = SanPham::where('id_nhom',$id)->join('tbsoluongmausp','tbsanpham.id','tbsoluongmausp.id_sanpham')->paginate(6);
+    	$sanphamdanhmuc = DB::table('tbsanpham')
+        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+        ->where('tbsanpham.id_nhom',$id)
+        ->orderBy('tbsanpham.id','desc')
+        ->paginate(6);
     	return view('pages/danhmuc1',
     		['danhmuc' => $danhmuc, 
     		'sanphamdanhmuc' => $sanphamdanhmuc,
@@ -147,6 +197,12 @@ class PageController extends Controller
     		'sanphamnokia' => $sanphamnokia,
     		'sanphamvsmart' => $sanphamvsmart
 		]);
+       // $sanphamdanhmuctest = DB::table('tbsanpham')
+       //  ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+       //  ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+       //  ->where('tbsanpham.id_nhom',$id)->orderBy('tbsanpham.id','asc')
+       //  ->get();
+       //  echo $sanphamdanhmuctest.'<br>';
     }
 
      public function danhmuc2($id)
@@ -160,9 +216,11 @@ class PageController extends Controller
     	$sanphamvsmart = SanPham::where('id_hangdt','5')->get();
     	$danhmucloai = NhomSanPham::find($id);
     	$danhmuc = HangDT::find($id);
-    	// $danhmuc = DB::table('tbhangdt')->join('tbsanpham','tbhangdt.id','tbsanpham.id_hangdt')
-    	// ->join('tbnhomsanpham','tbsanpham.id_nhom','tbnhomsanpham.id');
-    	$sanphamdanhmuc = SanPham::where('id_hangdt',$id)->join('tbsoluongmausp','tbsanpham.id','tbsoluongmausp.id_sanpham')->paginate(6);
+    	$sanphamdanhmuc = DB::table('tbsanpham')
+        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+        ->where('tbsanpham.id_hangdt',$id)
+        ->paginate(6);
     	return view('pages/danhmuc2',
     		['danhmuc' => $danhmuc, 
     		'sanphamdanhmuc' => $sanphamdanhmuc,
@@ -180,12 +238,19 @@ class PageController extends Controller
     public function chitietsp($id)
     {
     	$chitiet = SanPham::find($id);
-    	return view('pages/chitiet',['chitiet' => $chitiet]);
+    	$sanphamlienquan = SanPham::where('id_hangdt',$chitiet->id_hangdt)->take(4)->get();
+    	//var_dump(getGiaMin($id));
+    	return view('pages/chitiet',['chitiet' => $chitiet, 'sanphamlienquan' => $sanphamlienquan]);
     }
 
-    public function test()
+    public function hotdeals()
     {
-    	return view('pages/test');
+        $sanphamhotdealstt = DB::table('tbsanpham')
+        ->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
+        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+        ->where('tbdanhsachbanner.id_banner','2')->paginate(6);
+        return view('pages/hotdeals',['sanphamhotdealstt' => $sanphamhotdealstt]);
     }
 
 }
