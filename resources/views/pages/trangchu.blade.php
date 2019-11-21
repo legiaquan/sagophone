@@ -123,7 +123,11 @@
 											<div class="product-body">
 												<p class="product-category">{{$sphd->sanpham->hangdt->tenhang}}</p>
 												<h3 class="product-name"><a href="chitiet/{{$sphd->id_sanpham}}/{{$sphd->sanpham->tensp}}">{{$sphd->sanpham->tensp}}</a></h3>
+<<<<<<< HEAD
 												<h4 class="product-price">{{$sphd->gia}}<del class="product-old-price">{{$sphd->gia * 0.8}}
+=======
+												<h4 class="product-price">{{$sphd->gia}}<del class="product-old-price">>{{$sphd->gia * 0.8}}
+>>>>>>> 7ee913c56c031ab425d56c6df46989d6e978736b
 												</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
@@ -199,7 +203,11 @@
 											<div class="product-body">
 												<p class="product-category">{{$spm->sanpham->hangdt->tenhang}}</p>
 												<h3 class="product-name"><a href="chitiet/{{$spm->id_sanpham}}/{{$spm->sanpham->tensp}}">{{$spm->sanpham->tensp}}</a></h3>
+<<<<<<< HEAD
 												<h4 class="product-price">{{$spm->gia}}</h4>
+=======
+												<h4 class="product-price">{{-- {{$gia1->gia}} --}}</h4>
+>>>>>>> 7ee913c56c031ab425d56c6df46989d6e978736b
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
@@ -334,11 +342,19 @@
 								<div class="product-widget">
 									<div class="product-img">
 
+<<<<<<< HEAD
 											<img src="upload/imgSanPham/{{$sphd1->hinhsp}}" alt="">		
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$sphd1->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$sphd1->id}}/{{$sphd1->tensp}}">{{$sphd1->tensp}}</a></h3>
+=======
+											<img src="upload/imgSanPham/{{$sphd1->sanpham->hinhsp}}" alt="">		
+									</div>
+									<div class="product-body">
+										<p class="product-category">{{$sphd1->sanpham->hangdt->tenhang}}</p>
+										<h3 class="product-name"><a href="chitiet/{{$sphd1->id_sanpham}}/{{$sphd1->sanpham->tensp}}">{{$sphd1->sanpham->tensp}}</a></h3>
+>>>>>>> 7ee913c56c031ab425d56c6df46989d6e978736b
 										<h4 class="product-price">{{$sphd1->gia}}<del class="product-old-price">>{{$sphd1->gia * 0.8}}</del></h4>
 									</div>
 								</div>
@@ -353,9 +369,15 @@
 										<img src="upload/imgSanPham/{{$sphd2->hinhsp}}" alt="">
 									</div>
 									<div class="product-body">
+<<<<<<< HEAD
 										<p class="product-category">{{$sphd2->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$sphd2->id_sanpham}}/{{$sphd2->tensp}}">{{$sphd2->tensp}}</a></h3>
 										<h4 class="product-price">{{$sphd2->gia}}<del class="product-old-price">{{$sphd2->gia * 0.8}}</del></h4>
+=======
+										<p class="product-category">{{$sphd2->sanpham->hangdt->tenhang}}</p>
+										<h3 class="product-name"><a href="chitiet/{{$sphd2->id_sanpham}}/{{$sphd2->sanpham->tensp}}">{{$sphd2->sanpham->tensp}}</a></h3>
+										<h4 class="product-price">{{$sphd2->gia}}<del class="product-old-price">>{{$sphd2->gia * 0.8}}</del></h4>
+>>>>>>> 7ee913c56c031ab425d56c6df46989d6e978736b
 									</div>
 								</div>
 								@endforeach				
@@ -383,7 +405,11 @@
 									<div class="product-body">
 										<p class="product-category">{{$spm1->sanpham->hangdt->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$spm1->id_sanpham}}/{{$spm1->sanpham->tensp}}">{{$spm1->sanpham->tensp}}</a></h3>
+<<<<<<< HEAD
 										<h4 class="product-price">{{$spm1->gia}} <del class="product-old-price">{{$spm1->gia *0.5}}</del></h4>
+=======
+										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+>>>>>>> 7ee913c56c031ab425d56c6df46989d6e978736b
 									</div>
 								</div>
 								@endforeach							
@@ -398,7 +424,11 @@
 									<div class="product-body">
 										<p class="product-category">{{$spm2->sanpham->hangdt->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$spm2->id_sanpham}}/{{$spm2->sanpham->tensp}}">{{$spm2->sanpham->tensp}}</a></h3>
+<<<<<<< HEAD
 										<h4 class="product-price">{{$spm1->gia}} <del class="product-old-price">{{$spm1->gia * 0.5}} </del></h4>
+=======
+										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+>>>>>>> 7ee913c56c031ab425d56c6df46989d6e978736b
 									</div>
 								</div>
 								@endforeach							
@@ -427,7 +457,11 @@
 									<div class="product-body">
 										<p class="product-category">{{$spbc1->sanpham->hangdt->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$spbc1->id_sanpham}}/{{$spbc1->sanpham->tensp}}">{{$spbc1->sanpham->tensp}}</a></h3>
+<<<<<<< HEAD
 										<h4 class="product-price">{{$spbc1->gia}} <del class="product-old-price">{{$spbc1->gia * 0.5}}</del></h4>
+=======
+										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+>>>>>>> 7ee913c56c031ab425d56c6df46989d6e978736b
 									</div>
 								</div>
 								@endforeach							
@@ -442,7 +476,11 @@
 									<div class="product-body">
 										<p class="product-category">{{$spbc2->sanpham->hangdt->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$spbc2->id_sanpham}}/{{$spbc2->sanpham->tensp}}">{{$spbc2->sanpham->tensp}}</a></h3>
+<<<<<<< HEAD
 										<h4 class="product-price">{{$spbc2->gia}}<del class="product-old-price">{{$spbc2->gia * 0.5}}</del></h4>
+=======
+										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+>>>>>>> 7ee913c56c031ab425d56c6df46989d6e978736b
 									</div>
 								</div>
 								@endforeach							
