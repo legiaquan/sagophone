@@ -29,6 +29,10 @@ class PageController extends Controller
 	{
 		$nhomsanpham = NhomSanPham::all();
 		$hangdt = HangDT::all();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 1f54d3742b6a3ad0d77141f4de9691df06669937
 		$sanphammoi = DanhSachBanner::where('id_banner','3')->join('tbsanpham','tbdanhsachbanner.id_sanpham','tbsanpham.id')
 		->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')->orderBy('tbdanhsachbanner.id','asc')->get();
 		$sanphambanchay = DanhSachBanner::where('id_banner','4')->join('tbsanpham','tbdanhsachbanner.id_sanpham','tbsanpham.id')
@@ -57,6 +61,21 @@ class PageController extends Controller
     	->where('tbdanhsachbanner.id_banner','2')
     	->orderBy('tbdanhsachbanner.id','asc')
     	->take(3)->get();
+<<<<<<< HEAD
+=======
+=======
+		$sanphammoi = DanhSachBanner::where('id_banner','3')->get();
+		$sanphambanchay = DanhSachBanner::where('id_banner','4')->get();
+		$sanphamhotdeals = DanhSachBanner::where('id_banner','2')->get();
+		$sanphambanchay1 = DanhSachBanner::where('id_banner','4')->take(3)->get();
+		$sanphambanchay2 = DanhSachBanner::where('id_banner','4')->skip(3)->take(3)->get();
+		$sanphammoi1 = DanhSachBanner::where('id_banner','3')->take(3)->get();
+		$sanphammoi2 = DanhSachBanner::where('id_banner','3')->skip(3)->take(3)->get();
+		$sanphamhotdeals1 = DanhSachBanner::where('id_banner','2')->take(3)->get();
+		$sanphamhotdeals2 = DanhSachBanner::where('id_banner','2')->skip(3)->take(3)->get();
+		//$gia1 = DB::table('tbchitietsanpham')->where('id_sanpham',$sanphammoi->id_sanpham)->get();
+>>>>>>> 7ee913c56c031ab425d56c6df46989d6e978736b
+>>>>>>> 1f54d3742b6a3ad0d77141f4de9691df06669937
 		view()->share('nhomsanpham',$nhomsanpham);
 		view()->share('hangdt',$hangdt);
 		view()->share('sanphammoi',$sanphammoi);
@@ -68,6 +87,7 @@ class PageController extends Controller
 		view()->share('sanphambanchay2',$sanphambanchay2);
 		view()->share('sanphamhotdeals1', $sanphamhotdeals1);
 		view()->share('sanphamhotdeals2', $sanphamhotdeals2);
+		//view()->share('gia1',$gia1);
 		
 	}
 
