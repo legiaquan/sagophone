@@ -89,6 +89,37 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::get('them','DonHangController@getThem');
 	});
 
+		/*Nhom loai tin*/
+	Route::group(['prefix'=>'loaitin'],function(){
+		// admin/loaitin/danhsach
+		Route::get('danhsach','LoaiTinController@getDanhSach');
+
+		Route::get('sua/{id}','LoaiTinController@getSua');
+		Route::post('sua/{id}','LoaiTinController@postSua');
+
+		Route::get('them','LoaiTinController@getThem');
+		Route::post('them','LoaiTinController@postThem');
+
+		Route::get('xoa/{id}','LoaiTinController@getXoa');
+		Route::post('xoa/{id}','LoaiTinController@postXoa');
+	
+	});
+
+	/*tin tuc*/
+	Route::group(['prefix'=>'tintuc'],function(){
+		// admin/tintuc/danhsach
+		Route::get('danhsach','TinTucController@getDanhSach');
+
+		Route::get('sua/{id}','TinTucController@getSua');
+		Route::post('sua/{id}','TinTucController@postSua');
+
+		Route::get('them','TinTucController@getThem');
+		Route::post('them','TinTucController@postThem');
+		
+		Route::get('xoa/{id}','TinTucController@getXoa');
+		Route::post('xoa/{id}','TinTucController@postXoa');
+	});
+
 	/*Nhom san pham*/
 	Route::group(['prefix'=>'nhomsanpham'],function(){
 		// admin/nhomsanpham/danhsach
