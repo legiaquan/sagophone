@@ -62,7 +62,6 @@
               <li class="has-sub nav-item"><a ><i class="ft-shopping-cart"></i><span data-i18n="" class="menu-title">Đơn hàng</span></a>
                     <ul class="menu-content">
                       <li><a href="admin/donhang/danhsach" class="menu-item">Danh sách</a></li>
-                      <li><a href="admin/donhang/them" class="menu-item">Thêm</a></li>
                     </ul>
                   </li>
               <!-- End of Đơn hàng -->
