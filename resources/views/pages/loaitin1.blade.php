@@ -44,7 +44,7 @@
             <div class="col-md-9 ">
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background-color:#FF8000; color:white;">
-                       <h4><a href="loaitin" style="color: white; font-weight: bolder;">TẤT CẢ CÁC TIN</a></h4>
+                       <h4><a href="loaitin/{{$loaitin1->id}}" style="color: white; font-weight: bolder;">{{$loaitin1->tenloaitin}}</a></h4>
                     </div>
                     @foreach($tintuc as $tt)
                         <div class="row-item row">

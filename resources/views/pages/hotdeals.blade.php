@@ -10,9 +10,9 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="trangchu">Trang Chủ</a></li>
-						<li><a href="hotdeals">Hot Deals</a></li>
+						<li class="active"><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
-						<li class="active"><a href="danhmuc">Danh Mục</a></li>
+						<li><a href="danhmuc">Danh Mục</a></li>
 						<li><a href="danhmuc/1/Điện thoại}">Điện Thoại</a></li>									
 						<li><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
 					</ul>
@@ -33,7 +33,7 @@
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="trangchu">Trang Chủ</a></li>
-							<li><a href="danhmuc">Tất Cả Danh Mục</a></li>	
+							<li><a href="hotdeals">Hot Deals</a></li>	
 
 						</ul>
 					</div>
@@ -53,63 +53,7 @@
 					<!-- ASIDE -->
 					<div id="aside" class="col-md-3">
 						<!-- aside Widget -->
-						<div class="aside">						
-								<h3 class="aside-title"><a href="danhmuc" style="font-weight: bolder;">Danh Mục</a></h3>						
-							@foreach($nhomsanpham as $nsp)
-							<div class="checkbox-filter">						
-								{{-- <div class="">
-									<input type="checkbox" id="danhmuc" name="danhmuc" >
-									<label for="danhmuc">
-										<span></span>
-										{{$nsp->tennhom}}
-										@if($nsp->id == 1)
-											<small>({{count($sanphamdt)}})</small>
-										@else
-											<small>({{count($sanphampk)}})</small>
-										@endif
-									</label>
-								</div>					 --}}	
-								<div class="">
-									<label>
-										<a href="danhmuc/{{$nsp->id}}/{{$nsp->tennhom}}">
-											{{$nsp->tennhom}}
-										</a>
-									</label>
-									
-									@if($nsp->id == 1)
-										<small>({{count($sanphamdt)}})</small>
-									@elseif($nsp->id == 2)
-										<small>({{count($sanphampk)}})</small>
-									@else
-										<small>(0)</small>
-									@endif
-								</div>
-							</div>
-							@endforeach
-						</div>
-						<!-- /aside Widget -->
-
-						<!-- aside Widget -->
-						{{-- <div class="aside">
-							<h3 class="aside-title">Price</h3>
-							<div class="price-filter">
-								<div id="price-slider"></div>
-								<div class="input-number price-min">
-									<input id="price-min" type="number">
-									<span class="qty-up">+</span>
-									<span class="qty-down">-</span>
-								</div>
-								<span>-</span>
-								<div class="input-number price-max">
-									<input id="price-max" type="number">
-									<span class="qty-up">+</span>
-									<span class="qty-down">-</span>
-								</div>
-							</div>
-						</div> --}}
-						<!-- /aside Widget -->
-
-						<!-- aside Widget -->
+						
 						<div class="aside">
 							<h3 class="aside-title">Sản Phẩm Mới</h3>
 							<div class="products-widget-slick" data-nav="#slick-nav-5">
@@ -218,7 +162,7 @@
 						<!-- store products -->
 						<div class="row">
 							<!-- product -->
-							@foreach($sanpham as $sp)
+							@foreach($sanphamhotdealstt as $sp)
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
@@ -261,7 +205,7 @@
 						<br>
 						<!-- store bottom filter -->
 						<div class="store-filter clearfix">
-							{{$sanpham->links()}}
+							{{$sanphamhotdealstt->links()}}
 						</div>
 						<!-- /store bottom filter -->
 					</div>
