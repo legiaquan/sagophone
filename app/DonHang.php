@@ -20,6 +20,6 @@ class DonHang extends Model
 
     public function admins()
     {
-        return $this->belongsTo('App\Admin','id_admins','id');
+        return $this->belongsTo('App\NhanVien','id_admins','id');
     }
 }

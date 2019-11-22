@@ -10,42 +10,15 @@ class DonHangController extends Controller
     //
     public function getDanhSach()
     {
-    	$donhang = DonHang::orderBy('id','DESC')->get();
+    	$donhang = DonHang::orderBy('created_at', 'DESC')->get();
         
     	return view('admin.donhang.danhsach',['donhang'=>$donhang]);
     }
 
-    public function getThem()
-    {
-    	return view('admin.DonHang.them');
-    }
-
-    public function postThem(Request $request)
-    {
-    	$this->validate($request,
-    	[
-    		'txtTen'=>'required|unique:tbdonhang,tenhang|min:2|max:50'
-    	],
-    	[
-    		'txtTen.required'=>'Bạn chưa nhập tên hãng',
-    		'txtTen.unique'=>'Tên hãng đã tồn tại',
-    		'txtTen.min'=>'Tên hãng phải có độ dài từ 2 cho đến 50 ký tự',
-    		'txtTen.max'=>'Tên hãng phải có độ dài từ 2 cho đến 50 ký tự',
-    	]);
-
-    	$donhang = new DonHang;
-    	$donhang->tenhang = $request->txtTen;
-    	//đổi có dấu thành không dấu
-    	//echo changeTitle($request->txtTen);
-    	$donhang->save();
-
-    	return redirect('admin/donhang/them')->with('thongbao','Thêm thành công '.$donhang->tenhang. ' vào CSDL!');
-    }
-
     public function getSua($id)
     {
-    	$id_donhang = DonHang::find($id);
-    	return view('admin.donhang.sua',['id_donhang'=>$id_donhang]);
+    	$donhang = DonHang::find($id);
+    	return view('admin.donhang.sua',['donhang'=>$donhang]);
     }
 
     public function postSua(Request $request,$id)
@@ -53,23 +26,43 @@ class DonHangController extends Controller
     	$donhang = DonHang::find($id);
     	$this->validate($request,
     	[
-    		'txtTen'=>'required|unique:tbdonhang,tenhang|min:2|max:50'
+    		'txtTen'=>'required|min:2|max:50',
+            'txtSDT'=>'required|min:10|max:11',
+            'txtDiachi'=>'required|min:10'
     	],
     	[
-    		'txtTen.required'=>'Bạn chưa nhập tên hãng',
-    		'txtTen.unique'=>'Tên thể loại đã tồn tại',
-    		'txtTen.min'=>'Tên hãng phải có độ dài từ 2 cho đến 50 ký tự',
-    		'txtTen.max'=>'Tên hãng phải có độ dài từ 2 cho đến 50 ký tự',
+    		'txtTen.required'=>'Bạn chưa nhập tên người nhận',
+    		'txtTen.min'=>'Tên người nhận phải có độ dài từ 2 cho đến 50 ký tự',
+    		'txtTen.max'=>'Tên người nhận phải có độ dài từ 2 cho đến 50 ký tự',
+            'txtSDT.required'=>'Bạn chưa nhập SĐT',
+            'txtSDT.min'=>'SĐT phải có độ dài từ 10 cho đến 11 ký tự',
+            'txtSDT.max'=>'SĐT phải có độ dài từ 10 cho đến 11 ký tự',
+            'txtDiachi.required'=>'Bạn chưa nhập địa chỉ',
+            'txtDiachi.min'=>'SĐT phải có độ dài từ 10 ký tự',
     	]);
-    	$donhang->tenhang = $request->txtTen;
+    	$donhang->tennguoinhan = $request->txtTen;
+        $donhang->sdtnguoinhan = $request->txtSDT;
+        $donhang->diachinguoinhan = $request->txtDiachi;
     	$donhang->save();
     	return redirect('admin/donhang/sua/'.$id)->with('thongbao','Sửa thành công!');
     }
 
-    public function getXoa($id)
+    public function getXuly($id,$tinhtrang)
     {
     	$donhang = DonHang::find($id);
-    	$donhang->delete();
-    	return redirect('admin/donhang/danhsach')->with('thongbao','Bạn đã xóa thành công '.$donhang->tenhang);
+        $donhang->tinhtrang = $tinhtrang;
+        if($tinhtrang == 'confirmed')
+            $donhang->id_admins =1;
+    	$donhang->save();
+
+        $xuly = 'Thành Công';
+        if($tinhtrang =='cancel')
+            $xuly ='Hủy';
+        else if($tinhtrang =='confirmed')
+            $xuly = 'Đã xác nhận';
+        else if($tinhtrang == 'delivery')
+            $xuly = 'Đang giao hàng';
+        
+    	return redirect('admin/donhang/danhsach')->with('thongbao','Bạn đã thanh đổi thành công trạng thái đơn hàng '.$donhang->madh.' sang trạng thái '.$xuly.'!');
     }
 }

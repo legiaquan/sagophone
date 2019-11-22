@@ -73,23 +73,24 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('xoa/{id}/{id_mau}','ChiTietSanPhamController@postXoa');
 	});
 
-	/*Chi tiet hoa don*/
+	/*Chi tiet don hang*/
 	Route::group(['prefix'=>'chitietdonhang'],function(){
 		// admin/ChiTietDonHang/danhsach
-		Route::get('danhsach','ChiTietDonHangController@getDanhSach');
-		Route::get('sua','ChiTietDonHangController@getSua');
-		Route::get('them','ChiTietDonHangController@getThem');
+		Route::get('danhsach/{id}','ChiTietDonHangController@getDanhSach');
 	});
 
-	/*Hoa don*/
+	/*don hang*/
 	Route::group(['prefix'=>'donhang'],function(){
 		// admin/donhang/danhsach
 		Route::get('danhsach','DonHangController@getDanhSach');
-		Route::get('sua','DonHangController@getSua');
-		Route::get('them','DonHangController@getThem');
+
+		Route::get('sua/{id}','DonHangController@getSua');
+		Route::post('sua/{id}','DonHangController@postSua');
+
+		Route::get('xuly/{id}/{tinhtrang}','DonHangController@getXuly');
 	});
 
-		/*Nhom loai tin*/
+	/*Nhom loai tin*/
 	Route::group(['prefix'=>'loaitin'],function(){
 		// admin/loaitin/danhsach
 		Route::get('danhsach','LoaiTinController@getDanhSach');
