@@ -12,9 +12,14 @@
 						<li><a href="trangchu">Trang Chủ</a></li>
 						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
-						<li class="active"><a href="danhmuc">Danh Mục</a></li>
-						<li><a href="smartphones">Smartphones</a></li>									
-						<li><a href="phukien">Phụ Kiện</a></li>
+						<li><a href="danhmuc">Danh Mục</a></li>
+						@if($danhmuc->id == 1)
+							<li class="active"><a href="danhmuc/1/Điện thoại">Điện Thoại</a></li>
+							<li><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
+						@else
+							<li><a href="danhmuc/1/Điện thoại">Điện Thoại</a></li>
+							<li class="active"><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
+						@endif																		
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -150,12 +155,12 @@
 								@foreach($sanphambanchay1 as $spbc1)
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="upload/imgSanPham/{{$spbc1->sanpham->hinhsp}}" alt="">
+										<img src="upload/imgSanPham/{{$spbc1->hinhsp}}" alt="">
 									</div>
 									<div class="product-body">
-										<p class="product-category">{{$spbc1->sanpham->hangdt->tenhang}}</p>
-										<h3 class="product-name"><a href="#">{{$spbc1->sanpham->tensp}}</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+										<p class="product-category">{{$spbc1->tenhang}}</p>
+										<h3 class="product-name"><a href="#">{{$spbc1->tensp}}</a></h3>
+										<h4 class="product-price">{{$spbc1->gia}}</del></h4>
 									</div>
 								</div>
 								@endforeach							
@@ -165,12 +170,12 @@
 								@foreach($sanphambanchay2 as $spbc2)
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="upload/imgSanPham/{{$spbc2->sanpham->hinhsp}}" alt="">
+										<img src="upload/imgSanPham/{{$spbc2->hinhsp}}" alt="">
 									</div>
 									<div class="product-body">
-										<p class="product-category">{{$spbc2->sanpham->hangdt->tenhang}}</p>
-										<h3 class="product-name"><a href="#">{{$spbc2->sanpham->tensp}}</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+										<p class="product-category">{{$spbc2->tenhang}}</p>
+										<h3 class="product-name"><a href="#">{{$spbc2->tensp}}</a></h3>
+										<h4 class="product-price">{{$spbc2->gia}}</del></h4>
 									</div>
 								</div>
 								@endforeach							
@@ -228,7 +233,7 @@
 									<div class="product-body">
 										<p class="product-category">{{$sp->tenhang}}</p>
 										<h3 class="product-name"><a href="#">{{$sp->tensp}}</a></h3>
-										<h4 class="product-price">{{$sp->gia}}<del class="product-old-price">$990.00</del></h4>
+										<h4 class="product-price">{{$sp->gia}}<del class="product-old-price">{{$sp->gia * 0.5}}</del></h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>

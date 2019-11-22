@@ -33,7 +33,7 @@
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="trangchu">Trang Chủ</a></li>
-							<li><a href="danhmuc">Tất Cả Danh Mục</a></li>	
+							<li><a href="danhmuc">{{$keyword}}</a></li>	
 
 						</ul>
 					</div>
