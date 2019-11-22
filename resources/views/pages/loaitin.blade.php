@@ -52,7 +52,15 @@
                             
                                 <a href="tintuc/{{$tt->id}}">
                                     <br>
+<<<<<<< HEAD
                                     <img width="200px" height="200px" class="img-responsive" src="upload/imgTinTuc/{{$tt->img}}" alt="">
+=======
+<<<<<<< HEAD
+                                    <img width="200px" height="200px" class="img-responsive" src="upload/imgTinTuc/{{$tt->img}}" alt="">
+=======
+                                    <img width="200px" height="200px" class="img-responsive" src="upload/imgSanPham/{{$tt->img}}" alt="">
+>>>>>>> bc4d78425f36d9dc9ab1362421f871dba74f6a74
+>>>>>>> ef01f6d2196d9b73a49c34402e3763706ac60552
                                 </a>
                             </div>
 
