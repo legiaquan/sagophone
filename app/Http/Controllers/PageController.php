@@ -260,6 +260,7 @@ class PageController extends Controller
     	$sanphamlienquan = SanPham::where('id_hangdt',$chitiet->id_hangdt)->take(4)->get();
     	//var_dump(getGiaMin($id));
     	return view('pages/chitiet',['chitiet' => $chitiet, 'sanphamlienquan' => $sanphamlienquan]);
+<<<<<<< HEAD
     }
 
     public function hotdeals()
@@ -301,6 +302,18 @@ class PageController extends Controller
         {
             echo 'Không tìm thấy!';
         }
+=======
+    }
+
+    public function hotdeals()
+    {
+        $sanphamhotdealstt = DB::table('tbsanpham')
+        ->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
+        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
+        ->where('tbdanhsachbanner.id_banner','2')->paginate(6);
+        return view('pages/hotdeals',['sanphamhotdealstt' => $sanphamhotdealstt]);
+>>>>>>> bc4d78425f36d9dc9ab1362421f871dba74f6a74
     }
 
 }
