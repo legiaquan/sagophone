@@ -34,6 +34,11 @@
                                 {{ session('thongbao') }}
                             </div>
                         @endif
+                        @if(session('loi'))
+                            <div class="alert alert-danger">
+                                {{ session('loi') }}
+                            </div>
+                        @endif
 						<form action="admin/sanpham/sua/{{$sanpham->id}}" method="POST" enctype="multipart/form-data">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 							<div class="form-body">
