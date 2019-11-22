@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Controllers;
 
@@ -260,10 +260,6 @@ class PageController extends Controller
     	$sanphamlienquan = SanPham::where('id_hangdt',$chitiet->id_hangdt)->take(4)->get();
     	//var_dump(getGiaMin($id));
     	return view('pages/chitiet',['chitiet' => $chitiet, 'sanphamlienquan' => $sanphamlienquan]);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> ef01f6d2196d9b73a49c34402e3763706ac60552
     }
 
     public function hotdeals()
@@ -274,7 +270,6 @@ class PageController extends Controller
         ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
         ->where('tbdanhsachbanner.id_banner','2')->paginate(6);
         return view('pages/hotdeals',['sanphamhotdealstt' => $sanphamhotdealstt]);
-<<<<<<< HEAD
     }
 
     public function timkiem(Request $request)
@@ -306,51 +301,6 @@ class PageController extends Controller
         {
             echo 'Không tìm thấy!';
         }
-=======
-    }
-
-    public function timkiem(Request $request)
-    {
-        $loaitin = LoaiTin::all();
-        $this->validate($request,
-            [
-                'keyword' => 'required|min:5'
-
-            ],
-            [
-                'keyword.required' => 'Bạn chưa nhập từ khóa!',
-                'keyword.min' => 'Vui lòng nhập nhiều hơn 5 ký tự!'
-            ]
-        );
-        $keyword = $request->keyword;
-        $tintuc = TinTuc::where('tieude','like',"%$keyword%")->orWhere('mota','like','%$keyword%')->orWhere('noidung','like','%$keyword%')
-        ->take(20)->paginate(4);
-        $sanpham = SanPham::where('tensp','like','%$keyword%')->orWhere('mota','like','%$keyword%')->take(30)->paginate(6);
-        if($tintuc != NULL)
-        {
-            return view('pages/timkiem',['keyword' => $keyword, 'tintuc' => $tintuc,'loaitin' => $loaitin]);
-        }
-        else if($sanpham != NULL)
-        {
-            return view('pages/timkiem1',['keyword' => $keyword, 'sanpham' => $sanpham]);
-        }
-        else
-        {
-            echo 'Không tìm thấy!';
-        }
-=======
-    }
-
-    public function hotdeals()
-    {
-        $sanphamhotdealstt = DB::table('tbsanpham')
-        ->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
-        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
-        ->where('tbdanhsachbanner.id_banner','2')->paginate(6);
-        return view('pages/hotdeals',['sanphamhotdealstt' => $sanphamhotdealstt]);
->>>>>>> bc4d78425f36d9dc9ab1362421f871dba74f6a74
->>>>>>> ef01f6d2196d9b73a49c34402e3763706ac60552
     }
 
 }

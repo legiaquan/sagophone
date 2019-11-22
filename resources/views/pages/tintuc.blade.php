@@ -1,4 +1,4 @@
-@extends('layouts.index')
+﻿@extends('layouts.index')
 
 @section('content')
 <!-- NAVIGATION -->
@@ -45,15 +45,7 @@
                 <img class="img-responsive" src="upload/imgSanPham/{{$tintuc->img}}" alt="" width="200px" height="200px">
 
                 <!-- Date/Time -->
-<<<<<<< HEAD
                 <p  style="text-align: right;" ><span class="glyphicon glyphicon-pencil"></span> Đăng vào {{$tintuc->created_at}}</p>
-=======
-<<<<<<< HEAD
-                <p  style="text-align: right;" ><span class="glyphicon glyphicon-pencil"></span> Đăng vào {{$tintuc->created_at}}</p>
-=======
-                <p  style="text-align: right;" ><span class="glyphicon glyphicon-pencil"></span> Đăng vào {{$tintuc->create_at}}</p>
->>>>>>> bc4d78425f36d9dc9ab1362421f871dba74f6a74
->>>>>>> ef01f6d2196d9b73a49c34402e3763706ac60552
                 <hr>
 
                 <!-- Post Content -->
@@ -83,15 +75,7 @@
                         <div class="row" style="margin-top: 10px;">
                             <div class="col-md-5">
                                 <a href="tintuc/{{$tlq->id}}">
-<<<<<<< HEAD
                                     <img class="img-responsive" src="upload/imgTinTuc/{{$tlq->img}}" alt="">
-=======
-<<<<<<< HEAD
-                                    <img class="img-responsive" src="upload/imgTinTuc/{{$tlq->img}}" alt="">
-=======
-                                    <img class="img-responsive" src="upload/imgSanPham/{{$tlq->img}}" alt="">
->>>>>>> bc4d78425f36d9dc9ab1362421f871dba74f6a74
->>>>>>> ef01f6d2196d9b73a49c34402e3763706ac60552
                                 </a>
                             </div>
                             <div class="col-md-7">
