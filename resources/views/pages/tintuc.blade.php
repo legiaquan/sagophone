@@ -1,4 +1,4 @@
-@extends('layouts.index')
+﻿@extends('layouts.index')
 
 @section('content')
 <!-- NAVIGATION -->
@@ -45,7 +45,7 @@
                 <img class="img-responsive" src="upload/imgSanPham/{{$tintuc->img}}" alt="" width="200px" height="200px">
 
                 <!-- Date/Time -->
-                <p  style="text-align: right;" ><span class="glyphicon glyphicon-pencil"></span> Đăng vào {{$tintuc->create_at}}</p>
+                <p  style="text-align: right;" ><span class="glyphicon glyphicon-pencil"></span> Đăng vào {{$tintuc->created_at}}</p>
                 <hr>
 
                 <!-- Post Content -->
@@ -75,7 +75,7 @@
                         <div class="row" style="margin-top: 10px;">
                             <div class="col-md-5">
                                 <a href="tintuc/{{$tlq->id}}">
-                                    <img class="img-responsive" src="upload/imgSanPham/{{$tlq->img}}" alt="">
+                                    <img class="img-responsive" src="upload/imgTinTuc/{{$tlq->img}}" alt="">
                                 </a>
                             </div>
                             <div class="col-md-7">

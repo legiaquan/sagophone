@@ -1,4 +1,4 @@
-@extends('layouts.index')
+﻿@extends('layouts.index')
 
 @section('content')
 <!-- NAVIGATION -->
@@ -52,7 +52,7 @@
                             
                                 <a href="tintuc/{{$tt->id}}">
                                     <br>
-                                    <img width="200px" height="200px" class="img-responsive" src="upload/imgSanPham/{{$tt->img}}" alt="">
+                                    <img width="200px" height="200px" class="img-responsive" src="upload/imgTinTuc/{{$tt->img}}" alt="">
                                 </a>
                             </div>
 

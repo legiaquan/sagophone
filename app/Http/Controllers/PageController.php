@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Controllers;
 
@@ -270,6 +270,37 @@ class PageController extends Controller
         ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
         ->where('tbdanhsachbanner.id_banner','2')->paginate(6);
         return view('pages/hotdeals',['sanphamhotdealstt' => $sanphamhotdealstt]);
+    }
+
+    public function timkiem(Request $request)
+    {
+        $loaitin = LoaiTin::all();
+        $this->validate($request,
+            [
+                'keyword' => 'required|min:5'
+
+            ],
+            [
+                'keyword.required' => 'Bạn chưa nhập từ khóa!',
+                'keyword.min' => 'Vui lòng nhập nhiều hơn 5 ký tự!'
+            ]
+        );
+        $keyword = $request->keyword;
+        $tintuc = TinTuc::where('tieude','like',"%$keyword%")->orWhere('mota','like','%$keyword%')->orWhere('noidung','like','%$keyword%')
+        ->take(20)->paginate(4);
+        $sanpham = SanPham::where('tensp','like','%$keyword%')->orWhere('mota','like','%$keyword%')->take(30)->paginate(6);
+        if(isset($tintuc))
+        {
+            return view('pages/timkiem',['keyword' => $keyword, 'tintuc' => $tintuc,'loaitin' => $loaitin]);
+        }
+        else if(isset($sanpham))
+        {
+            return view('pages/timkiem1',['keyword' => $keyword, 'sanpham' => $sanpham]);
+        }
+        else
+        {
+            echo 'Không tìm thấy!';
+        }
     }
 
 }
