@@ -12,4 +12,8 @@ class ThanhVien extends Model
     {
     	return $this->hasMany('App\HoaDon','id_thanhvien','id');
     }
+    public function binhluan()
+    {
+    	return $this->hasMany('App\BinhLuan','id_thanhvien','id');
+    }
 }

@@ -13,8 +13,8 @@
 						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
 						<li class="active"><a href="danhmuc">Danh Mục</a></li>
-						<li><a href="smartphones">Smartphones</a></li>									
-						<li><a href="phukien">Phụ Kiện</a></li>
+						<li><a href="danhmuc/1/Điện thoại}">Điện Thoại</a></li>									
+						<li><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -34,7 +34,7 @@
 						<ul class="breadcrumb-tree">
 							<li><a href="trangchu">Trang Chủ</a></li>
 							<li><a href="danhmuc">Tất Cả Danh Mục</a></li>								
-							<li><a href="danhmuc/{{$danhmuc->id}}/{{$danhmucloai->tennhom}}/{{$danhmuc->tenhang}}">{{$danhmuc->tenhang}}</a></li>
+							<li><a href="danhmuc/{{$danhmuc->id}}/{{$danhmucloai->id}}">{{$danhmuc->tenhang}}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -71,7 +71,7 @@
 								</div>					 --}}	
 								<div class="">
 									<label>
-										<a href="danhmuc/{{$nsp->id}}/{{$nsp->tennhom}}">
+										<a href="danhmuc/{{$nsp->id}}">
 											{{$nsp->tennhom}}
 										</a>
 									</label>
@@ -116,7 +116,7 @@
 								@foreach($hangdt as $hdt)
 								<div class="">
 									<label>
-										<a href="danhmuc/{{$hdt->id}}/{{$danhmucloai->tennhom}}/{{$hdt->tenhang}}">
+										<a href="danhmuc/{{$danhmucloai->id}}/{{$hdt->id}}">
 											{{$hdt->tenhang}}
 										</a>
 									</label>
@@ -150,11 +150,13 @@
 								@foreach($sanphambanchay1 as $spbc1)
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="upload/imgSanPham/{{$spbc1->sanpham->hinhsp}}" alt="">
+										<a href="chitiet/{{$spbc1->id_sanpham}}/{{$spbc1->id}}">
+											<img src="upload/imgSanPham/{{$spbc1->hinhsp}}" alt="">
+										</a>
 									</div>
 									<div class="product-body">
-										<p class="product-category">{{$spbc1->sanpham->hangdt->tenhang}}</p>
-										<h3 class="product-name"><a href="#">{{$spbc1->sanpham->tensp}}</a></h3>
+										<p class="product-category">{{$spbc1->tenhang}}</p>
+										<h3 class="product-name"><a href="chitiet/{{$spbc1->id_sanpham}}/{{$spbc1->id}}">{{$spbc1->tensp}}</a></h3>
 										<h4 class="product-price">{{$spbc1->gia}}<del class="product-old-price">{{$spbc1->gia*0.3}}</del></h4>
 									</div>
 								</div>
@@ -165,11 +167,13 @@
 								@foreach($sanphambanchay2 as $spbc2)
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="upload/imgSanPham/{{$spbc2->sanpham->hinhsp}}" alt="">
+										<a href="chitiet/{{$spbc2->id_sanpham}}/{{$spbc2->id}}">
+											<img src="upload/imgSanPham/{{$spbc2->hinhsp}}" alt="">
+										</a>
 									</div>
 									<div class="product-body">
-										<p class="product-category">{{$spbc2->sanpham->hangdt->tenhang}}</p>
-										<h3 class="product-name"><a href="#">{{$spbc2->sanpham->tensp}}</a></h3>
+										<p class="product-category">{{$spbc2->tenhang}}</p>
+										<h3 class="product-name"><a href="chitiet/{{$spbc2->id_sanpham}}/{{$spbc2->id}}">{{$spbc2->tensp}}</a></h3>
 										<h4 class="product-price">{{$spbc2->gia}}<del class="product-old-price">{{$spbc2->gia*0.3}}</del></h4>
 									</div>
 								</div>
@@ -218,7 +222,9 @@
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img width="250px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
+										<a href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}">
+											<img width="250px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
+										</a>
 										
 										<div class="product-label">										
 												<span class="new">NEW</span>
@@ -227,7 +233,7 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$sp->tenhang}}</p>
-										<h3 class="product-name"><a href="#">{{$sp->tensp}}</a></h3>
+										<h3 class="product-name"><a href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}">{{$sp->tensp}}</a></h3>
 										<h4 class="product-price">{{$sp->gia}}<del class="product-old-price">{{$sp->gia*0.5}}</del></h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
@@ -239,7 +245,7 @@
 										<div class="product-btns">
 											{{-- <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button> --}}
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></button>
+											<button class="quick-view"><a href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
 										</div>
 									</div>
 									<div class="add-to-cart">

@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 @section('content')
-	<!-- NAVIGATION -->
+<!-- NAVIGATION -->
 		<nav id="navigation">
 			<!-- container -->
 			<div class="container">
@@ -12,14 +12,9 @@
 						<li><a href="trangchu">Trang Chủ</a></li>
 						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
-						<li><a href="danhmuc">Danh Mục</a></li>
-						@if($danhmuc->id == 1)
-							<li class="active"><a href="danhmuc/1/Điện thoại">Điện Thoại</a></li>
-							<li><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
-						@else
-							<li><a href="danhmuc/1/Điện thoại">Điện Thoại</a></li>
-							<li class="active"><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
-						@endif																		
+						<li class="active"><a href="danhmuc">Danh Mục</a></li>
+						<li><a href="danhmuc/1/Điện thoại}">Điện Thoại</a></li>									
+						<li><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -38,8 +33,8 @@
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="trangchu">Trang Chủ</a></li>
-							<li><a href="danhmuc">Tất Cả Danh Mục</a></li>
-							<li><a href="danhmuc/{{$danhmuc->id}}">{{$danhmuc->tennhom}}</a></li>							
+							<li><a href="danhmuc">{{$keyword}}</a></li>	
+
 						</ul>
 					</div>
 				</div>
@@ -76,7 +71,7 @@
 								</div>					 --}}	
 								<div class="">
 									<label>
-										<a href="danhmuc/{{$nsp->id}}">
+										<a href="danhmuc/{{$nsp->id}}/{{$nsp->tennhom}}">
 											{{$nsp->tennhom}}
 										</a>
 									</label>
@@ -116,32 +111,38 @@
 
 						<!-- aside Widget -->
 						<div class="aside">
-							<h3 class="aside-title"><a href="danhmuc" style="font-weight: bolder;">THƯƠNG HIỆU</a></h3>
-							<div class="">
-								@foreach($hangdt as $hdt)
-								<div class="">
-									<label>
-										<a href="danhmuc/{{$danhmuc->id}}/{{$hdt->id}}">
-											{{$hdt->tenhang}}
-										</a>
-									</label>
-									
-									@if($hdt->id == 1)
-										<small>({{count($sanphamapple)}})</small>
-									@elseif($hdt->id == 2)
-										<small>({{count($sanphamsamsung)}})</small>
-									@elseif($hdt->id == 3)
-										<small>({{count($sanphamsony)}})</small>
-									@elseif($hdt->id == 4)
-										<small>({{count($sanphamnokia)}})</small>
-									@else
-										<small>({{count($sanphamvsmart)}})</small>
-									@endif
-
-									<span></span>
-										
+							<h3 class="aside-title">Sản Phẩm Mới</h3>
+							<div class="products-widget-slick" data-nav="#slick-nav-5">
+							<div>
+								<!-- product widget -->
+								@foreach($sanphammoi1 as $spm1)
+								<div class="product-widget">
+									<div class="product-img">
+										<img src="upload/imgSanPham/{{$spm1->hinhsp}}" alt="">
+									</div>
+									<div class="product-body">
+										<p class="product-category">{{$spm1->tenhang}}</p>
+										<h3 class="product-name"><a href="chitiet/{{$spm1->id_sanpham}}/{{$spm1->tensp}}">{{$spm1->tensp}}</a></h3>
+										<h4 class="product-price">{{$spm1->gia}}<del class="product-old-price">{{$spm1->gia*0.3}}</h4>
+									</div>
 								</div>
 								@endforeach							
+							</div>
+							<div>
+								<!-- product widget -->
+								@foreach($sanphammoi2 as $spm2)
+								<div class="product-widget">
+									<div class="product-img">
+										<img src="upload/imgSanPham/{{$spm2->hinhsp}}" alt="">
+									</div>
+									<div class="product-body">
+										<p class="product-category">{{$spm2->tenhang}}</p>
+										<h3 class="product-name"><a href="chitiet/{{$spm2->id_sanpham}}/{{$spm2->tensp}}">{{$spm2->tensp}}</a></h3>
+										<h4 class="product-price">{{$spm2->gia}}<del class="product-old-price">{{$spm2->gia*0.3}}</h4>
+									</div>
+								</div>
+								@endforeach							
+							</div>
 							</div>
 						</div>
 						<!-- /aside Widget -->
@@ -155,13 +156,11 @@
 								@foreach($sanphambanchay1 as $spbc1)
 								<div class="product-widget">
 									<div class="product-img">
-										<a href="chitiet/{{$spbc1->id_sanpham}}/{{$spbc1->id}}">
-											<img src="upload/imgSanPham/{{$spbc1->hinhsp}}" alt="" width="70px" height="70px">
-										</a>
+										<img src="upload/imgSanPham/{{$spbc1->hinhsp}}" alt="">
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$spbc1->tenhang}}</p>
-										<h3 class="product-name"><a href="chitiet/{{$spbc1->id_sanpham}}/{{$spbc1->id}}">{{$spbc1->tensp}}</a></h3>
+										<h3 class="product-name"><a href="chitiet/{{$spbc1->id_sanpham}}/{{$spbc1->tensp}}">{{$spbc1->tensp}}</a></h3>
 										<h4 class="product-price">{{$spbc1->gia}}<del class="product-old-price">{{$spbc1->gia*0.3}}</del></h4>
 									</div>
 								</div>
@@ -172,13 +171,11 @@
 								@foreach($sanphambanchay2 as $spbc2)
 								<div class="product-widget">
 									<div class="product-img">
-										<a href="chitiet/{{$spbc2->id_sanpham}}/{{$spbc2->id}}">
-											<img src="upload/imgSanPham/{{$spbc2->hinhsp}}" alt="" width="70px" height="70px">
-										</a>
+										<img src="upload/imgSanPham/{{$spbc2->hinhsp}}" alt="">
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$spbc2->tenhang}}</p>
-										<h3 class="product-name"><a href="chitiet/{{$spbc2->id_sanpham}}/{{$spbc2->id}}">{{$spbc2->tensp}}</a></h3>
+										<h3 class="product-name"><a href="chitiet/{{$spbc2->id_sanpham}}/{{$spbc2->tensp}}">{{$spbc2->tensp}}</a></h3>
 										<h4 class="product-price">{{$spbc2->gia}}<del class="product-old-price">{{$spbc2->gia*0.3}}</h4>
 									</div>
 								</div>
@@ -189,9 +186,7 @@
 						<!-- /aside Widget -->
 					</div>
 					<!-- /ASIDE -->
-					<h2>
-						{{$danhmuc->tennhom}}
-					</h2>
+
 					<!-- STORE -->
 					<div id="store" class="col-md-9">
 						<!-- store top filter -->
@@ -223,14 +218,13 @@
 						<!-- store products -->
 						<div class="row">
 							<!-- product -->
-							@foreach($sanphamdanhmuc as $sp)
+							@foreach($sanpham as $sp)
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<a href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}">
+										<a href="chitiet/{{$sp->id_sanpham}}/{{$sp->tensp}}">
 											<img width="250px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
 										</a>
-										
 										<div class="product-label">										
 												<span class="new">NEW</span>
 												<span class="sale">-30%</span>
@@ -238,8 +232,8 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$sp->tenhang}}</p>
-										<h3 class="product-name"><a href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}">{{$sp->tensp}}</a></h3>
-										<h4 class="product-price">{{$sp->gia}}<del class="product-old-price">{{$sp->gia * 0.5}}</del></h4>
+										<h3 class="product-name"><a href="chitiet/{{$sp->id_sanpham}}/{{$sp->tensp}}">{{$sp->tensp}}</a></h3>
+										<h4 class="product-price">{{$sp->gia}}<del class="product-old-price">{{$sp->gia*0.3}}</del></h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
@@ -250,7 +244,7 @@
 										<div class="product-btns">
 											{{-- <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button> --}}
-											<button class="quick-view"><a href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
+											<button class="quick-view"><a href="chitiet/{{$sp->id_sanpham}}/{{$sp->tensp}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
 										</div>
 									</div>
 									<div class="add-to-cart">
@@ -267,7 +261,7 @@
 						<br>
 						<!-- store bottom filter -->
 						<div class="store-filter clearfix">
-							{{$sanphamdanhmuc->links()}}
+							{{$sanpham->links()}}
 						</div>
 						<!-- /store bottom filter -->
 					</div>
@@ -278,4 +272,5 @@
 			<!-- /container -->
 </div>
 <!-- /SECTION -->
+
 @endsection
