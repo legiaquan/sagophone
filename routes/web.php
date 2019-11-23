@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -73,20 +73,52 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('xoa/{id}/{id_mau}','ChiTietSanPhamController@postXoa');
 	});
 
-	/*Chi tiet hoa don*/
+	/*Chi tiet don hang*/
 	Route::group(['prefix'=>'chitietdonhang'],function(){
 		// admin/ChiTietDonHang/danhsach
-		Route::get('danhsach','ChiTietDonHangController@getDanhSach');
-		Route::get('sua','ChiTietDonHangController@getSua');
-		Route::get('them','ChiTietDonHangController@getThem');
+		Route::get('danhsach/{id}','ChiTietDonHangController@getDanhSach');
 	});
 
-	/*Hoa don*/
+	/*don hang*/
 	Route::group(['prefix'=>'donhang'],function(){
 		// admin/donhang/danhsach
 		Route::get('danhsach','DonHangController@getDanhSach');
-		Route::get('sua','DonHangController@getSua');
-		Route::get('them','DonHangController@getThem');
+
+		Route::get('sua/{id}','DonHangController@getSua');
+		Route::post('sua/{id}','DonHangController@postSua');
+
+		Route::get('xuly/{id}/{tinhtrang}','DonHangController@getXuly');
+	});
+
+	/*Nhom loai tin*/
+	Route::group(['prefix'=>'loaitin'],function(){
+		// admin/loaitin/danhsach
+		Route::get('danhsach','LoaiTinController@getDanhSach');
+
+		Route::get('sua/{id}','LoaiTinController@getSua');
+		Route::post('sua/{id}','LoaiTinController@postSua');
+
+		Route::get('them','LoaiTinController@getThem');
+		Route::post('them','LoaiTinController@postThem');
+
+		Route::get('xoa/{id}','LoaiTinController@getXoa');
+		Route::post('xoa/{id}','LoaiTinController@postXoa');
+	
+	});
+
+	/*tin tuc*/
+	Route::group(['prefix'=>'tintuc'],function(){
+		// admin/tintuc/danhsach
+		Route::get('danhsach','TinTucController@getDanhSach');
+
+		Route::get('sua/{id}','TinTucController@getSua');
+		Route::post('sua/{id}','TinTucController@postSua');
+
+		Route::get('them','TinTucController@getThem');
+		Route::post('them','TinTucController@postThem');
+		
+		Route::get('xoa/{id}','TinTucController@getXoa');
+		Route::post('xoa/{id}','TinTucController@postXoa');
 	});
 
 	/*Nhom san pham*/
@@ -228,5 +260,3 @@ Route::get('danhmuc/{id}/{tennhom}/{tenhang}','PageController@danhmuc2');
 Route::get('chitiet/{id}/{tennhom}', 'PageController@chitietsp');
 
 Route::get('hotdeals','PageController@hotdeals');
-
-Route::post('timkiem','PageController@timkiem');
