@@ -11,7 +11,7 @@ class SanPhamController extends Controller
     //
     public function getDanhSach()
     {
-        $sanpham = SanPham::all();
+        $sanpham = SanPham::orderBy('tensp')->get();
         return view('admin.sanpham.danhsach',['sanpham'=>$sanpham]);
     }
 
