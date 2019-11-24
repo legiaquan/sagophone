@@ -29,12 +29,12 @@
         <div class="row">
             <div class="col-md-3 ">
                 <ul class="list-group" id="menu">
-                    <li href="#" class="list-group-item menu1 active" style="background-color:#FA8258;">
+                    <li href="#" class="list-group-item menu1 active" style="background-color:#15161D;">
                         <h4><a href="loaitin" style="color: white; font-weight: bolder;">LOẠI TIN</a></h4>
                     </li>
                     @foreach($loaitin as $lt)
-                        <li href="#" class="list-group-item menu1"  style="background-color:#F5DA81;">
-                            <a href="loaitin/{{$lt->id}}"><h5 class="product-name">{{$lt->tenloaitin}}</h5></a>
+                        <li href="#" class="list-group-item menu1"  style="background-color:white;">
+                            <a href="loaitin/{{$lt->id}}"><h7 style="color: black;font-weight: bold;" >{{$lt->tenloaitin}}</h7></a>
                         </li>
                     @endforeach
                    
@@ -43,7 +43,7 @@
 
             <div class="col-md-9 ">
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="background-color:#FF8000; color:white;">
+                    <div class="panel-heading" style="background-color:#15161D; color:white;">
                        <h4><a href="loaitin" style="color: white; font-weight: bolder;">TẤT CẢ CÁC TIN</a></h4>
                     </div>
                     @foreach($tintuc as $tt)

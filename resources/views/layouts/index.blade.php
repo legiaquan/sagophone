@@ -23,9 +23,11 @@
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="css/font-awesome.min.css">
-
+		<link rel="shortcut icon" type="image/x-icon" href="admin_asset/app-assets/img/ico/sago.ico">
+    	<link rel="shortcut icon" type="image/png" href="admin_asset/app-assets/img/ico/sago-32.png">
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+
 
 		@yield('css')
 

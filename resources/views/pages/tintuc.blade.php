@@ -67,7 +67,7 @@
             <div class="col-md-3">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="background-color:#FA8258;"><h5 style="color: white">TIN LIÊN QUAN</h5></div>
+                    <div class="panel-heading" style="background-color:#D10024;"><h5 style="color: white">TIN LIÊN QUAN</h5></div>
                     <div class="panel-body">
 
                          <!-- item -->
@@ -78,13 +78,13 @@
                                     <img class="img-responsive" src="upload/imgTinTuc/{{$tlq->img}}" alt="">
                                 </a>
                             </div>
-                            <div class="col-md-7">
+                            <!-- <div class="col-md-7"> -->
                                 <a href="tintuc/{{$tlq->id}}"><b>{{$tlq->tieude}}</b></a>
                                 <br>
-                                <p>{{$tlq->mota}}</p>
-                            </div>
+                                <p>&emsp;&emsp;&emsp;{{mb_substr($tlq->mota,0,160-3,'UTF-8').'...' }}</p>
+                            <!-- </div> -->
                             
-                            <div class="break"></div>
+                            <div class="break"></div><hr>
                         </div>
                         @endforeach
                         <!-- end item -->
@@ -92,7 +92,7 @@
                 </div>
 
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="background-color:#FA8258;"><h5 style="color: white">TIN KHUYẾN MÃI</h5></div>
+                    <div class="panel-heading" style="background-color:#D10024;"><h5 style="color: white">TIN KHUYẾN MÃI</h5></div>
                     <div class="panel-body">
                         @foreach($tinkhuyenmai as $tkm)
                         <!-- item -->
