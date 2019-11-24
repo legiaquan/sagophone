@@ -61,27 +61,25 @@
               <!-- Đơn hàng -->
               <li class="has-sub nav-item"><a ><i class="ft-shopping-cart"></i><span data-i18n="" class="menu-title">Đơn hàng</span></a>
                     <ul class="menu-content">
-                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                      <li><a href="admin/donhang/danhsach" class="menu-item">Danh sách</a></li>
                     </ul>
                   </li>
               <!-- End of Đơn hàng -->
+              <!-- Tin tức -->
               <li class="has-sub nav-item"><a><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Quản lý tin tức</span></a>
                 <ul class="menu-content">
-                  
-                  <!-- Tin tức -->
-                  <li class="has-sub"><a ><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Loại tin</span></a>
-                    <ul class="menu-content">
-                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
-                    </ul>
-                  </li>
                   <li class="has-sub"><a ><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Tin tức</span></a>
                     <ul class="menu-content">
-                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                      <li><a href="admin/tintuc/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/tintuc/them" class="menu-item">Thêm</a></li>
                     </ul>
                   </li>
+                  <li class="has-sub"><a ><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Loại tin</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/loaitin/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/loaitin/them" class="menu-item">Thêm</a></li>
+                    </ul>
+                  </li>  
                 </ul>
               </li>
               <!-- End of Tin tức -->
@@ -90,8 +88,8 @@
 
               <li class="has-sub nav-item"><a ><i class="ft-users"></i><span data-i18n="" class="menu-title">Thành viên</span></a>
                 <ul class="menu-content">
-                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/thanhvien/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/thanhvien/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
               <!-- End of Thành viên -->
