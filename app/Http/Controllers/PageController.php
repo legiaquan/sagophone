@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 namespace App\Http\Controllers;
 
@@ -165,7 +165,7 @@ class PageController extends Controller
     	return view('pages/tintuc',['tintuc' => $tintuc, 'tinlienquan' => $tinlienquan, 'tinkhuyenmai' => $tinkhuyenmai]);
     }
 
-    public function danhmuc()
+    public function danhmuc(Request $request)
     {
     	$sanphamdt = DB::table('tbsanpham')->where('id_nhom','1')->get();
     	$sanphampk = DB::table('tbsanpham')->where('id_nhom','2')->get();
@@ -175,8 +175,54 @@ class PageController extends Controller
     	$sanphamnokia = SanPham::where('id_hangdt','4')->get();
     	$sanphamvsmart = SanPham::where('id_hangdt','5')->get();
     	$sanpham = DB::table('tbsanpham')->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-    	->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
-    	->paginate(6);
+    	->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham');
+        
+        if($request->price)
+        {
+            $price = $request->price;
+            switch ($price) {
+                case '1':
+                    $sanpham->where('gia','<',1000000)->orderBy('gia','ASC');
+                    break;
+                case '2' :
+                    $sanpham->whereBetween('gia',[1000000,3000000])->orderBy('gia','ASC');
+                    break;
+                case '3' :
+                    $sanpham->whereBetween('gia',[3000000,5000000])->orderBy('gia','ASC');
+                    break;
+                case '4' :
+                    $sanpham->whereBetween('gia',[5000000,7000000])->orderBy('gia','ASC');
+                    break;
+                case '5' :
+                    $sanpham->whereBetween('gia',[7000000,1000000])->orderBy('gia','ASC');
+                    break;
+                 case '6':
+                    $sanpham->where('gia','>',10000000)->orderBy('gia','ASC');
+                    break;
+                default:
+                   
+            }
+        }
+        if($request->orderby)
+        {
+            $orderby = $request->orderby;
+            switch($orderby)
+            {
+                case 'new' :
+                    $sanpham->orderBy('tbsanpham.id','DESC');
+                case 'price_max' :
+                    $sanpham->orderBy('gia','DESC');
+                    break;
+                case 'price_min' :
+                    $sanpham->orderBy('gia','ASC');
+                    break;
+                default:
+                    
+            }
+        }
+
+        $sanpham = $sanpham->paginate(6);
+
     	return view('pages/danhmuc',
     		['sanpham' => $sanpham,
     		'sanphamdt' => $sanphamdt, 
@@ -187,6 +233,7 @@ class PageController extends Controller
     		'sanphamnokia' => $sanphamnokia,
     		'sanphamvsmart' => $sanphamvsmart,
     	]);
+        //var_dump($request->orderby);
     }
 
     public function danhmuc1($id)
@@ -257,7 +304,8 @@ class PageController extends Controller
     public function chitietsp($id)
     {
     	$chitiet = SanPham::find($id);
-    	$sanphamlienquan = SanPham::where('id_hangdt',$chitiet->id_hangdt)->take(4)->get();
+    	$sanphamlienquan = SanPham::where('id_hangdt',$chitiet->id_hangdt)->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')->take(4)->get();
     	//var_dump(getGiaMin($id));
     	return view('pages/chitiet',['chitiet' => $chitiet, 'sanphamlienquan' => $sanphamlienquan]);
     }

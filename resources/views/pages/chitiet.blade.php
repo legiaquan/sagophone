@@ -397,7 +397,11 @@
 						<div class="product">
 							
 							<div class="product-img">
-								<img src="upload/imgSanPham/{{$splq->hinhsp}}" alt="">
+								<a href="chitiet/{{$splq->id_sanpham}}/{{$splq->id}}">				
+									<img src="upload/imgSanPham/{{$splq->hinhsp}}" alt="" width="250px" height="250px"> 
+								</a>
+							
+		
 								@foreach($splq->dsbanner as $sqlqbanner)
 								<div class="product-label">
 									@if($sqlqbanner->id_banner == 2)
@@ -411,9 +415,9 @@
 								@endforeach
 							</div>
 							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+								<p class="product-category">{{$splq->tenhang}}</p>
+								<h3 class="product-name"><a href="chitiet/{{$splq->id_sanpham}}/{{$splq->id}}">{{$splq->tensp}}</a></h3>
+								<h4 class="product-price">{{$splq->gia}}</del></h4>
 								<div class="product-rating">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
@@ -421,14 +425,12 @@
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+								<div class="product-btns">								
+									<button class="quick-view"><a href="chitiet/{{$splq->id_sanpham}}/{{$splq->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
 								</div>
 							</div>
 							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 							</div>
 							
 						</div>
