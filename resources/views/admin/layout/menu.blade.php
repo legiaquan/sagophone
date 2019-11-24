@@ -57,7 +57,13 @@
                     </ul>
               </li>
               <!-- End of Khuyến mãi -->
-
+              <!-- comment -->
+              <li class="has-sub nav-item"><a ><i class="ft-message-circle"></i><span data-i18n="" class="menu-title">Quản lý Comment</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/comment-san-pham/danhsach" class="menu-item">Sản phẩm</a></li>
+                    </ul>
+                  </li>
+              <!-- End of comment -->
               <!-- Đơn hàng -->
               <li class="has-sub nav-item"><a ><i class="ft-shopping-cart"></i><span data-i18n="" class="menu-title">Đơn hàng</span></a>
                     <ul class="menu-content">

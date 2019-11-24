@@ -28,13 +28,5 @@ class Controller extends BaseController
             
     		view()->share('admin_login',Auth::admin());
     	}
-        else{
-          
-            //$a = Auth::guard('admin')->check();
-            //var_dump($a);
-            //$b = Auth::guard('admin');
-            //echo 'chưa đăng nhập';
-            //var_dump($b);
-        }
     }
 }

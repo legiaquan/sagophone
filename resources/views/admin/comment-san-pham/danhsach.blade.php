@@ -6,11 +6,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">DANH SÁCH - SẢN PHẨM <i class="ft-smartphone"></i></h4>
+                                <h4 class="card-title">BÌNH LUẬN - Sản phẩm <i class="ft-smartphone"></i></h4>
                             </div>
                             <div class="card-body collapse show">
                                 <div class="card-block card-dashboard">
-                                    <a href="admin/sanpham/them" ><span class="badge badge-success mr-2">Thêm</span></a>
                                     <p class="card-text">
                                         @if(session('thongbao'))
                                             <div class="alert alert-success">
@@ -26,12 +25,7 @@
                                                 <th>Tên sp</th>
                                                 <th>Hãng</th>
                                                 <th>Nhóm</th>                            
-                                                <!-- <th>Mô tả</th> -->
-                                                <th>Màn hình</th>
-                                                <th>OS</th>
-                                                <th>Camera</th>
-                                                <th>CPU & Pin</th>
-                                                <th>Thẻ sim</th>                                     
+                                                <!-- <th>Mô tả</th> -->                        
                                                 <th>Xử lý</th>
                                             </tr>
                                         </thead>
@@ -44,24 +38,13 @@
                                                     {{ $row->tensp }} <br/><img width="90px" src="upload/imgSanPham/{{ $row->hinhsp }}"/>
                                                 </td>   
                                                 <td>{{ $row->hangdt->tenhang }}</td>
-                                                <td>{{ $row->nhomsanpham->tennhom }}</td>
-                                            <!-- <td>
-                                                     @if(strlen($row->mota)<=100)
-                                                         {{ $row->mota }}
-                                                     @else
-                                                         {{ mb_substr($row->mota,0,100-3,'UTF-8').'...' }}
-                                                     @endif
-                                                 </td> -->
-                                                <td>{{ $row->manhinh }}</td>
-                                                <td>{{ $row->hedieuhanh }}</td>
-                                                <td>Trước:{{ $row->camtruoc }}<br/>Sau:{{ $row->camsau }}</td>
-                                                <td>{{ $row->cpu }} <br>{{ $row->dungluongpin }} mAh</td>
-
-                                                <td>{{ $row->thesim }}</td>                                                                  
+                                                <td>{{ $row->nhomsanpham->tennhom }}</td>                                                          
                                                 <td align="center">
-                                                    <a href="admin/sanpham/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a><br>
-                                                    <a href="admin/sanpham/xoa/{{ $row->id }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2">Xóa</i></span></a><br>
-                                                    <a href="admin/chitietsanpham/them/{{ $row->id }}"><span class="badge badge-success mr-2"><i class="ft-eye mr-1"></i>Thêm<br> hiện thị</span></a>
+                                                    @if(demBinhLuan($row->id)>0)
+                                                        <a target="_blank" href="admin/comment-san-pham/binhluan/{{ $row->id }}"><span class="badge badge-success mr-2"><i class="ft-eye mr-1"></i>Xem<br>{{ demBinhLuan($row->id) }} Bình Luận</span></a>
+                                                    @else
+                                                        <a><span class="badge badge-warning mr-2"><i class="ft-alert-circle"></i> Chưa có<br> bình luận</a>
+                                                    @endif
                                                 </td>
                                                 
                                             </tr>
@@ -74,12 +57,7 @@
                                                 <th>Tên sp</th>
                                                 <th>Hãng</th>
                                                 <th>Nhóm</th>
-                                                <!-- <th>Mô tả</th> -->
-                                                <th>Màn hình</th>
-                                                <th>OS</th>
-                                                <th>Camera</th>
-                                                <th>CPU & Pin</th>
-                                                <th>Thẻ sim</th>                                     
+                                                <!-- <th>Mô tả</th> -->                                
                                                 <th>Xử lý</th>
                                             </tr>
                                         </tfoot>

@@ -27,7 +27,7 @@
                                                 <th width="125px">Thông tin giao hàng</th>
                                                 <th width="100px">Ngày đặt& Giao</th>
                                                 <th>Tổng tiên</th>
-                                                <th width="30px">Admin xử lý</th>
+                                                <th width="30px">Admin confirmed</th>
                                                 <th width="70px">Tình trạng</th>
                                                 <th>Xử lý</th>
                                             </tr>
@@ -36,7 +36,22 @@
                                             @foreach($donhang as $row)
                                             <tr>
                                                 <td><i class="ft-shopping-cart"></i></td>
-                                                <td>{{ $row->madh }}</td>
+                                                <td>
+                                                    <b>#{{ $row->madh }}</b><br>
+                                                    <b>Đánh giá:</b>
+                                                    @if(avgStarSanPham($row->id)!=null)
+                                                    {{ round(avgStarSanPham($row->id),2) }}/5
+                                                    @else
+                                                        Chưa đánh giá
+                                                    @endif
+                                                    <br>
+                                                    @if(getNhanXet($row->id)!=null)
+                                                        <?php $dem=null;?>
+                                                        @foreach(getNhanXet($row->id) as $nx)
+                                                            Nhận xét{{ $dem }}: {{ $nx->nhanxet }}<br><?php $dem++;?>
+                                                        @endforeach
+                                                    @endif
+                                                </td>
                                                 <td>{{ $row->thanhvien->username }}</td>
                                                 <td><b>Tên:</b> {{ $row->tennguoinhan }}<br>
                                                     <b>Địa chỉ:</b> {{ $row->diachinguoinhan }}<br>

@@ -152,6 +152,17 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('xoa/{id}','SanPhamController@postXoa');
 	});
 
+
+	Route::group(['prefix'=>'comment-san-pham'],function(){
+		// admin/sanpham/danhsach
+		Route::get('danhsach','BinhLuanController@getDanhSach');
+
+		Route::get('binhluan/{id}','BinhLuanController@getBinhLuan');
+		
+		Route::get('binhluan/xoa/{id}/{id_sanpham}','BinhLuanController@getXoa');
+	});
+
+
 	/*thanhvien*/
 	Route::group(['prefix'=>'thanhvien'],function(){
 		// admin/thanhvien/danhsach

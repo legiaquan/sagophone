@@ -15,7 +15,8 @@ class ChiTietDonHangController extends Controller
         					->where('tbchitietdonhang.id_donhang',$id)
         					->join('tbchitietsanpham','tbchitietdonhang.id_chitietsanpham','=','tbchitietsanpham.id')
         					->join('tbsanpham','tbchitietsanpham.id_sanpham','=','tbsanpham.id')
-        					->select('tbchitietdonhang.giamua','tbchitietdonhang.soluong','tbchitietdonhang.star','tbchitietdonhang.nhanxet','tbsanpham.tensp','tbsanpham.hinhsp')
+                            ->join('tbmau','tbchitietsanpham.id_mau','=','tbmau.id')
+        					->select('tbchitietdonhang.giamua','tbchitietdonhang.soluong','tbchitietdonhang.star','tbchitietdonhang.nhanxet','tbsanpham.tensp','tbsanpham.hinhsp','tbsanpham.id','tbchitietsanpham.gia','tbmau.mau','tbmau.mamau')
         					->get();
         $donhang = Donhang::find($id);
 
