@@ -31,7 +31,7 @@
                         <p class="pb-3"># {{ $donhang->madh }}</p>
                         <!-- <ul class="px-0 list-unstyled">
                             <li>Tổng tiền</li>
-                            <li class="lead text-bold-800">{{ number_format(sumDonHang($donhang->id)) }}₫</li>
+                            <li class="lead text-bold-800">300000₫</li>
                         </ul> -->
 
                     </div>
