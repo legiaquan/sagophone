@@ -32,18 +32,32 @@
 							</div>
 						</div>
 						<!-- /LOGO -->
-
+					
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
+								@if(count($errors)>0)
+		                            <div class="alert alert-danger">
+		                                @foreach($errors->all() as $err)
+		                                    {{$err}}<br>
+		                                @endforeach
+		                            </div>
+		                        @endif
+
+		                        @if(session('thongbao'))
+		                            <div class="alert alert-success">
+		                                {{session('thongbao')}}
+		                            </div>
+		                        @endif
+								<form action="timkiem" role="search" method="POST">
+									<input type="hidden" name="_token" value="{{csrf_token()}}">
 									<select class="input-select">
-										<option value="0">All Categories</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
+										<option value="1" selected="selected">Sản Phẩm</option>
+										<option value="2">Tin Tức</option>
 									</select>
-									<input class="input" placeholder="Tìm kiếm tại đây">
-									<button class="search-btn">Tìm</button>
+									
+										<input class="input" name="keyword" placeholder="Tìm kiếm tại đây">
+									<button type="submit" class="search-btn">Tìm</button>
 								</form>
 							</div>
 						</div>

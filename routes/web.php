@@ -215,14 +215,14 @@ Route::post('dangky','PageController@postDangKy');
 
 Route::get('loaitin','PageController@loaitin');
 
+Route::get('loaitin/{id}','PageController@loaitin1');
+
 Route::get('tintuc/{id}','PageController@tintuc');
 
 Route::get('danhmuc','PageController@danhmuc');
 
-Route::get('danhmuc/{id}/{tennhom}','PageController@danhmuc1');
+Route::get('chitiet/{id}/{id_sanpham}', 'PageController@chitietsp');
 
-Route::get('danhmuc/{id}/{tennhom}/{tenhang}','PageController@danhmuc2');
+Route::get('hotdeals','PageController@hotdeals');
 
-Route::get('chitiet/{id}/{tennhom}', 'PageController@chitietsp');
-
-Route::get('test','PageController@test');
+Route::post('timkiem','PageController@timkiem');
