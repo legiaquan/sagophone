@@ -49,3 +49,10 @@ function demBinhLuan($id)
         				->count();
 	return $demBinhLuan;
 }
+function getNameLevel($id_level)
+{
+	$name = DB::table('level')
+				->where('id',$id_level)
+				->value('tenlevel');
+	return $name;
+}

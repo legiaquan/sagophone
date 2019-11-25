@@ -9,6 +9,7 @@ class AdminController extends Controller
 {
     //
     //
+   
    public function index()
    {
       return view('admin.trang-chu');
@@ -22,22 +23,28 @@ class AdminController extends Controller
 
 		$this->validate($request,
 			[
-				'txtUsername' => 'required',
+				'txtUsername' => 'required|exists:admins,username',
 				'txtPassword' => 'required'
 			],
 			[
+				'txtUsername.exists' => 'Tài khoản không tồn tại',
 				'txtUsername.required' => 'Bạn chưa nhập username',
 				'txtPassword.required' => 'Bạn chưa nhập password'
 			]);
 		if(Auth::guard('admin')->attempt(['username'=>$request->txtUsername,'password'=>$request->txtPassword]))
 		{
-			return redirect('admin/hangdt/danhsach');
+			return redirect('admin/trang-chu.html');
 		}
 		else
 		{
-			return redirect()->back()->withInput($request->only('txtUsername'))->with('thongbao','Đăng nhập không thành công!');
+			return redirect()->back()->withInput($request->only('txtUsername'))->with('thongbao','Mật khẩu không đúng!');
 		}
 
+	}
+	public function getLogout()
+	{
+		Auth::guard('admin')->logout();
+        return redirect('admin/dangnhap');
 	}
 
 }

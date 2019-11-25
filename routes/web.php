@@ -15,9 +15,7 @@ use App\HangDt;
 use App\ChiTietDonHang;
 use App\DonHang;
 use App\ThanhVien;
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','PageController@trangchu');
 
 /*=============================================
 =            Admin Route START                =
@@ -26,10 +24,12 @@ Route::get('/', function () {
 Route::get('admin/dangnhap','AdminController@getLogin');
 Route::post('admin/dangnhap','AdminController@postLogin');
 
-Route::group(['prefix'=>'admin'],function(){
+Route::get('admin/dangxuat','AdminController@getLogout');
+
+Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 	Route::get('trang-chu.html','AdminController@index');
 	/*Hang dien thoai*/
-	Route::group(['prefix'=>'hangdt'],function(){
+	Route::group(['prefix'=>'hangdt','middleware'=>'quanlykho'],function(){
 		// admin/hangdt/danhsach
 		Route::get('danhsach','HangDTController@getDanhSach');
 
@@ -44,7 +44,7 @@ Route::group(['prefix'=>'admin'],function(){
 	});
 
 	/*Mau sp*/
-	Route::group(['prefix'=>'mau'],function(){
+	Route::group(['prefix'=>'mau','middleware'=>'quanlykho'],function(){
 		// admin/hangdt/danhsach
 		Route::get('danhsach','MauController@getDanhSach');
 
@@ -59,7 +59,7 @@ Route::group(['prefix'=>'admin'],function(){
 	});
 
 	/*Chi tiết sản phẩm*/
-	Route::group(['prefix'=>'chitietsanpham'],function(){
+	Route::group(['prefix'=>'chitietsanpham','middleware'=>'quanlykho'],function(){
 		// admin/hangdt/danhsach
 		Route::get('danhsach','ChiTietSanPhamController@getDanhSach');
 
@@ -73,28 +73,10 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('xoa/{id}/{id_mau}','ChiTietSanPhamController@postXoa');
 	});
 
-	/*Chi tiet don hang*/
-	Route::group(['prefix'=>'chitietdonhang'],function(){
-		// admin/ChiTietDonHang/danhsach
-		Route::get('danhsach/{id}','ChiTietDonHangController@getDanhSach');
-
-		Route::get('sua','ChiTietDonHangController@getSua');
-		Route::get('them','ChiTietDonHangController@getThem');
-	});
-
-	/*Đơn hàng*/
-	Route::group(['prefix'=>'donhang'],function(){
-		// admin/donhang/danhsach
-		Route::get('danhsach','DonHangController@getDanhSach');
-
-		Route::get('sua/{id}','DonHangController@getSua');
-		Route::post('sua/{id}','DonHangController@postSua');
-
-		Route::get('xuly/{id}/{tinhtrang}','DonHangController@getXuly');
-	});
+	
 
 	/*Nhom san pham*/
-	Route::group(['prefix'=>'nhomsanpham'],function(){
+	Route::group(['prefix'=>'nhomsanpham','middleware'=>'quanlykho'],function(){
 		// admin/nhomsanpham/danhsach
 		Route::get('danhsach','NhomSanPhamController@getDanhSach');
 
@@ -110,7 +92,7 @@ Route::group(['prefix'=>'admin'],function(){
 	});
 
 	/*San pham*/
-	Route::group(['prefix'=>'sanpham'],function(){
+	Route::group(['prefix'=>'sanpham','middleware'=>'quanlykho'],function(){
 		// admin/sanpham/danhsach
 		Route::get('danhsach','SanPhamController@getDanhSach');
 
@@ -125,18 +107,10 @@ Route::group(['prefix'=>'admin'],function(){
 	});
 
 
-	Route::group(['prefix'=>'comment-san-pham'],function(){
-		// admin/sanpham/danhsach
-		Route::get('danhsach','BinhLuanController@getDanhSach');
-
-		Route::get('binhluan/{id}','BinhLuanController@getBinhLuan');
-		
-		Route::get('binhluan/xoa/{id}/{id_sanpham}','BinhLuanController@getXoa');
-	});
-
+	
 
 	/*thanhvien*/
-	Route::group(['prefix'=>'thanhvien'],function(){
+	Route::group(['prefix'=>'thanhvien','middleware'=>'quanlykho'],function(){
 		// admin/thanhvien/danhsach
 		Route::get('danhsach','ThanhVienController@getDanhSach');
 
@@ -149,38 +123,28 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::get('xoa/{id}','ThanhVienController@getXoa');
 	});
 
-	/*Level*/
-	Route::group(['prefix'=>'level'],function(){
-		// admin/level/danhsach
-		Route::get('danhsach','LevelController@getDanhSach');
+	/*Chi tiet don hang*/
+	Route::group(['prefix'=>'chitietdonhang','middleware'=>'quanlykinhdoanh'],function(){
+		// admin/ChiTietDonHang/danhsach
+		Route::get('danhsach/{id}','ChiTietDonHangController@getDanhSach');
 
-		Route::get('sua/{id}','LevelController@getSua');
-		Route::post('sua/{id}','LevelController@postSua');
-		
-		Route::get('them','LevelController@getThem');
-		Route::post('them','LevelController@postThem');
-
-		Route::get('xoa/{id}','LevelController@getXoa');
-		Route::post('xoa/{id}','LevelController@postXoa');
+		Route::get('sua','ChiTietDonHangController@getSua');
+		Route::get('them','ChiTietDonHangController@getThem');
 	});
 
-	/*Admin*/
-	Route::group(['prefix'=>'nhanvien'],function(){
-		// admin/level/danhsach
-		Route::get('danhsach','NhanVienController@getDanhSach');
+	/*Đơn hàng*/
+	Route::group(['prefix'=>'donhang','middleware'=>'quanlykinhdoanh'],function(){
+		// admin/donhang/danhsach
+		Route::get('danhsach','DonHangController@getDanhSach');
 
-		Route::get('sua/{id}','NhanVienController@getSua');
-		Route::post('sua/{id}','NhanVienController@postSua');
-		
-		Route::get('them','NhanVienController@getThem');
-		Route::post('them','NhanVienController@postThem');
+		Route::get('sua/{id}','DonHangController@getSua');
+		Route::post('sua/{id}','DonHangController@postSua');
 
-		Route::get('xoa/{id}','NhanVienController@getXoa');
-		Route::post('xoa/{id}','NhanVienController@postXoa');
+		Route::get('xuly/{id}/{tinhtrang}','DonHangController@getXuly');
 	});
 
-		/*Banner*/
-	Route::group(['prefix'=>'banner'],function(){
+	/*Banner*/
+	Route::group(['prefix'=>'banner','middleware'=>'quanlykinhdoanh'],function(){
 		// admin/level/danhsach
 		Route::get('danhsach','BannerController@getDanhSach');
 
@@ -195,7 +159,7 @@ Route::group(['prefix'=>'admin'],function(){
 	});
 
 	/*So danh sách banner*/
-	Route::group(['prefix'=>'danhsachbanner'],function(){
+	Route::group(['prefix'=>'danhsachbanner','middleware'=>'quanlykinhdoanh'],function(){
 		// admin/hangdt/danhsach
 		Route::get('danhsach/{id}','DanhSachBannerController@getDanhSach');
 
@@ -208,8 +172,21 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::get('xoa/{id}/{id_sanpham}','DanhSachBannerController@getXoa');
 		Route::post('xoa/{id}/{id_sanpham}','DanhSachBannerController@postXoa');
 	});
+
+
+	/*Binh luan*/
+	Route::group(['prefix'=>'comment-san-pham','middleware'=>'quanlykinhdoanh'],function(){
+		// admin/comment-san-pham/danhsach
+		Route::get('danhsach','BinhLuanController@getDanhSach');
+
+		Route::get('binhluan/{id}','BinhLuanController@getBinhLuan');
+		
+		Route::get('binhluan/xoa/{id}/{id_sanpham}','BinhLuanController@getXoa');
+	});
+
+
 		/*Nhom loai tin*/
-	Route::group(['prefix'=>'loaitin'],function(){
+	Route::group(['prefix'=>'loaitin','middleware'=>'quanlykinhdoanh'],function(){
 		// admin/loaitin/danhsach
 		Route::get('danhsach','LoaiTinController@getDanhSach');
 
@@ -225,7 +202,7 @@ Route::group(['prefix'=>'admin'],function(){
 	});
 
 	/*tin tuc*/
-	Route::group(['prefix'=>'tintuc'],function(){
+	Route::group(['prefix'=>'tintuc','middleware'=>'quanlykinhdoanh'],function(){
 		// admin/tintuc/danhsach
 		Route::get('danhsach','TinTucController@getDanhSach');
 
@@ -239,6 +216,35 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('xoa/{id}','TinTucController@postXoa');
 	});
 	
+	/*Level*/
+	Route::group(['prefix'=>'level','middleware'=>'admin'],function(){
+		// admin/level/danhsach
+		Route::get('danhsach','LevelController@getDanhSach');
+
+		Route::get('sua/{id}','LevelController@getSua');
+		Route::post('sua/{id}','LevelController@postSua');
+		
+		Route::get('them','LevelController@getThem');
+		Route::post('them','LevelController@postThem');
+
+		Route::get('xoa/{id}','LevelController@getXoa');
+		Route::post('xoa/{id}','LevelController@postXoa');
+	});
+
+	/*Admin*/
+	Route::group(['prefix'=>'nhanvien','middleware'=>'admin'],function(){
+		// admin/level/danhsach
+		Route::get('danhsach','NhanVienController@getDanhSach');
+
+		Route::get('sua/{id}','NhanVienController@getSua');
+		Route::post('sua/{id}','NhanVienController@postSua');
+		
+		Route::get('them','NhanVienController@getThem');
+		Route::post('them','NhanVienController@postThem');
+
+		Route::get('xoa/{id}','NhanVienController@getXoa');
+		Route::post('xoa/{id}','NhanVienController@postXoa');
+	});
 });
 
 /*=====  End of Admin Route  ======*/

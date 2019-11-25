@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesResource;
 use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
@@ -15,18 +16,7 @@ class Controller extends BaseController
     function __construct()
     {
         
-    	$this->checkDangNhapAdmin();
-
+        
     }
 
-    function checkDangNhapAdmin()
-    {
-
-        $auth = Auth::guard('admin');
-    	if($auth->check())
-    	{
-            
-    		view()->share('admin_login',Auth::admin());
-    	}
-    }
 }
