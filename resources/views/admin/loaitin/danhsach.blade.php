@@ -6,11 +6,11 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">DANH SÁCH - CHỨC VỤ<i class="ft-award"></i></h4>
+                                <h4 class="card-title">DANH SÁCH - LOẠI TIN<i class="ft-award"></i></h4>
                             </div>
                             <div class="card-body collapse show">
                                 <div class="card-block card-dashboard">
-                                    <a href="admin/level/them" ><span class="badge badge-success mr-2">Thêm</span></a>
+                                    <a href="admin/loaitin/them" ><span class="badge badge-success mr-2">Thêm</span></a>
                                     <p class="card-text">
                                         @if(session('thongbao'))
                                             <div class="alert alert-success">
@@ -22,18 +22,26 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Chức vụ</th>
+                                                <th>Tên loại tin</th>
+                                                <th>Trạng thái</th>
                                                 <th>Xử lý</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($level as $row)
+                                            @foreach($loaitin as $row)
                                             <tr>
                                                 <td>{{ $row->id }}</td>
-                                                <td>{{ $row->tenlevel }}</td>
+                                                <td>{{ $row->tenloaitin }}</td>
                                                 <td>
-                                                    <a href="admin/level/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a> - 
-                                                    <a href="admin/level/xoa/{{ $row->id }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2"> Xóa</i></span></a>
+                                                    @if($row->trangthai=='show')
+                                                    <span class="badge badge-primary ">{{ $row->trangthai }}</span>
+                                                    @else
+                                                    <span class=" badge badge-dark">{{ $row->trangthai }}</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <a href="admin/loaitin/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a> - 
+                                                    <a href="admin/loaitin/xoa/{{ $row->id }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2"> Xóa</i></span></a>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -41,7 +49,8 @@
                                         <tfoot>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Chức vụ</th>
+                                                <th>Tên hãng</th>
+                                                <th>Trạng thái</th>
                                                 <th>Xử lý</th>
                                             </tr>
                                         </tfoot>
