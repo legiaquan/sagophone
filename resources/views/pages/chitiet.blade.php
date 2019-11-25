@@ -206,7 +206,6 @@
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Mô Tả</a></li>				
 								<li><a data-toggle="tab" href="#tab2">Đánh Giá (3)</a></li>
-								<li><a data-toggle="tab" href="#tab3">Bình luận (3)</a></li>
 							</ul>
 							<!-- /product tab nav -->
 

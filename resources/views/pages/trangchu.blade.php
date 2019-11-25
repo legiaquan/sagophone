@@ -13,7 +13,7 @@
 						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
 						<li><a href="danhmuc">Danh Mục</a></li>
-						<li><a href="danhmuc/1/Điện thoại">Điện Thoại</a></li>									
+						<li><a href="danhmuc/1/Điện thoại}">Điện Thoại</a></li>									
 						<li><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
 					</ul>
 					<!-- /NAV -->
@@ -23,15 +23,13 @@
 			<!-- /container -->
 		</nav>
 <!-- /NAVIGATION -->
-		
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
-				<div class="row">
-					
-								<!-- shop -->
+				<div class="row">				
+					<!-- shop -->
 					<div class="col-md-4 col-xs-6">
 						<div class="shop">
 							<div class="shop-img">
