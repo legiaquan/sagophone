@@ -4,9 +4,9 @@
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +032-824-8594</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> sagophone_qt@gmail.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 439 Đường Hùng Vương</a></li>
+						<li><a href="tel:19001560"><i class="fa fa-phone"></i> +1900-1560</a></li>
+						<li><a href="mailto:sagophone@gmail.com"><i class="fa fa-envelope-o"></i> sagophone@gmail.com</a></li>
+						<li><a target="_blank" href="https://goo.gl/maps/JLcSzPrHN7a2P8Kg8"><i class="fa fa-map-marker"></i> 180 Cao Lỗ, Quận 8</a></li>
 					</ul>
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-dollar"></i> VND </a></li>
@@ -26,8 +26,8 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="trangchu" class="logo" style="font-size: 35pt;color: silver">
-									SagoPhone
+								<a href="trangchu" class="logo" style="font-size: 35pt;color: white">
+									Sagophone
 								</a>
 							</div>
 						</div>
