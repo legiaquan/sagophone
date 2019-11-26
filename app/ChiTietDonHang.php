@@ -10,9 +10,9 @@ class ChiTietDonHang extends Model
     protected $table = "tbchitiethoadon";
     public $timestamps = false;
     
-    public function sanpham()
+    public function chitietsanpham()
     {
-    	return $this->belongsTo('App\SanPham','id','id_sanpham');
+    	return $this->belongsTo('App\SanPham','id','id_chitietsanpham');
     }
     public function hoadon()
     {
