@@ -32,18 +32,32 @@
 							</div>
 						</div>
 						<!-- /LOGO -->
-
+					
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
+								@if(count($errors)>0)
+		                            <div class="alert alert-danger">
+		                                @foreach($errors->all() as $err)
+		                                    {{$err}}<br>
+		                                @endforeach
+		                            </div>
+		                        @endif
+
+		                        @if(session('thongbao'))
+		                            <div class="alert alert-success">
+		                                {{session('thongbao')}}
+		                            </div>
+		                        @endif
+								<form action="timkiem" role="search" method="POST">
+									<input type="hidden" name="_token" value="{{csrf_token()}}">
 									<select class="input-select">
-										<option value="0">All Categories</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
+										<option value="1" selected="selected">Sản Phẩm</option>
+										<option value="2">Tin Tức</option>
 									</select>
-									<input class="input" placeholder="Tìm kiếm tại đây">
-									<button class="search-btn">Tìm</button>
+									
+										<input class="input" name="keyword" placeholder="Tìm kiếm tại đây">
+									<button type="submit" class="search-btn">Tìm</button>
 								</form>
 							</div>
 						</div>
@@ -64,12 +78,12 @@
 
 								<!-- Cart -->
 								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<a href="{{route('get.list.shopping.cart')}}" class="dropdown-toggle" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Giỏ Hàng</span>
-										<div class="qty">3</div>
+										<div class="qty">{{Cart::count()}}</div>
 									</a>
-									<div class="cart-dropdown">
+									{{-- <div class="cart-dropdown">
 										<div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
@@ -101,7 +115,7 @@
 											<a href="#">View Cart</a>
 											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
-									</div>
+									</div> --}}
 								</div>
 								<!-- /Cart -->
 

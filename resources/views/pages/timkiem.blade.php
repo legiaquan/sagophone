@@ -1,4 +1,4 @@
-<title>Tin Tức</title>
+<title>Tìm Kiếm</title>
 @extends('layouts.index')
 
 @section('content')
@@ -9,12 +9,14 @@
                 <!-- responsive-nav -->
                 <div id="responsive-nav">
                     <!-- NAV -->
-                        <ul class="main-nav nav navbar-nav">
+                    <ul class="main-nav nav navbar-nav">
                         <li><a href="trangchu">Trang Chủ</a></li>
                         <li><a href="hotdeals">Hot Deals</a></li>
                         <li class="active"><a href="loaitin">Tin Tức</a></li>
-                        <li><a href="danhmuc">Cửa Hàng</a></li>                                 
-                        <li><a href="lienhe">Liên Hệ</a></li>
+                        <li><a href="danhmuc">Danh Mục</a></li>
+                        <li><a href="danhmuc/1/Điện thoại}">Điện Thoại</a></li>                                 
+                        <li><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
+                    </ul>
                     <!-- /NAV -->
                 </div>
                 <!-- /responsive-nav -->
@@ -26,14 +28,21 @@
 <br>
     <div class="container">
         <div class="row">
+			
+        	<?php
+        		function doimau($str, $keyword)
+        		{
+        			return str_replace($keyword, "<span style='color: red;'>$keyword</span>", $str);
+        		}	
+        	?>
             <div class="col-md-3 ">
                 <ul class="list-group" id="menu">
                     <li href="#" class="list-group-item menu1 active" style="background-color:#FA8258;">
                         <h4><a href="loaitin" style="color: white; font-weight: bolder;">LOẠI TIN</a></h4>
                     </li>
                     @foreach($loaitin as $lt)
-                        <li class="list-group-item menu1"  style="background-color:#F5DA81;">
-                            <a class="{{Request::get('id') == $lt->id? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['id' => $lt->id]) }}"><h5 class="product-name">{{$lt->tenloaitin}}</h5></a>
+                        <li href="#" class="list-group-item menu1"  style="background-color:#F5DA81;">
+                            <a href="loaitin/{{$lt->id}}"><h5 class="product-name">{{$lt->tenloaitin}}</h5></a>
                         </li>
                     @endforeach
                    
@@ -43,7 +52,7 @@
             <div class="col-md-9 ">
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background-color:#FF8000; color:white;">
-                       <h4><a href="loaitin" style="color: white; font-weight: bolder;">TẤT CẢ CÁC TIN</a></h4>
+                       <h4><a href="loaitin" style="color: white; font-weight: bolder;">Tìm kiếm : {{$keyword}}</a></h4>
                     </div>
                     @foreach($tintuc as $tt)
                         <div class="row-item row">
@@ -57,8 +66,8 @@
 
                             <div class="col-md-9">
                                 <br>
-                                <h3><a href="tintuc/{{$tt->id}}"> {{$tt->tieude}} </a></h3>
-                                <p>{{$tt->mota}}</p>
+                                <h3><a href="tintuc/{{$tt->id}}"> {!!doimau($tt->tieude, $keyword)!!} </a></h3>
+                                <p>{!!doimau($tt->mota, $keyword)!!}</p>
                                 <div>
                                      <a class="btn btn-primary" href="tintuc/{{$tt->id}}" style="margin-top: 75px">Chi tiết</a>
                                 </div>
