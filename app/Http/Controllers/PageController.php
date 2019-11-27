@@ -24,7 +24,11 @@ use App\LoaiTin;
 
 use App\TinTuc;
 
+use App\Cart;
+
 use DB;
+
+use Session;
 
 class PageController extends Controller
 {
@@ -109,13 +113,7 @@ class PageController extends Controller
 
     public function trangchu()
     {
-        // $sanphamhotdeals =DB::table('tbsanpham')
-        // ->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
-        // ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-        // ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
-        // ->where('tbdanhsachbanner.id_banner','2')
-        // ->get();
-        // var_dump($sanphamhotdeals).'<br>';
+
     	return view('pages/trangchu');
     	
     }
@@ -140,21 +138,43 @@ class PageController extends Controller
 
     }
 
-    public function loaitin()
+    public function loaitin(Request $request)
     {
         $loaitin = LoaiTin::all();
-        $tintuc = DB::table('tbtintuc')->paginate(4);
+        $tintuc = DB::table('tbtintuc');
+        if($request->id)
+        {
+            $idlt = $request->id;
+            switch ($idlt){
+                case '2':
+                    $tintuc->where('id_loaitin','2');
+                    break;
+                case '3':
+                    $tintuc->where('id_loaitin','3');
+                    break;
+                case '4':
+                    $tintuc->where('id_loaitin','4');
+                    break;
+                case '5':
+                    $tintuc->where('id_loaitin','5');
+                    break;
+                case '6':
+                    $tintuc->where('id_loaitin','6');
+                    break;
+                case '7':
+                    $tintuc->where('id_loaitin','7');
+                    break;
+                case '8':
+                    $tintuc->where('id_loaitin','8');
+                    break;
+                default:
+                    # code...
+                    break;
+            }
 
+        }
+        $tintuc = $tintuc->paginate(4);
     	return view('pages/loaitin',['loaitin' => $loaitin, 'tintuc' => $tintuc]);
-    }
-
-    public function loaitin1($id)
-    {
-        $loaitin = LoaiTin::all();
-        $loaitin1 = LoaiTin::find($id);
-        $tintuc = TinTuc::where('id_loaitin',$id)->paginate(4);
-        return view('pages/loaitin1',['loaitin' => $loaitin, 'loaitin1' => $loaitin1, 'tintuc' => $tintuc]);
-        //var_dump($loaitin1);
     }
 
     public function tintuc($id)
@@ -173,56 +193,99 @@ class PageController extends Controller
     	$sanphamsamsung = SanPham::where('id_hangdt','2')->get();
     	$sanphamsony = SanPham::where('id_hangdt','3')->get();
     	$sanphamnokia = SanPham::where('id_hangdt','4')->get();
-    	$sanphamvsmart = SanPham::where('id_hangdt','5')->get();
-    	$sanpham = DB::table('tbsanpham')->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-    	->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham');
+    	$sanphamvsmart = SanPham::where('id_hangdt','5')->get();	
+        $sanpham = DB::table('tbsanpham')->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham');
         
         if($request->price)
         {
-            $price = $request->price;
-            switch ($price) {
+                $price = $request->price;
+                switch ($price) {
+                    case '1':
+                        $sanpham->where('gia','<',1000000)->orderBy('gia','ASC');
+                        break;
+                    case '2' :
+                        $sanpham->whereBetween('gia',[1000000,3000000])->orderBy('gia','ASC');
+                        break;
+                    case '3' :
+                        $sanpham->whereBetween('gia',[3000000,5000000])->orderBy('gia','ASC');
+                        break;
+                    case '4' :
+                        $sanpham->whereBetween('gia',[5000000,7000000])->orderBy('gia','ASC');
+                        break;
+                    case '5' :
+                        $sanpham->whereBetween('gia',[7000000,1000000])->orderBy('gia','ASC');
+                        break;
+                     case '6':
+                        $sanpham->where('gia','>',10000000)->orderBy('gia','ASC');
+                        break;
+                    default:
+                       
+                }
+                
+        }
+
+        if($request->id_nhom)
+        {
+            $id_nhom = $request->id_nhom;
+            switch ($id_nhom) {
                 case '1':
-                    $sanpham->where('gia','<',1000000)->orderBy('gia','ASC');
+                    $sanpham->where('id_nhom','1');
                     break;
-                case '2' :
-                    $sanpham->whereBetween('gia',[1000000,3000000])->orderBy('gia','ASC');
+                case '2':
+                    $sanpham->where('id_nhom','2');
+                default:
+                    # code...
                     break;
-                case '3' :
-                    $sanpham->whereBetween('gia',[3000000,5000000])->orderBy('gia','ASC');
+            }
+        }
+
+        if($request->id_hang)
+        {
+            $id_hang = $request->id_hang;
+            switch ($id_hang) {
+                case '1':
+                    $sanpham->where('id_hangdt','1');
                     break;
-                case '4' :
-                    $sanpham->whereBetween('gia',[5000000,7000000])->orderBy('gia','ASC');
+                case '2':
+                    $sanpham->where('id_hangdt','2');
                     break;
-                case '5' :
-                    $sanpham->whereBetween('gia',[7000000,1000000])->orderBy('gia','ASC');
+                case '3':
+                    $sanpham->where('id_hangdt','3');
                     break;
-                 case '6':
-                    $sanpham->where('gia','>',10000000)->orderBy('gia','ASC');
+                case '4':
+                    $sanpham->where('id_hangdt','4');
+                    break;
+                case '5':
+                    $sanpham->where('id_hangdt','5');
                     break;
                 default:
-                   
+                     # code...
+                    break;
             }
+               
         }
         if($request->orderby)
         {
-            $orderby = $request->orderby;
-            switch($orderby)
-            {
-                case 'new' :
-                    $sanpham->orderBy('tbsanpham.id','DESC');
-                case 'price_max' :
-                    $sanpham->orderBy('gia','DESC');
-                    break;
-                case 'price_min' :
-                    $sanpham->orderBy('gia','ASC');
-                    break;
-                default:
-                    
-            }
+                $orderby = $request->orderby;
+                switch($orderby)
+                {
+                    case 'new' :
+                        $sanpham->orderBy('tbsanpham.id','DESC');
+                    case 'price_max' :
+                        $sanpham->orderBy('gia','DESC');
+                        break;
+                    case 'price_min' :
+                        $sanpham->orderBy('gia','ASC');
+                        break;
+                    default:
+                        
+                }
+               
         }
 
         $sanpham = $sanpham->paginate(6);
-
+        
     	return view('pages/danhmuc',
     		['sanpham' => $sanpham,
     		'sanphamdt' => $sanphamdt, 
@@ -236,71 +299,7 @@ class PageController extends Controller
         //var_dump($request->orderby);
     }
 
-    public function danhmuc1($id)
-    {
-    	$sanphamdt = DB::table('tbsanpham')->where('id_nhom','1')->get();
-    	$sanphampk = DB::table('tbsanpham')->where('id_nhom','2')->get();
-    	$sanphamapple = SanPham::where('id_hangdt','1')->get();
-    	$sanphamsamsung = SanPham::where('id_hangdt','2')->get();
-    	$sanphamsony = SanPham::where('id_hangdt','3')->get();
-    	$sanphamnokia = SanPham::where('id_hangdt','4')->get();
-    	$sanphamvsmart = SanPham::where('id_hangdt','5')->get();
-    	$danhmuc = NhomSanPham::find($id);
-    	$sanphamdanhmuc = DB::table('tbsanpham')
-        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
-        ->where('tbsanpham.id_nhom',$id)
-        ->orderBy('tbsanpham.id','desc')
-        ->paginate(6);
-    	return view('pages/danhmuc1',
-    		['danhmuc' => $danhmuc, 
-    		'sanphamdanhmuc' => $sanphamdanhmuc,
-    		'sanphamdt' => $sanphamdt, 
-    		'sanphampk' => $sanphampk,
-    		'sanphamapple' => $sanphamapple,
-    		'sanphamsamsung' => $sanphamsamsung,
-    		'sanphamsony' => $sanphamsony,
-    		'sanphamnokia' => $sanphamnokia,
-    		'sanphamvsmart' => $sanphamvsmart
-		]);
-       // $sanphamdanhmuctest = DB::table('tbsanpham')
-       //  ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-       //  ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
-       //  ->where('tbsanpham.id_nhom',$id)->orderBy('tbsanpham.id','asc')
-       //  ->get();
-       //  echo $sanphamdanhmuctest.'<br>';
-    }
-
-     public function danhmuc2($id)
-    {
-    	$sanphamdt = DB::table('tbsanpham')->where('id_nhom','1')->get();
-    	$sanphampk = DB::table('tbsanpham')->where('id_nhom','2')->get();
-    	$sanphamapple = SanPham::where('id_hangdt','1')->get();
-    	$sanphamsamsung = SanPham::where('id_hangdt','2')->get();
-    	$sanphamsony = SanPham::where('id_hangdt','3')->get();
-    	$sanphamnokia = SanPham::where('id_hangdt','4')->get();
-    	$sanphamvsmart = SanPham::where('id_hangdt','5')->get();
-    	$danhmucloai = NhomSanPham::find($id);
-    	$danhmuc = HangDT::find($id);
-    	$sanphamdanhmuc = DB::table('tbsanpham')
-        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-        ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
-        ->where('tbsanpham.id_hangdt',$id)
-        ->paginate(6);
-    	return view('pages/danhmuc2',
-    		['danhmuc' => $danhmuc, 
-    		'sanphamdanhmuc' => $sanphamdanhmuc,
-    		'danhmucloai' => $danhmucloai,
-    		'sanphamdt' => $sanphamdt, 
-    		'sanphampk' => $sanphampk,
-    		'sanphamapple' => $sanphamapple,
-    		'sanphamsamsung' => $sanphamsamsung,
-    		'sanphamsony' => $sanphamsony,
-    		'sanphamnokia' => $sanphamnokia,
-    		'sanphamvsmart' => $sanphamvsmart
-		]);
-    }
-
+   
     public function chitietsp($id)
     {
     	$chitiet = SanPham::find($id);
@@ -310,13 +309,59 @@ class PageController extends Controller
     	return view('pages/chitiet',['chitiet' => $chitiet, 'sanphamlienquan' => $sanphamlienquan]);
     }
 
-    public function hotdeals()
+    public function hotdeals(Request $request)
     {
         $sanphamhotdealstt = DB::table('tbsanpham')
         ->join('tbdanhsachbanner','tbsanpham.id','tbdanhsachbanner.id_sanpham')
         ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
         ->join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
-        ->where('tbdanhsachbanner.id_banner','2')->paginate(6);
+        ->where('tbdanhsachbanner.id_banner','2');
+        if($request->orderby)
+        {
+                $orderby = $request->orderby;
+                switch($orderby)
+                {
+                    case 'new' :
+                        $sanphamhotdealstt->orderBy('tbsanpham.id','DESC');
+                    case 'price_max' :
+                        $sanphamhotdealstt->orderBy('gia','DESC');
+                        break;
+                    case 'price_min' :
+                        $sanphamhotdealstt->orderBy('gia','ASC');
+                        break;
+                    default:
+                        
+                }
+               
+        }
+         if($request->price)
+        {
+                $price = $request->price;
+                switch ($price) {
+                    case '1':
+                        $sanphamhotdealstt->where('gia','<',1000000)->orderBy('gia','ASC');
+                        break;
+                    case '2' :
+                        $sanphamhotdealstt->whereBetween('gia',[1000000,3000000])->orderBy('gia','ASC');
+                        break;
+                    case '3' :
+                        $sanphamhotdealstt->whereBetween('gia',[3000000,5000000])->orderBy('gia','ASC');
+                        break;
+                    case '4' :
+                        $sanphamhotdealstt->whereBetween('gia',[5000000,7000000])->orderBy('gia','ASC');
+                        break;
+                    case '5' :
+                        $sanphamhotdealstt->whereBetween('gia',[7000000,1000000])->orderBy('gia','ASC');
+                        break;
+                     case '6':
+                        $sanphamhotdealstt->where('gia','>',10000000)->orderBy('gia','ASC');
+                        break;
+                    default:
+                       
+                }
+                
+        }
+        $sanphamhotdealstt = $sanphamhotdealstt->paginate(6);
         return view('pages/hotdeals',['sanphamhotdealstt' => $sanphamhotdealstt]);
     }
 
@@ -349,6 +394,11 @@ class PageController extends Controller
         {
             echo 'Không tìm thấy!';
         }
+    }
+
+    public function lienhe()
+    {
+        return view('pages.lienhe');
     }
 
 }

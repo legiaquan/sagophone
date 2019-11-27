@@ -2,6 +2,10 @@
 use Illuminate\Support\Facades\DB;
 //app/helpers.php
 
+function helloWorld()
+{
+    return 'Hello, World!';
+}
 function getAllGia($id)
 {
 	$gia = DB::table('tbchitietsanpham')
@@ -25,34 +29,4 @@ function getGiaMin($id)
 			->select('tbchitietsanpham.gia','tbmau.mau','tbmau.mamau','tbmau.id')
 			->get();
 	return $gia;
-}
-function avgStarSanPham($id_donhang)
-{
-	$avgStar = DB::table('tbchitietdonhang')
-			->where('id_donhang', $id_donhang)
-			->avg('tbchitietdonhang.star');
-	return $avgStar;
-}
-function getNhanXet($id_donhang)
-{
-	$nhanxet = DB::table('tbchitietdonhang')
-			->where('id_donhang', $id_donhang)
-			->select('nhanxet')
-			->get();
-	return $nhanxet;
-}
-function demBinhLuan($id)
-{
-	$demBinhLuan = DB::table('tbbinhluan')
-        				->where('id_sanpham',$id)
-        				->join('tbthanhvien','tbbinhluan.id_thanhvien','=','tbthanhvien.id')
-        				->count();
-	return $demBinhLuan;
-}
-function getNameLevel($id_level)
-{
-	$name = DB::table('level')
-				->where('id',$id_level)
-				->value('tenlevel');
-	return $name;
 }

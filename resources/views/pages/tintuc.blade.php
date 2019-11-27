@@ -1,3 +1,4 @@
+<title>Tin Tức</title>
 @extends('layouts.index')
 
 @section('content')

@@ -78,12 +78,12 @@
 
 								<!-- Cart -->
 								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<a href="{{route('get.list.shopping.cart')}}" class="dropdown-toggle" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Giỏ Hàng</span>
-										<div class="qty">3</div>
+										<div class="qty">{{Cart::count()}}</div>
 									</a>
-									<div class="cart-dropdown">
+									{{-- <div class="cart-dropdown">
 										<div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
@@ -115,7 +115,7 @@
 											<a href="#">View Cart</a>
 											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
-									</div>
+									</div> --}}
 								</div>
 								<!-- /Cart -->
 

@@ -12,9 +12,8 @@
 						<li class="active"><a href="trangchu">Trang Chủ</a></li>
 						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
-						<li><a href="danhmuc">Danh Mục</a></li>
-						<li><a href="danhmuc/1/Điện thoại}">Điện Thoại</a></li>									
-						<li><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
+						<li><a href="danhmuc">Cửa Hàng</a></li>									
+						<li><a href="lienhe">Liên Hệ</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -37,7 +36,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Apples<br>Collection</h3>
-								<a href="danhmuc/1/1/1" class="cta-btn">Mua Ngay<i class="fa fa-arrow-circle-right"></i></a>
+								<a href="danhmuc" class="cta-btn">Mua Ngay<i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -51,7 +50,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Samsungs<br>Collection</h3>
-								<a href="danhmuc/1/1/2" class="cta-btn">Mua Ngay<i class="fa fa-arrow-circle-right"></i></a>
+								<a href="danhmuc" class="cta-btn">Mua Ngay<i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -65,7 +64,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Phụ Kiện<br>Collection</h3>
-								<a href="danhmuc/2/2" class="cta-btn">Mua Ngay<i class="fa fa-arrow-circle-right"></i></a>
+								<a href="danhmuc" class="cta-btn">Mua Ngay<i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -134,7 +133,7 @@
 												</div>											
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+												<a style="color: white;font-weight: bolder;" href="{{route('add.shopping.cart',$sphd->id)}}"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
 											</div>
 										
 										</div>

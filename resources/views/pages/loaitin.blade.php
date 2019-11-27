@@ -1,3 +1,4 @@
+<title>Tin Tức</title>
 @extends('layouts.index')
 
 @section('content')
@@ -8,14 +9,12 @@
                 <!-- responsive-nav -->
                 <div id="responsive-nav">
                     <!-- NAV -->
-                    <ul class="main-nav nav navbar-nav">
+                        <ul class="main-nav nav navbar-nav">
                         <li><a href="trangchu">Trang Chủ</a></li>
                         <li><a href="hotdeals">Hot Deals</a></li>
                         <li class="active"><a href="loaitin">Tin Tức</a></li>
-                        <li><a href="danhmuc">Danh Mục</a></li>
-                        <li><a href="danhmuc/1/Điện thoại}">Điện Thoại</a></li>                                 
-                        <li><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
-                    </ul>
+                        <li><a href="danhmuc">Cửa Hàng</a></li>                                 
+                        <li><a href="lienhe">Liên Hệ</a></li>
                     <!-- /NAV -->
                 </div>
                 <!-- /responsive-nav -->
@@ -33,8 +32,8 @@
                         <h4><a href="loaitin" style="color: white; font-weight: bolder;">LOẠI TIN</a></h4>
                     </li>
                     @foreach($loaitin as $lt)
-                        <li href="#" class="list-group-item menu1"  style="background-color:#F5DA81;">
-                            <a href="loaitin/{{$lt->id}}"><h5 class="product-name">{{$lt->tenloaitin}}</h5></a>
+                        <li class="list-group-item menu1"  style="background-color:#F5DA81;">
+                            <a class="{{Request::get('id') == $lt->id? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['id' => $lt->id]) }}"><h5 class="product-name">{{$lt->tenloaitin}}</h5></a>
                         </li>
                     @endforeach
                    

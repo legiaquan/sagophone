@@ -1,3 +1,4 @@
+<title>Tìm Kiếm</title>
 @extends('layouts.index')
 
 @section('content')
