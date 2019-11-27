@@ -39,7 +39,7 @@
                                 {{ session('loi') }}
                             </div>
                         @endif
-						<form action="admin/tintuc/them" method="POST" enctype="multipart/form-data">
+						<form action="admin/tintuc/them/{{ auth('admin')->user()->id }}" method="POST" enctype="multipart/form-data">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 							<div class="form-body">
 								<div class="row">

@@ -6,7 +6,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">DANH SÁCH - Tin Tức<i class="ft-smartphone"></i></h4>
+                                <h4 class="card-title">DANH SÁCH - Tin Tức<i class="ft-file-text"></i></h4>
                             </div>
                             <div class="card-body collapse show">
                                 <div class="card-block card-dashboard">
@@ -21,13 +21,13 @@
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
-                                                <th width="10px">ID</th>
-                                                <th width="80px">Loại tin</th>
-                                                <th width="5px">Admin đăng</th>
+                                                <th width="1px" ></th>
+                                                <th width="10px">Loại tin</th>
+                                                <th >Admin đăng</th>
                                                 <th width="270px">Tiêu đề & Ảnh</th>                            
                                                 <!-- <th>Mô tả</th> -->
-                                                <th width="150px">Mô tả</th>
-                                                <th>Nội dung</th>
+                                                <th width="300px">Mô tả</th>
+                                                
                                                 <th width="10px">Trạng thái</th>                                    
                                                 <th width="10px">Xử lý</th>
                                             </tr>
@@ -35,7 +35,7 @@
                                         <tbody>
                                             @foreach($tintuc as $row)
                                             <tr>
-                                                <td>{{ $row->id }}</td>
+                                                <td><i class="ft-file-text"></i></td>
                                                 <td><b>{{ $row->loaitin->tenloaitin }}</b></td>
                                                 <td>{{ $row->nhanvien->username }}</td>
                                                 <td>
@@ -46,18 +46,12 @@
                                                     @if(strlen($row->mota)<=100)
                                                          {{ $row->mota }}
                                                      @else
-                                                         {{ mb_substr($row->mota,0,160-3,'UTF-8').'...' }}
+                                                         {{ mb_substr($row->mota,0,300-3,'UTF-8').'...' }}
                                                      @endif
                                                  </td>
 
                                                      
-                                                <td>
-                                                    @if(strlen($row->noidung)<=100)
-                                                         {{ $row->noidung }}
-                                                     @else
-                                                         {{ mb_substr($row->noidung,0,160-3,'UTF-8').'...' }}
-                                                     @endif
-                                                </td>
+                                               
 
                                                 <td>
                                                     @if($row->trangthai=='show')
@@ -76,13 +70,13 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>ID</th>
+                                                <th></th>
                                                 <th>Loại tin</th>
                                                 <th>Admin Đăng</th>
                                                 <th>Tiêu đề</th>                            
                                                 <!-- <th>Mô tả</th> -->
                                                 <th>Mô tả</th>
-                                                <th>Nội dung</th>
+                                               
                                                 <th>Trạng thái</th>                                    
                                                 <th>Xử lý</th>
                                             </tr>

@@ -47,12 +47,12 @@ class DonHangController extends Controller
     	return redirect('admin/donhang/sua/'.$id)->with('thongbao','Sửa thành công!');
     }
 
-    public function getXuly($id,$tinhtrang)
+    public function getXuly($id,$tinhtrang,$id_admins)
     {
     	$donhang = DonHang::find($id);
         $donhang->tinhtrang = $tinhtrang;
         if($tinhtrang == 'confirmed')
-            $donhang->id_admins =1;
+            $donhang->id_admins =$id_admins;
     	$donhang->save();
 
         $xuly = 'Thành Công';

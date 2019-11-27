@@ -22,21 +22,18 @@ class BannerController extends Controller
     	return view('admin.banner.them');
     }
 
-    public function postThem(Request $request)
+    public function postThem(Request $request,$id_admins)
     {
     	$this->validate($request,
     	[
     		'txtTen'=>'required|unique:tbbanner,tenbanner|min:2|max:255',
-            'txtNgaybatdau'=>'required',
-            'txtNgayketthuc'=>'required'
+
     	],
     	[
     		'txtTen.required'=>'Bạn chưa nhập tên banner',
     		'txtTen.unique'=>'Tên banner đã tồn tại',
     		'txtTen.min'=>'Tên banner phải có độ dài từ 2 cho đến 50 ký tự',
     		'txtTen.max'=>'Tên banner phải có độ dài từ 2 cho đến 50 ký tự',
-            'txtNgaybatdau.required'=>'Bạn chưa chọn ngày bắt đầu',
-            'txtNgayketthuc.required'=>'Bạn chưa chọn ngày kết thúc'
     	]);
 
     	$banner = new Banner;
@@ -66,7 +63,7 @@ class BannerController extends Controller
         $banner->ngaybatdau = $request->txtNgaybatdau;
         $banner->ngayketthuc = $request->txtNgayketthuc;
         $banner->trangthai = $request->txtTrangthai;
-        $banner->id_admins=1;
+        $banner->id_admins=$id_admins;
 
         //echo $namefile;
     	// đổi có dấu thành không dấu

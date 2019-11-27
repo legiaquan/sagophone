@@ -92,16 +92,16 @@
                                                             <button style="font-size: 12px" type="button" class="btn btn-raised btn-secondary  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-star"></i> Xử lý</button>
                                                             <div class="dropdown-menu">
                                                                 @if($row->tinhtrang !='cancel' and $row->tinhtrang !='complete')
-                                                                <a class="btn btn-raised btn-danger" style="width: 100%"  href="admin/donhang/xuly/{{ $row->id }}/cancel">Hủy</a>
+                                                                <a class="btn btn-raised btn-danger" style="width: 100%"  href="admin/donhang/xuly/{{ $row->id }}/cancel/{{ auth('admin')->user()->id }}">Hủy</a>
                                                                 @endif
                                                                 @if($row->tinhtrang != 'confirmed' and $row->tinhtrang != 'delivery' )
-                                                                <a class="btn btn-raised btn-primary" style="width: 100%" href="admin/donhang/xuly/{{ $row->id }}/confirmed">Đã xác nhận</a>
+                                                                <a class="btn btn-raised btn-primary" style="width: 100%" href="admin/donhang/xuly/{{ $row->id }}/confirmed/{{ auth('admin')->user()->id }}">Đã xác nhận</a>
                                                                 @endif
                                                                 @if($row->tinhtrang != 'delivery' and $row->tinhtrang !='pending')
-                                                                <a class="btn btn-raised btn-info" style="width: 100%" href="admin/donhang/xuly/{{ $row->id }}/delivery">Đang giao hàng</a>
+                                                                <a class="btn btn-raised btn-info" style="width: 100%" href="admin/donhang/xuly/{{ $row->id }}/delivery/{{ auth('admin')->user()->id }}">Đang giao hàng</a>
                                                                 @endif
                                                                 @if($row->tinhtrang !='pending' and $row->tinhtrang != 'confirmed')
-                                                                <a class="btn btn-raised btn-success" style="width: 100%" href="admin/donhang/xuly/{{ $row->id }}/complete">Thành công</a>
+                                                                <a class="btn btn-raised btn-success" style="width: 100%" href="admin/donhang/xuly/{{ $row->id }}/complete/{{ auth('admin')->user()->id }}">Thành công</a>
                                                                 @endif
                                                             </div>
                                                         </div>

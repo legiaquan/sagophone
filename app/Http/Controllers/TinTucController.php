@@ -20,7 +20,7 @@ class TinTucController extends Controller
         return view('admin.tintuc.them',['loaitin'=>$loaitin]);
     }
 
-    public function postThem(Request $request)
+    public function postThem(Request $request,$id_admins)
     {
         $this->validate($request,
         [
@@ -39,7 +39,7 @@ class TinTucController extends Controller
         $tintuc = new TinTuc;
         $tintuc->tieude = $request->txtTen;
         $tintuc->id_loaitin = $request->txtLoaitin;
-        $tintuc->id_admins = 1;
+        $tintuc->id_admins = $id_admins;
         $tintuc->mota = $request->txtMota;
         //$tintuc->img = $request->flHinh;
         
@@ -65,7 +65,7 @@ class TinTucController extends Controller
         	$tintuc->img = "";
         }
         $tintuc->noidung = $request->txtNoidung;
-
+        $tintuc->trangthai = $request->txtTrangthai;
         $tintuc->save();
 
         return redirect('admin/tintuc/them')->with('thongbao','Thêm thành công vào CSDL!');
@@ -97,29 +97,28 @@ class TinTucController extends Controller
         $tintuc =  TinTuc::find($id);
         $tintuc->tieude = $request->txtTen;
         $tintuc->id_loaitin = $request->txtLoaitin;
-        $tintuc->id_admins = 1;
         $tintuc->mota = $request->txtMota;
         
        	if($request->hasFile('flHinh'))
         {
-            $file = $request->file('flHinh');
+           $file = $request->file('flHinh');
             $duoi = $file->getClientOriginalExtension();
             if($duoi != 'jpg' && $duoi != 'png' && $duoi != 'jpeg')
             {
                 return redirect('admin/tintuc/them')->with('loi','Bạn chỉ được chọn file có đuôi là jpg, png, jpeg');
             }
             $namefile = $file->getClientOriginalName();
-            $Hinh = str_random(4)."_".$namefile;
+            $Hinh = str_random(4)."-sago-".$namefile;
             while (file_exists("upload/imgTinTuc/".$Hinh)) {
                 # code...
-                $Hinh = str_random(4)."-".$namefile."-sago";
+                $Hinh = str_random(4)."-".$namefile;
             }
-
             $file->move("upload/imgTinTuc",$Hinh);
-            // unlink("upload/imgtintuc/".$tintuc->Hinh);
+            unlink("upload/imgTinTuc/".$tintuc->Hinh);
             $tintuc->img = $Hinh;
         }
         $tintuc->noidung = $request->txtNoidung;
+        $tintuc->trangthai = $request->txtTrangthai;
         $tintuc->save();
         return redirect('admin/tintuc/sua/'.$id)->with('thongbao','Sửa thành công vào CSDL!');
     }

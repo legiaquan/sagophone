@@ -28,6 +28,10 @@ Route::get('admin/dangxuat','AdminController@getLogout');
 
 Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 	Route::get('trang-chu.html','AdminController@index');
+
+	Route::get('suathongtin/{id}','AdminController@getSuathongtin');
+	Route::post('suathongtin/{id}','AdminController@postSuathongtin');
+	
 	/*Hang dien thoai*/
 	Route::group(['prefix'=>'hangdt','middleware'=>'quanlykho'],function(){
 		// admin/hangdt/danhsach
@@ -140,7 +144,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		Route::get('sua/{id}','DonHangController@getSua');
 		Route::post('sua/{id}','DonHangController@postSua');
 
-		Route::get('xuly/{id}/{tinhtrang}','DonHangController@getXuly');
+		Route::get('xuly/{id}/{tinhtrang}/{id_admins}','DonHangController@getXuly');
 	});
 
 	/*Banner*/
@@ -152,7 +156,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		Route::post('sua/{id}','BannerController@postSua');
 		
 		Route::get('them','BannerController@getThem');
-		Route::post('them','BannerController@postThem');
+		Route::post('them/{id_admins}','BannerController@postThem');
 
 		Route::get('xoa/{id}','BannerController@getXoa');
 		Route::post('xoa/{id}','BannerController@postXoa');
@@ -210,7 +214,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		Route::post('sua/{id}','TinTucController@postSua');
 
 		Route::get('them','TinTucController@getThem');
-		Route::post('them','TinTucController@postThem');
+		Route::post('them/{id_admins}','TinTucController@postThem');
 		
 		Route::get('xoa/{id}','TinTucController@getXoa');
 		Route::post('xoa/{id}','TinTucController@postXoa');
