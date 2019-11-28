@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>SagoPhone | @yield('title')</title>
+		<title>SagoPhone @yield('title')</title>
 		<base href="{{asset('')}}">
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -23,9 +23,11 @@
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="css/font-awesome.min.css">
-
+		<link rel="shortcut icon" type="image/x-icon" href="admin_asset/app-assets/img/ico/sago.ico">
+    	<link rel="shortcut icon" type="image/png" href="admin_asset/app-assets/img/ico/sago-32.png">
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+
 
 		@yield('css')
 
