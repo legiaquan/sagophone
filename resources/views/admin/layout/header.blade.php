@@ -8,13 +8,21 @@
               <ul class="navbar-nav">
                 
                 <li class="dropdown nav-item">
-                  <a class="nav-link position-relative">Xin chào bạn Quân!</a>
+                  <a class="nav-link position-relative"><b>Xin chào</b>
+                    
+                  @if(auth('admin')->user())
+                    <?php $id_level = auth('admin')->user()->id_level;?> 
+                    {{  getNameLevel($id_level) }} - 
+                    {{ auth('admin')->user()->name }}
+                  @endif
+                  !</a>
                 </li>
                 
                 <li class="dropdown nav-item"><a id="dropdownBasic3" href="#" data-toggle="dropdown" class="nav-link position-relative dropdown-toggle"><i class="ft-user font-medium-3 blue-grey darken-4"></i>
                     <p class="d-none">User Settings</p></a>
-                  <div ngbdropdownmenu="" aria-labelledby="dropdownBasic3" class="dropdown-menu text-left dropdown-menu-right"><a href="javascript:;" class="dropdown-item py-1"><i class="ft-settings mr-2"></i><span>Settings</span></a><a href="javascript:;" class="dropdown-item py-1"><i class="ft-edit mr-2"></i><span>Edit Profile</span></a><a href="javascript:;" class="dropdown-item py-1"><i class="ft-mail mr-2"></i><span>My Inbox</span></a>
-                    <div class="dropdown-divider"></div><a href="javascript:;" class="dropdown-item"><i class="ft-power mr-2"></i><span>Logout</span></a>
+                  <div ngbdropdownmenu="" aria-labelledby="dropdownBasic3" class="dropdown-menu text-left dropdown-menu-right">
+                    <a href="admin/suathongtin/{{ auth('admin')->user()->id }}" class="dropdown-item py-1"><i class="ft-edit mr-2"></i><span>Sửa thông tin cá nhân</span></a>
+                    <div class="dropdown-divider"></div><a href="admin/dangxuat" class="dropdown-item"><i class="ft-power mr-2"></i><span>Đăng xuất</span></a>
                   </div>
                 </li>
                 

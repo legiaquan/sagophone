@@ -39,7 +39,7 @@
                                 {{ session('loi') }}
                             </div>
                         @endif
-						<form class="form" action="admin/banner/them" method="POST"  enctype="multipart/form-data">
+						<form class="form" action="admin/banner/them/{{ auth('admin')->user()->id }}" method="POST"  enctype="multipart/form-data">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="form-body">
 								<div class="form-group">

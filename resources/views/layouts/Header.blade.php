@@ -4,14 +4,38 @@
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +032-824-8594</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> sagophone_qt@gmail.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 439 Đường Hùng Vương</a></li>
+						<li><a href="tel:19001560"><i class="fa fa-phone"></i> +1900-1560</a></li>
+						<li><a href="mailto:sagophone@gmail.com"><i class="fa fa-envelope-o"></i> sagophone@gmail.com</a></li>
+						<li><a target="_blank" href="https://goo.gl/maps/JLcSzPrHN7a2P8Kg8"><i class="fa fa-map-marker"></i> 180 Cao Lỗ, Quận 8</a></li>
 					</ul>
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-dollar"></i> VND </a></li>
-						<li><a href="dangnhap"><i class="fa fa-user-o"></i> Đăng Nhập </a></li>
-						<li><a href="dangky"><i class="fa fa-user-o"></i> Đăng Ký </a></li>
+						@if(!Auth::user())
+	                        <li>
+	                        	<i class="fa fa-registered"></i>
+	                            <a href="dangky">Đăng ký</a>
+	                        </li>
+	                        <li>
+	                        	<i class="fa fa-sign-in"></i>
+	                            <a href="dangnhap">Đăng nhập</a>
+	                        </li>
+	                    @else
+	                        <li>
+	                        	<a href="nguoidung">
+	                        		<i class="fa fa-user-o"></i>
+	                        		@if(Auth::user()->name != null)
+	                        			{{Auth::user()->name}}
+	                        		@else
+	                        			{{Auth::user()->username}}
+	                        		@endif
+	                        	</a>
+	                        </li>
+
+	                        <li>
+	                        	<i class="fa fa-sign-out"></i>
+	                        	<a href="dangxuat">Đăng xuất</a>
+	                        </li>
+                    	@endif
 					</ul>
 				</div>
 			</div>
@@ -26,24 +50,34 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="trangchu" class="logo" style="font-size: 35pt;color: silver">
-									SagoPhone
+								<a href="trangchu" class="logo" style="font-size: 35pt;color: white">
+									Sagophone
 								</a>
 							</div>
 						</div>
 						<!-- /LOGO -->
-
+					
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
-									<select class="input-select">
-										<option value="0">All Categories</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
-									</select>
-									<input class="input" placeholder="Tìm kiếm tại đây">
-									<button class="search-btn">Tìm</button>
+								@if(count($errors)>0)
+		                            <div class="alert alert-danger">
+		                                @foreach($errors->all() as $err)
+		                                    {{$err}}<br>
+		                                @endforeach
+		                            </div>
+		                        @endif
+
+								<form id="form_search" action="timkiem" class="tree-most"  role="search" method="GET">
+									
+ 									<select name="timkiem" class="input-select">
+										<option value="">Chọn hãng ...</option>
+										@foreach($hangdt as $hdt)
+											<option value="{{$hdt->id}}">{{$hdt->tenhang}}</option>
+										@endforeach
+									</select>								
+										<input class="input" name="keyword" placeholder="Nhập sản phẩm cần tìm">
+									<button type="submit" class="search-btn">Tìm</button>
 								</form>
 							</div>
 						</div>
@@ -64,12 +98,12 @@
 
 								<!-- Cart -->
 								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<a href="{{route('get.list.shopping.cart')}}" class="dropdown-toggle" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Giỏ Hàng</span>
-										<div class="qty">3</div>
+										<div class="qty">{{Cart::count()}}</div>
 									</a>
-									<div class="cart-dropdown">
+									{{-- <div class="cart-dropdown">
 										<div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
@@ -101,7 +135,7 @@
 											<a href="#">View Cart</a>
 											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
-									</div>
+									</div> --}}
 								</div>
 								<!-- /Cart -->
 
@@ -125,4 +159,13 @@
 		</header>
 <!-- /HEADER -->
 
-
+@section('script')
+    <script>
+ 		$(function(){
+ 			$('.input-select').change(function(){
+ 				//$("#form_search").submit();
+ 				$('.input-select').val();
+ 			});
+ 		});
+    </script>
+@endsection

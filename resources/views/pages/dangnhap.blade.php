@@ -27,13 +27,13 @@
 				    	<form action="dangnhap" method="POST">
 				    		<input type="hidden" name="_token" value="{{csrf_token()}}">
 							<div>
-				    			<label>Email</label>
-							  	<input type="email" class="form-control" placeholder="Nhập địa chỉ email" name="email" 
+				    			&nbsp;<label>Tên đăng nhập hoặc Email</label>
+							  	<input type="text" class="form-control" placeholder="Nhập tên đăng nhập hoặc Email" name="email" 
 							  	>
 							</div>
 							<br>	
 							<div>
-				    			<label>Mật khẩu</label>
+				    			&nbsp;<label>Mật khẩu</label>
 							  	<input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu">
 							</div>
 							<br>

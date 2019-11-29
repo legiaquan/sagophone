@@ -12,8 +12,8 @@
 						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
 						<li><a href="danhmuc">Danh Mục</a></li>
-						<li><a href="dienthoai">Điện Thoại</a></li>									
-						<li><a href="phukien">Phụ Kiện</a></li>
+						<li><a href="danhmuc/1/Điện thoại}">Điện Thoại</a></li>									
+						<li><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -23,27 +23,6 @@
 		</nav>
 <!-- /NAVIGATION -->
 
-<!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li><a href="#">All Categories</a></li>
-							<li><a href="#">Accessories</a></li>
-							<li><a href="#">Headphones</a></li>
-							<li class="active">Product name goes here</li>
-						</ul>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-<!-- /BREADCRUMB -->
 
 <!-- SECTION -->
 		<div class="section">
@@ -58,15 +37,15 @@
 								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 							<div class="product-preview">
-								<img src="./img/product03.png" alt="">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="./img/product06.png" alt="">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="./img/product08.png" alt="">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 							
 						</div>
@@ -80,15 +59,15 @@
 								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 							<div class="product-preview">
-								<img src="./img/product03.png" alt="">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="./img/product06.png" alt="">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="./img/product08.png" alt="">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 							
 						</div>
@@ -107,72 +86,114 @@
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star-o"></i>
 								</div>
-								<a class="review-link" href="#">10 Review(s)</a>
+								<a class="review-link" href="#">10 Đánh giá(s)</a>
 							</div>
+							<!-- Get giá -->
+							<?php $getgiasp = getGiaMin($chitiet->id)?>
 							<div>
-								<h3 class="product-price">{{$chitiet->gia}}<del class="product-old-price">{{$chitiet->gia * 0.5}}</del></h3>
+								<h3 class="product-price">					
+									{{getGiaChiTiet($chitiet->id)}}
+									<del class="product-old-price">{{$chitiet->gia * 0.5}}</del>
+									
+								</h3>
 								<span class="product-available">Còn Hàng</span>
 							</div>
-							<p>{{$chitiet->mota}}.</p>
+							
+							
+							<div class="product-options">	
 
-							<div class="product-options">
 								<label>
-									Size
-									<select class="input-select">
-										<option value="0">X</option>
-									</select>
-								</label>
-								<label>
-									Color
-									<select class="input-select">
-										<option value="0">Red</option>
-									</select>
-								</label>
-							</div>
-
-							<div class="add-to-cart">
-								<div class="qty-label">
-									Qty
-									<div class="input-number">
-										<input type="number">
-										<span class="qty-up">+</span>
-										<span class="qty-down">-</span>
+									Màu Sắc
+									<!-- <select class="input-select">
+										@foreach($getgiasp as $sp)
+										<option value="{{$sp->id}}"> {{$sp->mau}}</option>
+										@endforeach
+									</select> -->
+									<div class="linked-products f-left">
+										<div class="linked">
+											@foreach($getgiasp as $sp)
+												<a class="item i-18373 active" href="chitiet/{{$chitiet->id}}/" style=" ">
+													<span><i class="iconmobile-opt"></i>{{$sp->mau}}</span>
+													<strong>{{$sp->gia}}</strong>
+												</a>			
+											@endforeach
+										</div>
 									</div>
-								</div>
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+								</label>
+
 							</div>
-
-							<ul class="product-btns">
-								<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
-							</ul>
-
-							<ul class="product-links">
-								<li>Category:</li>
-								<li><a href="#">Headphones</a></li>
-								<li><a href="#">Accessories</a></li>
-							</ul>
-
-							<ul class="product-links">
-								<li>Share:</li>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-							</ul>
-
+							
+							<div>
+								RAM :
+								<label>
+									{{$chitiet->ram}}GB
+								</label>
+								&nbsp
+								ROM :
+								<label>
+									{{$chitiet->rom}}GB
+								</label>
+							</div>
+							<br>
+							<div>
+								Màn Hình :
+								<label>
+									{{$chitiet->manhinh}}
+								</label>
+							</div>
+							<br>
+							<div>
+								Hệ Điều Hành :
+								<label>
+									{{$chitiet->hedieuhanh}}
+								</label>
+							</div>
+							<br>
+							<div>
+								CAM Trước :
+								<label>
+									{{$chitiet->camtruoc}}
+								</label>
+								&nbsp
+								CAM Sau :
+								<label>
+									{{$chitiet->camsau}}
+								</label>
+							</div>
+							<br>
+							<div>
+								CPU :
+								<label>
+									{{$chitiet->cpu}}
+								</label>
+								&nbsp
+								Thẻ SIM :
+								<label>
+									{{$chitiet->thesim}}
+								</label>								
+							</div>
+							<br>
+							<div>
+								Dung Lượng PIN :
+								<label>
+									{{$chitiet->dungluongpin}}
+								</label>
+							</div>
+							<br>
+							<div class="add-to-cart">
+								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+							</div>
 						</div>
 					</div>
 					<!-- /Product details -->
-
+					
 					<!-- Product tab -->
 					<div class="col-md-12">
 						<div id="product-tab">
 							<!-- product tab nav -->
 							<ul class="tab-nav">
-								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-								<li><a data-toggle="tab" href="#tab2">Details</a></li>
-								<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+								<li class="active"><a data-toggle="tab" href="#tab1">Mô Tả</a></li>				
+								<li><a data-toggle="tab" href="#tab2">Đánh Giá (3)</a></li>
 							</ul>
 							<!-- /product tab nav -->
 
@@ -182,24 +203,15 @@
 								<div id="tab1" class="tab-pane fade in active">
 									<div class="row">
 										<div class="col-md-12">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+											<p>{!!$chitiet->mota!!}</p>
 										</div>
 									</div>
 								</div>
 								<!-- /tab1  -->
 
+					
 								<!-- tab2  -->
 								<div id="tab2" class="tab-pane fade in">
-									<div class="row">
-										<div class="col-md-12">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-										</div>
-									</div>
-								</div>
-								<!-- /tab2  -->
-
-								<!-- tab3  -->
-								<div id="tab3" class="tab-pane fade in">
 									<div class="row">
 										<!-- Rating -->
 										<div class="col-md-3">
@@ -287,76 +299,46 @@
 
 										<!-- Reviews -->
 										<div class="col-md-6">
+											@foreach($chitiet->binhluan as $cmt)
 											<div id="reviews">
 												<ul class="reviews">
 													<li>
 														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
+															<h5 class="name">{{$cmt->thanhvien->name}}</h5>
+															<p class="date">{{$cmt->created_at}}</p>
+															
 														</div>
 														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+															<p>{{$cmt->binhluan}}</p>
 														</div>
 													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
+													
 												</ul>
-												<ul class="reviews-pagination">
-													<li class="active">1</li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">4</a></li>
-													<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-												</ul>
+												
 											</div>
+										
+											@endforeach
 										</div>
 										<!-- /Reviews -->
 
 										<!-- Review Form -->
-										<div class="col-md-3">
+										@if(Auth::user() != null)		
+										<div class="col-md-3">	
+											<h4><span class="glyphicon glyphicon-pencil"></span>&nbsp;...Bình luận</h4>
+
+											@if(session('thongbao'))
+												<div class="alert alert-success">
+													{{session('thongbao')}}
+												</div>
+											@endif
+										
 											<div id="review-form">
-												<form class="review-form">
-													<input class="input" type="text" placeholder="Your Name">
-													<input class="input" type="email" placeholder="Your Email">
-													<textarea class="input" placeholder="Your Review"></textarea>
-													<div class="input-rating">
+												<form action="binhluan/{{$chitiet->id}}" class="review-form" method="POST">
+													<input type="hidden" name="_token" value="{{csrf_token()}}">
+													{{-- <input class="input" type="text" placeholder="Your Name">
+													<input class="input" type="email" placeholder="Your Email"> --}}
+													<textarea name="binhluan" class="input" placeholder="Bình luận của bạn"></textarea>
+													{{-- <div class="input-rating">
 														<span>Your Rating: </span>
 														<div class="stars">
 															<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
@@ -365,15 +347,36 @@
 															<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
 															<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
 														</div>
-													</div>
-													<button class="primary-btn">Submit</button>
+													</div> --}}
+													<button class="primary-btn">Gửi</button>
 												</form>
 											</div>
 										</div>
+										@else
+											<div class="col-md-3">	
+											<h4><span class="glyphicon glyphicon-pencil"></span>&nbsp;...Bình luận</h4>
+
+											@if(session('thongbao'))
+												<div class="alert alert-success">
+													{{session('thongbao')}}
+												</div>
+											@endif
+										
+											<div id="review-form">
+												<form action="binhluan/{{$chitiet->id}}" class="review-form" method="POST">
+													<input type="hidden" name="_token" value="{{csrf_token()}}">
+													
+													<textarea name="binhluan" class="input" placeholder="(Đăng nhập để bình luận!)" disabled=""></textarea>
+													
+													<button class="primary-btn" disabled="">Gửi</button>
+												</form>
+											</div>
+										</div>
+										@endif
 										<!-- /Review Form -->
 									</div>
 								</div>
-								<!-- /tab3  -->
+								<!-- /tab2  -->
 							</div>
 							<!-- /product tab content  -->
 						</div>
@@ -396,51 +399,38 @@
 
 					<div class="col-md-12">
 						<div class="section-title text-center">
-							<h3 class="title">Related Products</h3>
+							<h3 class="title">Sản Phẩm Liên Quan</h3>
 						</div>
 					</div>
 
 					<!-- product -->
+					@foreach($sanphamlienquan as $splq)
 					<div class="col-md-3 col-xs-6">
+						
 						<div class="product">
+							
 							<div class="product-img">
-								<img src="./img/product01.png" alt="">
+								<a href="chitiet/{{$splq->id_sanpham}}/{{$splq->id}}">				
+									<img src="upload/imgSanPham/{{$splq->hinhsp}}" alt="" width="250px" height="250px"> 
+								</a>
+							
+		
+								@foreach($splq->dsbanner as $sqlqbanner)
 								<div class="product-label">
-									<span class="sale">-30%</span>
+									@if($sqlqbanner->id_banner == 2)
+										<span class="sale">-30%</span>
+									@elseif($sqlqbanner->id_banner == 3)
+										<span class="new">NEW</span>
+									@else
+										<span class="new">HOT</span>
+									@endif
 								</div>
+								@endforeach
 							</div>
 							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="./img/product02.png" alt="">
-								<div class="product-label">
-									<span class="new">NEW</span>
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+								<p class="product-category">{{$splq->tenhang}}</p>
+								<h3 class="product-name"><a href="chitiet/{{$splq->id_sanpham}}/{{$splq->id}}">{{$splq->tensp}}</a></h3>
+								<h4 class="product-price">{{$splq->gia}}</del></h4>
 								<div class="product-rating">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
@@ -448,75 +438,19 @@
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+								<div class="product-btns">								
+									<button class="quick-view"><a href="chitiet/{{$splq->id_sanpham}}/{{$splq->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
 								</div>
 							</div>
 							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 							</div>
+							
 						</div>
+						
 					</div>
 					<!-- /product -->
-
-					<div class="clearfix visible-sm visible-xs"></div>
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="./img/product03.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o"></i>
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="./img/product04.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
+					@endforeach
 
 				</div>
 				<!-- /row -->

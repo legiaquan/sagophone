@@ -39,9 +39,9 @@
 								<h3 class="footer-title">Về SagonPhone</h3>
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
 								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-phone"></i> +032-824-8594</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i> sagophone_qt@gmail.com</a></li>
-									<li><a href="#"><i class="fa fa-map-marker"></i> 439 Đường Hùng Vương</a></li>
+									<li><a href="tel:19001560"><i class="fa fa-phone"></i> +1900-1560</a></li>
+									<li><a href="mailto:sagophone@gmail.com"><i class="fa fa-envelope-o"></i> sagophone@gmail.com</a></li>
+									<li><a target="_blank" href="https://goo.gl/maps/JLcSzPrHN7a2P8Kg8"><i class="fa fa-map-marker"></i> 180 Cao Lỗ, Quận 8</a></li>
 								</ul>
 							</div>
 						</div>

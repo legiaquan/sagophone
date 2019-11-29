@@ -41,7 +41,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Tên hãng</th>
+                                                <th>Chức vụ</th>
                                                 <th>Xử lý</th>
                                             </tr>
                                         </tfoot>
