@@ -1,4 +1,4 @@
-<title>Hot Deals</title>
+<title>Cửa Hàng</title>
 @extends('layouts.index')
 
 @section('content')
@@ -11,9 +11,9 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="trangchu">Trang Chủ</a></li>
-						<li class="active"><a href="hotdeals">Hot Deals</a></li>
+						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
-						<li><a href="cuahang">Cửa Hàng</a></li>									
+						<li class="active"><a href="cuahang">Cửa Hàng</a></li>									
 						<li><a href="#">Liên Hệ</a></li>
 					</ul>
 					<!-- /NAV -->
@@ -26,10 +26,6 @@
 
 
 <!-- SECTION -->
-
-{{-- <div class="banner">
-	<img width="260px" height="250px" src="./upload/imgKhuyenMai/{{$hinhhotdeals->hinhbanner}}" alt="">
-</div> --}}
 <div class="section">
 			<!-- container -->
 			<div class="container">
@@ -37,6 +33,32 @@
 				<div class="row">
 					<!-- ASIDE -->
 					<div id="aside" class="col-md-3">
+						<!-- aside Widget -->
+						<div class="aside">						
+								<h3 class="aside-title"><a href="cuahang" style="font-weight: bolder;">Danh Mục</a></h3>						
+							@foreach($nhomsanpham as $nsp)
+							<div class="checkbox-filter">							
+								<div class="">
+									<label>
+										<a class="{{Request::get('id_nhom') == $nsp->id? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['id_nhom' => $nsp->id]) }}">
+											{{$nsp->tennhom}}
+										</a>
+									</label>
+									
+									@if($nsp->id == 1)
+										<small>({{count($sanphamdt)}})</small>
+									@elseif($nsp->id == 2)
+										<small>({{count($sanphampk)}})</small>
+									@else
+										<small>(0)</small>
+									@endif
+								</div>
+							</div>
+							@endforeach
+						</div>
+						<!-- /aside Widget -->
+
+						
 						<div class="aside">
 							<h3 class="aside-title"><a style="font-weight: bolder;">Thương Hiệu</a></h3>
 							@foreach($hangdt as $hdt)
@@ -64,7 +86,45 @@
 							
 							
 						</div>
-						
+						<div class="aside">
+							<h3 class="aside-title">Sản Phẩm Bán Chạy</h3>
+							<div class="products-widget-slick" data-nav="#slick-nav-6">
+							<div>
+								<!-- product widget -->
+								@foreach($sanphambanchay1 as $spbc1)
+								<div class="product-widget">
+									<div class="product-img">
+										<a href="chitiet/{{$spbc1->id}}">
+											<img src="upload/imgSanPham/{{$spbc1->hinhsp}}" alt="" width="70px" height="70px">
+										</a>
+									</div>
+									<div class="product-body">
+										<p class="product-category">{{$spbc1->tenhang}}</p>
+										<h3 class="product-name"><a href="chitiet/{{$spbc1->id}}">{{$spbc1->tensp}}</a></h3>
+										<h4 class="product-price">{{$spbc1->gia}}</h4>
+									</div>
+								</div>
+								@endforeach							
+							</div>
+							<div>
+								<!-- product widget -->
+								@foreach($sanphambanchay2 as $spbc2)
+								<div class="product-widget">
+									<div class="product-img">
+										<a href="chitiet/{{$spbc2->id}}">
+											<img src="upload/imgSanPham/{{$spbc2->hinhsp}}" alt="" width="70px" height="70px">
+										</a>
+									</div>
+									<div class="product-body">
+										<p class="product-category">{{$spbc2->tenhang}}</p>
+										<h3 class="product-name"><a href="chitiet/{{$spbc2->id}}">{{$spbc2->tensp}}</a></h3>
+										<h4 class="product-price">{{$spbc2->gia}}</h4>
+									</div>
+								</div>
+								@endforeach							
+							</div>
+							</div>
+						</div>
 						<!-- /aside Widget -->
 						<div class="col-md-9">
 							<br/>
@@ -88,8 +148,8 @@
 											<select name="orderby" class="input-select">
 												<option class="{{Request::get('orderby') == "" ? 'selected' : ''}}" {{Request::get('orderby') == "" ? "selected = 'selected'" : ""}}  value="">click chọn...</option>
 												<option class="{{Request::get('orderby') == "new" ? 'selected' : ''}}" {{Request::get('orderby') == "new" ? "selected = 'selected'" : ""}} {{ request()->fullUrlWithQuery(['orderby' => "new"]) }} value="new">Sản phẩm mới</option>
-												<option class="{{Request::get('orderby') == "price_min" ? 'active' : ''}}" {{Request::get('orderby') == "price_min" ? "selected = 'selected'" : ""}} value="price_min">Giá tăng dần</option>
-												<option class="{{Request::get('orderby') == "price_max" ? 'active' : ''}}" {{Request::get('orderby') == "price_max" ? "selected = 'selected'" : ""}} value="price_max">Giá giảm dần</option>
+												<option class="{{Request::get('orderby') == "price_min" ? 'selected' : ''}}" {{Request::get('orderby') == "price_min" ? "selected = 'selected'" : ""}} value="price_min">Giá tăng dần</option>
+												<option class="{{Request::get('orderby') == "price_max" ? 'selected' : ''}}" {{Request::get('orderby') == "price_max" ? "selected = 'selected'" : ""}} value="price_max">Giá giảm dần</option>
 											</select>	
 									</label>
 								
@@ -101,28 +161,33 @@
 						<!-- store products -->
 						<div class="row">
 							<!-- product -->
-								@foreach($sanphamhotdealstt as $sp)
+								@foreach($sanpham as $sp)
 								<div class="col-md-4 col-xs-6">
 									<div class="product">
 										<div class="product-img">
 											<a href="chitiet/{{$sp->id}}">
 												<img width="260px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
 											</a>
-											<div class="product-label">
-													@if($sp->phantramkhuyenmai != null)
-														<span class="sale">-{{$sp->phantramkhuyenmai}}%</span>	
-													@endif											
-												</div>							
+											<div class="product-label">	
+												@if($sp->id_banner == 3)									
+													<span class="new">NEW</span>
+												@elseif($sp->id_banner == 2)
+													<span class="sale">-30%</span>
+												@elseif($sp->id_banner == 4)
+													<span class="sale">HOT</span>
+												@endif
+											</div>									
 										</div>
 										<div class="product-body">
 											<p class="product-category">{{$sp->tenhang}}</p>
-											<h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id_sanpham}}">{{$sp->tensp}}</a></h3>
+											<h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id}}">{{$sp->tensp}}</a></h3>
 											<h4 class="product-price">
-													@if($sp->phantramkhuyenmai != null)
-													{{$sp->gia * (100 - $sp->phantramkhuyenmai) / 100}}<del class="product-old-price">{{$sp->gia}}
-													@else
-														{{$sp->gia}}
-													@endif
+												@if($sp->phantramkhuyenmai != null)
+													{{$sp->gia * (100 - $sp->phantramkhuyenmai) / 100}}
+													<del class="product-old-price">{{$sp->gia}}</del>
+												@else
+													{{$sp->gia}}
+												@endif
 											</h4>
 											<div class="product-rating">
 												<i class="fa fa-star"></i>
@@ -150,7 +215,7 @@
 						<br>
 						<!-- store bottom filter -->
 						<div class="store-filter clearfix" style="text-align: center;">
-							{{ $sanphamhotdealstt->appends(request()->query())->links() }}
+							{{ $sanpham->appends(request()->query())->links() }}
 						</div>
 						<!-- /store bottom filter -->
 					</div>

@@ -9,12 +9,13 @@
                 <!-- responsive-nav -->
                 <div id="responsive-nav">
                     <!-- NAV -->
-                        <ul class="main-nav nav navbar-nav">
+                    <ul class="main-nav nav navbar-nav">
                         <li><a href="trangchu">Trang Chủ</a></li>
                         <li><a href="hotdeals">Hot Deals</a></li>
                         <li class="active"><a href="loaitin">Tin Tức</a></li>
-                        <li><a href="danhmuc">Cửa Hàng</a></li>                                 
+                        <li><a href="cuahang">Cửa Hàng</a></li>
                         <li><a href="lienhe">Liên Hệ</a></li>
+                    </ul>
                     <!-- /NAV -->
                 </div>
                 <!-- /responsive-nav -->
@@ -39,7 +40,7 @@
                    
                 </ul>
             </div>
-
+            
             <div class="col-md-9 ">
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background-color:#151515; color:white;">
@@ -64,7 +65,7 @@
                                 </div>
                                
                             </div>
-                            <div class="break"></div>
+                           
                         </div>
                         <hr>
                     @endforeach

@@ -9,7 +9,7 @@
 						<li><a target="_blank" href="https://goo.gl/maps/JLcSzPrHN7a2P8Kg8"><i class="fa fa-map-marker"></i> 180 Cao Lỗ, Quận 8</a></li>
 					</ul>
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> VND </a></li>
+						<li><a><i class="fa fa-dollar"></i> VND </a></li>
 						@if(!Auth::user())
 	                        <li>
 	                        	<i class="fa fa-registered"></i>
@@ -60,6 +60,11 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
+								@if(session('thongbao'))
+                            		<div class="alert alert-warning">
+                                		{{session('thongbao')}}
+                            		</div>
+                       			@endif
 								@if(count($errors)>0)
 		                            <div class="alert alert-danger">
 		                                @foreach($errors->all() as $err)

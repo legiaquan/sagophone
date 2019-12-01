@@ -17,15 +17,7 @@ function giaKhuyenMai($gia,$phantram)
 	$giaKM = $gia*(100-$phantram)/100;
 	return $giaKM;
 }
-function getGiaMin($id)
-{
-	$gia = DB::table('tbchitietsanpham')
-			->where('id_sanpham',$id)
-			->join('tbmau', 'tbchitietsanpham.id_mau', '=', 'tbmau.id')
-			->select('tbchitietsanpham.gia','tbchitietsanpham.id','tbmau.mau','tbmau.mamau','tbmau.id')
-			->get();
-	return $gia;
-}
+
 function avgStarSanPham($id_donhang)
 {
 	$avgStar = DB::table('tbchitietdonhang')
@@ -56,21 +48,21 @@ function getNameLevel($id_level)
 				->value('tenlevel');
 	return $name;
 }
-function getGiaChiTiet($id)
+
+function getGiaMin($id)
 {
 	$gia = DB::table('tbchitietsanpham')
 			->where('id_sanpham',$id)
-			->value('gia');
+			->join('tbmau', 'tbchitietsanpham.id_mau', '=', 'tbmau.id')
+			->select('tbchitietsanpham.gia','tbchitietsanpham.id','tbmau.mau','tbmau.mamau','tbmau.id')
+			->get();
 	return $gia;
 }
-function getSanPhamHotDeals($id_banner)
+
+function getPhanTram($id)
 {
-	$sanphamhotdeals = DB::table('tbchitietsanpham')
-	->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
-	->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
-	->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-	->where('tbdanhsachbanner.id_banner','4')
-	->select('tbsanpham.tensp','tbchitietsanpham.gia','tbchitietsanpham.star','tbchitietsanpham.hinhchitiet')
-	->get();
-	return $sanphamhotdeals;
+	$phantram = DB::table('tbdanhsachbanner')
+				->where('id_chitietsanpham',$id)
+				->value('phantramkhuyenmai');
+	return $phantram;
 }

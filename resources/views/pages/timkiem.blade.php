@@ -13,7 +13,7 @@
                         <li><a href="trangchu">Trang Chủ</a></li>
                         <li><a href="hotdeals">Hot Deals</a></li>
                         <li><a href="loaitin">Tin Tức</a></li>
-                        <li><a href="danhmuc">Cửa Hàng</a></li>                                 
+                        <li><a href="cuahang">Cửa Hàng</a></li>                                 
                         <li><a href="#">Liên Hệ</a></li>
                     </ul>
                     <!-- /NAV -->
@@ -89,25 +89,37 @@
                     
                     <!-- STORE -->
                     <div id="store" class="col-md-9">
-                        <h3> ({{count($sanpham)}}) Kết quả tìm kiếm : {{$keyword}} </h3>
+                        <h3> ({{count($tongsanpham)}}) Kết quả tìm kiếm : {{$keyword}} </h3>
                         <div class="row">
                             <!-- product -->
                                 @foreach($sanpham as $sp)
                                 <div class="col-md-4 col-xs-6">
                                     <div class="product">
                                         <div class="product-img">
-                                            <a href="chitiet/{{$sp->id_sanpham}}">
+                                            <a href="chitiet/{{$sp->id}}">
                                                 <img width="260px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
                                             </a>
-                                            <div class="product-label">                                     
+                                           <div class="product-label">  
+                                                @if($sp->id_banner == 3)                                    
                                                     <span class="new">NEW</span>
+                                                @elseif($sp->id_banner == 2)
                                                     <span class="sale">-30%</span>
-                                            </div>                                  
+                                                @elseif($sp->id_banner == 4)
+                                                    <span class="sale">HOT</span>
+                                                @endif
+                                            </div>                                          
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">{{$sp->tenhang}}</p>
                                             <h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}">{{$sp->tensp}}</a></h3>
-                                            <h4 class="product-price">{{$sp->gia}}<del class="product-old-price">{{$sp->gia*0.3}}</del></h4>
+                                            <h4 class="product-price">
+                                                @if($sp->phantramkhuyenmai != null)
+                                                    {{$sp->gia * (100 - $sp->phantramkhuyenmai) / 100}}
+                                                    <del class="product-old-price">{{$sp->gia}}</del>
+                                                @else
+                                                    {{$sp->gia}}
+                                                @endif
+                                            </h4>
                                             <div class="product-rating">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -118,7 +130,7 @@
                                             <div class="product-btns">
                                                 {{-- <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
                                                 <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button> --}}
-                                                <button class="quick-view"><a href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
+                                                <button class="quick-view"><a href="chitiet/{{$sp->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
                                             </div>
                                         </div>
                                         <div class="add-to-cart">

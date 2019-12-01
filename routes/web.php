@@ -267,7 +267,7 @@ Route::get('loaitin/{id}','PageController@loaitin1');
 
 Route::get('tintuc/{id}','PageController@tintuc');
 
-Route::get('danhmuc','PageController@danhmuc');
+Route::get('cuahang','PageController@cuahang');
 
 Route::get('chitiet/{id}', 'PageController@chitietsp');
 
