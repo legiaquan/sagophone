@@ -275,7 +275,7 @@ Route::get('hotdeals','PageController@hotdeals');
 
 Route::get('timkiem','PageController@timkiem')->name('find.product');
 
-Route::get('dangnhap','PageController@getDangNhap');
+Route::get('dangnhap','PageController@getDangNhap')->name('pages.dangnhap');
 
 Route::post('dangnhap','PageController@postDangNhap');
 
@@ -296,7 +296,13 @@ Route::prefix('shopping')->group(function(){
 	Route::get('/cart','ShoppingCartController@getListShoppingCart')->name('get.list.shopping.cart');//trang giỏ hàng
 	Route::get('/delete/{rowId}','ShoppingCartController@deleteCart')->name('delete.cart.item');//xoa item
 	Route::post('/update/{rowId}','ShoppingCartController@updateCart');//update item
+	Route::get('pay','ShoppingCartController@payCart')->name('pay.cart');//trang thanh toán
+	Route::post('pay','ShoppingCartController@saveCart');//lưu thông tin thanh toán
+	Route::get('paysuccess','ShoppingCartController@successCart');
 });
+Route::get('lichsumuahang','ShoppingCartController@lichsumuahang');
+
+Route::get('chitietdonhang/{id}','ShoppingCartController@chitietdonhang');
 
 Route::get('lienhe','PageController@lienhe');
 
