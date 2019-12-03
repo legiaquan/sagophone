@@ -1,4 +1,4 @@
-<title>Tìm Kiếm</title>
+<title>Tìm kiếm</title>
 @extends('layouts.index')
 
 @section('content')
@@ -12,10 +12,9 @@
                     <ul class="main-nav nav navbar-nav">
                         <li><a href="trangchu">Trang Chủ</a></li>
                         <li><a href="hotdeals">Hot Deals</a></li>
-                        <li class="active"><a href="loaitin">Tin Tức</a></li>
-                        <li><a href="danhmuc">Danh Mục</a></li>
-                        <li><a href="danhmuc/1/Điện thoại}">Điện Thoại</a></li>                                 
-                        <li><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
+                        <li><a href="loaitin">Tin Tức</a></li>
+                        <li><a href="cuahang">Cửa Hàng</a></li>                                 
+                        <li><a href="#">Liên Hệ</a></li>
                     </ul>
                     <!-- /NAV -->
                 </div>
@@ -23,73 +22,151 @@
             </div>
             <!-- /container -->
         </nav>
+
 <!-- /NAVIGATION -->
-<!-- Page Content -->
-<br>
-    <div class="container">
-        <div class="row">
-			
-        	<?php
-        		function doimau($str, $keyword)
-        		{
-        			return str_replace($keyword, "<span style='color: red;'>$keyword</span>", $str);
-        		}	
-        	?>
-            <div class="col-md-3 ">
-                <ul class="list-group" id="menu">
-                    <li href="#" class="list-group-item menu1 active" style="background-color:#FA8258;">
-                        <h4><a href="loaitin" style="color: white; font-weight: bolder;">LOẠI TIN</a></h4>
-                    </li>
-                    @foreach($loaitin as $lt)
-                        <li href="#" class="list-group-item menu1"  style="background-color:#F5DA81;">
-                            <a href="loaitin/{{$lt->id}}"><h5 class="product-name">{{$lt->tenloaitin}}</h5></a>
-                        </li>
-                    @endforeach
-                   
-                </ul>
-            </div>
-
-            <div class="col-md-9 ">
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="background-color:#FF8000; color:white;">
-                       <h4><a href="loaitin" style="color: white; font-weight: bolder;">Tìm kiếm : {{$keyword}}</a></h4>
-                    </div>
-                    @foreach($tintuc as $tt)
-                        <div class="row-item row">
-                            <div class="col-md-3">
-                            
-                                <a href="tintuc/{{$tt->id}}">
-                                    <br>
-                                    <img width="200px" height="200px" class="img-responsive" src="upload/imgTinTuc/{{$tt->img}}" alt="">
-                                </a>
-                            </div>
-
-                            <div class="col-md-9">
-                                <br>
-                                <h3><a href="tintuc/{{$tt->id}}"> {!!doimau($tt->tieude, $keyword)!!} </a></h3>
-                                <p>{!!doimau($tt->mota, $keyword)!!}</p>
-                                <div>
-                                     <a class="btn btn-primary" href="tintuc/{{$tt->id}}" style="margin-top: 75px">Chi tiết</a>
+        
+<!-- SECTION -->
+<div class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <!-- ASIDE -->
+                    <div id="aside" class="col-md-3">
+                        <!-- aside Widget -->
+                        {{-- <div class="aside">                        
+                                <h3 class="aside-title"><a href="danhmuc" style="font-weight: bolder;">Danh Mục</a></h3>                        
+                            @foreach($nhomsanpham as $nsp)
+                            <div class="checkbox-filter">                           
+                                <div class="">
+                                    <label>
+                                        <a class="{{Request::get('id_nhom') == $nsp->id? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['id_nhom' => $nsp->id]) }}">
+                                            {{$nsp->tennhom}}
+                                        </a>
+                                    </label>
+                                    
+                                    @if($nsp->id == 1)
+                                        <small>({{count($sanphamdt)}})</small>
+                                    @elseif($nsp->id == 2)
+                                        <small>({{count($sanphampk)}})</small>
+                                    @else
+                                        <small>(0)</small>
+                                    @endif
                                 </div>
-                               
                             </div>
-                            <div class="break"></div>
+                            @endforeach
                         </div>
-                        <hr>
-                    @endforeach
-                    <!-- Pagination -->
-                    <div class="row text-center">
-                        <div class="col-lg-12">
-                            {{$tintuc->links()}}
+                        <!-- /aside Widget --> --}}
+
+                       
+                        <!-- aside Widget -->
+                        <div class="aside">
+                            <h3 class="aside-title"><a style="font-weight: bolder;">Lọc Theo Giá</a></h3>
+                            
+                                <ul>
+                                    <li><a class="{{Request::get('gia') == 1 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 1]) }}">Dưới 1 triệu</a></li><br>
+                                    <li><a class="{{Request::get('gia') == 2 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 2]) }}">1.000.000 - 3.000.000 triệu</a></li><br>
+                                    <li><a class="{{Request::get('gia') == 3 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 3]) }}">3.000.000 - 5.000.000 triệu</a></li><br>
+                                    <li><a class="{{Request::get('gia') == 4 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 4]) }}">5.000.000 - 7.000.000 triệu</a></li><br>
+                                    <li><a class="{{Request::get('gia') == 5 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 5]) }}">7.000.000 - 10.000.000 triệu</a></li><br>
+                                    <li><a class="{{Request::get('gia') == 6 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 6]) }}">Trên 10.000.000 triệu</a></li><br>
+                                </ul>
+                        
+                            
+                            
                         </div>
+                        
+                        <!-- /aside Widget -->
+                        <div class="col-md-9">
+                            <br/>
+                            <div class="row filter_data">
+
+                            </div>
+                        </div>
+
                     </div>
-                    <!-- /.row -->
-
+                    <!-- /ASIDE -->
+                    
+                    <!-- STORE -->
+                    <div id="store" class="col-md-9">
+                        <h3> ({{count($tongsanpham)}}) Kết quả tìm kiếm : {{$keyword}} </h3>
+                        <div class="row">
+                            <!-- product -->
+                                @foreach($sanpham as $sp)
+                                <div class="col-md-4 col-xs-6">
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <a href="chitiet/{{$sp->id}}">
+                                                <img width="260px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
+                                            </a>
+                                           <div class="product-label">  
+                                                @if($sp->id_banner == 3)                                    
+                                                    <span class="new">NEW</span>
+                                                @elseif($sp->id_banner == 2)
+                                                    <span class="sale">-30%</span>
+                                                @elseif($sp->id_banner == 4)
+                                                    <span class="sale">HOT</span>
+                                                @endif
+                                            </div>                                          
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">{{$sp->tenhang}}</p>
+                                            <h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}">{{$sp->tensp}}</a></h3>
+                                            <h4 class="product-price">
+                                                @if($sp->phantramkhuyenmai != null)
+                                                    {{$sp->gia * (100 - $sp->phantramkhuyenmai) / 100}}
+                                                    <del class="product-old-price">{{$sp->gia}}</del>
+                                                @else
+                                                    {{$sp->gia}}
+                                                @endif
+                                            </h4>
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="product-btns">
+                                                {{-- <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button> --}}
+                                                <button class="quick-view"><a href="chitiet/{{$sp->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
+                                            </div>
+                                        </div>
+                                        <div class="add-to-cart">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- /product -->
+                                @endforeach
+        
+                        </div>
+                        <!-- /store products -->
+                        <br>
+                        <!-- store bottom filter -->
+                        <div class="store-filter clearfix" style="text-align: center;">
+                           {{ $sanpham->appends(Request::except('timkiem'))->links() }}
+                        </div>
+                        <!-- /store bottom filter -->
+                    </div>
+                    <!-- /STORE -->
                 </div>
-            </div> 
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+</div>
+<!-- /SECTION -->
 
-        </div>
+@endsection
 
-    </div>
-<!-- end Page Content -->
+@section('script')
+    <script>
+        $(function(){
+            $('.input-select').change(function(){
+                $("#form_order").submit();
+                $('.input-select').val();
+            });
+        });
+    </script>
 @endsection

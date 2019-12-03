@@ -13,7 +13,7 @@
 						<li><a href="trangchu">Trang Chủ</a></li>
 						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
-						<li class="active"><a href="danhmuc">Cửa Hàng</a></li>									
+						<li class="active"><a href="cuahang">Cửa Hàng</a></li>									
 						<li><a href="#">Liên Hệ</a></li>
 					</ul>
 					<!-- /NAV -->
@@ -35,7 +35,7 @@
 					<div id="aside" class="col-md-3">
 						<!-- aside Widget -->
 						<div class="aside">						
-								<h3 class="aside-title"><a href="danhmuc" style="font-weight: bolder;">Danh Mục</a></h3>						
+								<h3 class="aside-title"><a href="cuahang" style="font-weight: bolder;">Danh Mục</a></h3>						
 							@foreach($nhomsanpham as $nsp)
 							<div class="checkbox-filter">							
 								<div class="">
@@ -88,20 +88,20 @@
 						</div>
 						<div class="aside">
 							<h3 class="aside-title">Sản Phẩm Bán Chạy</h3>
-							<div class="products-widget-slick" data-nav="#slick-nav-5">
+							<div class="products-widget-slick" data-nav="#slick-nav-6">
 							<div>
 								<!-- product widget -->
 								@foreach($sanphambanchay1 as $spbc1)
 								<div class="product-widget">
 									<div class="product-img">
-										<a href="chitiet/{{$spbc1->id_sanpham}}">
+										<a href="chitiet/{{$spbc1->id}}">
 											<img src="upload/imgSanPham/{{$spbc1->hinhsp}}" alt="" width="70px" height="70px">
 										</a>
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$spbc1->tenhang}}</p>
-										<h3 class="product-name"><a href="chitiet/{{$spbc1->id_sanpham}}/{{$spbc1->id}}">{{$spbc1->tensp}}</a></h3>
-										<h4 class="product-price">{{$spbc1->gia}}<del class="product-old-price">{{$spbc1->gia*0.3}}</del></h4>
+										<h3 class="product-name"><a href="chitiet/{{$spbc1->id}}">{{$spbc1->tensp}}</a></h3>
+										<h4 class="product-price">{{$spbc1->gia}}</h4>
 									</div>
 								</div>
 								@endforeach							
@@ -111,14 +111,14 @@
 								@foreach($sanphambanchay2 as $spbc2)
 								<div class="product-widget">
 									<div class="product-img">
-										<a href="chitiet/{{$spbc2->id_sanpham}}">
+										<a href="chitiet/{{$spbc2->id}}">
 											<img src="upload/imgSanPham/{{$spbc2->hinhsp}}" alt="" width="70px" height="70px">
 										</a>
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$spbc2->tenhang}}</p>
-										<h3 class="product-name"><a href="chitiet/{{$spbc2->id_sanpham}}/{{$spbc2->id}}">{{$spbc2->tensp}}</a></h3>
-										<h4 class="product-price">{{$spbc2->gia}}<del class="product-old-price">{{$spbc2->gia*0.3}}</h4>
+										<h3 class="product-name"><a href="chitiet/{{$spbc2->id}}">{{$spbc2->tensp}}</a></h3>
+										<h4 class="product-price">{{$spbc2->gia}}</h4>
 									</div>
 								</div>
 								@endforeach							
@@ -148,8 +148,8 @@
 											<select name="orderby" class="input-select">
 												<option class="{{Request::get('orderby') == "" ? 'selected' : ''}}" {{Request::get('orderby') == "" ? "selected = 'selected'" : ""}}  value="">click chọn...</option>
 												<option class="{{Request::get('orderby') == "new" ? 'selected' : ''}}" {{Request::get('orderby') == "new" ? "selected = 'selected'" : ""}} {{ request()->fullUrlWithQuery(['orderby' => "new"]) }} value="new">Sản phẩm mới</option>
-												<option class="{{Request::get('orderby') == "price_min" ? 'active' : ''}}" {{Request::get('orderby') == "price_min" ? "selected = 'selected'" : ""}} value="price_min">Giá tăng dần</option>
-												<option class="{{Request::get('orderby') == "price_max" ? 'active' : ''}}" {{Request::get('orderby') == "price_max" ? "selected = 'selected'" : ""}} value="price_max">Giá giảm dần</option>
+												<option class="{{Request::get('orderby') == "price_min" ? 'selected' : ''}}" {{Request::get('orderby') == "price_min" ? "selected = 'selected'" : ""}} value="price_min">Giá tăng dần</option>
+												<option class="{{Request::get('orderby') == "price_max" ? 'selected' : ''}}" {{Request::get('orderby') == "price_max" ? "selected = 'selected'" : ""}} value="price_max">Giá giảm dần</option>
 											</select>	
 									</label>
 								
@@ -165,18 +165,30 @@
 								<div class="col-md-4 col-xs-6">
 									<div class="product">
 										<div class="product-img">
-											<a href="chitiet/{{$sp->id_sanpham}}">
+											<a href="chitiet/{{$sp->id}}">
 												<img width="260px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
 											</a>
-											<div class="product-label">										
+											<div class="product-label">	
+												@if($sp->id_banner == 3)									
 													<span class="new">NEW</span>
+												@elseif($sp->id_banner == 2)
 													<span class="sale">-30%</span>
+												@elseif($sp->id_banner == 4)
+													<span class="sale">HOT</span>
+												@endif
 											</div>									
 										</div>
 										<div class="product-body">
 											<p class="product-category">{{$sp->tenhang}}</p>
-											<h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}">{{$sp->tensp}}</a></h3>
-											<h4 class="product-price">{{$sp->gia}}<del class="product-old-price">{{$sp->gia*0.3}}</del></h4>
+											<h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id}}">{{$sp->tensp}}</a></h3>
+											<h4 class="product-price">
+												@if($sp->phantramkhuyenmai != null)
+													{{$sp->gia * (100 - $sp->phantramkhuyenmai) / 100}}
+													<del class="product-old-price">{{$sp->gia}}</del>
+												@else
+													{{$sp->gia}}
+												@endif
+											</h4>
 											<div class="product-rating">
 												<i class="fa fa-star"></i>
 												<i class="fa fa-star"></i>
@@ -187,11 +199,11 @@
 											<div class="product-btns">
 												{{-- <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 												<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button> --}}
-												<button class="quick-view"><a href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
+												<button class="quick-view" onclick="window.location.href = 'chitiet/{{$sp->id}}';"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></button>
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$sp->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 										</div>
 									</div>
 								</div>

@@ -9,9 +9,9 @@
     		<div class="col-md-4"></div>
             <div class="col-md-4">
                 <div class="panel panel-default">
-				  	<div class="panel-heading">Đăng nhập</div>
+				  	<div class="panel-heading"><h3>Đăng nhập</h3></div>
 				  	<div class="panel-body">
-				  	@if(count($errors)>0)
+				  		@if(count($errors)>0)
                             <div class="alert alert-danger">
                                 @foreach($errors->all() as $err)
                                     {{$err}}<br>
@@ -23,22 +23,26 @@
                             <div class="alert alert-danger">
                                 {{session('thongbao')}}
                             </div>
-                        @endif	
+                        @endif
+
 				    	<form action="dangnhap" method="POST">
 				    		<input type="hidden" name="_token" value="{{csrf_token()}}">
 							<div>
-				    			<label>Email</label>
-							  	<input type="email" class="form-control" placeholder="Nhập địa chỉ email" name="email" 
+				    			&nbsp;<label>Tên đăng nhập hoặc Email</label>
+							  	<input type="text" class="form-control" placeholder="Nhập tên đăng nhập hoặc Email" name="email" 
 							  	>
 							</div>
 							<br>	
 							<div>
-				    			<label>Mật khẩu</label>
+				    			&nbsp;<label>Mật khẩu</label>
 							  	<input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu">
 							</div>
 							<br>
-							<button type="submit" class="btn btn-default">Đăng nhập
-							</button>
+							<div>
+								<button type="submit" class="btn btn-default">Đăng nhập</button>
+								&nbsp;
+								Chưa có tài khoản?&nbsp;<a href="dangky">Đăng ký</a>
+							</div>
 				    	</form>
 				  	</div>
 				</div>

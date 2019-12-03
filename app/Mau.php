@@ -11,6 +11,6 @@ class Mau extends Model
 
     public function chitietsanpham()
     {
-    	return $this->hasMany('App\SoLuongMauSP','id_mau','id');
+    	return $this->hasMany('App\ChiTietSanPham','id_mau','id');
     }
 }
