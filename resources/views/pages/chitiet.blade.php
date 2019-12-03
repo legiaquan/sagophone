@@ -11,9 +11,8 @@
 						<li><a href="trangchu">Trang Chủ</a></li>
 						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
-						<li><a href="danhmuc">Danh Mục</a></li>
-						<li><a href="danhmuc/1/Điện thoại}">Điện Thoại</a></li>									
-						<li><a href="danhmuc/2/Phụ kiện">Phụ Kiện</a></li>
+						<li class="active"><a href="cuahang">Cửa Hàng</a></li>									
+						<li><a href="lienhe">Liên Hệ</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -23,7 +22,27 @@
 		</nav>
 <!-- /NAVIGATION -->
 
-
+<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a>Trang Chủ</a></li>
+							<li class="active"><a>Cửa Hàng</a></li>
+							<li class="active"><a>{{$chitiet->sanpham->nhomsanpham->tennhom}}</a></li>
+							<li class="active"><a>{{$chitiet->sanpham->hangdt->tenhang}}</a></li>
+							<li class="active"><a>{{$chitiet->sanpham->tensp}}</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
 <!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -31,45 +50,29 @@
 				<!-- row -->
 				<div class="row">
 					<!-- Product main img -->
+
 					<div class="col-md-5 col-md-push-2">
+						
 						<div id="product-main-img">
+							@foreach($hinhchitiet as $hinh)
 							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
+								<a href="chitiet/{{$hinh->id}}"><img src="upload/imgSanPham/{{$hinh->hinhchitiet}}" alt=""></a>
 							</div>
-							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
-							</div>
-							
+							@endforeach
 						</div>
+						
 					</div>
 					<!-- /Product main img -->
 
 					<!-- Product thumb imgs -->
 					<div class="col-md-2  col-md-pull-5">
+						
 						<div id="product-imgs">
+							@foreach($hinhchitiet as $hinh1)
 							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
+								<a href="chitiet/{{$hinh1->id}}"><img src="upload/imgSanPham/{{$hinh1->hinhchitiet}}" alt=""></a>
 							</div>
-							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
-							</div>
-							
+							@endforeach
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->
@@ -109,13 +112,17 @@
 									@endif --}}
 									
 									@if($getphantram != null)
-										{{$chitiet->gia * (100 - $getphantram) / 100}}
-										<del class="product-old-price">{{$chitiet->gia}}</del>
+										<del class="product-old-price">{{number_format($chitiet->gia,0,',','.')}} VND</del>
+										{{number_format($chitiet->gia * (100 - $getphantram) / 100,0,',','.')}} VND
 									@else
-										{{$chitiet->gia}}
+										{{number_format($chitiet->gia,0,',','.')}} VND
 									@endif
 								</h3>
-								<span class="product-available">Còn Hàng</span>
+								@if($chitiet->soluong > 0)
+									<span class="product-available">Còn Hàng</span>
+								@else
+									<span class="product-available">Hết Hàng</span>
+								@endif
 							</div>
 							
 							<div>	
@@ -220,7 +227,11 @@
 							</div>
 							<br>
 							<div class="add-to-cart">
-								<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$chitiet->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+								@if($chitiet->soluong > 0)
+									<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$chitiet->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+								@else
+									<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$chitiet->id)}}';" disabled=""><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+								@endif
 							</div>
 						</div>
 					</div>
@@ -469,7 +480,13 @@
 							<div class="product-body">
 								<p class="product-category">{{$splq->tenhang}}</p>
 								<h3 class="product-name"><a href="chitiet/{{$splq->id_sanpham}}/{{$splq->id}}">{{$splq->tensp}}</a></h3>
-								<h4 class="product-price">{{$splq->gia}}</del></h4>
+								<h4 class="product-price">
+											@if($splq->phantramkhuyenmai != null)
+												<del class="product-old-price">{{number_format($splq->gia,0,',','.')}}</del>{{number_format($splq->gia * (100 - $splq->phantramkhuyenmai) / 100,0,',','.')}}VND
+												@else
+													{{number_format($splq->gia,0,',','.')}}VND
+											@endif
+								</h4>
 								<div class="product-rating">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
@@ -478,7 +495,7 @@
 									<i class="fa fa-star"></i>
 								</div>
 								<div class="product-btns">								
-									<button class="quick-view"><a href="chitiet/{{$splq->id_sanpham}}/{{$splq->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
+									<button class="quick-view"><a href="chitiet/{{$splq->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
 								</div>
 							</div>
 							<div class="add-to-cart">

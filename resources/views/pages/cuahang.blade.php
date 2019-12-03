@@ -14,7 +14,7 @@
 						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
 						<li class="active"><a href="cuahang">Cửa Hàng</a></li>									
-						<li><a href="#">Liên Hệ</a></li>
+						<li><a href="lienhe">Liên Hệ</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -23,7 +23,24 @@
 			<!-- /container -->
 		</nav>
 <!-- /NAVIGATION -->
-
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a>Trang Chủ</a></li>
+							<li class="active"><a>Cửa Hàng</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
 
 <!-- SECTION -->
 <div class="section">
@@ -75,12 +92,12 @@
 							<h3 class="aside-title"><a style="font-weight: bolder;">Lọc Theo Giá</a></h3>
 							
 								<ul>
-									<li><a class="{{Request::get('gia') == 1 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 1]) }}">Dưới 1 triệu</a></li><br>
-									<li><a class="{{Request::get('gia') == 2 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 2]) }}">1.000.000 - 3.000.000 triệu</a></li><br>
-									<li><a class="{{Request::get('gia') == 3 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 3]) }}">3.000.000 - 5.000.000 triệu</a></li><br>
-									<li><a class="{{Request::get('gia') == 4 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 4]) }}">5.000.000 - 7.000.000 triệu</a></li><br>
-									<li><a class="{{Request::get('gia') == 5 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 5]) }}">7.000.000 - 10.000.000 triệu</a></li><br>
-									<li><a class="{{Request::get('gia') == 6 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 6]) }}">Trên 10.000.000 triệu</a></li><br>
+									<li><a class="{{Request::get('gia') == 1 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 1]) }}">Dưới 1.000.000 VND</a></li><br>
+									<li><a class="{{Request::get('gia') == 2 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 2]) }}">1.000.000 - 3.000.000 VND</a></li><br>
+									<li><a class="{{Request::get('gia') == 3 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 3]) }}">3.000.000 - 5.000.000 VND</a></li><br>
+									<li><a class="{{Request::get('gia') == 4 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 4]) }}">5.000.000 - 7.000.000 VND</a></li><br>
+									<li><a class="{{Request::get('gia') == 5 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 5]) }}">7.000.000 - 10.000.000 VND</a></li><br>
+									<li><a class="{{Request::get('gia') == 6 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 6]) }}">Trên 10.000.000 VND</a></li><br>
 								</ul>
 						
 							
@@ -101,7 +118,13 @@
 									<div class="product-body">
 										<p class="product-category">{{$spbc1->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$spbc1->id}}">{{$spbc1->tensp}}</a></h3>
-										<h4 class="product-price">{{$spbc1->gia}}</h4>
+										<h4 class="product-price">
+											@if($spbc1->phantramkhuyenmai != null)
+												<del class="product-old-price">{{number_format($spbc1->gia,0,',','.')}}</del>{{number_format($spbc1->gia * (100 - $spbc1->phantramkhuyenmai) / 100,0,',','.')}}VND
+												@else
+													{{number_format($spbc1->gia,0,',','.')}}VND
+											@endif
+										</h4>
 									</div>
 								</div>
 								@endforeach							
@@ -118,7 +141,13 @@
 									<div class="product-body">
 										<p class="product-category">{{$spbc2->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$spbc2->id}}">{{$spbc2->tensp}}</a></h3>
-										<h4 class="product-price">{{$spbc2->gia}}</h4>
+										<h4 class="product-price">
+											@if($spbc2->phantramkhuyenmai != null)
+												<del class="product-old-price">{{number_format($spbc2->gia,0,',','.')}}</del>{{number_format($spbc2->gia * (100 - $spbc2->phantramkhuyenmai) / 100,0,',','.')}}VND
+												@else
+													{{number_format($spbc2->gia,0,',','.')}}VND
+											@endif
+										</h4>
 									</div>
 								</div>
 								@endforeach							
@@ -145,7 +174,7 @@
 								<form class="tree-most" id="form_order" method="GET">
 								<div class="store-sort">
 										Sắp xếp theo :  			
-											<select name="orderby" class="input-select">
+											<select name="orderby" class="input-select1">
 												<option class="{{Request::get('orderby') == "" ? 'selected' : ''}}" {{Request::get('orderby') == "" ? "selected = 'selected'" : ""}}  value="">click chọn...</option>
 												<option class="{{Request::get('orderby') == "new" ? 'selected' : ''}}" {{Request::get('orderby') == "new" ? "selected = 'selected'" : ""}} {{ request()->fullUrlWithQuery(['orderby' => "new"]) }} value="new">Sản phẩm mới</option>
 												<option class="{{Request::get('orderby') == "price_min" ? 'selected' : ''}}" {{Request::get('orderby') == "price_min" ? "selected = 'selected'" : ""}} value="price_min">Giá tăng dần</option>
@@ -183,10 +212,9 @@
 											<h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id}}">{{$sp->tensp}}</a></h3>
 											<h4 class="product-price">
 												@if($sp->phantramkhuyenmai != null)
-													{{$sp->gia * (100 - $sp->phantramkhuyenmai) / 100}}
-													<del class="product-old-price">{{$sp->gia}}</del>
-												@else
-													{{$sp->gia}}
+													<del class="product-old-price">{{number_format($sp->gia,0,',','.')}}</del>{{number_format($sp->gia * (100 - $sp->phantramkhuyenmai) / 100,0,',','.')}}VND
+													@else
+														{{number_format($sp->gia,0,',','.')}}VND
 												@endif
 											</h4>
 											<div class="product-rating">
@@ -232,9 +260,9 @@
 @section('script')
     <script>
  		$(function(){
- 			$('.input-select').change(function(){
+ 			$('.input-select1').change(function(){
  				$("#form_order").submit();
- 				$('.input-select').val();
+ 				$('.input-select1').val();
  			});
  		});
     </script>

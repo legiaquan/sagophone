@@ -32,6 +32,8 @@ use App\BinhLuan;
 
 use App\ThanhVien;
 
+use App\NhanVien;
+
 use DB;
 
 use Session;
@@ -146,9 +148,11 @@ class PageController extends Controller
 
     public function trangchu()
     {
+        $hinh = Banner::where('id',2)->value('hinhbanner');
         $hangdt3 = HangDT::take(3)->get();
     	return view('pages/trangchu',[
-            'hangdt3' => $hangdt3
+            'hangdt3' => $hangdt3,
+            'hinh' => $hinh
         ]);
     	
     }
@@ -195,9 +199,13 @@ class PageController extends Controller
     public function tintuc($id)
     {
         $tintuc = TinTuc::find($id);
-        $tinlienquan = TinTuc::where('id_loaitin',$tintuc->id_loaitin)->take(3)->get();
-        $tinkhuyenmai = TinTuc::where('id_loaitin', '2')->take(3)->get();
-    	return view('pages/tintuc',['tintuc' => $tintuc, 'tinlienquan' => $tinlienquan, 'tinkhuyenmai' => $tinkhuyenmai]);
+        $tinlienquan = TinTuc::where('id_loaitin',$tintuc->id_loaitin)->where('id','<>',$id)->take(3)->get();
+        $tinkhuyenmai = TinTuc::where('id_loaitin', '2')->where('id','<>',$id)->take(3)->get();
+        $tenadmin = NhanVien::where('id',$tintuc->id_admins)->value('name');
+    	return view('pages/tintuc',['tintuc' => $tintuc, 'tinlienquan' => $tinlienquan, 
+            'tinkhuyenmai' => $tinkhuyenmai,
+            'tenadmin' => $tenadmin
+        ]);
     }
 
     public function cuahang(Request $request)
@@ -290,7 +298,7 @@ class PageController extends Controller
                 switch($orderby)
                 {
                     case 'new' :
-                        $sanpham->orderBy('tbdanhsachbanner.id_banner','ASC');
+                        $sanpham->orderBy('id','DESC');
                         break;
                     case 'price_max' :
                         $sanpham->orderBy('gia','DESC');
@@ -299,7 +307,7 @@ class PageController extends Controller
                         $sanpham->orderBy('gia','ASC');
                         break;
                     default:
-                        
+                        $sanpham->inRandomOrder();
                 }
                
         }
@@ -323,12 +331,16 @@ class PageController extends Controller
     public function chitietsp($id, Request $request)
     {
     	$chitiet = ChiTietSanPham::find($id);
-    	$sanphamlienquan = DB::table('tbdanhsachbanner')
-        ->join('tbchitietsanpham','tbdanhsachbanner.id_chitietsanpham','tbchitietsanpham.id')
-        ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
-        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-        ->where('id_hangdt',$chitiet->sanpham->id_hangdt)->take(4)->get();
+    	$sanphamlienquan =   DB::table('tbchitietsanpham')
+                            ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
+                            ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+                            ->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')                          
+                            ->where('tbchitietsanpham.id','<>',$id)
+                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai','tbdanhsachbanner.id_banner')
+                            ->where('id_nhom',$chitiet->sanpham->id_nhom)
+                            ->inRandomOrder()->take(4)->get();
     	//var_dump(getGiaMin($id));
+        $hinhchitiet = ChiTietSanPham::where('id_sanpham',$chitiet->id_sanpham)->get();
         if($request->id_mau)
         {
             if($request->id_mau == 1)
@@ -363,7 +375,7 @@ class PageController extends Controller
         else
             $chitiet = $chitiet;
         
-    	return view('pages/chitiet',['chitiet' => $chitiet, 'sanphamlienquan' => $sanphamlienquan]);
+    	return view('pages/chitiet',['chitiet' => $chitiet, 'sanphamlienquan' => $sanphamlienquan, 'hinhchitiet' => $hinhchitiet]);
     }
 
     public function hotdeals(Request $request)
@@ -447,7 +459,8 @@ class PageController extends Controller
                
         }
         $sanphamhotdealstt = $sanphamhotdealstt->paginate(6);
-        return view('pages/hotdeals',['sanphamhotdealstt' => $sanphamhotdealstt]);
+        $hinh = Banner::where('id',2)->value('hinhbanner');
+        return view('pages/hotdeals',['sanphamhotdealstt' => $sanphamhotdealstt, 'hinh' => $hinh]);
     }
 
     public function timkiem(Request $request)
@@ -637,17 +650,6 @@ class PageController extends Controller
 
     public function lienhe()
     {
-       Mapper::map(
-            53.381128999999990000, 
-            -1.470085000000040000,
-            [
-                'zoom' => 16,
-                'draggable' => true,
-                'marker' => false,
-                'eventAfterload' => 'circle:istener(map[0].shapes[0].circle[0]);'
-            ]
-        );
-
         return view('pages.lienhe');
     }
 

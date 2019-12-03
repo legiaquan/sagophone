@@ -23,6 +23,26 @@
 			<!-- /container -->
 		</nav>
 <!-- /NAVIGATION -->
+
+<!-- BREADCRUMB -->
+        <div id="breadcrumb" class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="breadcrumb-tree">
+                            <li><a>Trang Chủ</a></li>
+                            <li class="active"><a>Tin Tức</a></li>
+                            <li class="active"><a>{{ mb_substr($tintuc->tieude,0,50,'UTF-8').'...' }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /BREADCRUMB -->
 <!-- Page Content -->
 <br>
     <div class="container">
@@ -36,17 +56,14 @@
                 <!-- Title -->
                 <h1>{{$tintuc->tieude}}</h1>
 
-                <!-- Author -->
-                <p class="lead">
-                    Đăng bởi <a href="#">{{$tintuc->id_admins}}</a>
-                </p>
+               
+                
+
 
                 <!-- Preview Image -->
-                <img class="img-responsive" src="upload/imgSanPham/{{$tintuc->img}}" alt="" width="200px" height="200px">
+                <img class="img-responsive" src="upload/imgTinTuc/{{$tintuc->img}}" alt="" width="1000px" height="">
 
-                <!-- Date/Time -->
-                <p  style="text-align: right;" ><span class="glyphicon glyphicon-pencil"></span> Đăng vào {{$tintuc->created_at}}</p>
-                <hr>
+          
 
                 <!-- Post Content -->
                 <p class="lead">
@@ -81,7 +98,7 @@
                             <div class="col-md-7">
                                 <a href="tintuc/{{$tlq->id}}"><b>{{$tlq->tieude}}</b></a>
                                 <br>
-                                <p>{{$tlq->mota}}</p>
+                                <p>{{ mb_substr($tlq->mota,0,50,'UTF-8').'...' }}</p>
                             </div>
                             
                             <div class="break"></div>
@@ -105,7 +122,7 @@
                             <div class="col-md-7">
                                 <a href="tintuc/{{$tkm->id}}"><b>{{$tkm->tieude}}</b></a>
                                 <br>
-                                <p>{{$tkm->mota}}</p>
+                                <p>{{ mb_substr($tlq->mota,0,50,'UTF-8').'...' }}</p>
                             </div>
 
                             <div class="break"></div>
@@ -116,9 +133,20 @@
                 </div>
                 
             </div>
-
+        
         </div>
+        <p class="lead">
+            <span class="glyphicon glyphicon-pencil"></span> Đăng vào {{$tintuc->created_at}}</p>
+            Bỏi <a>{{$tenadmin}}</a>
+            <p style="text-align: right; padding-right: 300px">
+                <a href="loaitin" style="font-size: 20px" >Quay Lại</a>
+            </p>
+        </p>
+
+        <hr>
+
         <!-- /.row -->
     </div>
+
 <!-- end Page Content -->
 @endsection

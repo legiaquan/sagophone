@@ -102,6 +102,10 @@
                                 <div class="col-md-12"><strong>Địa Chỉ Email Đặt Hàng</strong></div>
                                 <div class="col-md-12"><input type="text" name="email_address" class="form-control" value="{{Auth::user()->email}}" disabled="" /></div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-md-12"><strong>Số Điện Thoại Đặt Hàng</strong></div>
+                                <div class="col-md-12"><input type="text" name="phone_address" class="form-control" value="{{Auth::user()->sdt}}" disabled="" /></div>
+                            </div>
                             
                         </div>
                     </div>
