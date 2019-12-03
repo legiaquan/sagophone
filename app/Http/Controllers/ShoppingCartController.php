@@ -15,18 +15,16 @@ class ShoppingCartController extends Controller
 {
     public function addProduct(Request $request,$id)
     {
-    	$product = SanPham::join('tbchitietsanpham','tbsanpham.id','tbchitietsanpham.id_sanpham')
-    	->where('id_sanpham',$id)->orderBy('gia')->get()->first();
-
+    	$product = ChiTietSanPham::where('id',$id)->first();
     	if(!$product)
     		return redirect('');
 
     	Cart::add([
     		'id' => $id, 
-    		'name' => $product->tensp,
+    		'name' => $product->sanpham->tensp,
     		'qty' => 1, 
     		'price' => $product->gia, 
-    		'options' => ['avatar' => $product->hinhsp]]);
+    		'options' => ['avatar' => $product->sanpham->hinhsp]]);
 
     	return redirect()->back();
 
