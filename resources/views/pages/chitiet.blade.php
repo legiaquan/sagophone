@@ -23,6 +23,27 @@
 		</nav>
 <!-- /NAVIGATION -->
 
+<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a href="trangchu">Trang Chủ</a></li>
+							<li><a href="danhmuc">Tất Cả Danh Mục</a></li>
+							<li><a href="danhmuc/{{$chitiet->id_nhom}}/{{$chitiet->nhomsanpham->tennhom}}">{{$chitiet->nhomsanpham->tennhom}}</a></li>
+							<li><a href="danhmuc/{{$chitiet->id_hangdt}}/{{$chitiet->nhomsanpham->tennhom}}/{{$chitiet->hangdt->tenhang}}">{{$chitiet->hangdt->tenhang}}</a></li>
+							<li class="active"><a href="chitiet/{{$chitiet->id}}/{{$chitiet->tensp}}">{{$chitiet->tensp}}</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+<!-- /BREADCRUMB -->
 
 <!-- SECTION -->
 		<div class="section">
@@ -34,18 +55,18 @@
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
 							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
+							</div>
+
+							<div class="product-preview">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 							
 						</div>
@@ -56,18 +77,18 @@
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
 							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="upload/imgSanPham/{{$chitiet->sanpham->hinhsp}}" alt="">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
+							</div>
+
+							<div class="product-preview">
+								<img src="upload/imgSanPham/{{$chitiet->hinhsp}}" alt="">
 							</div>
 							
 						</div>
@@ -77,14 +98,7 @@
 					<!-- Product details -->
 					<div class="col-md-5">
 						<div class="product-details">
-							<!-- Get giá -->
-							<?php 
-								$getgiasp = getGiaMin($chitiet->id_sanpham);
-								$getphantram = getPhanTram($chitiet->id);
-								$getdanhgia = getNhanXet($chitiet->id);
-								$dembinhluan = demBinhLuan($chitiet->id_sanpham);
-							?>
-							<h2 class="product-name">{{$chitiet->sanpham->tensp}}</h2>
+							<h2 class="product-name">{{$chitiet->tensp}}</h2>
 							<div>
 								<div class="product-rating">
 									<i class="fa fa-star"></i>
@@ -93,134 +107,93 @@
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star-o"></i>
 								</div>
-								<a class="review-link" href="#">{{count($getdanhgia)}} Đánh giá(s)</a>
+								<a class="review-link" href="#">10 Đánh giá(s)</a>
 							</div>
-							
+							<!-- Get giá -->
+							<?php $getgiasp = getGiaMin($chitiet->id)?>
 							<div>
 								<h3 class="product-price">
-									{{-- @if(Request::get('id_mau')!=null)					
-										{{$chitiet->gia}}
-										<del class="product-old-price">{{$chitiet->gia * $chitiet->phantramkhuyenmai}}</del>
-									@else
-										{{$chitiet->gia}}
-										@if($chitiet->phantramkhuyenmai != null)
-											<del class="product-old-price">{{$chitiet->id * $chitiet->phantramkhuyenmai}}</del>
-										@endif
-									@endif --}}
-									
-									@if($getphantram != null)
-										{{$chitiet->gia * (100 - $getphantram) / 100}}
-										<del class="product-old-price">{{$chitiet->gia}}</del>
-									@else
-										{{$chitiet->gia}}
-									@endif
+									@foreach($getgiasp as $sp)
+									{{$sp->gia}}
+									<del class="product-old-price">{{$chitiet->gia * 0.5}}</del>
+									@endforeach
 								</h3>
 								<span class="product-available">Còn Hàng</span>
 							</div>
 							
-							<div>	
-								 
-									<label>
-										Màu Sắc :
-									</label>
-									<form action="chitiet/{{$chitiet->id}}" method="GET" class="tree-most" id="form_color">
-										<select name="id_mau" class="input-select">
-											@foreach($getgiasp as $sp)
-												<option value="{{$sp->id}}"
-													@if($chitiet->id_mau == $sp->id)
-														{{'selected="selected"'}}
-													@endif
-													>{{$sp->mau}}</option>
-											@endforeach
-										</select>
-									</form>
-									{{-- <div class="linked-products f-left">
-										<div class="linked">
-											@foreach($getgiasp as $sp)
-												<a class="item i-18373 active" href="chitiet/{{$chitiet->id}}/">
-													<span><i class="iconmobile-opt"></i>{{$sp->mau}}</span>
-													<strong>{{$sp->gia}}</strong>
-												</a>
-												&nbsp;			
-											@endforeach
-										</div>
-									</div>
-								 --}}
+							
+							<div class="product-options">	
+
+								<label>
+									Màu Sắc
+									<select class="input-select">
+										@foreach($getgiasp as $sp)
+										<option value="{{$sp->id}}"> {{$sp->mau}}</option>
+										@endforeach
+									</select>
+								</label>
 
 							</div>
-							<br>
 							
 							<div>
-								
+								RAM :
 								<label>
-									RAM :
+									{{$chitiet->ram}}GB
 								</label>
-								{{$chitiet->sanpham->ram}}GB
 								&nbsp
-								
+								ROM :
 								<label>
-									ROM :
-									
+									{{$chitiet->rom}}GB
 								</label>
-								{{$chitiet->sanpham->rom}}GB
 							</div>
 							<br>
 							<div>
-								
+								Màn Hình :
 								<label>
-									Màn Hình :	
+									{{$chitiet->manhinh}}
 								</label>
-								{{$chitiet->sanpham->manhinh}}
 							</div>
 							<br>
 							<div>
-								
+								Hệ Điều Hành :
 								<label>
-									Hệ Điều Hành :	
+									{{$chitiet->hedieuhanh}}
 								</label>
-								{{$chitiet->sanpham->hedieuhanh}}
 							</div>
 							<br>
 							<div>
-								
+								CAM Trước :
 								<label>
-									CAM Trước :
+									{{$chitiet->camtruoc}}
 								</label>
-								{{$chitiet->sanpham->camtruoc}}
 								&nbsp
-								
+								CAM Sau :
 								<label>
-									CAM Sau :
+									{{$chitiet->camsau}}
 								</label>
-								{{$chitiet->sanpham->camsau}}
 							</div>
 							<br>
 							<div>
-								
+								CPU :
 								<label>
-									CPU :
+									{{$chitiet->cpu}}
 								</label>
-								{{$chitiet->sanpham->cpu}}
-								&nbsp													
+								&nbsp
+								Thẻ SIM :
+								<label>
+									{{$chitiet->thesim}}
+								</label>								
 							</div>
 							<br>
 							<div>
+								Dung Lượng PIN :
 								<label>
-									Thẻ SIM :	
+									{{$chitiet->dungluongpin}}
 								</label>
-								{{$chitiet->sanpham->thesim}}
-							</div>
-							<br>
-							<div>
-								
-								<label>
-									Dung Lượng PIN :
-								</label>
-								{{$chitiet->sanpham->dungluongpin}}
 							</div>
 							<br>
 							<div class="add-to-cart">
-								<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$chitiet->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 							</div>
 						</div>
 					</div>
@@ -232,7 +205,7 @@
 							<!-- product tab nav -->
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Mô Tả</a></li>				
-								<li><a data-toggle="tab" href="#tab2">Bình Luận ({{$dembinhluan}})</a></li>
+								<li><a data-toggle="tab" href="#tab2">Đánh Giá (3)</a></li>
 							</ul>
 							<!-- /product tab nav -->
 
@@ -242,7 +215,7 @@
 								<div id="tab1" class="tab-pane fade in active">
 									<div class="row">
 										<div class="col-md-12">
-											<p>{!!$chitiet->sanpham->mota!!}</p>
+											<p>{{$chitiet->mota}}</p>
 										</div>
 									</div>
 								</div>
@@ -338,14 +311,20 @@
 
 										<!-- Reviews -->
 										<div class="col-md-6">
-											@foreach($chitiet->sanpham->binhluan as $cmt)
+											@foreach($chitiet->binhluan as $cmt)
 											<div id="reviews">
 												<ul class="reviews">
 													<li>
 														<div class="review-heading">
-															<h5 class="name">{{$cmt->thanhvien->name}}</h5>
-															<p class="date">{{$cmt->created_at}}</p>
-															
+															<h5 class="name">{{$cmt->thanhvien->hoten}}</h5>
+															<p class="date">{{$cmt->create_at}}</p>
+															<div class="review-rating">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star-o empty"></i>
+															</div>
 														</div>
 														<div class="review-body">
 															<p>{{$cmt->binhluan}}</p>
@@ -361,23 +340,13 @@
 										<!-- /Reviews -->
 
 										<!-- Review Form -->
-										@if(Auth::user() != null)		
-										<div class="col-md-3">	
-											<h4><span class="glyphicon glyphicon-pencil"></span>&nbsp;...Bình luận</h4>
-
-											@if(session('thongbao'))
-												<div class="alert alert-success">
-													{{session('thongbao')}}
-												</div>
-											@endif
-										
+										<div class="col-md-3">
 											<div id="review-form">
-												<form action="binhluan/{{$chitiet->id}}" class="review-form" method="POST">
-													<input type="hidden" name="_token" value="{{csrf_token()}}">
-													{{-- <input class="input" type="text" placeholder="Your Name">
-													<input class="input" type="email" placeholder="Your Email"> --}}
-													<textarea name="binhluan" class="input" placeholder="Bình luận của bạn"></textarea>
-													{{-- <div class="input-rating">
+												<form class="review-form">
+													<input class="input" type="text" placeholder="Your Name">
+													<input class="input" type="email" placeholder="Your Email">
+													<textarea class="input" placeholder="Your Review"></textarea>
+													<div class="input-rating">
 														<span>Your Rating: </span>
 														<div class="stars">
 															<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
@@ -386,32 +355,11 @@
 															<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
 															<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
 														</div>
-													</div> --}}
-													<button class="primary-btn">Gửi</button>
+													</div>
+													<button class="primary-btn">Submit</button>
 												</form>
 											</div>
 										</div>
-										@else
-											<div class="col-md-3">	
-											<h4><span class="glyphicon glyphicon-pencil"></span>&nbsp;...Bình luận</h4>
-
-											@if(session('thongbao'))
-												<div class="alert alert-success">
-													{{session('thongbao')}}
-												</div>
-											@endif
-										
-											<div id="review-form">
-												<form action="binhluan/{{$chitiet->id}}" class="review-form" method="POST">
-													<input type="hidden" name="_token" value="{{csrf_token()}}">
-													
-													<textarea name="binhluan" class="input" placeholder="(Đăng nhập để bình luận!)" disabled=""></textarea>
-													
-													<button class="primary-btn" disabled="">Gửi</button>
-												</form>
-											</div>
-										</div>
-										@endif
 										<!-- /Review Form -->
 									</div>
 								</div>
@@ -454,17 +402,17 @@
 								</a>
 							
 		
-								
+								@foreach($splq->dsbanner as $sqlqbanner)
 								<div class="product-label">
-									@if($splq->id_banner == 2)
+									@if($sqlqbanner->id_banner == 2)
 										<span class="sale">-30%</span>
-									@elseif($splq->id_banner == 3)
+									@elseif($sqlqbanner->id_banner == 3)
 										<span class="new">NEW</span>
 									@else
 										<span class="new">HOT</span>
 									@endif
 								</div>
-							
+								@endforeach
 							</div>
 							<div class="product-body">
 								<p class="product-category">{{$splq->tenhang}}</p>
@@ -497,16 +445,5 @@
 			<!-- /container -->
 		</div>
 <!-- /Section -->
-@endsection
-
-@section('script')
-    <script>
- 		$(function(){
- 			$('.input-select').change(function(){
- 				$("#form_color").submit();
- 				$('.input-select').val();
- 			});
- 		});
-    </script>
 @endsection
 		

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ChiTietDonHang extends Model
 {
     //
-    protected $table = "tbchitietdonhang";
+    protected $table = "tbchitiethoadon";
     public $timestamps = false;
     
     public function chitietsanpham()

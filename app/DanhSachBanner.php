@@ -9,14 +9,13 @@ class DanhSachBanner extends Model
     //
     protected $table = "tbdanhsachbanner";
     public $timestamps = false;
-    public function chitietsanpham()
+    public function sanpham()
     {
-    	return $this->belongsTo('App\ChiTietSanPham','id_chitietsanpham','id');
+    	return $this->belongsTo('App\SanPham','id_sanpham','id');
     }
 
     public function banner()
     {
     	return $this->belongsTo('App\Banner','id_banner','id');
     }
-
 }

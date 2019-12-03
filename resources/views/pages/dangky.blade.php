@@ -10,15 +10,15 @@
             </div>
             <div class="col-md-8">
                 <div class="panel panel-default">
-				  	<div class="panel-heading"><h3>Đăng ký tài khoản</h3></div>
+				  	<div class="panel-heading">Đăng ký tài khoản</div>
 				  	<div class="panel-body">
-				  		{{-- @if(count($errors)>0)
+				  		@if(count($errors)>0)
                             <div class="alert alert-danger">
                                 @foreach($errors->all() as $err)
                                     {{$err}}<br>
                                 @endforeach
                             </div>
-                        @endif --}}
+                        @endif
 
                         @if(session('thongbao'))
                             <div class="alert alert-success">
@@ -28,7 +28,7 @@
 				    	<form action="dangky" method="POST">
 				    		<input type="hidden" name="_token" value="{{csrf_token()}}">
 				    		<div>
-				    			<label>Tên đăng nhập</label>
+				    			<label>Họ tên</label>
 							  	<input type="text" class="form-control" placeholder="Nhập tên người dùng" name="Ten" aria-describedby="basic-addon1">
 							</div>
 							<br>

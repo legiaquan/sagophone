@@ -94,7 +94,7 @@
 								@foreach($sanphambanchay1 as $spbc1)
 								<div class="product-widget">
 									<div class="product-img">
-										<a href="chitiet/{{$spbc1->id_sanpham}}">
+										<a href="chitiet/{{$spbc1->id_sanpham}}/{{$spbc1->id}}">
 											<img src="upload/imgSanPham/{{$spbc1->hinhsp}}" alt="" width="70px" height="70px">
 										</a>
 									</div>
@@ -111,7 +111,7 @@
 								@foreach($sanphambanchay2 as $spbc2)
 								<div class="product-widget">
 									<div class="product-img">
-										<a href="chitiet/{{$spbc2->id_sanpham}}">
+										<a href="chitiet/{{$spbc2->id_sanpham}}/{{$spbc2->id}}">
 											<img src="upload/imgSanPham/{{$spbc2->hinhsp}}" alt="" width="70px" height="70px">
 										</a>
 									</div>
@@ -165,7 +165,7 @@
 								<div class="col-md-4 col-xs-6">
 									<div class="product">
 										<div class="product-img">
-											<a href="chitiet/{{$sp->id_sanpham}}">
+											<a href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}">
 												<img width="260px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
 											</a>
 											<div class="product-label">										

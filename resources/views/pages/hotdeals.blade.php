@@ -13,7 +13,7 @@
 						<li><a href="trangchu">Trang Chủ</a></li>
 						<li class="active"><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
-						<li><a href="cuahang">Cửa Hàng</a></li>									
+						<li><a href="danhmuc">Cửa Hàng</a></li>									
 						<li><a href="#">Liên Hệ</a></li>
 					</ul>
 					<!-- /NAV -->
@@ -26,10 +26,6 @@
 
 
 <!-- SECTION -->
-
-{{-- <div class="banner">
-	<img width="260px" height="250px" src="./upload/imgKhuyenMai/{{$hinhhotdeals->hinhbanner}}" alt="">
-</div> --}}
 <div class="section">
 			<!-- container -->
 			<div class="container">
@@ -37,6 +33,32 @@
 				<div class="row">
 					<!-- ASIDE -->
 					<div id="aside" class="col-md-3">
+						<!-- aside Widget -->
+						{{-- <div class="aside">						
+								<h3 class="aside-title"><a href="danhmuc" style="font-weight: bolder;">Danh Mục</a></h3>						
+							@foreach($nhomsanpham as $nsp)
+							<div class="checkbox-filter">							
+								<div class="">
+									<label>
+										<a class="{{Request::get('id_nhom') == $nsp->id? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['id_nhom' => $nsp->id]) }}">
+											{{$nsp->tennhom}}
+										</a>
+									</label>
+									
+									@if($nsp->id == 1)
+										<small>({{count($sanphamdt)}})</small>
+									@elseif($nsp->id == 2)
+										<small>({{count($sanphampk)}})</small>
+									@else
+										<small>(0)</small>
+									@endif
+								</div>
+							</div>
+							@endforeach
+						</div>
+						<!-- /aside Widget --> --}}
+
+						
 						<div class="aside">
 							<h3 class="aside-title"><a style="font-weight: bolder;">Thương Hiệu</a></h3>
 							@foreach($hangdt as $hdt)
@@ -105,25 +127,18 @@
 								<div class="col-md-4 col-xs-6">
 									<div class="product">
 										<div class="product-img">
-											<a href="chitiet/{{$sp->id}}">
+											<a href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}">
 												<img width="260px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
 											</a>
-											<div class="product-label">
-													@if($sp->phantramkhuyenmai != null)
-														<span class="sale">-{{$sp->phantramkhuyenmai}}%</span>	
-													@endif											
-												</div>							
+											<div class="product-label">										
+													<span class="new">NEW</span>
+													<span class="sale">-30%</span>
+											</div>									
 										</div>
 										<div class="product-body">
 											<p class="product-category">{{$sp->tenhang}}</p>
-											<h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id_sanpham}}">{{$sp->tensp}}</a></h3>
-											<h4 class="product-price">
-													@if($sp->phantramkhuyenmai != null)
-													{{$sp->gia * (100 - $sp->phantramkhuyenmai) / 100}}<del class="product-old-price">{{$sp->gia}}
-													@else
-														{{$sp->gia}}
-													@endif
-											</h4>
+											<h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}">{{$sp->tensp}}</a></h3>
+											<h4 class="product-price">{{$sp->gia}}<del class="product-old-price">{{$sp->gia*0.3}}</del></h4>
 											<div class="product-rating">
 												<i class="fa fa-star"></i>
 												<i class="fa fa-star"></i>
@@ -134,11 +149,11 @@
 											<div class="product-btns">
 												{{-- <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 												<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button> --}}
-												<button class="quick-view" onclick="window.location.href = 'chitiet/{{$sp->id}}';"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></button>
+												<button class="quick-view"><a href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$sp->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 										</div>
 									</div>
 								</div>
