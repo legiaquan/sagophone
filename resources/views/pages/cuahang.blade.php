@@ -104,6 +104,17 @@
 							
 						</div>
 						<div class="aside">
+							<h3 class="aside-title"><a style="font-weight: bolder;">ROM</a></h3>
+							
+								<ul>
+									<li><a class="{{Request::get('rom') == 32 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 32]) }}">32 GB</a></li><br>
+									<li><a class="{{Request::get('rom') == 64 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 64]) }}">64 GB</a></li><br>
+									<li><a class="{{Request::get('rom') == 128 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 128]) }}">128 GB</a></li><br>
+									<li><a class="{{Request::get('rom') == 256 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 256]) }}">256 GB</a></li><br>
+								</ul>
+			
+						</div>
+						<div class="aside">
 							<h3 class="aside-title">Sản Phẩm Bán Chạy</h3>
 							<div class="products-widget-slick" data-nav="#slick-nav-6">
 							<div>

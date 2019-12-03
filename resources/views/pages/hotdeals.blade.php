@@ -79,6 +79,17 @@
 							
 							
 						</div>
+						<div class="aside">
+							<h3 class="aside-title"><a style="font-weight: bolder;">ROM</a></h3>
+							
+								<ul>
+									<li><a class="{{Request::get('rom') == 32 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 32]) }}">32 GB</a></li><br>
+									<li><a class="{{Request::get('rom') == 64 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 64]) }}">64 GB</a></li><br>
+									<li><a class="{{Request::get('rom') == 128 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 128]) }}">128 GB</a></li><br>
+									<li><a class="{{Request::get('rom') == 256 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 256]) }}">256 GB</a></li><br>
+								</ul>
+			
+						</div>
 						
 						<!-- /aside Widget -->
 						<div class="col-md-9">

@@ -251,6 +251,27 @@ class PageController extends Controller
                 }
                 
         }
+         if($request->rom)
+        {
+                $rom = $request->rom;
+                switch ($rom) {
+                    case '32':
+                        $sanpham->where('rom','32');
+                        break;
+                    case '64' :
+                        $sanpham->where('rom','64');
+                        break;
+                    case '128':
+                        $sanpham->where('rom','128');
+                        break;
+                    case '256' :
+                        $sanpham->where('rom','256');
+                        break;
+                    default:
+                       
+                }
+                
+        }
 
         if($request->id_nhom)
         {
@@ -433,6 +454,28 @@ class PageController extends Controller
                 }
                 
         }
+          if($request->rom)
+        {
+                $rom = $request->rom;
+                switch ($rom) {
+                    case '32':
+                        $sanphamhotdealstt->where('rom','32');
+                        break;
+                    case '64' :
+                        $sanphamhotdealstt->where('rom','64');
+                        break;
+                    case '128':
+                        $sanphamhotdealstt->where('rom','128');
+                        break;
+                    case '256' :
+                        $sanphamhotdealstt->where('rom','256');
+                        break;
+                    default:
+                       
+                }
+                
+        }
+
         if($request->id_hang)
         {
             $id_hang = $request->id_hang;
