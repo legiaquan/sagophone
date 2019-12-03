@@ -43,7 +43,7 @@
                                                 <td align="center">{{ $row->sanpham->rom }}GB</td>
                                                 <td><?php $arrGia = getAllGia($row->id_sanpham) ?>
                                                     @foreach($arrGia as $giasp)
-                                                        <span style="background: {{ $giasp->mamau }};color:#a6a6a6">{{ $giasp->mau }}:</span> {{ number_format($giasp->gia) }}₫<br>
+                                                        <span style="background: {{ $giasp->mamau }};color:#a6a6a6;border-radius: 5px;">{{ $giasp->mau }}:</span> {{ number_format($giasp->gia) }}₫<br>
                                                     @endforeach
                                                 </td>
                                                 <td align="center" width="110px"><b>{{ $row->phantramkhuyenmai }} 
@@ -53,7 +53,7 @@
                                                 </td>
                                                 <td>
                                                     @foreach($arrGia as $giasp)
-                                                        <span style="background: {{ $giasp->mamau }};color:#a6a6a6">{{ $giasp->mau }}:</span> {{ number_format(giaKhuyenMai($giasp->gia,$row->phantramkhuyenmai)) }}₫<br>
+                                                        <span style="background: {{ $giasp->mamau }};color:#a6a6a6;border-radius: 5px;">{{ $giasp->mau }}:</span> {{ number_format(giaKhuyenMai($giasp->gia,$row->phantramkhuyenmai)) }}₫<br>
                                                     @endforeach
                                                 </td>
                                                 <td align="center">

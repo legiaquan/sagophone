@@ -124,7 +124,7 @@
 									<i class="ft-refresh-ccw"></i> Làm mới
 								</button>							
 								<button type="submit" class="btn btn-raised btn-primary">
-									<i class="fa fa-check-square-o"></i> Thêm
+									<i class="fa fa-check-square-o"></i> Sửa
 								</button>
 							</div>
 						</form>

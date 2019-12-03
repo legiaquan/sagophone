@@ -14,6 +14,7 @@
             <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
               <li class="nav-item"><a href="admin/trang-chu.html"><i class="ft-home"></i><span data-i18n="" class="menu-title">Trang chủ</span></a>
               </li>
+              @if(auth('admin')->user()->id_level == 2 || auth('admin')->user()->id_level == 7)
               <!-- Quản lý sản phẩm -->
               <li class="has-sub nav-item"><a><i class="ft-aperture"></i><span data-i18n="" class="menu-title">Quản lý sản phẩm</span></a>
                 <ul class="menu-content">
@@ -46,8 +47,9 @@
                   </li>
                 </ul>
               </li>
+              @endif
               <!-- End of Quản lý sản phẩm -->
-
+              @if(auth('admin')->user()->id_level == 6 || auth('admin')->user()->id_level == 7)
               <!-- Khuyến mãi -->
               <li class="has-sub"><a ><i class="ft-bookmark"></i><span data-i18n="" class="menu-title">Khuyến mãi</span></a>
                     <ul class="menu-content">
@@ -57,46 +59,52 @@
                     </ul>
               </li>
               <!-- End of Khuyến mãi -->
-
+              <!-- comment -->
+              <li class="has-sub nav-item"><a ><i class="ft-message-circle"></i><span data-i18n="" class="menu-title">Quản lý Comment</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/comment-san-pham/danhsach" class="menu-item">Sản phẩm</a></li>
+                    </ul>
+                  </li>
+              <!-- End of comment -->
               <!-- Đơn hàng -->
               <li class="has-sub nav-item"><a ><i class="ft-shopping-cart"></i><span data-i18n="" class="menu-title">Đơn hàng</span></a>
                     <ul class="menu-content">
-                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                      <li><a href="admin/donhang/danhsach" class="menu-item">Danh sách</a></li>
                     </ul>
                   </li>
               <!-- End of Đơn hàng -->
+              <!-- Tin tức -->
               <li class="has-sub nav-item"><a><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Quản lý tin tức</span></a>
                 <ul class="menu-content">
-                  
-                  <!-- Tin tức -->
-                  <li class="has-sub"><a ><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Loại tin</span></a>
-                    <ul class="menu-content">
-                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
-                    </ul>
-                  </li>
                   <li class="has-sub"><a ><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Tin tức</span></a>
                     <ul class="menu-content">
-                      <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                      <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                      <li><a href="admin/tintuc/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/tintuc/them" class="menu-item">Thêm</a></li>
                     </ul>
                   </li>
+                  <li class="has-sub"><a ><i class="ft-file-text"></i><span data-i18n="" class="menu-title">Loại tin</span></a>
+                    <ul class="menu-content">
+                      <li><a href="admin/loaitin/danhsach" class="menu-item">Danh sách</a></li>
+                      <li><a href="admin/loaitin/them" class="menu-item">Thêm</a></li>
+                    </ul>
+                  </li>  
                 </ul>
               </li>
               <!-- End of Tin tức -->
-
+              @endif
               <!-- Thành viên -->
-
+              @if(auth('admin')->user()->id_level == 2 || auth('admin')->user()->id_level == 7)
               <li class="has-sub nav-item"><a ><i class="ft-users"></i><span data-i18n="" class="menu-title">Thành viên</span></a>
                 <ul class="menu-content">
-                  <li><a href="admin/hangdt/danhsach" class="menu-item">Danh sách</a></li>
-                  <li><a href="admin/hangdt/them" class="menu-item">Thêm</a></li>
+                  <li><a href="admin/thanhvien/danhsach" class="menu-item">Danh sách</a></li>
+                  <li><a href="admin/thanhvien/them" class="menu-item">Thêm</a></li>
                 </ul>
               </li>
+              @endif
               <!-- End of Thành viên -->
 
               <!-- Nhân viên -->
+              @if(auth('admin')->user()->id_level == 1 || auth('admin')->user()->id_level == 7)
               <li class="has-sub nav-item"><a><i class="ft-gitlab"></i><span data-i18n="" class="menu-title">Quản lý nhân viên</span></a>
                 <ul class="menu-content">
                   <li class="has-sub nav-item"><a ><i class="ft-award"></i><span data-i18n="" class="menu-title">Chức vụ</span></a>
@@ -113,6 +121,7 @@
                   </li>
                 </ul>
               </li>
+              @endif
               <!-- End of Nhân viên -->
             
             </ul>
