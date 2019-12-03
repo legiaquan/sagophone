@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class ChiTietDonHang extends Model
 {
     //
-    protected $table = "tbchitiethoadon";
+    protected $table = "tbchitietdonhang";
     public $timestamps = false;
     
-    public function sanpham()
+    public function chitietsanpham()
     {
-    	return $this->belongsTo('App\SanPham','id','id_sanpham');
+    	return $this->belongsTo('App\ChiTietSanPham','id_chitietsanpham','id');
     }
-    public function hoadon()
+    public function donhang()
     {
-    	return $this->belongsTo('App\HoaDon','id','id_hoadon');
+    	return $this->belongsTo('App\DonHang','id_donhang','id');
     }
 
 }

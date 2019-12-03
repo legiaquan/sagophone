@@ -13,13 +13,13 @@ class DonHang extends Model
     {
     	return $this->belongsTo('App\ThanhVien','id_thanhvien','id');
     }
-    public function chitiet()
+    public function chitietdonhang()
     {
-    	return $this->hasMany('App\ChiTietHoaDon','id_hoadon','id');
+    	return $this->hasMany('App\ChiTietDonHang','id_donhang','id');
     }
 
     public function admins()
     {
-        return $this->belongsTo('App\Admin','id_admins','id');
+        return $this->belongsTo('App\NhanVien','id_admins','id');
     }
 }

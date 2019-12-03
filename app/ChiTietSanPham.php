@@ -18,13 +18,14 @@ class ChiTietSanPham extends Model
     {
     	return $this->belongsTo('App\SanPham','id_sanpham','id');
     }
-        public function dsbanner()
+    public function danhsachbanner()
     {
         return $this->hasMany('App\DanhSachBanner','id_chitietsanpham','id');
     }
-        public function chitietsanpham()
+
+    public function chitietdonhang()
     {
-        return $this->hasMany('App\DanhSachBanner','id_chitietsanpham','id');
+        return $this->hasMany('App\ChiTietDonHang','id_chitietsanpham','id');
     }
     
 }
