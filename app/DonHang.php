@@ -15,7 +15,7 @@ class DonHang extends Model
     }
     public function chitiet()
     {
-    	return $this->hasMany('App\ChiTietHoaDon','id_hoadon','id');
+    	return $this->hasMany('App\ChiTietDonHang','id_hoadon','id');
     }
 
     public function admins()
