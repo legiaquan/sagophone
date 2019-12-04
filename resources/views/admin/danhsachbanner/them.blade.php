@@ -27,7 +27,7 @@
                                                 <th>Tên sản phẩm</th>
                                                 <th>Ram</th>
                                                 <th>Rom</th>
-                                                <th>Xử lý</th>
+                                                <th>Giá</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -38,17 +38,22 @@
                                                 <td align="center">{{ $row->ram }} GB</td>
                                                 <td align="center">{{ $row->rom }} GB</td>
                                                 <td align="center">
-                                                	<?php $dem = 0;?>
-                                                	@foreach($danhsachbanner as $row1)
-														@if($row1->id_sanpham == $row->id)
-															<?php $dem++;?>
-														@endif
-                                                	@endforeach
-                                                	@if($dem<=0)
-                                                    <a href="admin/danhsachbanner/them/{{ $banner->id }}/{{ $row->id}}"><span class="badge badge-primary mr-2"><i class="ft-plus-circle"></i> Thêm</span></a> <br>
-                                                    @else
-                                                    	<a><span class="badge badge-warning"><i class="ft-alert-circle"></i> Đã có <br>sản phẩm<br> này</span></a> <br>
-													@endif
+                                                	
+                                                    <?php $arrGia = getAllGia($row->id) ?>
+                                                    @foreach($arrGia as $giasp)
+                                                        
+                                                        <span style="background: {{ $giasp->mamau }};color:#a6a6a6;border-radius: 5px;">{{ $giasp->mau }}:</span> {{ number_format($giasp->gia) }}₫ - {{ $giasp->soluong }}
+                                                        
+                                                        @if(checkTonTaiSPBanner($giasp->id,$banner->id)==0)
+                                                        <a href="admin/danhsachbanner/them/{{ $banner->id }}/{{ $giasp->id}}"><span style="float: right;" class="badge badge-primary mr-2"><i class="ft-plus-circle"></i> Thêm</span></a>
+                                                        @else
+                                                        <a><span style="float: right;" class="badge badge-warning mr-2"><i class="ft-alert-circle"></i> Đã có</span></a>
+                                                        
+                                                        
+                                                        @endif
+                                                        <br><br>
+                                                    @endforeach
+                                                    	
                                                 </td>
                                             </tr>
                                             
@@ -61,7 +66,7 @@
                                                 <th>Tên sản phẩm</th>
                                                 <th>Ram</th>
                                                 <th>Rom</th>
-                                                <th>Xử lý</th>
+                                                <th>Giá</th>
                                             </tr>
                                         </tfoot>
                                     </table>

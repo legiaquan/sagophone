@@ -44,7 +44,32 @@ class ChiTietSanPhamController extends Controller
         $chitietsanpham->id_mau = $request->txtMau;
         $chitietsanpham->soluong = $request->txtSoluong;
         $chitietsanpham->gia = $request->txtGia;
-        
+
+        $sanpham = SanPham::find($id);
+        if($request->hasFile('flHinh'))
+        {
+            $file = $request->file('flHinh');
+            $duoi = $file->getClientOriginalExtension();
+            if($duoi != 'jpg' && $duoi != 'png' && $duoi != 'jpeg')
+            {
+                return redirect('admin/chitietsanpham/them')->with('loi','Bạn chỉ được chọn file có đuôi là jpg, png, jpeg');
+            }
+            $namefile = $file->getClientOriginalName();
+            $Hinh = str_random(4)."_".$namefile;
+            while (file_exists("upload/imgSanPham/".$Hinh)) {
+                # code...
+                $Hinh = str_random(4)."-".$namefile."-sago";
+            }
+
+            $file->move("upload/imgSanPham",$Hinh);
+            //unlink("upload/imgSanPham/".$sanpham->hinhsp);
+            $chitietsanpham->hinhchitiet = $Hinh;
+
+        }
+        else
+        {
+            $chitietsanpham->hinhchitiet = $sanpham->hinhsp;
+        }
 
         $chitietsanpham->save();
 
@@ -87,9 +112,34 @@ class ChiTietSanPhamController extends Controller
         $tensp = $sp->tensp;
         $ram = $sp->ram;
         $rom = $sp->rom;
+        $chitietsanpham = ChiTietSanPham::where('id_sanpham',$id)->where('id_mau',$id_mau)->first();
+
+        if($request->hasFile('flHinh'))
+        {
+            $file = $request->file('flHinh');
+            $duoi = $file->getClientOriginalExtension();
+            if($duoi != 'jpg' && $duoi != 'png' && $duoi != 'jpeg')
+            {
+                return redirect('admin/chitietsanpham/sua')->with('loi','Bạn chỉ được chọn file có đuôi là jpg, png, jpeg');
+            }
+            $namefile = $file->getClientOriginalName();
+            $Hinh = str_random(4)."_".$namefile;
+            while (file_exists("upload/imgSanPham/".$Hinh)) {
+                # code...
+                $Hinh = str_random(4)."-".$namefile."-sago";
+            }
+
+            $file->move("upload/imgSanPham",$Hinh);
+            //unlink("upload/imgSanPham/".$sanpham->hinhsp);
+        }
+        else
+        {
+            $Hinh = $chitietsanpham->hinhchitiet;
+        }
+        var_dump($Hinh);
         DB::table('tbchitietsanpham')
             ->where('id_sanpham',$id)->where('id_mau',$id_mau)
-            ->update(['id_mau' => $request->txtMau, 'soluong'=> $request->txtSoluong, 'gia'=> $request->txtGia]);
+            ->update(['id_mau' => $request->txtMau, 'soluong'=> $request->txtSoluong, 'gia'=> $request->txtGia,'hinhchitiet'=>$Hinh]);
         return redirect('admin/chitietsanpham/sua/'.$id.'/'.$request->txtMau)->with('thongbao','Sửa thành công '.$tensp.' '.$ram.'GB '.$rom.'GB '.$request->txtMau.' ,Giá: '.number_format($request->txtGia).'VNĐ ,Số lượng: '.$request->txtSoluong.' vào hiển thị!');
     }
     public function getXoa($id,$id_mau)
@@ -101,7 +151,10 @@ class ChiTietSanPhamController extends Controller
     public function postXoa(Request $request,$id,$id_mau)
     {
         $sp = SanPham::find($id);
+        $mau = Mau::find($id_mau);
+        $tenmau = $mau->mau;
         $tensp = $sp->tensp;
+        $kq = $tensp.' - '.$tenmau;
         $this->validate($request,
         [
             'confirm'=>'required'
@@ -110,6 +163,6 @@ class ChiTietSanPhamController extends Controller
             'confirm.required'=>'Bạn chưa check vào "Tôi đồng ý"'
         ]);
         DB::table('tbchitietsanpham')->where('id_sanpham', $id)->where('id_mau',$id_mau)->delete();
-        return redirect('admin/chitietsanpham/danhsach')->with('thongbao','Bạn đã xóa thành công '.$tensp);
+        return redirect('admin/sanpham/danhsach')->with('thongbao','Bạn đã xóa thành công '.$kq);
     }
 }

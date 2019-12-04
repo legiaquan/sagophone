@@ -37,14 +37,14 @@
                                         <tbody>
                                             @foreach($danhsachbanner as $row)
                                             <tr>
-                                                
-                                                <td width="400px" align="center"><b>{{ $row->sanpham->tensp }}</b> <br> <img width="100px" src="upload/imgSanPham/{{ $row->sanpham->hinhsp }}" /></td>
-                                                <td align="center">{{ $row->sanpham->ram }}GB</td>
-                                                <td align="center">{{ $row->sanpham->rom }}GB</td>
-                                                <td><?php $arrGia = getAllGia($row->id_sanpham) ?>
-                                                    @foreach($arrGia as $giasp)
-                                                        <span style="background: {{ $giasp->mamau }};color:#a6a6a6;border-radius: 5px;">{{ $giasp->mau }}:</span> {{ number_format($giasp->gia) }}₫<br>
-                                                    @endforeach
+                                                <?php $thongtinsp = getDanhSanhBannerSanPham($row->id_chitietsanpham)?>
+
+                                                <td width="400px" align="center"><b>{{ $thongtinsp->tensp }}</b> <br> <img width="100px" src="upload/imgSanPham/{{ $thongtinsp->hinhchitiet }}" /></td>
+                                                <td align="center">{{ $thongtinsp->ram }}GB</td>
+                                                <td align="center">{{ $thongtinsp->rom }}GB</td>
+                                                <td>
+                                                    <span style="background: {{$thongtinsp->mamau }};color:#a6a6a6;border-radius: 5px;">{{ $thongtinsp->mau }}:</span> {{ number_format($row->chitietsanpham->gia) }}₫<br>
+                                                    
                                                 </td>
                                                 <td align="center" width="110px"><b>{{ $row->phantramkhuyenmai }} 
                                                     @if(isset($row->phantramkhuyenmai)==false)
@@ -52,13 +52,11 @@
                                                     @endif%</b>
                                                 </td>
                                                 <td>
-                                                    @foreach($arrGia as $giasp)
-                                                        <span style="background: {{ $giasp->mamau }};color:#a6a6a6;border-radius: 5px;">{{ $giasp->mau }}:</span> {{ number_format(giaKhuyenMai($giasp->gia,$row->phantramkhuyenmai)) }}₫<br>
-                                                    @endforeach
+                                                    <span style="background: {{ $thongtinsp->mamau }};color:#a6a6a6;border-radius: 5px;">{{ $thongtinsp->mau }}:</span> {{ number_format(giaKhuyenMai($row->chitietsanpham->gia,$row->phantramkhuyenmai)) }}₫<br>
                                                 </td>
                                                 <td align="center">
-                                                    <a href="admin/danhsachbanner/sua/{{ $row->id_banner }}/{{ $row->id_sanpham }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a> <br>
-                                                    <a href="admin/danhsachbanner/xoa/{{ $row->id_banner }}/{{ $row->id_sanpham }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2"> Xóa</i></span></a>
+                                                    <a href="admin/danhsachbanner/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a> <br>
+                                                    <a href="admin/danhsachbanner/xoa/{{ $row->id_banner }}/{{ $row->id_chitietsanpham }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2"> Xóa</i></span></a>
                                                 </td>
                                                 
                                             </tr>

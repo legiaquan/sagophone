@@ -167,14 +167,14 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		// admin/hangdt/danhsach
 		Route::get('danhsach/{id}','DanhSachBannerController@getDanhSach');
 
-		Route::get('sua/{id}/{id_sanpham}','DanhSachBannerController@getSua');
-		Route::post('sua/{id}/{id_sanpham}','DanhSachBannerController@postSua');
+		Route::get('sua/{id}','DanhSachBannerController@getSua');
+		Route::post('sua/{id}','DanhSachBannerController@postSua');
 
 		Route::get('them/{id}','DanhSachBannerController@getThem');
-		Route::get('them/{id}/{id_sanpham}','DanhSachBannerController@activeThem');
+		Route::get('them/{id}/{id_chitietsanpham}','DanhSachBannerController@activeThem');
 
-		Route::get('xoa/{id}/{id_sanpham}','DanhSachBannerController@getXoa');
-		Route::post('xoa/{id}/{id_sanpham}','DanhSachBannerController@postXoa');
+		Route::get('xoa/{id}/{id_chitietsanpham}','DanhSachBannerController@getXoa');
+		Route::post('xoa/{id}/{id_chitietsanpham}','DanhSachBannerController@postXoa');
 	});
 
 

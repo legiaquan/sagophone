@@ -7,7 +7,7 @@ function getAllGia($id)
 	$gia = DB::table('tbchitietsanpham')
 			->where('id_sanpham',$id)
 			->join('tbmau', 'tbchitietsanpham.id_mau', '=', 'tbmau.id')
-			->select('tbchitietsanpham.gia','tbmau.mau','tbmau.mamau')
+			->select('tbchitietsanpham.id','tbchitietsanpham.gia','tbchitietsanpham.id_mau','tbchitietsanpham.soluong','tbmau.mau','tbmau.mamau')
 			->orderBy('tbmau.id','asc')
 			->get();
 	return $gia;
@@ -65,4 +65,21 @@ function getPhanTram($id)
 				->where('id_chitietsanpham',$id)
 				->value('phantramkhuyenmai');
 	return $phantram;
+}
+function getDanhSanhBannerSanPham($id)
+{
+	$ds = DB::table('tbchitietsanpham')
+				->where('tbchitietsanpham.id',$id)
+				->join('tbsanpham', 'tbchitietsanpham.id_sanpham', '=', 'tbsanpham.id')
+				->join('tbmau', 'tbchitietsanpham.id_mau', '=', 'tbmau.id')
+				->select('tbchitietsanpham.gia','tbchitietsanpham.hinhchitiet','tbsanpham.hinhsp','tbsanpham.tensp','tbsanpham.ram','tbsanpham.rom','tbmau.mau','tbmau.mamau')
+				->first();
+	return $ds;
+}
+function checkTonTaiSPBanner($id_chitietsanpham,$id_banner)
+{
+	$check = DB::table('tbdanhsachbanner')
+			->where('tbdanhsachbanner.id_chitietsanpham',$id_chitietsanpham)->where('tbdanhsachbanner.id_banner',$id_banner)
+			->count();
+	return $check;
 }

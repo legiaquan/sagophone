@@ -165,7 +165,42 @@
                                             </div>
 										</div>
 									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="projectinput3">Giá</label>
+											<div class="input-group">										
+												<input type="number" name="txtGia" value="1000000" class="form-control" />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">VNĐ</span>
+                                                </div>
+                                            </div>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<label for="projectinput3">Số lượng</label>
+											<div class="input-group">										
+												<input type="number" name="txtSoluong" value="100" class="form-control" />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Sản phẩm</span>
+                                                </div>
+                                            </div>
+										</div>
+									</div>
+
 								</div>
+
+								<div class="form-group">
+									<label for="projectinput3">Màu</label>				
+									<div class="checkbox">
+										@foreach($mau as $row)
+			                          	<div class="form-check-label" >
+				                            <label class="form-check-label" style="font-size: 15px; float: left;"><input  type="checkbox" name="mau[]" value="{{ $row->id }}"/> <div style=" color:grey;float:right; width: 150px; height: 30px;background: {{ $row->mamau }};">{{ $row->mau }}</div></label>
+			                          	</div>
+			                          	@endforeach
+			                      	</div>
+								</div>
+								<div>&nbsp;</div>
 								<div class="form-group">
 									<label for="projectinput8">Mô tả</label>
 									<textarea id="projectinput8" rows="5" class="ckeditor" name="txtMota" >Đang cập nhật!</textarea>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\SanPham;
 use App\DanhSachBanner;
 use App\Banner;
+use App\ChiTietSanPham;
 use Illuminate\Support\Facades\DB;
 class DanhSachBannerController extends Controller
 {
@@ -26,50 +27,57 @@ class DanhSachBannerController extends Controller
         return view('admin.danhsachbanner.them',['sanpham'=>$sanpham,'banner'=>$banner,'danhsachbanner'=>$danhsachbanner]);
     }
 
-    public function activeThem(Request $request,$id,$id_sanpham)
+    public function activeThem(Request $request,$id,$id_chitietsanpham)
     {
-        $sanpham = SanPham::find($id_sanpham);
+        $chitietsanpham = ChiTietSanPham::find($id_chitietsanpham);
+        $sanpham = SanPham::find($chitietsanpham->id_sanpham);
         $danhsachbanner = new DanhSachBanner;
         $danhsachbanner->id_banner = $id;
-        $danhsachbanner->id_sanpham = $id_sanpham;
+        $danhsachbanner->id_chitietsanpham = $id_chitietsanpham;
+        $danhsachbanner->phantramkhuyenmai = 0;
         $danhsachbanner->save();
         
 
-       	return redirect('admin/danhsachbanner/them/'.$id)->with('thongbao','Thêm thành công '.$sanpham->tensp."!");
+       	return redirect('admin/danhsachbanner/them/'.$id)->with('thongbao','Thêm thành công '.$sanpham->tensp.' - '.$chitietsanpham->mau->mau."!");
     }
 
-    public function getSua($id,$id_sanpham)
+    public function getSua($id)
     {
-       	$danhsachbanner = DanhSachBanner::where('id_banner',$id)->where('id_sanpham',$id_sanpham)->first();
-        return view('admin.danhsachbanner.sua',['danhsachbanner'=>$danhsachbanner]);
+       	$danhsachbanner = DanhSachBanner::find($id);
+        $chitietsanpham = ChiTietSanPham::find($danhsachbanner->id_chitietsanpham);
+        $sanpham = SanPham::find($chitietsanpham->id_sanpham);
+        $banner = Banner::find($danhsachbanner->id_banner);
+        return view('admin.danhsachbanner.sua',['danhsachbanner'=>$danhsachbanner,'sanpham'=>$sanpham,'banner'=>$banner]);
     }
 
-    public function postSua($id,$id_sanpham, Request $request)
+    public function postSua($id, Request $request)
     {
         $this->validate($request,
         [
-            'txtKhuyenmai'=>'required|min:2'
+            'txtKhuyenmai'=>'max:2'
             
         ],
         [
             'txtKhuyenmai.min'=>'Khuyến mãi tối đa 99%',
-            'txtKhuyenmai.required'=>'Bạn khuyến mãi mới'
         ]);
 
-        $danhsachbanner = DB::table('tbdanhsachbanner')
-	        ->where('id_banner',$id)->where('id_sanpham',$id_sanpham)
-	        ->update(['phantramkhuyenmai'=>$request->txtKhuyenmai]);
+        $danhsachbanner = DanhSachBanner::find($id);
+        $danhsachbanner->phantramkhuyenmai = $request->txtKhuyenmai;
+        $danhsachbanner->save();
         
-        return redirect('admin/danhsachbanner/sua/'.$id.'/'.$id_sanpham)->with('thongbao','Sửa thành công !');
+        return redirect('admin/danhsachbanner/sua/'.$id)->with('thongbao','Sửa thành công !');
     }
-    public function getXoa($id,$id_sanpham)
+    public function getXoa($id,$id_chitietsanpham)
     {
-        $danhsachbanner = DanhSachBanner::where('id_banner',$id)->where('id_sanpham',$id_sanpham)->first();
-        return view('admin.danhsachbanner.xoa',['danhsachbanner'=>$danhsachbanner]);
+        $chitietsanpham = ChiTietSanPham::find($id_chitietsanpham);
+        $sanpham = SanPham::find($chitietsanpham->id_sanpham);
+        $danhsachbanner = DanhSachBanner::where('id_banner',$id)->where('id_chitietsanpham',$id_chitietsanpham)->first();
+
+        return view('admin.danhsachbanner.xoa',['danhsachbanner'=>$danhsachbanner,'sanpham'=>$sanpham,'chitietsanpham'=>$chitietsanpham]);
     }
-    public function postXoa(Request $request,$id,$id_sanpham)
-    {
-    	$sanpham = SanPham::find($id_sanpham);
+    public function postXoa(Request $request,$id,$id_chitietsanpham)
+    {   $chitietsanpham = ChiTietSanPham::find($id_chitietsanpham);
+        $sanpham = SanPham::find($chitietsanpham->id_sanpham);
     	$tensp = $sanpham->tensp;
         $this->validate($request,
         [
@@ -78,7 +86,7 @@ class DanhSachBannerController extends Controller
         [
             'confirm.required'=>'Bạn chưa check vào "Tôi đồng ý"'
         ]);
-        DB::table('tbdanhsachbanner')->where('id_banner', $id)->where('id_sanpham',$id_sanpham)->delete();
-        return redirect('admin/danhsachbanner/danhsach/'.$id)->with('thongbao','Bạn đã xóa thành công '.$tensp."!");
+        DB::table('tbdanhsachbanner')->where('id_banner', $id)->where('id_chitietsanpham',$id_chitietsanpham)->delete();
+        return redirect('admin/danhsachbanner/danhsach/'.$id)->with('thongbao','Bạn đã xóa thành công '.$tensp.' - '.$chitietsanpham->mau->mau."!");
     }
 }

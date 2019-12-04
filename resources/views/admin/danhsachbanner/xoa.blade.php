@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">XÓA SẢN PHẨM <a style="color: tomato">{{ $danhsachbanner->sanpham->tensp}}</a> TRONG BANNER <a style="color: tomato">{{ $danhsachbanner->banner->tenbanner }}</a></h4>
+                    <h4 class="card-title">XÓA SẢN PHẨM <a style="color: tomato">{{ $sanpham->tensp}} - {{ $chitietsanpham->mau->mau }}</a> TRONG BANNER <a style="color: tomato">{{ $danhsachbanner->banner->tenbanner }}</a></h4>
                 </div>
                 <div class="card-body collapse show">
                     <div class="card-block card-dashboard">
@@ -23,10 +23,10 @@
                             </div>
                         @endif
                       <strong>Lưu ý!</strong>
-                      <p>Hệ thống sẽ sản phẩm {{ $danhsachbanner->sanpham->tensp}} trong banner {{ $danhsachbanner->banner->tenbanner }}.</p>
+                      <p>Hệ thống sẽ sản phẩm {{ $sanpham->tensp}} - {{ $chitietsanpham->mau->mau }} trong banner {{ $danhsachbanner->banner->tenbanner }}.</p>
                       <p>Bạn có chắc chắn muốn xóa?</p>
 
-                      <form class="form" action="admin/danhsachbanner/xoa/{{ $danhsachbanner->id_banner }}/{{ $danhsachbanner->id_sanpham }}" method="POST">
+                      <form class="form" action="admin/danhsachbanner/xoa/{{ $danhsachbanner->id_banner }}/{{ $danhsachbanner->id_chitietsanpham }}" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <p>
                           Tôi đồng ý: <input type="checkbox" name="confirm" value="1">

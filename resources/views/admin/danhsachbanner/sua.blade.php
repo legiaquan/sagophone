@@ -33,20 +33,20 @@
                                 {{ session('thongbao') }}
                             </div>
                         @endif
-						<form class="form" action="admin/danhsachbanner/sua/{{ $danhsachbanner->id_banner }}/{{ $danhsachbanner->id_sanpham }}" method="POST">
+						<form class="form" action="admin/danhsachbanner/sua/{{ $danhsachbanner->id }}" method="POST">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="form-body">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="issueinput1">Tên sản phẩm </label>
-											<input type="text" id="issueinput1" class="form-control"  name="txtTen" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Issue Title" disabled="" value="{{ $danhsachbanner->sanpham->tensp }}">
+											<input type="text" id="issueinput1" class="form-control"  name="txtTen" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Issue Title" disabled="" value="{{ $sanpham->tensp }}">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="issueinput3">Banner</label>
-											<input type="text" id="issueinput3" class="form-control" name="txtSoluong" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Date Opened" value="{{ $danhsachbanner->banner->tenbanner }}" placeholder="Vui lòng nhập tên hãng" disabled="">
+											<input type="text" id="issueinput3" class="form-control" name="txtSoluong" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Date Opened" value="{{ $banner->tenbanner }}" placeholder="Vui lòng nhập tên hãng" disabled="">
 										</div>
 									</div>
 									

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\SanPham;
 use App\HangDT;
 use App\NhomSanPham;
+use App\Mau;
+use App\ChiTietSanPham;
 class SanPhamController extends Controller
 {
     //
@@ -19,7 +21,8 @@ class SanPhamController extends Controller
     {
     	$hangdt = HangDT::all();
     	$nhomsp = NhomSanPham::all();
-        return view('admin.sanpham.them',['hangdt'=>$hangdt,'nhomsp'=>$nhomsp]);
+        $mau = Mau::all();
+        return view('admin.sanpham.them',['hangdt'=>$hangdt,'nhomsp'=>$nhomsp,'mau'=>$mau]);
     }
 
     public function postThem(Request $request)
@@ -27,13 +30,19 @@ class SanPhamController extends Controller
         $this->validate($request,
         [
             'txtTen'=>'required|min:3|unique:tbsanpham,tensp',
-            'txtMota'=>'required'
+            'txtMota'=>'required',
+            'txtGia'=>'required',
+            'txtSoluong'=>'required',
+            'mau'=>'required'
         ],
         [
             'txtTen.required'=>'Bạn chưa nhập tên sản phẩm',
             'txtTen.min'=>'Tên sản phẩm phải có ít nhất 3 ký tự',
             'txtTen.unique'=>'Tên sản phẩm đã tồn tại',
-            'txtMota.required'=>'Bạn chưa nhập mô tả sản phẩm'
+            'txtMota.required'=>'Bạn chưa nhập mô tả sản phẩm',
+            'txtGia'=>'Bạn chưa nhập giá',
+            'txtSoluong'=>'Bạn chưa nhập số lương',
+            'mau'=>'Bạn chưa chọn màu cho sản phẩm'
         ]);
 
         $sanpham = new SanPham;
@@ -75,6 +84,18 @@ class SanPhamController extends Controller
         $sanpham->rom = $request->txtRom;
 
         $sanpham->save();
+
+        
+        foreach ($request->mau as $key => $value) {
+            $chitietsanpham = new ChiTietSanPham;
+            $chitietsanpham->id_sanpham = $sanpham->id;
+            $chitietsanpham->id_mau=$value;
+            $chitietsanpham->gia=$request->txtGia;
+            $chitietsanpham->soluong=$request->txtSoluong;
+            $chitietsanpham->hinhchitiet=$sanpham->hinhsp;
+            $chitietsanpham->save();
+        }
+       
 
         return redirect('admin/sanpham/them')->with('thongbao','Thêm thành công '.$sanpham->tensp.' - '.$sanpham->ram.'/'.$sanpham->rom.'GB'.' vào CSDL!');
     }
@@ -124,8 +145,9 @@ class SanPhamController extends Controller
             }
 
             $file->move("upload/imgSanPham",$Hinh);
-            // unlink("upload/imgSanPham/".$sanpham->Hinh);
+            //unlink("upload/imgSanPham/".$sanpham->hinhsp);
             $sanpham->hinhsp = $Hinh;
+
         }
         else
         {

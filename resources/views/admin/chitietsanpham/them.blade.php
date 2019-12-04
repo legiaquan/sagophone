@@ -3,7 +3,7 @@
 <section id="basic-form-layouts">
 	<div class="row">
         <div class="col-sm-12">
-            <div class="content-header">Thêm vào hiển thị</div>
+            <div class="content-header">Chi tiết sản phẩm</div>
         </div>
     </div>
 	
@@ -15,7 +15,7 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
-					<h4 class="card-title" id="basic-layout-tooltip">Thêm</h4>
+					<h4 class="card-title" id="basic-layout-tooltip">Thêm phân loại màu <span style="color: tomato">{{ $sanpham->tensp }}</span></h4>
 					<p class="mb-12"></p>
 					<a href="admin/sanpham/danhsach" ><span class="badge badge-success mr-2"><i class="ft-corner-down-left"></i> Danh sách</span></a>
 				</div>
@@ -34,7 +34,7 @@
                                 {{ session('thongbao') }}
                             </div>
                         @endif
-						<form class="form" action="admin/chitietsanpham/them/{{ $sanpham->id }}" method="POST">
+						<form class="form" action="admin/chitietsanpham/them/{{ $sanpham->id }}" method="POST" enctype="multipart/form-data">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="form-body">
 								<div class="row">
@@ -88,7 +88,10 @@
 										</div>
 									</div>
 								</div>
-								
+								<div class="form-group">
+									<label>Hình</label>
+									<input type="file" class="form-control-file" id="projectinput8" name="flHinh">
+								</div>
 
 							</div>
 

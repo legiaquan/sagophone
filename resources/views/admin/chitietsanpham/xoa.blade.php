@@ -6,6 +6,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">XÓA HIỂN THỊ <a style="color: tomato">{{ $sanpham->tensp}} {{ $mau->mau }}</a></h4>
+                    
                 </div>
                 <div class="card-body collapse show">
                     <div class="card-block card-dashboard">
@@ -34,7 +35,7 @@
 
                         <div class="form-actions">
                           <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" onclick="quayve()">
-                            <i class="ft-x"></i> Quay về
+                            <i class="ft-corner-down-left"></i> Quay về
                           </button>
                           <button type="submit" class="btn btn-raised btn-raised btn-primary">
                             <i class="fa fa-check-square-o"></i> Xóa
