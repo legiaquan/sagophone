@@ -46,9 +46,9 @@
                                                 <td>{{ $row->admins->username }}</td>
                                                 <td>
                                                     @if($row->trangthai=='show')
-                                                    <span class="badge badge-primary ">{{ $row->trangthai }}</span>
+                                                    <a href="admin/banner/hide/{{ $row->id }}"><span class="badge badge-primary ">{{ $row->trangthai }}</span></a>
                                                     @else
-                                                    <span class=" badge badge-dark">{{ $row->trangthai }}</span>
+                                                    <a href="admin/banner/show/{{ $row->id }}"><span class=" badge badge-dark">{{ $row->trangthai }}</span></a>
                                                     @endif
                                                 </td>
                                                 <td>{{ $row->ngaybatdau }}</td>

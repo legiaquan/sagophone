@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\DonHang;
 use App\ChiTietDonHang;
+use App\ChiTietSanPham;
 class DonHangController extends Controller
 {
     //
@@ -49,11 +50,38 @@ class DonHangController extends Controller
 
     public function getXuly($id,$tinhtrang,$id_admins)
     {
+        //xu ly so luong thanh toán trong tbchitietsanpham
+        $chitietdonhang = ChiTietDonHang::where('id_donhang',$id)->get();
+        //lay don hang
     	$donhang = DonHang::find($id);
-        $donhang->tinhtrang = $tinhtrang;
-        if($tinhtrang == 'confirmed')
+        
+        if($tinhtrang == 'confirmed'){
             $donhang->id_admins =$id_admins;
+            //giảm số lượng
+            foreach($chitietdonhang as $row){
+                $chitietsanpham = ChiTietSanPham::find($row->id_chitietsanpham);
+                $chitietsanpham->soluong -=$row->soluong;
+                $chitietsanpham->save();
+                unset($chitietsanpham);
+            }
+
+        }
+        if($tinhtrang == 'cancel')
+        {
+            if($donhang->tinhtrang != 'pending')
+            {
+                foreach($chitietdonhang as $row){
+                    $chitietsanpham = ChiTietSanPham::find($row->id_chitietsanpham);
+                    $chitietsanpham->soluong +=$row->soluong;
+                    $chitietsanpham->save();
+                    unset($chitietsanpham);
+                }
+            }
+        }
+        $donhang->tinhtrang = $tinhtrang;
     	$donhang->save();
+
+
 
         $xuly = 'Thành Công';
         if($tinhtrang =='cancel')

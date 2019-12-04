@@ -132,6 +132,20 @@ class BannerController extends Controller
 
         return redirect('admin/banner/sua/'.$id)->with('thongbao','Sửa thành công '.$banner->tenbanner. ' vào CSDL!');
     }
+    public function getShow($id)
+    {
+        $banner = Banner::find($id);
+        $banner->trangthai = 'show';
+        $banner->save();
+        return redirect('admin/banner/danhsach')->with('thongbao','Sửa thành công trạng thái '.$banner->tenbanner.' thành show!');
+    }
+    public function getHide($id)
+    {
+        $banner = Banner::find($id);
+        $banner->trangthai = 'hide';
+        $banner->save();
+        return redirect('admin/banner/danhsach')->with('thongbao','Sửa thành công trạng thái '.$banner->tenbanner.' thành hide!');
+    }
     public function getXoa($id)
     {
         $banner = Banner::find($id);

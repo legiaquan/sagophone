@@ -155,6 +155,9 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		Route::get('sua/{id}','BannerController@getSua');
 		Route::post('sua/{id}','BannerController@postSua');
 		
+		Route::get('show/{id}','BannerController@getShow');
+		Route::get('hide/{id}','BannerController@getHide');
+
 		Route::get('them','BannerController@getThem');
 		Route::post('them/{id_admins}','BannerController@postThem');
 

@@ -61,7 +61,12 @@
                                                 <td>{{ $row->thesim }}</td>
                                                 <td><?php $arrGia = getAllGia($row->id) ?>
                                                     @foreach($arrGia as $giasp)
-                                                        <span style="background: {{ $giasp->mamau }};color:#a6a6a6;border-radius: 5px;">{{ $giasp->mau }}:</span> {{ number_format($giasp->gia) }}₫ - {{ $giasp->soluong }}
+                                                        <span style="background: {{ $giasp->mamau }};color:#a6a6a6;border-radius: 5px;">{{ $giasp->mau }}:</span> {{ number_format($giasp->gia) }}₫ - 
+                                                        @if($giasp->soluong>0)
+                                                            {{ $giasp->soluong }}
+                                                        @else
+                                                            <span style="color: tomato">({{ $giasp->soluong }})</span>
+                                                        @endif
                                                         <a style="float:right" href="admin/chitietsanpham/sua/{{ $row->id }}/{{ $giasp->id_mau }}"><i class="ft-edit mr-1"></i></a>
                                                         <a style="float:right" href="admin/chitietsanpham/xoa/{{ $row->id }}/{{ $giasp->id_mau }}"><span class=" danger"><i class="ft-trash "></i></span></a>
                                                         <br>

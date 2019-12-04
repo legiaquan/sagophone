@@ -83,3 +83,10 @@ function checkTonTaiSPBanner($id_chitietsanpham,$id_banner)
 			->count();
 	return $check;
 }
+function getSoLuongCTDH($id_chitietsanpham,$id_donhang)
+{
+	$check = DB::table('tbchitietdonhang')
+			->where('tbchitietdonhang.id_chitietsanpham',$id_chitietsanpham)->where('tbchitietdonhang.id_donhang',$id_donhang)
+			->value('tbchitietdonhang.soluong');
+	return $check;
+}
