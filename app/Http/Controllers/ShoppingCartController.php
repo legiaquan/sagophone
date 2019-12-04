@@ -152,4 +152,12 @@ class ShoppingCartController extends Controller
         $tinhtrang = DonHang::where('id',$id)->value('tinhtrang');
         return view('shopping.chitietdonhang',['chitietdonhang' => $chitietdonhang, 'tinhtrang' => $tinhtrang]);
     }
+
+    public function cancelOrder($id)
+    {
+        $donhang = DonHang::find($id);
+        $donhang->tinhtrang = "cancel";
+        $donhang->save();
+        return redirect()->back();
+    }
 }

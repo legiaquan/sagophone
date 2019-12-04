@@ -23,6 +23,25 @@
             <!-- /container -->
         </nav>
 <!-- /NAVIGATION -->
+<!-- BREADCRUMB -->
+        <div id="breadcrumb" class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="breadcrumb-tree">
+                            <li><a>Trang Chủ</a></li>
+                            <li class="active"><a>Tin Tức</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /BREADCRUMB -->
+
 <!-- Page Content -->
 <br>
     <div class="container">
@@ -30,7 +49,7 @@
             <div class="col-md-3 ">
                 <ul class="list-group" id="menu">
                     <li href="#" class="list-group-item menu1 active" style="background-color:#151515;">
-                        <h4><a href="loaitin" style="color: white; font-weight: bolder;">LOẠI TIN</a></h4>
+                        <h4><a href="loaitin" style="color: white; font-weight: bolder;">Loại Tin</a></h4>
                     </li>
                     @foreach($loaitin as $lt)
                         <li class="list-group-item menu1">
@@ -44,7 +63,7 @@
             <div class="col-md-9 ">
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background-color:#151515; color:white;">
-                       <h4><a href="loaitin" style="color: white; font-weight: bolder;">TẤT CẢ CÁC TIN</a></h4>
+                       <h4><a href="loaitin" style="color: white; font-weight: bolder;">Tin Tức</a></h4>
                     </div>
                     @foreach($tintuc as $tt)
                         <div class="row-item row">
@@ -59,7 +78,7 @@
                             <div class="col-md-9">
                                 <br>
                                 <h3><a href="tintuc/{{$tt->id}}"> {{$tt->tieude}} </a></h3>
-                                <p>{{$tt->mota}}</p>
+                               <p>{{ mb_substr($tt->mota,0,300,'UTF-8').'...' }}</p>
                                 <div>
                                      <a class="btn btn-primary" href="tintuc/{{$tt->id}}" style="margin-top: 75px">Chi tiết</a>
                                 </div>

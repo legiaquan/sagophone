@@ -26,6 +26,7 @@
 		<div class="section">
 			<!-- container -->
 			<div class="container">
+
 				<!-- row -->
 				<div class="row">				
 					<!-- shop -->
@@ -67,6 +68,7 @@
 						</div>
 					</div>
 					<!-- /shop -->
+					<a href="hotdeals" style="padding-left: 15px"><img width="1140px" height="250px" src="./upload/imgKhuyenMai/{{$hinh}}" alt=""></a>
 				</div>
 				<!-- /row -->
 			</div>
@@ -109,7 +111,7 @@
 										<div class="product">
 											<div class="product-img">
 												<a href="chitiet/{{$sphd->id}}"> 
-													<img width="250px" height="250px" src="./upload/imgSanPham/{{$sphd->hinhsp}}" alt="">
+													<img width="250px" height="250px" src="./upload/imgSanPham/{{$sphd->hinhchitiet}}" alt="">
 												</a>
 												
 												<div class="product-label">
@@ -124,9 +126,9 @@
 												<h3 class="product-name"><a href="chitiet/{{$sphd->id}}">{{$sphd->tensp}}</a></h3>
 												<h4 class="product-price">
 													@if($sphd->phantramkhuyenmai != null)
-													{{$sphd->gia * (100 - $sphd->phantramkhuyenmai) / 100}}<del class="product-old-price">{{$sphd->gia}}
+													<del class="product-old-price">{{number_format($sphd->gia,0,',','.')}}</del>{{number_format($sphd->gia * (100 - $sphd->phantramkhuyenmai) / 100,0,',','.')}}VND
 													@else
-														{{$sphd->gia}}
+														{{number_format($sphd->gia,0,',','.')}}VND
 													@endif
 												</h4>
 												<div class="product-rating">
@@ -194,7 +196,7 @@
 										<div class="product">
 											<div class="product-img">
 												<a href="chitiet/{{$spm->id}}"> 
-													<img width="250px" height="250px" src="./upload/imgSanPham/{{$spm->hinhsp}}" alt="">
+													<img width="250px" height="250px" src="./upload/imgSanPham/{{$spm->hinhchitiet}}" alt="">
 												</a>
 												
 												<div class="product-label">
@@ -208,9 +210,11 @@
 												<p class="product-category">{{$spm->tenhang}}</p>
 												<h3 class="product-name"><a href="chitiet/{{$spm->id}}">{{$spm->tensp}}</a></h3>
 												<h4 class="product-price">
-													
-														{{$spm->gia}}
-
+													@if($spm->phantramkhuyenmai != null)
+													<del class="product-old-price">{{number_format($spm->gia,0,',','.')}}</del>{{number_format($spm->gia * (100 - $spm->phantramkhuyenmai) / 100,0,',','.')}}VND
+													@else
+														{{number_format($spm->gia,0,',','.')}}VND
+													@endif
 												</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
@@ -283,13 +287,11 @@
 										<div class="product">
 											<div class="product-img">
 												<a href="chitiet/{{$spbc->id}}"> 
-													<img width="250px" height="250px" src="./upload/imgSanPham/{{$spbc->hinhsp}}" alt="">
+													<img width="250px" height="250px" src="./upload/imgSanPham/{{$spbc->hinhchitiet}}" alt="">
 												</a>
 												
 												<div class="product-label">
-													
-														<span class="sale">HOT</span>
-																							
+													<span class="sale">HOT</span>									
 												</div>
 											</div>
 											
@@ -298,9 +300,9 @@
 												<h3 class="product-name"><a href="chitiet/{{$spbc->id}}">{{$spbc->tensp}}</a></h3>
 												<h4 class="product-price">
 													@if($spbc->phantramkhuyenmai != null)
-													{{$spbc->gia * $spbc->phantramkhuyenmai / 100}}<del class="product-old-price">{{$spbc->gia}}
+													<del class="product-old-price">{{number_format($spbc->gia,0,',','.')}}</del>{{number_format($spbc->gia * (100 - $spbc->phantramkhuyenmai) / 100,0,',','.')}}VND
 													@else
-														{{$spbc->gia}}
+														{{number_format($spbc->gia,0,',','.')}}VND
 													@endif
 												</h4>
 												<div class="product-rating">
@@ -354,13 +356,19 @@
 								<div class="product-widget">
 									<div class="product-img">
 										<a href="chitiet/{{$sphd1->id}}">
-											<img src="upload/imgSanPham/{{$sphd1->hinhsp}}" alt="" width="70px" height="70px">
+											<img src="upload/imgSanPham/{{$sphd1->hinhchitiet}}" alt="" width="70px" height="70px">
 										</a>		
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$sphd1->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$sphd1->id}}">{{$sphd1->tensp}}</a></h3>
-										<h4 class="product-price">{{$sphd1->gia *(100 - $sphd1->phantramkhuyenmai) / 100}}<del class="product-old-price">{{$sphd1->gia}}</del></h4>
+										<h4 class="product-price">
+											@if($sphd1->phantramkhuyenmai != null)
+												<del class="product-old-price">{{number_format($sphd1->gia,0,',','.')}}</del>{{number_format($sphd1->gia * (100 - $sphd1->phantramkhuyenmai) / 100,0,',','.')}}VND
+												@else
+													{{number_format($sphd1->gia,0,',','.')}}VND
+											@endif
+										</h4>
 									</div>
 								</div>
 								@endforeach				
@@ -372,13 +380,19 @@
 								<div class="product-widget">
 									<div class="product-img">
 										<a href="chitiet/{{$sphd2->id}}">
-											<img src="upload/imgSanPham/{{$sphd2->hinhsp}}" alt="" width="70px" height="70px">
+											<img src="upload/imgSanPham/{{$sphd2->hinhchitiet}}" alt="" width="70px" height="70px">
 										</a>
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$sphd2->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$sphd2->id_sanpham}}/{{$sphd2->id}}">{{$sphd2->tensp}}</a></h3>
-										<h4 class="product-price">{{$sphd2->gia * (100 - $sphd2->phantramkhuyenmai) / 100}}<del class="product-old-price">{{$sphd2->gia}}</del></h4>
+										<h4 class="product-price">
+											@if($sphd2->phantramkhuyenmai != null)
+												<del class="product-old-price">{{number_format($sphd2->gia,0,',','.')}}</del>{{number_format($sphd2->gia * (100 - $sphd2->phantramkhuyenmai) / 100,0,',','.')}}VND
+												@else
+													{{number_format($sphd2->gia,0,',','.')}}VND
+											@endif
+										</h4>
 									</div>
 								</div>
 								@endforeach				
@@ -402,13 +416,19 @@
 								<div class="product-widget">
 									<div class="product-img">
 										<a href="chitiet/{{$spm1->id}}">
-											<img src="upload/imgSanPham/{{$spm1->hinhsp}}" alt="" width="70px" height="70px">
+											<img src="upload/imgSanPham/{{$spm1->hinhchitiet}}" alt="" width="70px" height="70px">
 										</a>
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$spm1->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$spm1->id_sanpham}}/{{$spm1->id}}">{{$spm1->tensp}}</a></h3>
-										<h4 class="product-price">{{$spm1->gia}}</h4>
+										<h4 class="product-price">
+											@if($spm1->phantramkhuyenmai != null)
+												<del class="product-old-price">{{number_format($spm1->gia,0,',','.')}}</del>{{number_format($spm1->gia * (100 - $spm1->phantramkhuyenmai) / 100,0,',','.')}}VND
+												@else
+													{{number_format($spm1->gia,0,',','.')}}VND
+											@endif
+										</h4>
 									</div>
 								</div>
 								@endforeach							
@@ -419,13 +439,19 @@
 								<div class="product-widget">
 									<div class="product-img">
 										<a href="chitiet/{{$spm2->id}}">
-											<img src="upload/imgSanPham/{{$spm2->hinhsp}}" alt="" width="70px" height="70px">
+											<img src="upload/imgSanPham/{{$spm2->hinhchitiet}}" alt="" width="70px" height="70px">
 										</a>
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$spm2->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$spm2->id}}">{{$spm2->tensp}}</a></h3>
-										<h4 class="product-price">{{$spm1->gia}}</h4>
+										<h4 class="product-price">
+											@if($spm2->phantramkhuyenmai != null)
+												<del class="product-old-price">{{number_format($spm2->gia,0,',','.')}}</del>{{number_format($spm2->gia * (100 - $spm2->phantramkhuyenmai) / 100,0,',','.')}}VND
+												@else
+													{{number_format($spm2->gia,0,',','.')}}VND
+											@endif
+										</h4>
 									</div>
 								</div>
 								@endforeach							
@@ -450,13 +476,19 @@
 								<div class="product-widget">
 									<div class="product-img">
 										<a href="chitiet/{{$spbc1->id}}">
-											<img src="upload/imgSanPham/{{$spbc1->hinhsp}}" alt="" width="70px" height="70px">
+											<img src="upload/imgSanPham/{{$spbc1->hinhchitiet}}" alt="" width="70px" height="70px">
 										</a>
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$spbc1->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$spbc1->id}}">{{$spbc1->tensp}}</a></h3>
-										<h4 class="product-price">{{$spbc1->gia}}</h4>
+										<h4 class="product-price">
+											@if($spbc1->phantramkhuyenmai != null)
+												<del class="product-old-price">{{number_format($spbc1->gia,0,',','.')}}</del>{{number_format($spbc1->gia * (100 - $spbc1->phantramkhuyenmai) / 100,0,',','.')}}VND
+												@else
+													{{number_format($spbc1->gia,0,',','.')}}VND
+											@endif
+										</h4>
 									</div>
 								</div>
 								@endforeach							
@@ -467,13 +499,19 @@
 								<div class="product-widget">
 									<div class="product-img">
 										<a href="chitiet/{{$spbc2->id}}">
-											<img src="upload/imgSanPham/{{$spbc2->hinhsp}}" alt="" width="70px" height="70px">
+											<img src="upload/imgSanPham/{{$spbc2->hinhchitiet}}" alt="" width="70px" height="70px">
 										</a>
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$spbc2->tenhang}}</p>
 										<h3 class="product-name"><a href="chitiet/{{$spbc2->id}}">{{$spbc2->tensp}}</a></h3>
-										<h4 class="product-price">{{$spbc2->gia}}</h4>
+										<h4 class="product-price">
+											@if($spbc2->phantramkhuyenmai != null)
+												<del class="product-old-price">{{number_format($spbc2->gia,0,',','.')}}</del>{{number_format($spbc2->gia * (100 - $spbc2->phantramkhuyenmai) / 100,0,',','.')}}VND
+												@else
+													{{number_format($spbc2->gia,0,',','.')}}VND
+											@endif
+										</h4>
 									</div>
 								</div>
 								@endforeach							
@@ -499,13 +537,13 @@
 							
 							<ul class="newsletter-follow">
 								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
+									<a href="https://www.facebook.com/100003864792199"><i class="fa fa-facebook"></i></a>
 								</li>
 								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
+									<a href="https://www.facebook.com/100003864792199"><i class="fa fa-twitter"></i></a>
 								</li>
 								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
+									<a href="https://www.facebook.com/100003864792199"><i class="fa fa-instagram"></i></a>
 								</li>							
 							</ul>
 						</div>

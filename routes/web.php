@@ -291,18 +291,22 @@ Route::get('nguoidung','PageController@getNguoiDung');
 
 Route::post('nguoidung','PageController@postNguoiDung');
 
-Route::prefix('shopping')->group(function(){
+Route::group(['prefix' => 'shopping'],function(){
 	Route::get('/add/{id}','ShoppingCartController@addProduct')->name('add.shopping.cart');//thêm mới vào giỏ hàng
 	Route::get('/cart','ShoppingCartController@getListShoppingCart')->name('get.list.shopping.cart');//trang giỏ hàng
 	Route::get('/delete/{rowId}','ShoppingCartController@deleteCart')->name('delete.cart.item');//xoa item
 	Route::post('/update/{rowId}','ShoppingCartController@updateCart');//update item
-	Route::get('pay','ShoppingCartController@payCart')->name('pay.cart');//trang thanh toán
-	Route::post('pay','ShoppingCartController@saveCart');//lưu thông tin thanh toán
-	Route::get('paysuccess','ShoppingCartController@successCart');
+	Route::group(['middleware' => 'userLogin'],function(){
+		Route::get('pay','ShoppingCartController@payCart')->name('pay.cart');//trang thanh toán
+		Route::post('pay','ShoppingCartController@saveCart');//lưu thông tin thanh toán
+		Route::get('paysuccess','ShoppingCartController@successCart');//thanh toan thanh cong
+	});
 });
 Route::get('lichsumuahang','ShoppingCartController@lichsumuahang');
 
 Route::get('chitietdonhang/{id}','ShoppingCartController@chitietdonhang');
+
+Route::post('chitietdonhang/{id}','ShoppingCartController@cancelOrder');
 
 Route::get('lienhe','PageController@lienhe');
 

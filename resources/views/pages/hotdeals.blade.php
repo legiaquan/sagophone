@@ -14,7 +14,7 @@
 						<li class="active"><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
 						<li><a href="cuahang">Cửa Hàng</a></li>									
-						<li><a href="#">Liên Hệ</a></li>
+						<li><a href="lienhe">Liên Hệ</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -24,15 +24,30 @@
 		</nav>
 <!-- /NAVIGATION -->
 
-
+<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a>Trang Chủ</a></li>
+							<li class="active"><a>Hot Deals</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
 <!-- SECTION -->
-
-{{-- <div class="banner">
-	<img width="260px" height="250px" src="./upload/imgKhuyenMai/{{$hinhhotdeals->hinhbanner}}" alt="">
-</div> --}}
 <div class="section">
 			<!-- container -->
 			<div class="container">
+				<img width="1140px" height="250px" src="./upload/imgKhuyenMai/{{$hinh}}" alt="">
+				<hr>
 				<!-- row -->
 				<div class="row">
 					<!-- ASIDE -->
@@ -53,16 +68,27 @@
 							<h3 class="aside-title"><a style="font-weight: bolder;">Lọc Theo Giá</a></h3>
 							
 								<ul>
-									<li><a class="{{Request::get('gia') == 1 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 1]) }}">Dưới 1 triệu</a></li><br>
-									<li><a class="{{Request::get('gia') == 2 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 2]) }}">1.000.000 - 3.000.000 triệu</a></li><br>
-									<li><a class="{{Request::get('gia') == 3 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 3]) }}">3.000.000 - 5.000.000 triệu</a></li><br>
-									<li><a class="{{Request::get('gia') == 4 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 4]) }}">5.000.000 - 7.000.000 triệu</a></li><br>
-									<li><a class="{{Request::get('gia') == 5 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 5]) }}">7.000.000 - 10.000.000 triệu</a></li><br>
-									<li><a class="{{Request::get('gia') == 6 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 6]) }}">Trên 10.000.000 triệu</a></li><br>
+									<li><a class="{{Request::get('gia') == 1 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 1]) }}">Dưới 1.000.000 VND</a></li><br>
+									<li><a class="{{Request::get('gia') == 2 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 2]) }}">1.000.000 - 3.000.000 VND</a></li><br>
+									<li><a class="{{Request::get('gia') == 3 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 3]) }}">3.000.000 - 5.000.000 VND</a></li><br>
+									<li><a class="{{Request::get('gia') == 4 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 4]) }}">5.000.000 - 7.000.000 VND</a></li><br>
+									<li><a class="{{Request::get('gia') == 5 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 5]) }}">7.000.000 - 10.000.000 VND</a></li><br>
+									<li><a class="{{Request::get('gia') == 6 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 6]) }}">Trên 10.000.000 VND</a></li><br>
 								</ul>
 						
 							
 							
+						</div>
+						<div class="aside">
+							<h3 class="aside-title"><a style="font-weight: bolder;">ROM</a></h3>
+							
+								<ul>
+									<li><a class="{{Request::get('rom') == 32 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 32]) }}">32 GB</a></li><br>
+									<li><a class="{{Request::get('rom') == 64 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 64]) }}">64 GB</a></li><br>
+									<li><a class="{{Request::get('rom') == 128 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 128]) }}">128 GB</a></li><br>
+									<li><a class="{{Request::get('rom') == 256 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 256]) }}">256 GB</a></li><br>
+								</ul>
+			
 						</div>
 						
 						<!-- /aside Widget -->
@@ -118,11 +144,11 @@
 											<p class="product-category">{{$sp->tenhang}}</p>
 											<h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id_sanpham}}">{{$sp->tensp}}</a></h3>
 											<h4 class="product-price">
-													@if($sp->phantramkhuyenmai != null)
-													{{$sp->gia * (100 - $sp->phantramkhuyenmai) / 100}}<del class="product-old-price">{{$sp->gia}}
+												@if($sp->phantramkhuyenmai != null)
+													<del class="product-old-price">{{number_format($sp->gia,0,',','.')}}</del>{{number_format($sp->gia * (100 - $sp->phantramkhuyenmai) / 100,0,',','.')}}VND
 													@else
-														{{$sp->gia}}
-													@endif
+														{{number_format($sp->gia,0,',','.')}}VND
+												@endif
 											</h4>
 											<div class="product-rating">
 												<i class="fa fa-star"></i>
@@ -168,7 +194,7 @@
     <script>
  		$(function(){
  			$('.input-select').change(function(){
- 				$("#form_order").submit();
+ 				//$("#form_order").submit();
  				$('.input-select').val();
  			});
  		});

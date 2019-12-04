@@ -1,6 +1,46 @@
 <title>Lịch Sử Mua Hàng</title>
 @extends('layouts.index')	
 @section('content')
+<!-- NAVIGATION -->
+        <nav id="navigation">
+            <!-- container -->
+            <div class="container">
+                <!-- responsive-nav -->
+                <div id="responsive-nav">
+                    <!-- NAV -->
+                    <ul class="main-nav nav navbar-nav">
+                        <li><a href="trangchu">Trang Chủ</a></li>
+                        <li><a href="hotdeals">Hot Deals</a></li>
+                        <li><a href="loaitin">Tin Tức</a></li>
+                        <li><a href="cuahang">Cửa Hàng</a></li>                                  
+                        <li><a href="lienhe">Liên Hệ</a></li>
+                    </ul>
+                    <!-- /NAV -->
+                </div>
+                <!-- /responsive-nav -->
+            </div>
+            <!-- /container -->
+        </nav>
+<!-- /NAVIGATION -->
+<!-- BREADCRUMB -->
+        <div id="breadcrumb" class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="breadcrumb-tree">
+                            <li><a>Trang Chủ</a></li>
+                            <li class="active"><a>Người Dùng</a></li>
+                            <li class="active"><a>Lịch Sử Mua Hàng</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /BREADCRUMB -->
 	<div class="section">
 			<!-- container -->
 			<div class="container">
@@ -32,7 +72,6 @@
 							<td>
 								@if($dh->tinhtrang == "apending")
 									<a class="btn btn-warning">Đang xử lý</a>
-					      			<a href="#"><i class="fa fa-trash-o"></i>Hủy</a>
 								@elseif($dh->tinhtrang == "confirmed")
 									<a class="btn btn-primary">Đã Xác Nhận</a>
 								@elseif($dh->tinhtrang == "delivery")

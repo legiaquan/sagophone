@@ -9,7 +9,7 @@
 						<div class="">
 							<div class="footer">
 								<h3 class="footer-title">Về SagonPhone</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+								<p>Hiện nay cửa hàng bán điện thoại SagoPhone chuyên cung cấp điện thoại của các hãng như: Apple, Samsung, Sony,…và dòng điện thoại thông minh khác. Ngoài ra cửa hàng còn cung cấp các sản phẩm phụ kiện khác như: tai nghe, ốp lưng, sạc dự phòng, dây sạc, cáp sạc,… và các dịch vụ sửa chữa, thay thế linh kiện điện thoại.</p>
 								<ul class="footer-links">
 									<li><a href="tel:19001560"><i class="fa fa-phone"></i> +1900-1560</a></li>
 									<li><a href="mailto:sagophone@gmail.com"><i class="fa fa-envelope-o"></i> sagophone@gmail.com</a></li>
