@@ -274,7 +274,7 @@ Route::get('cuahang','PageController@cuahang');
 
 Route::get('chitiet/{id}', 'PageController@chitietsp');
 
-Route::get('hotdeals','PageController@hotdeals');
+Route::get('banner/{id}','PageController@getBanner');
 
 Route::get('timkiem','PageController@timkiem')->name('find.product');
 

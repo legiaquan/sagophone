@@ -148,11 +148,11 @@ class PageController extends Controller
 
     public function trangchu()
     {
-        $hinh = Banner::where('id',2)->value('hinhbanner');
+        $banner = Banner::all();
         $hangdt3 = HangDT::take(3)->get();
     	return view('pages/trangchu',[
             'hangdt3' => $hangdt3,
-            'hinh' => $hinh
+            'banner' => $banner
         ]);
     	
     }
@@ -399,15 +399,15 @@ class PageController extends Controller
     	return view('pages/chitiet',['chitiet' => $chitiet, 'sanphamlienquan' => $sanphamlienquan, 'hinhchitiet' => $hinhchitiet]);
     }
 
-    public function hotdeals(Request $request)
+    public function getBanner($id,Request $request)
     {
-        $sanphamhotdealstt =  DB::table('tbchitietsanpham')
+        $banner =  DB::table('tbchitietsanpham')
                             ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                             ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
                             ->join('tbnhomsanpham','tbsanpham.id_nhom','tbnhomsanpham.id')
                             ->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
                             ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                            ->where('tbdanhsachbanner.id_banner','2')
+                            ->where('tbdanhsachbanner.id_banner',$id)
                             ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai');
         if($request->orderby)
         {
@@ -415,12 +415,12 @@ class PageController extends Controller
                 switch($orderby)
                 {
                     // case 'new' :
-                    //     $sanphamhotdealstt->orderBy('tbsanpham.id','DESC');
+                    //     $banner->orderBy('tbsanpham.id','DESC');
                     case 'price_max' :
-                        $sanphamhotdealstt->orderBy('gia','DESC');
+                        $banner->orderBy('gia','DESC');
                         break;
                     case 'price_min' :
-                        $sanphamhotdealstt->orderBy('gia','ASC');
+                        $banner->orderBy('gia','ASC');
                         break;
                     default:
                         
@@ -432,22 +432,22 @@ class PageController extends Controller
                 $price = $request->price;
                 switch ($price) {
                     case '1':
-                        $sanphamhotdealstt->where('gia','<',1000000)->orderBy('gia','ASC');
+                        $banner->where('gia','<',1000000)->orderBy('gia','ASC');
                         break;
                     case '2' :
-                        $sanphamhotdealstt->whereBetween('gia',[1000000,3000000])->orderBy('gia','ASC');
+                        $banner->whereBetween('gia',[1000000,3000000])->orderBy('gia','ASC');
                         break;
                     case '3' :
-                        $sanphamhotdealstt->whereBetween('gia',[3000000,5000000])->orderBy('gia','ASC');
+                        $banner->whereBetween('gia',[3000000,5000000])->orderBy('gia','ASC');
                         break;
                     case '4' :
-                        $sanphamhotdealstt->whereBetween('gia',[5000000,7000000])->orderBy('gia','ASC');
+                        $banner->whereBetween('gia',[5000000,7000000])->orderBy('gia','ASC');
                         break;
                     case '5' :
-                        $sanphamhotdealstt->whereBetween('gia',[7000000,1000000])->orderBy('gia','ASC');
+                        $banner->whereBetween('gia',[7000000,1000000])->orderBy('gia','ASC');
                         break;
                      case '6':
-                        $sanphamhotdealstt->where('gia','>',10000000)->orderBy('gia','ASC');
+                        $banner->where('gia','>',10000000)->orderBy('gia','ASC');
                         break;
                     default:
                        
@@ -459,16 +459,16 @@ class PageController extends Controller
                 $rom = $request->rom;
                 switch ($rom) {
                     case '32':
-                        $sanphamhotdealstt->where('rom','32');
+                        $banner->where('rom','32');
                         break;
                     case '64' :
-                        $sanphamhotdealstt->where('rom','64');
+                        $banner->where('rom','64');
                         break;
                     case '128':
-                        $sanphamhotdealstt->where('rom','128');
+                        $banner->where('rom','128');
                         break;
                     case '256' :
-                        $sanphamhotdealstt->where('rom','256');
+                        $banner->where('rom','256');
                         break;
                     default:
                        
@@ -481,19 +481,19 @@ class PageController extends Controller
             $id_hang = $request->id_hang;
             switch ($id_hang) {
                 case '1':
-                    $sanphamhotdealstt->where('id_hangdt','1');
+                    $banner->where('id_hangdt','1');
                     break;
                 case '2':
-                    $sanphamhotdealstt->where('id_hangdt','2');
+                    $banner->where('id_hangdt','2');
                     break;
                 case '3':
-                    $sanphamhotdealstt->where('id_hangdt','3');
+                    $banner->where('id_hangdt','3');
                     break;
                 case '4':
-                    $sanphamhotdealstt->where('id_hangdt','4');
+                    $banner->where('id_hangdt','4');
                     break;
                 case '5':
-                    $sanphamhotdealstt->where('id_hangdt','5');
+                    $banner->where('id_hangdt','5');
                     break;
                 default:
                      # code...
@@ -501,9 +501,9 @@ class PageController extends Controller
             }
                
         }
-        $sanphamhotdealstt = $sanphamhotdealstt->paginate(6);
-        $hinh = Banner::where('id',2)->value('hinhbanner');
-        return view('pages/hotdeals',['sanphamhotdealstt' => $sanphamhotdealstt, 'hinh' => $hinh]);
+        $sanphamhotdealstt = $banner->paginate(6);
+        $hinh = Banner::where('id',$id)->value('hinhbanner');
+        return view('pages/banner',['sanphamhotdealstt' => $sanphamhotdealstt, 'hinh' => $hinh]);
     }
 
     public function timkiem(Request $request)
