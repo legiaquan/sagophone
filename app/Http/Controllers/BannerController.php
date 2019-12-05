@@ -11,7 +11,7 @@ class BannerController extends Controller
 {
      public function getDanhSach()
     {
-    	$banner = Banner::orderBy('ngaybatdau','asc')->get();
+    	$banner = Banner::orderBy('trangthai','desc')->orderBy('ngaybatdau','asc')->get();
         $dembanner= DB::table('tbdanhsachbanner')->get();
         //var_dump($dembanner);
     	return view('admin.banner.danhsach',['banner'=>$banner,'dembanner'=>$dembanner]);
@@ -83,13 +83,12 @@ class BannerController extends Controller
     {
     	$this->validate($request,
         [
-            'txtTen'=>'required|unique:tbbanner,tenbanner|min:2|max:255',
+            'txtTen'=>'required|min:2|max:255',
             'txtNgaybatdau'=>'required',
             'txtNgayketthuc'=>'required'
         ],
         [
             'txtTen.required'=>'Bạn chưa nhập tên banner',
-            'txtTen.unique'=>'Tên banner đã tồn tại',
             'txtTen.min'=>'Tên banner phải có độ dài từ 2 cho đến 50 ký tự',
             'txtTen.max'=>'Tên banner phải có độ dài từ 2 cho đến 50 ký tự',
             'txtNgaybatdau.required'=>'Bạn chưa chọn ngày bắt đầu',

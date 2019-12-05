@@ -52,7 +52,18 @@
                                                     @endif
                                                 </td>
                                                 <td>{{ $row->ngaybatdau }}</td>
-                                                <td>{{ $row->ngayketthuc }}</td>
+                                                <?php 
+                                                $ngaykt = strtotime($row->ngayketthuc);
+                                                $ngayhientai = strtotime(date("Y-m-d"));
+                                                $checkNgay = $ngaykt - $ngayhientai;
+                                                ?>
+                                                <td>
+                                                    @if($checkNgay >0)
+                                                    {{$row->ngayketthuc }}
+                                                    @else
+                                                    <span style="color: tomato">{{$row->ngayketthuc }}</span>
+                                                    @endif
+                                                </td>
                                                 <td width="100px" align="center">
                                                     <a  href="admin/banner/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a><br>
                                                     <a href="admin/banner/xoa/{{ $row->id }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2"> Xóa</i></span></a>
