@@ -8,7 +8,6 @@ class ChiTietDonHang extends Model
 {
     //
     protected $table = "tbchitietdonhang";
-    public $timestamps = false;
     
     public function chitietsanpham()
     {

@@ -48,29 +48,27 @@ class PageController extends Controller
 		$sanphammoi =       DB::table('tbchitietsanpham')
                             ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                             ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-                            ->join('tbnhomsanpham','tbsanpham.id_nhom','tbnhomsanpham.id')
                             ->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
                             ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
                             ->where('tbdanhsachbanner.id_banner','3')
-                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai')
+                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai', 'tbdanhsachbanner.id_banner','tbmau.mau')
                             ->get();
 		$sanphambanchay =   DB::table('tbchitietsanpham')
                             ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                             ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-                            ->join('tbnhomsanpham','tbsanpham.id_nhom','tbnhomsanpham.id')
                             ->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
                             ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
                             ->where('tbdanhsachbanner.id_banner','4')
-                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai')
+                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai', 'tbdanhsachbanner.id_banner','tbmau.mau')
                             ->get();
 		$sanphamhotdeals =  DB::table('tbchitietsanpham')
                             ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                             ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-                            ->join('tbnhomsanpham','tbsanpham.id_nhom','tbnhomsanpham.id')
                             ->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
                             ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
                             ->where('tbdanhsachbanner.id_banner','2')
-                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai')
+                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai','tbmau.mau'
+                                ,'tbdanhsachbanner.id_banner')
                             ->get();
 		$sanphambanchay1 =   DB::table('tbchitietsanpham')
                             ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
@@ -149,10 +147,23 @@ class PageController extends Controller
     public function trangchu()
     {
         $banner = Banner::all();
-        $hangdt3 = HangDT::take(3)->get();
+        $apple = SanPham::join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->where('id_hangdt',1)->inRandomOrder()->first();
+        $samsung = SanPham::join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->where('id_hangdt',2)->inRandomOrder()->first();
+        $nokia = SanPham::join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+        ->where('id_hangdt',4)->inRandomOrder()->first();
+        $bannerhotdeals = Banner::where('id',2)->first();
+        $bannernew = Banner::where('id',3)->first();
+        $bannerbanchay = Banner::where('id',4)->first();
     	return view('pages/trangchu',[
-            'hangdt3' => $hangdt3,
-            'banner' => $banner
+            'apple' => $apple,
+            'banner' => $banner,
+            'samsung' => $samsung,
+            'nokia' => $nokia,
+            'bannerhotdeals' => $bannerhotdeals,
+            'bannernew' => $bannernew,
+            'bannerbanchay' => $bannerbanchay
         ]);
     	
     }

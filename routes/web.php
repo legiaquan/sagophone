@@ -155,9 +155,6 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		Route::get('sua/{id}','BannerController@getSua');
 		Route::post('sua/{id}','BannerController@postSua');
 		
-		Route::get('show/{id}','BannerController@getShow');
-		Route::get('hide/{id}','BannerController@getHide');
-
 		Route::get('them','BannerController@getThem');
 		Route::post('them/{id_admins}','BannerController@postThem');
 
@@ -170,14 +167,14 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		// admin/hangdt/danhsach
 		Route::get('danhsach/{id}','DanhSachBannerController@getDanhSach');
 
-		Route::get('sua/{id}','DanhSachBannerController@getSua');
-		Route::post('sua/{id}','DanhSachBannerController@postSua');
+		Route::get('sua/{id}/{id_sanpham}','DanhSachBannerController@getSua');
+		Route::post('sua/{id}/{id_sanpham}','DanhSachBannerController@postSua');
 
 		Route::get('them/{id}','DanhSachBannerController@getThem');
-		Route::get('them/{id}/{id_chitietsanpham}','DanhSachBannerController@activeThem');
+		Route::get('them/{id}/{id_sanpham}','DanhSachBannerController@activeThem');
 
-		Route::get('xoa/{id}/{id_chitietsanpham}','DanhSachBannerController@getXoa');
-		Route::post('xoa/{id}/{id_chitietsanpham}','DanhSachBannerController@postXoa');
+		Route::get('xoa/{id}/{id_sanpham}','DanhSachBannerController@getXoa');
+		Route::post('xoa/{id}/{id_sanpham}','DanhSachBannerController@postXoa');
 	});
 
 
@@ -274,7 +271,7 @@ Route::get('cuahang','PageController@cuahang');
 
 Route::get('chitiet/{id}', 'PageController@chitietsp');
 
-Route::get('banner/{id}','PageController@getBanner');
+Route::get('hotdeals','PageController@hotdeals');
 
 Route::get('timkiem','PageController@timkiem')->name('find.product');
 
@@ -294,6 +291,12 @@ Route::get('nguoidung','PageController@getNguoiDung');
 
 Route::post('nguoidung','PageController@postNguoiDung');
 
+Route::get('danhgia/{id}','ShoppingCartController@getDanhgia');
+
+Route::post('danhgia/{id}','ShoppingCartController@postDanhgia');
+
+Route::post('capnhatdanhgia/{$id}','ShoppingCartController@updateDanhgia');
+
 Route::group(['prefix' => 'shopping'],function(){
 	Route::get('/add/{id}','ShoppingCartController@addProduct')->name('add.shopping.cart');//thêm mới vào giỏ hàng
 	Route::get('/cart','ShoppingCartController@getListShoppingCart')->name('get.list.shopping.cart');//trang giỏ hàng
@@ -303,6 +306,7 @@ Route::group(['prefix' => 'shopping'],function(){
 		Route::get('pay','ShoppingCartController@payCart')->name('pay.cart');//trang thanh toán
 		Route::post('pay','ShoppingCartController@saveCart');//lưu thông tin thanh toán
 		Route::get('paysuccess','ShoppingCartController@successCart');//thanh toan thanh cong
+
 	});
 });
 Route::get('lichsumuahang','ShoppingCartController@lichsumuahang');

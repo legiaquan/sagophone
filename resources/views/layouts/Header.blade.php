@@ -82,14 +82,14 @@
 
 								<form id="form_search" action="timkiem" class="tree-most"  role="search" method="GET">
 									
- 									<select name="timkiem" class="input-select">
-										<option value="">Chọn hãng ...</option>
+ 									<select name="timkiem" class="input-select col-lg-3">
+										<option value="">Chọn hãng</option>
 										@foreach($hangdt as $hdt)
 											<option value="{{$hdt->id}}">{{$hdt->tenhang}}</option>
 										@endforeach
 									</select>								
-										<input class="input" name="keyword" placeholder="Nhập sản phẩm cần tìm">
-									<button type="submit" class="search-btn">Tìm</button>
+										<input class="input col-lg-3" name="keyword" placeholder="Nhập sản phẩm cần tìm">
+									<button type="submit" class="search-btn col-lg-3">Tìm</button>
 								</form>
 							</div>
 						</div>

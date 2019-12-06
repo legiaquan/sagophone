@@ -8,7 +8,7 @@ class ChiTietSanPham extends Model
 {
     //
     protected $table = "tbchitietsanpham";
-    public $timestamps = false;
+
     public function mau()
     {
     	return $this->belongsTo('App\Mau','id_mau','id');

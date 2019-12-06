@@ -32,9 +32,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="breadcrumb-tree">
-                            <li><a>Trang Chủ</a></li>
-                            <li class="active"><a>Người Dùng</a></li>
-                            <li class="active"><a>Thông Tin Tài Khoản</a></li>
+                            <li><a href="trangchu">Trang Chủ</a></li>
+                            <li class="active"><a href="nguoidung">Thông Tin Tài Khoản</a></li>
                         </ul>
                     </div>
                 </div>

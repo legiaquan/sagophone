@@ -21,7 +21,7 @@ function giaKhuyenMai($gia,$phantram)
 function avgStarSanPham($id_donhang)
 {
 	$avgStar = DB::table('tbchitietdonhang')
-			->where('id_donhang', $id_donhang)
+			->where('id_chitietsanpham', $id_donhang)
 			->avg('tbchitietdonhang.star');
 	return $avgStar;
 }
@@ -90,3 +90,15 @@ function getSoLuongCTDH($id_chitietsanpham,$id_donhang)
 			->value('tbchitietdonhang.soluong');
 	return $check;
 }
+function getBanner($id)
+{
+	$test = DB::table('tbdanhsachbanner')->where('id_chitietsanpham',$id)->value('id_banner');
+	$test1 = DB::table('tbdanhsachbanner')->where('id_chitietsanpham',$id)->orderBy('id_banner','DESC')->value('id_banner');
+	$banner = DB::table('tbchitietsanpham')
+			->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
+			->where('id_chitietsanpham',$id)
+			->value('tbdanhsachbanner.id_banner');
+	return $banner;
+
+}
+

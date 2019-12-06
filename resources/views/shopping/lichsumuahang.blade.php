@@ -30,10 +30,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="breadcrumb-tree">
-                            <li><a>Trang Chủ</a></li>
-                            <li class="active"><a>Người Dùng</a></li>
-                            <li class="active"><a>Lịch Sử Mua Hàng</a></li>
-                        </ul>
+							<li><a href="trangchu">Trang Chủ</a></li>
+							<li class="active"><a href="lichsumuahang">Lịch Sử Mua Hàng</a></li>
+						</ul>
                     </div>
                 </div>
                 <!-- /row -->

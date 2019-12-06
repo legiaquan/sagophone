@@ -30,11 +30,10 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="breadcrumb-tree">
-                            <li><a>Trang Chủ</a></li>
-                            <li class="active"><a>Người Dùng</a></li>
-                            <li class="active"><a>Lịch Sử Mua Hàng</a></li>
-                            <li class="active"><a>Chi Tiết Đơn Hàng</a></li>
-                        </ul>
+							<li><a href="trangchu">Trang Chủ</a></li>
+							<li><a href="lichsumuahang">Lịch Sử Mua Hàng</a></li>
+							<li><a class="active" href="chitietdonhang/{{ $tinhtrang->id }}">Chi Tiết Đơn Hàng {{$tinhtrang->madh}}</a></li>
+						</ul>
                     </div>
                 </div>
                 <!-- /row -->
@@ -50,37 +49,37 @@
                 <div class="row">
                     <div style="display: table; margin: auto; height: 50px; text-align: center;">
                     	<h3>Trạng Thái Đơn Hàng <i class="fa fa-truck"> </i> 
-                    		@if($tinhtrang == "cancel")
+                    		@if($tinhtrang->tinhtrang == "cancel")
 	                       	 	<span class="step step_complete"> <a class="btn btn-default" style="font-weight: bolder;">Đã Hủy</a> <span class="step_line "></span> <span class="step_line step_complete"> </span> </span>
                     		@endif
                     	</h3><br>
-                    	@if($tinhtrang == "apending")
+                    	@if($tinhtrang->tinhtrang == "apending")
 							<span class="step step_complete"> <a class="btn btn-warning" style="font-weight: bolder;">Đang Xử Lý</a> <span class="step_line step_complete"> </span> <span class="step_line backline"> <i class="fa fa-arrow-right"> </i> </span> </span>
 	                        <span class="step step_complete"> <a class="btn btn-primary" style="opacity: 0.4;">Đã Xác Nhận</a> <span class="step_line step_complete"> </span> <span class="step_line backline">  <i class="fa fa-arrow-right"> </i> </span> </span>
 	                        <span class="step step_complete"> <a class="btn btn-info" style="opacity: 0.4">Đang Vận Chuyển</a> <span class="step_line step_complete"> </span> <span class="step_line backline">  <i class="fa fa-arrow-right"> </i> </span> </span>
 	                        <span class="step step_complete"> <a class="btn btn-success" style="opacity: 0.4">Đã Hoàn Thành</a> <span class="step_line "> </span> <span class="step_line step_complete"> </span> </span>
-	                    @elseif($tinhtrang == "confirmed")
+	                    @elseif($tinhtrang->tinhtrang == "confirmed")
 	                    	<span class="step step_complete"> <a class="btn btn-warning" style="opacity: 0.4;">Đang Xử Lý</a> <span class="step_line step_complete"> </span> <span class="step_line backline"> <i class="fa fa-arrow-right"> </i> </span> </span>
 	                        <span class="step step_complete"> <a class="btn btn-primary" style="font-weight: bolder;">Đã Xác Nhận</a> <span class="step_line step_complete"> </span> <span class="step_line backline">  <i class="fa fa-arrow-right"> </i> </span> </span>
 	                        <span class="step step_complete"> <a class="btn btn-info" style="opacity: 0.4">Đang Vận Chuyển</a> <span class="step_line step_complete"> </span> <span class="step_line backline">  <i class="fa fa-arrow-right"> </i> </span> </span>
 	                        <span class="step step_complete"> <a class="btn btn-success" style="opacity: 0.4">Đã Hoàn Thành</a> <span class="step_line "> </span> <span class="step_line step_complete"> </span> </span>
-	                    @elseif($tinhtrang == "delivery")
+	                    @elseif($tinhtrang->tinhtrang == "delivery")
 	                    	<span class="step step_complete"> <a class="btn btn-warning" style="opacity: 0.4;">Đang Xử Lý</a> <span class="step_line step_complete"> </span> <span class="step_line backline"> <i class="fa fa-arrow-right"> </i> </span> </span>
 	                        <span class="step step_complete"> <a class="btn btn-primary" style="opacity: 0.4" >Đã Xác Nhận</a> <span class="step_line step_complete"> </span> <span class="step_line backline">  <i class="fa fa-arrow-right"> </i> </span> </span>
 	                        <span class="step step_complete"> <a class="btn btn-info" style="font-weight: bolder;">Đang Vận Chuyển</a> <span class="step_line step_complete"> </span> <span class="step_line backline">  <i class="fa fa-arrow-right"> </i> </span> </span>
 	                        <span class="step step_complete"> <a class="btn btn-success" style="opacity: 0.4">Đã Hoàn Thành</a> <span class="step_line "> </span> <span class="step_line step_complete"> </span> </span>
-						 @elseif($tinhtrang == "complete")
+						 @elseif($tinhtrang->tinhtrang == "complete")
 	                    	<span class="step step_complete"> <a class="btn btn-warning" style="opacity: 0.4;">Đang Xử Lý</a> <span class="step_line step_complete"> </span> <span class="step_line backline"> <i class="fa fa-arrow-right"> </i> </span> </span>
 	                        <span class="step step_complete"> <a class="btn btn-primary" style="opacity: 0.4">Đã Xác Nhận</a> <span class="step_line step_complete"> </span> <span class="step_line backline">  <i class="fa fa-arrow-right"> </i> </span> </span>
 	                        <span class="step step_complete"> <a class="btn btn-info" style="opacity: 0.4">Đang Vận Chuyển</a> <span class="step_line step_complete"> </span> <span class="step_line backline">  <i class="fa fa-arrow-right"> </i> </span> </span>
-	                        <span class="step step_complete"> <a class="btn btn-success" style="font-weight: bolder;">Đã Hoàn Thành</a> <span class="step_line "> </span> <span class="step_line step_complete"> </span> <i class="fa fa-arrow-right"> </i> </span>
+	                        <span class="step step_complete"> <a class="btn btn-success" style="font-weight: bolder;">Đã Hoàn Thành</a> <span class="step_line "> </span> <span class="step_line step_complete"> </span></span>
 
 	                 
 	                     @else
 	                     	<span class="step step_complete"> <a class="btn btn-warning" style="opacity: 0.4;">Đang Xử Lý</a> <span class="step_line step_complete"> </span> <span class="step_line backline"> <i class="fa fa-arrow-right"> </i> </span> </span>
 	                        <span class="step step_complete"> <a class="btn btn-primary" style="opacity: 0.4">Đã Xác Nhận</a> <span class="step_line step_complete"> </span> <span class="step_line backline">  <i class="fa fa-arrow-right"> </i> </span> </span>
 	                        <span class="step step_complete"> <a class="btn btn-info" style="opacity: 0.4">Đang Vận Chuyển</a> <span class="step_line step_complete"> </span> <span class="step_line backline">  <i class="fa fa-arrow-right"> </i> </span> </span>
-	                        <span class="step step_complete"> <a class="btn btn-success" style="opacity: 0.4">Đã Hoàn Thành</a> <span class="step_line "> </span> <span class="step_line step_complete"> </span> <i class="fa fa-arrow-right"> </i> </span>
+	                        <span class="step step_complete"> <a class="btn btn-success" style="opacity: 0.4">Đã Hoàn Thành</a> <span class="step_line "> </span> <span class="step_line step_complete"> </span></span>
                     	@endif
                        {{--  <span class="step step_complete"> <a href="#" class="btn btn-warning">Đang Xử Lý</a> <span class="step_line step_complete"> </span> <span class="step_line backline"> <i class="fa fa-arrow-right"> </i> </span> </span>
                         <span class="step step_complete"> <a href="#" class="btn btn-primary">Đã Xác Nhận</a> <span class="step_line step_complete"> </span> <span class="step_line backline">  <i class="fa fa-arrow-right"> </i> </span> </span>
@@ -113,8 +112,9 @@
 		                                <div class="col-sm-6 col-xs-6">
 		                                    <div class="col-xs-12">{{$chitiet->chitietsanpham->sanpham->tensp}} {{$chitiet->chitietsanpham->mau->mau}}</div>
 		                                    <div class="col-xs-12"><small>Số lượng x <span>{{$chitiet->soluong}}</span></small></div>
+
 		                                </div>
-		                                <div class="col-sm-3 col-xs-3 text-right">
+		                                 <div class="col-sm-3 col-xs-3">
 		                                	<?php 
                     							$getphantram = getPhanTram($chitiet->id_chitietsanpham);
                     						?>
@@ -124,9 +124,28 @@
 												<h6>{{number_format($chitiet->chitietsanpham->gia,0,',','.')}} <span>VND</span> </h6>
 		                                    @endif
 		                                </div>
-		                            </div>
+			                           	<div class="col-sm-0 col-xs-0">
+				                                    <div class="col-xs-3">
+					                                    @if($tinhtrang->tinhtrang == "complete")
+					                                		<!-- Button trigger modal -->
+					                                		@if($chitiet->star == null)
+																<a href="danhgia/{{$chitiet->id}}" class="btn btn-primary" style="font-weight: bold;">
+																  ĐÁNH GIÁ
+																</a>
+															@else
+																<a href="danhgia/{{$chitiet->id}}" class="btn btn-success" style="font-weight: bold;">
+																  ĐÃ ĐÁNH GIÁ
+																</a>
+															@endif
+														@endif
+				                                	</div>	                                    
+				                        </div>
+		                               
+		                          </div>
 	                            @endforeach
-	                           	<div class="form-group"><hr /></div>
+	                           	<div class="form-group">
+	                           		<hr />
+	                           	</div>
                             <div class="form-group">
 	                                <div class="col-xs-12">
 	                                    <strong><h4>Tổng Tiền</h4></strong>
@@ -138,7 +157,7 @@
 	                        <hr />
 	                        <div class="form-group">
                                 <div class="col-md-12" style="text-align: right;">
-                                	@if($tinhtrang == "apending")
+                                	@if($tinhtrang->tinhtrang == "apending")
 										<button type="submit" class="btn btn-danger" onclick="return confirm('Chọn OK để Hủy')">Hủy Đơn Hàng</button>
 									@endif
                                 </div>

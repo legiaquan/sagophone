@@ -149,7 +149,7 @@ class ShoppingCartController extends Controller
     public function chitietdonhang($id)
     {
         $chitietdonhang = ChiTietDonHang::where('id_donhang',$id)->get();
-        $tinhtrang = DonHang::where('id',$id)->value('tinhtrang');
+        $tinhtrang = DonHang::where('id',$id)->select('id','tinhtrang','madh')->first();
         return view('shopping.chitietdonhang',['chitietdonhang' => $chitietdonhang, 'tinhtrang' => $tinhtrang]);
     }
 
@@ -160,4 +160,50 @@ class ShoppingCartController extends Controller
         $donhang->save();
         return redirect()->back();
     }
+
+    public function getDanhgia($id)
+    {
+        $chitiet = ChiTietDonHang::find($id);
+        $danhgia = ChiTietDonHang::where('id_chitietsanpham',$chitiet->id_chitietsanpham)
+        ->where('star','!=','null')
+        ->paginate(3);
+        $sodanhgia = count(ChiTietDonHang::where('id_chitietsanpham',$chitiet->id_chitietsanpham)
+        ->where('star','!=','null')->get());
+        return view('shopping.danhgia',['chitiet' => $chitiet, 'danhgia' => $danhgia, 'sodanhgia' => $sodanhgia]);
+    }
+    public function postDanhgia($id, Request $request)
+    {
+        $danhgia = ChiTietDonHang::find($id);
+        if($danhgia->star == null)
+        {
+            $this->validate($request,
+            [
+            'rating' => 'required'
+            ]
+        ,
+            [
+                'rating.required' => 'Vui lòng đánh số sao!'
+            ]);
+            $danhgia->nhanxet = $request->danhgia;
+            $danhgia->star = $request->rating;
+        }
+        else
+        {
+            $danhgia->nhanxet = $request->danhgia;
+            $danhgia->star = $request->rating;
+        }    
+        $danhgia->save();
+        return redirect()->back();
+    }
+
+     public function updateDanhgia($id, Request $request)
+     {
+        $danhgia = ChiTietDonHang::find($id);
+        $danhgia->nhanxet = $request->danhgia;
+        if($request->rating)
+            $danhgia->star = $request->rating;
+        $danhgia->save();
+        return redirect()->back();
+     }
+    
 }
