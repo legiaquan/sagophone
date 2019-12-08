@@ -1,4 +1,4 @@
-<title>Tin Tức</title>
+<title>Chi Tiết Tin Tức</title>
 @extends('layouts.index')
 
 @section('content')
@@ -10,12 +10,11 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="trangchu">Trang Chủ</a></li>
-                        <li><a href="hotdeals">Hot Deals</a></li>
+                        <li><a href="trangchu">Trang Chủ</a></li>
                         <li class="active"><a href="loaitin">Tin Tức</a></li>
-                        <li><a href="cuahang">Cửa Hàng</a></li>
+                        <li><a href="cuahang">Cửa Hàng</a></li>                                 
                         <li><a href="lienhe">Liên Hệ</a></li>
-					</ul>
+                    </ul>
 					<!-- /NAV -->
 				</div>
 				<!-- /responsive-nav -->
@@ -32,9 +31,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="breadcrumb-tree">
-                            <li><a>Trang Chủ</a></li>
-                            <li class="active"><a>Tin Tức</a></li>
-                            <li class="active"><a>{{ mb_substr($tintuc->tieude,0,50,'UTF-8').'...' }}</a></li>
+                            <li><a href="trangchu">Trang Chủ</a></li>
+                            <li class="active"><a href="tintuc">Tin Tức</a></li>
+                            <li class="active"><a href="tintuc/{{ $tintuc->id }}">{{ mb_substr($tintuc->tieude,0,50,'UTF-8').'...' }}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -54,19 +53,21 @@
                 <!-- Blog Post -->
 
                 <!-- Title -->
-                <h1>{{$tintuc->tieude}}</h1>
-
+                <h1 class="text-justify">{{$tintuc->tieude}}</h1>
+                <br>
+                <span class="glyphicon glyphicon-pencil text-right"></span> Đăng vào {{$tintuc->created_at}}</p>
+                Bỏi <a class="product-name text-right">{{$tenadmin}}</a>
                
-                
+                <hr>
 
 
                 <!-- Preview Image -->
                 <img class="img-responsive" src="upload/imgTinTuc/{{$tintuc->img}}" alt="" width="1000px" height="">
 
-          
+                
 
                 <!-- Post Content -->
-                <p class="lead">
+                <p class="lead text-justify">
                     {!! $tintuc->noidung !!} <!-- chèn css html -->
                 </p>
 
@@ -84,50 +85,48 @@
             <div class="col-md-3">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="background-color:#FA8258;"><h5 style="color: white">TIN LIÊN QUAN</h5></div>
+                    <div class="panel-heading" style="background-color:#2A140F;"><h5 style="color: white">TIN LIÊN QUAN</h5></div>
                     <div class="panel-body">
 
                          <!-- item -->
                          @foreach($tinlienquan as $tlq)
                         <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-5">
+                            <div class="col-lg-5">
                                 <a href="tintuc/{{$tlq->id}}">
-                                    <img class="img-responsive" src="upload/imgTinTuc/{{$tlq->img}}" alt="">
+                                    <img src="upload/imgTinTuc/{{$tlq->img}}" width="90px" height="90px" alt="">
                                 </a>
                             </div>
-                            <div class="col-md-7">
-                                <a href="tintuc/{{$tlq->id}}"><b>{{$tlq->tieude}}</b></a>
-                                <br>
-                                <p>{{ mb_substr($tlq->mota,0,50,'UTF-8').'...' }}</p>
+                            <div class="col-md-7 text-justify">
+                                <a href="tintuc/{{$tlq->id}}" style="font-size: 13px;"><b>{{$tlq->tieude}}</b></a>
                             </div>
                             
                             <div class="break"></div>
                         </div>
+                        <hr>
                         @endforeach
                         <!-- end item -->
                     </div>
                 </div>
 
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="background-color:#FA8258;"><h5 style="color: white">TIN KHUYẾN MÃI</h5></div>
+                    <div class="panel-heading" style="background-color:#AB280B;"><h5 style="color: white">TIN KHÁC</h5></div>
                     <div class="panel-body">
-                        @foreach($tinkhuyenmai as $tkm)
+                        @foreach($tinkhac as $tkm)
                         <!-- item -->
                         <div class="row" style="margin-top: 10px;">
                             <div class="col-md-5">
                                 <a href="tintuc/{{$tkm->id}}">
-                                    <img class="img-responsive" src="upload/imgSanPham/{{$tkm->img}}" alt="">
+                                    <img src="upload/imgTinTuc/{{$tkm->img}}" width="90px" height="90px"  alt="">
                                 </a>
                             </div>
-                            <div class="col-md-7">
-                                <a href="tintuc/{{$tkm->id}}"><b>{{$tkm->tieude}}</b></a>
-                                <br>
-                                <p>{{ mb_substr($tlq->mota,0,50,'UTF-8').'...' }}</p>
+                            <div class="col-md-7 text-justify">
+                                <a href="tintuc/{{$tkm->id}}" style="font-size: 13px;"><b>{{$tkm->tieude}}</b></a>
                             </div>
 
                             <div class="break"></div>
                         </div>
                         <!-- end item -->
+                        <hr>
                         @endforeach
                     </div>
                 </div>
@@ -136,10 +135,13 @@
         
         </div>
         <p class="lead">
-            <span class="glyphicon glyphicon-pencil"></span> Đăng vào {{$tintuc->created_at}}</p>
-            Bỏi <a>{{$tenadmin}}</a>
-            <p style="text-align: right; padding-right: 300px">
-                <a href="loaitin" style="font-size: 20px" >Quay Lại</a>
+            <p>
+                <a href="trangchu" style="font-size: 20px" >Trang Chủ</a>
+                @if(isset($tinketiep))
+                    <a href="tintuc/{{ $tinketiep->id }}" style="font-size: 20px; text-align: right; padding-left: 650px" >Tin Kế Tiếp</a>
+                @else
+                    <a href="loaitin" style="font-size: 20px; text-align: right; padding-left: 650px" >Tin Tức</a>
+                @endif
             </p>
         </p>
 

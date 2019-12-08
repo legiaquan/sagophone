@@ -111,18 +111,22 @@
 								$starnguyen = floor(avgStarSanPham($chitiet->id_chitietsanpham));
 							?>
 							<div class="product-preview" style="text-align: center">
-								<div class="review-rating">
-									@for($i=0;$i<$starnguyen;$i++)
-										@if($i < $star)
-											<i class="fa fa-star checked"></i>
+								@if($star != null)
+									<div class="review-rating">
+										@for($i=0;$i<$starnguyen;$i++)
+											@if($i < $star)
+												<i class="fa fa-star checked"></i>
+											@endif
+										@endfor
+										@if($star >= ($starnguyen + 0.5))
+											<i class="fa fa-star-half-o checked"></i>
 										@endif
-									@endfor
-									@if($star >= ($starnguyen + 0.5))
-										<i class="fa fa-star-half-o checked"></i>
+									</div>
+									@if(avgStarSanPham($chitiet->id_chitietsanpham) != null)
+											({{ $star }} / 5 <i class="fa fa-star checked"></i>)
 									@endif
-								</div>
-								@if(avgStarSanPham($chitiet->id_chitietsanpham) != null)
-										({{ $star }} / 5 <i class="fa fa-star checked"></i>)
+								@else
+									<a style="font-size: 12px">(Chưa có đánh giá)</a>
 								@endif
 							</div>
 
@@ -171,9 +175,5 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-<style>
-	.checked {
-	  color: #BB2404;
-	}
-</style>
+
 @endsection

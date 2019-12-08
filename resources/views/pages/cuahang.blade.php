@@ -11,7 +11,6 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="trangchu">Trang Chủ</a></li>
-						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
 						<li class="active"><a href="cuahang">Cửa Hàng</a></li>									
 						<li><a href="lienhe">Liên Hệ</a></li>
@@ -31,8 +30,8 @@
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
-							<li><a>Trang Chủ</a></li>
-							<li class="active"><a>Cửa Hàng</a></li>
+							<li><a href="trangchu">Trang Chủ</a></li>
+							<li class="active"><a href="cuahang">Cửa Hàng</a></li>
 						</ul>
 					</div>
 				</div>
@@ -42,6 +41,30 @@
 		</div>
 		<!-- /BREADCRUMB -->
 
+<!-- ##### Hero Area Start ##### -->
+    <div class="hero-area">
+        <div class="container">
+            <div class="row align-items-center">
+                
+                   
+
+                <!-- Hero Add -->
+                <div class="col-3 col-lg-15 text-center" style="padding-left: 100px; font-size: 20px; font-weight: bolder;">
+                    <div class="hero-add">
+
+                        &nbsp;&nbsp;
+                        @foreach($banner as $bn)
+                            @if(count($bn->danhsachbanner) > 0)
+                                <a class="{{Request::get('id_banner') == $bn->id ? 'btn btn-success btn-lg active' : ''}}" href="{{ request()->fullUrlWithQuery(['id_banner' => $bn->id]) }}" class="product-category" style="font-size: 20px; font-weight: bolder; border: dotted; color: black">{{$bn->tenbanner}}</a>
+                            @endif
+                            &nbsp;&nbsp;
+                        @endforeach
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+    <!-- ##### Hero Area End ##### -->
 <!-- SECTION -->
 <div class="section">
 			<!-- container -->
@@ -57,7 +80,7 @@
 							<div class="checkbox-filter">							
 								<div class="">
 									<label>
-										<a class="{{Request::get('id_nhom') == $nsp->id? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['id_nhom' => $nsp->id]) }}">
+										<a class="{{Request::get('id_nhom') == $nsp->id? 'btn btn-info' : ''}}" href="{{ request()->fullUrlWithQuery(['id_nhom' => $nsp->id]) }}"style="font-size: 15px; font-weight: bolder; color: black">
 											{{$nsp->tennhom}}
 										</a>
 									</label>
@@ -76,96 +99,6 @@
 						<!-- /aside Widget -->
 
 						
-						<div class="aside">
-							<h3 class="aside-title"><a style="font-weight: bolder;">Thương Hiệu</a></h3>
-							@foreach($hangdt as $hdt)
-								
-								<ul>
-									<li><a class="{{Request::get('id_hang') == $hdt->id? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['id_hang' => $hdt->id]) }}">{{$hdt->tenhang}}</a></li><br>
-								</ul>
-								
-							@endforeach
-							
-						</div>
-						<!-- aside Widget -->
-						<div class="aside">
-							<h3 class="aside-title"><a style="font-weight: bolder;">Lọc Theo Giá</a></h3>
-							
-								<ul>
-									<li><a class="{{Request::get('gia') == 1 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 1]) }}">Dưới 1.000.000 VND</a></li><br>
-									<li><a class="{{Request::get('gia') == 2 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 2]) }}">1.000.000 - 3.000.000 VND</a></li><br>
-									<li><a class="{{Request::get('gia') == 3 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 3]) }}">3.000.000 - 5.000.000 VND</a></li><br>
-									<li><a class="{{Request::get('gia') == 4 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 4]) }}">5.000.000 - 7.000.000 VND</a></li><br>
-									<li><a class="{{Request::get('gia') == 5 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 5]) }}">7.000.000 - 10.000.000 VND</a></li><br>
-									<li><a class="{{Request::get('gia') == 6 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 6]) }}">Trên 10.000.000 VND</a></li><br>
-								</ul>
-						
-							
-							
-						</div>
-						<div class="aside">
-							<h3 class="aside-title"><a style="font-weight: bolder;">ROM</a></h3>
-							
-								<ul>
-									<li><a class="{{Request::get('rom') == 32 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 32]) }}">32 GB</a></li><br>
-									<li><a class="{{Request::get('rom') == 64 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 64]) }}">64 GB</a></li><br>
-									<li><a class="{{Request::get('rom') == 128 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 128]) }}">128 GB</a></li><br>
-									<li><a class="{{Request::get('rom') == 256 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['rom' => 256]) }}">256 GB</a></li><br>
-								</ul>
-			
-						</div>
-						<div class="aside">
-							<h3 class="aside-title">Sản Phẩm Bán Chạy</h3>
-							<div class="products-widget-slick" data-nav="#slick-nav-6">
-							<div>
-								<!-- product widget -->
-								@foreach($sanphambanchay1 as $spbc1)
-								<div class="product-widget">
-									<div class="product-img">
-										<a href="chitiet/{{$spbc1->id}}">
-											<img src="upload/imgSanPham/{{$spbc1->hinhsp}}" alt="" width="70px" height="70px">
-										</a>
-									</div>
-									<div class="product-body">
-										<p class="product-category">{{$spbc1->tenhang}}</p>
-										<h3 class="product-name"><a href="chitiet/{{$spbc1->id}}">{{$spbc1->tensp}}</a></h3>
-										<h4 class="product-price">
-											@if($spbc1->phantramkhuyenmai != null)
-												<del class="product-old-price">{{number_format($spbc1->gia,0,',','.')}}</del>{{number_format($spbc1->gia * (100 - $spbc1->phantramkhuyenmai) / 100,0,',','.')}}VND
-												@else
-													{{number_format($spbc1->gia,0,',','.')}}VND
-											@endif
-										</h4>
-									</div>
-								</div>
-								@endforeach							
-							</div>
-							<div>
-								<!-- product widget -->
-								@foreach($sanphambanchay2 as $spbc2)
-								<div class="product-widget">
-									<div class="product-img">
-										<a href="chitiet/{{$spbc2->id}}">
-											<img src="upload/imgSanPham/{{$spbc2->hinhsp}}" alt="" width="70px" height="70px">
-										</a>
-									</div>
-									<div class="product-body">
-										<p class="product-category">{{$spbc2->tenhang}}</p>
-										<h3 class="product-name"><a href="chitiet/{{$spbc2->id}}">{{$spbc2->tensp}}</a></h3>
-										<h4 class="product-price">
-											@if($spbc2->phantramkhuyenmai != null)
-												<del class="product-old-price">{{number_format($spbc2->gia,0,',','.')}}</del>{{number_format($spbc2->gia * (100 - $spbc2->phantramkhuyenmai) / 100,0,',','.')}}VND
-												@else
-													{{number_format($spbc2->gia,0,',','.')}}VND
-											@endif
-										</h4>
-									</div>
-								</div>
-								@endforeach							
-							</div>
-							</div>
-						</div>
-						<!-- /aside Widget -->
 						<div class="col-md-9">
 							<br/>
 							<div class="row filter_data">
@@ -178,71 +111,138 @@
 					
 					<!-- STORE -->
 					<div id="store" class="col-md-9">
-						
 							<!-- store top filter -->
-							<div class="store-filter clearfix" style="text-align: right;">
+							<div class="store-filter" style="text-align: left;">
 
-								<form class="tree-most" id="form_order" method="GET">
-								<div class="store-sort">
-										Sắp xếp theo :  			
-											<select name="orderby" class="input-select1">
-												<option class="{{Request::get('orderby') == "" ? 'selected' : ''}}" {{Request::get('orderby') == "" ? "selected = 'selected'" : ""}}  value="">click chọn...</option>
-												<option class="{{Request::get('orderby') == "new" ? 'selected' : ''}}" {{Request::get('orderby') == "new" ? "selected = 'selected'" : ""}} {{ request()->fullUrlWithQuery(['orderby' => "new"]) }} value="new">Sản phẩm mới</option>
-												<option class="{{Request::get('orderby') == "price_min" ? 'selected' : ''}}" {{Request::get('orderby') == "price_min" ? "selected = 'selected'" : ""}} value="price_min">Giá tăng dần</option>
-												<option class="{{Request::get('orderby') == "price_max" ? 'selected' : ''}}" {{Request::get('orderby') == "price_max" ? "selected = 'selected'" : ""}} value="price_max">Giá giảm dần</option>
+								<form class="tree-most" id="form_order1" method="GET">
+								<div class="store-sort col-lg-3">
+										<a>Thương Hiệu</a>			
+											<select name="grand" class="input-select1">
+												<option class="{{Request::get('grand') == "" ? 'selected' : ''}}" {{Request::get('grand') == "" ? "selected = 'selected'" : ""}}  value="">click chọn...</option>
+												@foreach($thuonghieu as $th)
+													<option class="{{Request::get('grand') == $th->id ? 'selected' : ''}}" {{Request::get('grand') == $th->id ? "selected = 'selected'" : ""}} value="{{ $th->id }}">{{ $th->tenhang }}</option>
+												@endforeach
 											</select>	
 									</label>
 								
 								</div>
 								</form>
-							</div>
+								<form class="tree-most" id="form_order2" method="GET">
+								<div class="store-sort col-lg-3">
+										<a>ROM</a>(Red Only Memory)			
+											<select name="rom" class="input-select2">
+												<option class="{{Request::get('rom') == "" ? 'selected' : ''}}" {{Request::get('rom') == "" ? "selected = 'selected'" : ""}}  value="">click chọn...</option>
+												@foreach($rom as $r)
+													<option class="{{Request::get('rom') == $r->rom ? 'selected' : ''}}" {{Request::get('rom') == $r->rom ? "selected = 'selected'" : ""}} value="{{ $r->rom }}">{{ $r->rom }}GB</option>
+												@endforeach
+											</select>		
+									</label>
+								
+								</div>
+								</form>
+
+
+								<form class="tree-most" id="form_order3" method="GET">
+								<div class="store-sort col-lg-3">
+										<a>Khoảng Giá</a>  			
+											<select name="price" class="input-select3">
+												<option class="{{Request::get('price') == "" ? 'selected' : ''}}" {{Request::get('price') == "" ? "selected = 'selected'" : ""}}  value="">click chọn...</option>
+												@foreach($khoanggia as $kg)
+													<option class="{{Request::get('price') == $kg->id ? 'selected' : ''}}" {{Request::get('price') == $kg->id ? "selected = 'selected'" : ""}} value="{{ $kg->id }}">{{ $kg->khoanggia }}</option>
+												@endforeach
+											</select>	
+									</label>
+								
+								</div>
+								</form>
+
+								<form class="tree-most text-right" id="form_order4" method="GET">
+								<div class="store-sort col-lg-3">
+										<a href="cuahang" class="btn btn-primary">Reset bộ lọc</a>
+								</div>
+								</form>
+							
+							
+						</div>
+							<!-- /store top filter -->
+							<!-- store top filter -->
+							
 							<!-- /store top filter -->
 						
 						<!-- store products -->
 						<div class="row">
 							<!-- product -->
 								@foreach($sanpham as $sp)
-								<div class="col-md-4 col-xs-6">
-									<div class="product">
+								<div class="col-md-4 col-xs-5">
+									<div class="product" style="height: 480px;margin-bottom: 50px ">
 										<div class="product-img">
 											<a href="chitiet/{{$sp->id}}">
 												<img width="260px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
 											</a>
 											<div class="product-label">	
-												@if($sp->id_banner == 3)									
-													<span class="new">NEW</span>
-												@elseif($sp->id_banner == 2)
-													<span class="sale">-30%</span>
-												@elseif($sp->id_banner == 4)
-													<span class="sale">HOT</span>
+												@if(getBanner($sp->id) != null)
+													@if(getBanner($sp->id) == 3)
+														@if(getBanner2($sp->id) == 4)				
+															<span class="new">NEW</span>
+															<span class="sale">HOT</span>
+														@else
+															<span class="new">NEW</span>
+														@endif
+													@elseif(getBanner($sp->id) == 2)
+														@if(getBanner2($sp->id) == 4)				
+															<span class="sale">-{{ getPhanTram($sp->id) }}%</span>
+															<span class="sale">HOT</span>
+														@else
+															<span class="sale">-{{ getPhanTram($sp->id) }}%</span>
+														@endif
+													@elseif(getBanner($sp->id) == 4)
+														@if(getBanner2($sp->id) == 3)	
+															<span class="sale">HOT</span>			
+															<span class="new">NEW</span>
+														@elseif(getBanner2($sp->id) == 2)
+															<span class="sale">HOT</span>
+															<span class="sale">-{{ getPhanTram($sp->id) }}%</span>
+														@else
+															<span class="sale">HOT</span>
+														@endif
+													@endif
 												@endif
 											</div>									
 										</div>
 										<div class="product-body">
 											<p class="product-category">{{$sp->tenhang}}</p>
-											<h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id}}">{{$sp->tensp}}</a></h3>
+											<h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id}}">{{$sp->tensp}} {{ $sp->mau }}</a></h3>
 											<h4 class="product-price">
-												@if($sp->phantramkhuyenmai != null)
-													<del class="product-old-price">{{number_format($sp->gia,0,',','.')}}</del>{{number_format($sp->gia * (100 - $sp->phantramkhuyenmai) / 100,0,',','.')}}VND
+												@if(getPhanTram($sp->id) != null)
+													<del class="product-old-price">{{number_format($sp->gia,0,',','.')}}</del>{{number_format($sp->gia * (100 - getPhanTram($sp->id)) / 100,0,',','.')}}VND
 													@else
 														{{number_format($sp->gia,0,',','.')}}VND
 												@endif
 											</h4>
-											<div class="product-rating">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-											</div>
+											<?php
+												$star = round((avgStarSanPham($sp->id)),2);
+												$starnguyen = floor(avgStarSanPham($sp->id));
+											?>
+												<div class="review-rating">
+													@if($star != null)
+														@for($i=0;$i<$starnguyen;$i++)
+															@if($i < $star)
+																<i class="fa fa-star checked"></i>
+															@endif
+														@endfor
+														@if($star >= ($starnguyen + 0.5))
+															<i class="fa fa-star-half-o checked"></i>
+														@endif
+													@else
+														<a style="font-size: 10px">(Chưa có đánh giá)</a>
+													@endif
+												</div>				
 											<div class="product-btns">
-												{{-- <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-												<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button> --}}
 												<button class="quick-view" onclick="window.location.href = 'chitiet/{{$sp->id}}';"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></button>
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$sp->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$sp->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
 										</div>
 									</div>
 								</div>
@@ -272,8 +272,20 @@
     <script>
  		$(function(){
  			$('.input-select1').change(function(){
- 				$("#form_order").submit();
+ 				$("#form_order1").submit();
  				$('.input-select1').val();
+ 			});
+ 			$('.input-select2').change(function(){
+ 				$("#form_order2").submit();
+ 				$('.input-select2').val();
+ 			});
+ 			$('.input-select3').change(function(){
+ 				$("#form_order3").submit();
+ 				$('.input-select3').val();
+ 			});
+ 			$('.input-select4').change(function(){
+ 				$("#form_order4").submit();
+ 				$('.input-select4').val();
  			});
  		});
     </script>

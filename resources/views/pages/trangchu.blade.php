@@ -18,7 +18,6 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="trangchu">Trang Chủ</a></li>
-						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
 						<li><a href="cuahang">Cửa Hàng</a></li>									
 						<li><a href="lienhe">Liên Hệ</a></li>
@@ -158,22 +157,26 @@
 														@endif
 													</h4>
 													<?php
-														$star = (avgStarSanPham($sphd->id));
+														$star = round((avgStarSanPham($sphd->id)),2);
 														$starnguyen = floor(avgStarSanPham($sphd->id));
 													?>
-													<div class="product-rating">
-														@for($i=0;$i<$starnguyen;$i++)
-															@if($i < $star)
-																<i class="fa fa-star checked"></i>
+													<div class="review-rating">
+														@if($star != null)
+															@for($i=0;$i<$starnguyen;$i++)
+																@if($i < $star)
+																	<i class="fa fa-star checked"></i>
+																@endif
+															@endfor
+															@if($star >= ($starnguyen + 0.5))
+																<i class="fa fa-star-half-o checked"></i>
 															@endif
-														@endfor
-														@if($star >= ($starnguyen + 0.5))
-															<i class="fa fa-star-half-o checked"></i>
+														@else
+															<a style="font-size: 14px;">(Chưa có đánh giá)</a>
 														@endif
-													</div>											
+													</div>										
 												</div>
 												<div class="add-to-cart">
-													<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$sphd->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+													<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$sphd->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
 												</div>
 											
 											</div>
@@ -273,17 +276,28 @@
 														{{number_format($spm->gia,0,',','.')}}VND
 													@endif
 												</h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>											
+												<?php
+														$star = round((avgStarSanPham($spm->id)),2);
+														$starnguyen = floor(avgStarSanPham($spm->id));
+													?>
+													<div class="review-rating">
+														@if($star != null)
+															@for($i=0;$i<$starnguyen;$i++)
+																@if($i < $star)
+																	<i class="fa fa-star checked"></i>
+																@endif
+															@endfor
+															@if($star >= ($starnguyen + 0.5))
+																<i class="fa fa-star-half-o checked"></i>
+															@endif
+														@else
+															<a style="font-size: 14px;">(Chưa có đánh giá)</a>
+														@endif
+													</div>											
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$spm->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
-											</div>
+											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$spm->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+										</div>
 										
 										</div>
 										<!-- /product -->
@@ -348,12 +362,17 @@
 												</a>
 												
 												<div class="product-label">
-													<span class="sale">HOT</span>	
-													@if(getBanner($spbc->id) == 3)
-														<span class="new">NEW</span>
-													@elseif(getBanner($spbc->id) == 2)
-														<span class="sale">-{{$sphd->phantramkhuyenmai}}%</span>
-													@endif								
+													@if(getPhanTram($spbc->id) != null)
+														@if(getBanner($spbc->id) == 3)	
+															<span class="sale">HOT</span>			
+															<span class="new">NEW</span>
+														@elseif(getBanner2($spbc->id) == 2)
+															<span class="sale">HOT</span>
+															<span class="sale">-{{ getPhanTram($spbc->id) }}%</span>
+														@endif
+													@else
+														<span class="sale">HOT</span>
+													@endif							
 												</div>
 											</div>
 											
@@ -361,22 +380,33 @@
 												<p class="product-category">{{$spbc->tenhang}}</p>
 												<h3 class="product-name"><a href="chitiet/{{$spbc->id}}">{{$spbc->tensp}} {{ $spbc->mau }}</a></h3>
 												<h4 class="product-price">
-													@if($spbc->phantramkhuyenmai != null)
-													<del class="product-old-price">{{number_format($spbc->gia,0,',','.')}}</del>{{number_format($spbc->gia * (100 - $spbc->phantramkhuyenmai) / 100,0,',','.')}}VND
+													@if(getPhanTram($spbc->id) != null)
+													<del class="product-old-price">{{number_format($spbc->gia,0,',','.')}}</del>{{number_format($spbc->gia * (100 - getPhanTram($spbc->id)) / 100,0,',','.')}}VND
 													@else
 														{{number_format($spbc->gia,0,',','.')}}VND
-													@endif
+												@endif
 												</h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>											
+												<?php
+														$star = round((avgStarSanPham($spbc->id)),2);
+														$starnguyen = floor(avgStarSanPham($spbc->id));
+													?>
+													<div class="review-rating">
+														@if($star != null)
+															@for($i=0;$i<$starnguyen;$i++)
+																@if($i < $star)
+																	<i class="fa fa-star checked"></i>
+																@endif
+															@endfor
+															@if($star >= ($starnguyen + 0.5))
+																<i class="fa fa-star-half-o checked"></i>
+															@endif
+														@else
+															<a style="font-size: 14px;">(Chưa có đánh giá)</a>
+														@endif
+													</div>											
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$spbc->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+												<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$spbc->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
 											</div>
 										
 										</div>
@@ -404,185 +434,42 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-					<div class="col-md-4 col-xs-6">
-						<div class="section-title">
-							<h4 class="title">Sản Phẩm Hot Deals</h4>
-							<div class="section-nav">
-								<div id="slick-nav-4" class="products-slick-nav"></div>
+					<!-- section title -->
+						<div>
+							<div class="section-title">
+								<a href="hotdeals"><h3 class="title">Tin Tức</h3></a>
 							</div>
 						</div>
-
-						<div class="products-widget-slick" data-nav="#slick-nav-4">
-							<div>
-								<!-- product widget -->
-								@foreach($sanphamhotdeals1 as $sphd1)
-								<div class="product-widget">
+						<!-- /section title -->
+					@foreach($khuyenmai as $km)
+					<div>
+						<div>
+							<div class="product-widget">
 									<div class="product-img">
-										<a href="chitiet/{{$sphd1->id}}">
-											<img src="upload/imgSanPham/{{$sphd1->hinhchitiet}}" alt="" width="70px" height="70px">
+										<a href="tintuc/{{$km->id}}">
+											<img src="upload/imgTinTuc/{{$km->img}}" alt="" width="160px" height="110px">
 										</a>		
 									</div>
-									<div class="product-body">
-										<p class="product-category">{{$sphd1->tenhang}}</p>
-										<h3 class="product-name"><a href="chitiet/{{$sphd1->id}}">{{$sphd1->tensp}}</a></h3>
-										<h4 class="product-price">
-											@if($sphd1->phantramkhuyenmai != null)
-												<del class="product-old-price">{{number_format($sphd1->gia,0,',','.')}}</del>{{number_format($sphd1->gia * (100 - $sphd1->phantramkhuyenmai) / 100,0,',','.')}}VND
-												@else
-													{{number_format($sphd1->gia,0,',','.')}}VND
-											@endif
-										</h4>
-									</div>
-								</div>
-								@endforeach				
-								<!-- /product widget -->			
-							</div>
-							<div>
-								<!-- product widget -->
-								@foreach($sanphamhotdeals2 as $sphd2)
-								<div class="product-widget">
-									<div class="product-img">
-										<a href="chitiet/{{$sphd2->id}}">
-											<img src="upload/imgSanPham/{{$sphd2->hinhchitiet}}" alt="" width="70px" height="70px">
+									<div class="product-body" style="margin-left: 100px">
+										<p class="product-category">{{ $km->tenloaitin }}</p>
+										<h3 class="product-name"><a href="tintuc/{{$km->id}}">{{$km->tieude,0,100}}</a></h3>
+										<a class="product-detail">
+											{{ mb_substr($km->mota,0,270,'UTF-8').'...' }}
 										</a>
 									</div>
-									<div class="product-body">
-										<p class="product-category">{{$sphd2->tenhang}}</p>
-										<h3 class="product-name"><a href="chitiet/{{$sphd2->id_sanpham}}/{{$sphd2->id}}">{{$sphd2->tensp}}</a></h3>
-										<h4 class="product-price">
-											@if($sphd2->phantramkhuyenmai != null)
-												<del class="product-old-price">{{number_format($sphd2->gia,0,',','.')}}</del>{{number_format($sphd2->gia * (100 - $sphd2->phantramkhuyenmai) / 100,0,',','.')}}VND
-												@else
-													{{number_format($sphd2->gia,0,',','.')}}VND
-											@endif
-										</h4>
-									</div>
-								</div>
-								@endforeach				
-								<!-- /product widget -->			
-							</div>
+							</div>								
 						</div>
-					</div>
+					</div> 
+					<hr>
+					@endforeach
 
-					<div class="col-md-4 col-xs-6">
-						<div class="section-title">
-							<h4 class="title">Sản Phẩm Mới</h4>
-							<div class="section-nav">
-								<div id="slick-nav-5" class="products-slick-nav"></div>
-							</div>
-						</div>
-
-						<div class="products-widget-slick" data-nav="#slick-nav-5">						
-							<div>
-								<!-- product widget -->
-								@foreach($sanphammoi1 as $spm1)
-								<div class="product-widget">
-									<div class="product-img">
-										<a href="chitiet/{{$spm1->id}}">
-											<img src="upload/imgSanPham/{{$spm1->hinhchitiet}}" alt="" width="70px" height="70px">
-										</a>
-									</div>
-									<div class="product-body">
-										<p class="product-category">{{$spm1->tenhang}}</p>
-										<h3 class="product-name"><a href="chitiet/{{$spm1->id_sanpham}}/{{$spm1->id}}">{{$spm1->tensp}}</a></h3>
-										<h4 class="product-price">
-											@if($spm1->phantramkhuyenmai != null)
-												<del class="product-old-price">{{number_format($spm1->gia,0,',','.')}}</del>{{number_format($spm1->gia * (100 - $spm1->phantramkhuyenmai) / 100,0,',','.')}}VND
-												@else
-													{{number_format($spm1->gia,0,',','.')}}VND
-											@endif
-										</h4>
-									</div>
-								</div>
-								@endforeach							
-							</div>
-							<div>
-								<!-- product widget -->
-								@foreach($sanphammoi2 as $spm2)
-								<div class="product-widget">
-									<div class="product-img">
-										<a href="chitiet/{{$spm2->id}}">
-											<img src="upload/imgSanPham/{{$spm2->hinhchitiet}}" alt="" width="70px" height="70px">
-										</a>
-									</div>
-									<div class="product-body">
-										<p class="product-category">{{$spm2->tenhang}}</p>
-										<h3 class="product-name"><a href="chitiet/{{$spm2->id}}">{{$spm2->tensp}}</a></h3>
-										<h4 class="product-price">
-											@if($spm2->phantramkhuyenmai != null)
-												<del class="product-old-price">{{number_format($spm2->gia,0,',','.')}}</del>{{number_format($spm2->gia * (100 - $spm2->phantramkhuyenmai) / 100,0,',','.')}}VND
-												@else
-													{{number_format($spm2->gia,0,',','.')}}VND
-											@endif
-										</h4>
-									</div>
-								</div>
-								@endforeach							
-							</div>
-						</div>
-					</div>
-
-					<div class="clearfix visible-sm visible-xs"></div>
-
-					<div class="col-md-4 col-xs-6">
-						<div class="section-title">
-							<h4 class="title">Sản Phẩm Bán Chạy</h4>
-							<div class="section-nav">
-								<div id="slick-nav-6" class="products-slick-nav"></div>
-							</div>
-						</div>
-
-						<div class="products-widget-slick" data-nav="#slick-nav-6">
-							<div>
-								<!-- product widget -->
-								@foreach($sanphambanchay1 as $spbc1)
-								<div class="product-widget">
-									<div class="product-img">
-										<a href="chitiet/{{$spbc1->id}}">
-											<img src="upload/imgSanPham/{{$spbc1->hinhchitiet}}" alt="" width="70px" height="70px">
-										</a>
-									</div>
-									<div class="product-body">
-										<p class="product-category">{{$spbc1->tenhang}}</p>
-										<h3 class="product-name"><a href="chitiet/{{$spbc1->id}}">{{$spbc1->tensp}}</a></h3>
-										<h4 class="product-price">
-											@if($spbc1->phantramkhuyenmai != null)
-												<del class="product-old-price">{{number_format($spbc1->gia,0,',','.')}}</del>{{number_format($spbc1->gia * (100 - $spbc1->phantramkhuyenmai) / 100,0,',','.')}}VND
-												@else
-													{{number_format($spbc1->gia,0,',','.')}}VND
-											@endif
-										</h4>
-									</div>
-								</div>
-								@endforeach							
-							</div>
-							<div>
-								<!-- product widget -->
-								@foreach($sanphambanchay2 as $spbc2)
-								<div class="product-widget">
-									<div class="product-img">
-										<a href="chitiet/{{$spbc2->id}}">
-											<img src="upload/imgSanPham/{{$spbc2->hinhchitiet}}" alt="" width="70px" height="70px">
-										</a>
-									</div>
-									<div class="product-body">
-										<p class="product-category">{{$spbc2->tenhang}}</p>
-										<h3 class="product-name"><a href="chitiet/{{$spbc2->id}}">{{$spbc2->tensp}}</a></h3>
-										<h4 class="product-price">
-											@if($spbc2->phantramkhuyenmai != null)
-												<del class="product-old-price">{{number_format($spbc2->gia,0,',','.')}}</del>{{number_format($spbc2->gia * (100 - $spbc2->phantramkhuyenmai) / 100,0,',','.')}}VND
-												@else
-													{{number_format($spbc2->gia,0,',','.')}}VND
-											@endif
-										</h4>
-									</div>
-								</div>
-								@endforeach							
-							</div>
-							</div>
-						</div>
-					</div>
-
+					 <!-- Pagination -->
+                    <div class="row text-center">
+                        <div class="col-lg-12">
+                            {{$khuyenmai->links()}}
+                        </div>
+                    </div>
+                    <!-- /.row -->
 				</div>
 				<!-- /row -->
 			</div>

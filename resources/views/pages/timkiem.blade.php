@@ -11,10 +11,9 @@
                     <!-- NAV -->
                     <ul class="main-nav nav navbar-nav">
                         <li><a href="trangchu">Trang Chủ</a></li>
-                        <li><a href="hotdeals">Hot Deals</a></li>
                         <li><a href="loaitin">Tin Tức</a></li>
                         <li><a href="cuahang">Cửa Hàng</a></li>                                 
-                        <li><a href="#">Liên Hệ</a></li>
+                        <li><a href="lienhe">Liên Hệ</a></li>
                     </ul>
                     <!-- /NAV -->
                 </div>
@@ -111,7 +110,7 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">{{$sp->tenhang}}</p>
-                                            <h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}">{{$sp->tensp}}</a></h3>
+                                            <h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}">{{$sp->tensp}} {{ $sp->mau }}</a></h3>
                                             <h4 class="product-price">
                                                 @if($sp->phantramkhuyenmai != null)
                                                     <del class="product-old-price">{{number_format($sp->gia,0,',','.')}}</del>{{number_format($sp->gia * (100 - $sp->phantramkhuyenmai) / 100,0,',','.')}}VND

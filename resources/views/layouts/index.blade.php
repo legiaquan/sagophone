@@ -30,7 +30,7 @@
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
 
-
+		
 		@yield('css')
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -60,3 +60,8 @@
 		@yield('script')
 	</body>
 </html>
+<style>
+	.checked {
+	  color: #BB2404;
+	}
+</style>

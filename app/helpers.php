@@ -59,13 +59,7 @@ function getGiaMin($id)
 	return $gia;
 }
 
-function getPhanTram($id)
-{
-	$phantram = DB::table('tbdanhsachbanner')
-				->where('id_chitietsanpham',$id)
-				->value('phantramkhuyenmai');
-	return $phantram;
-}
+
 function getDanhSanhBannerSanPham($id)
 {
 	$ds = DB::table('tbchitietsanpham')
@@ -92,13 +86,42 @@ function getSoLuongCTDH($id_chitietsanpham,$id_donhang)
 }
 function getBanner($id)
 {
-	$test = DB::table('tbdanhsachbanner')->where('id_chitietsanpham',$id)->value('id_banner');
-	$test1 = DB::table('tbdanhsachbanner')->where('id_chitietsanpham',$id)->orderBy('id_banner','DESC')->value('id_banner');
+	
 	$banner = DB::table('tbchitietsanpham')
 			->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
 			->where('id_chitietsanpham',$id)
+			->orderBy('id_banner','ASC')
+			->value('tbdanhsachbanner.id_banner');
+	return $banner;
+}
+function getBanner2($id)
+{
+	
+	$banner = DB::table('tbchitietsanpham')
+			->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
+			->where('id_chitietsanpham',$id)
+			->orderBy('id_banner','DESC')
 			->value('tbdanhsachbanner.id_banner');
 	return $banner;
 
+}
+
+function getPhanTram($id)
+{
+	$phantram = DB::table('tbchitietsanpham')
+			->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
+			->where('id_chitietsanpham',$id)
+			->orderBy('id_banner','ASC')
+			->value('tbdanhsachbanner.phantramkhuyenmai');
+	return $phantram;
+}
+function getPhanTram2($id)
+{
+	$phantram = DB::table('tbchitietsanpham')
+			->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
+			->where('id_chitietsanpham',$id)
+			->orderBy('id_banner','DESC')
+			->value('tbdanhsachbanner.phantramkhuyenmai');
+	return $phantram;
 }
 
