@@ -56,7 +56,7 @@
                                                 <td>{{ $row->manhinh }}</td>
                                                 <td>{{ $row->hedieuhanh }}</td>
                                                 <td>Trước:{{ $row->camtruoc }}<br/>Sau:{{ $row->camsau }}</td>
-                                                <td>{{ $row->cpu }} <br>{{ $row->dungluongpin }} mAh</td>
+                                                <td>{{ $row->cpu }} <br><i>{{ $row->dungluongpin }} @if($row->dungluongpin)mAh @endif</i></td>
 
                                                 <td>{{ $row->thesim }}</td>
                                                 <td><?php $arrGia = getAllGia($row->id) ?>
