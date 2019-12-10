@@ -2,6 +2,46 @@
 @extends('layouts.index')
 
 @section('content')
+<!-- NAVIGATION -->
+        <nav id="navigation">
+            <!-- container -->
+            <div class="container">
+                <!-- responsive-nav -->
+                <div id="responsive-nav">
+                    <!-- NAV -->
+                    <ul class="main-nav nav navbar-nav">
+                        <li><a href="trangchu">Trang Chủ</a></li>
+                        <li><a href="hotdeals">Hot Deals</a></li>
+                        <li><a href="loaitin">Tin Tức</a></li>
+                        <li><a href="cuahang">Cửa Hàng</a></li>                                  
+                        <li><a href="lienhe">Liên Hệ</a></li>
+                    </ul>
+                    <!-- /NAV -->
+                </div>
+                <!-- /responsive-nav -->
+            </div>
+            <!-- /container -->
+        </nav>
+<!-- /NAVIGATION -->
+<!-- BREADCRUMB -->
+        <div id="breadcrumb" class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="breadcrumb-tree">
+                            <li><a href="trangchu">Trang Chủ</a></li>
+                            <li><a href="shopping/cart">Giỏ Hàng</a></li>
+                            <li class="active"><a href="shopping/pay">Thanh Toán</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /BREADCRUMB -->
 	<div class="container wrapper">
             <div class="row cart-head">
                 <div class="container">
@@ -77,19 +117,19 @@
                         	<div class="form-group">
                                 <div class="col-md-12"><strong>Tên Người Nhận</strong></div>
                                 <div class="col-md-12">
-                                    <input type="text" name="name" class="form-control" value="" />
+                                    <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Địa Chỉ Người Nhận</strong></div>
                                 <div class="col-md-12">
-                                    <input type="text" name="address" class="form-control" value="" />
+                                    <input type="text" name="address" class="form-control" value="{{ Auth::user()->diachi }}" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Số Điện Thoại Người Nhận</strong></div>
                                 <div class="col-md-12">
-                                    <input type="text" name="phone" class="form-control" value="" />
+                                    <input type="text" name="phone" class="form-control" value="{{ Auth::user()->sdt }}" />
                                 </div>
                             </div>
                             <div class="form-group">

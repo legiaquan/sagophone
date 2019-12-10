@@ -25,12 +25,12 @@ function avgStarSanPham($id_donhang)
 			->avg('tbchitietdonhang.star');
 	return $avgStar;
 }
-function getNhanXet($id_donhang)
+function getNhanXet($id)
 {
 	$nhanxet = DB::table('tbchitietdonhang')
-			->where('id_donhang', $id_donhang)
-			->select('nhanxet')
-			->get();
+			->where('id_chitietsanpham', $id)
+			->where('star','<>','null')
+			->select('star')->get();
 	return $nhanxet;
 }
 function demBinhLuan($id)
@@ -123,5 +123,13 @@ function getPhanTram2($id)
 			->orderBy('id_banner','DESC')
 			->value('tbdanhsachbanner.phantramkhuyenmai');
 	return $phantram;
+}
+
+function getStar($id)
+{
+	$star = DB::table('tbchitietdonhang')
+		->where('id_chitietsanpham',$id)
+		->select('star')->get();
+	return $star;
 }
 

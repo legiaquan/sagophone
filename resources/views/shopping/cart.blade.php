@@ -23,6 +23,24 @@
             <!-- /container -->
         </nav>
 <!-- /NAVIGATION -->
+<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a href="trangchu">Trang Chủ</a></li>
+							<li class="active"><a href="shopping/cart">Giỏ Hàng</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
 <!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -43,22 +61,17 @@
 				  </thead>
 				  <tbody>
 				  	<?php $i = 1 ?>
-				  	 @if(session('msg'))
-	                            <div class="alert alert-success">
-	                                {{session('msg')}}
-	                            </div>
-	                        @endif
 				  	@foreach($products as $pds)
 					    <tr>
 					    <th scope="row">#{{$i}}</th>
 					      <th scope="row"><a href="#">{{$pds->name}}</a></th>
 					      <td><img style="width: 120px; height: 120px" src="upload/imgSanPham/{{$pds->options->avatar}}"></td>
 					      <td>
-							<form action="shopping/update/{{$pds->rowId}}" method="POST">
+							<form action="shopping/update/{{$pds->rowId}}" method="POST" id="form_update">
 								<input type="hidden" name="_token" value="{{csrf_token()}}">
-								<input type="number" value="{{$pds->qty}}" name="qty" min="1">
+								<input type="number" value="{{$pds->qty}}" name="qty" id="qty" min="1">
 								<input type="hidden" value="{{$pds->rowId}}" name="rowId">
-								<input type="submit" name="update" value="Sửa"> <i class="fa fa-pencil"></i>
+								<i class="fa fa-pencil"></i>
 					      	</form>
 					      	
 					      </td>
@@ -84,4 +97,14 @@
 		</div>
 		<!-- /SECTION -->
 	
+@endsection
+@section('script')
+    <script>
+ 		$(function(){
+ 			$('#qty').change(function(){
+ 				$("#form_update").submit();
+ 				$('#qty').val();
+ 			});
+ 		});
+    </script>
 @endsection

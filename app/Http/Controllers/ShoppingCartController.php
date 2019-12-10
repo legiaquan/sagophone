@@ -77,7 +77,7 @@ class ShoppingCartController extends Controller
     public function updateCart(Request $request)
     {
     	Cart::update($request->rowId, $request->qty);
-    	return redirect('shopping/cart')->with('msg','Cập nhật thành công!');
+    	return redirect('shopping/cart');
     }
 
     public function payCart()
