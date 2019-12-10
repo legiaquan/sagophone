@@ -55,7 +55,7 @@
                         &nbsp;&nbsp;
                         @foreach($loaitin as $lt)
                             @if(count($lt->tintuc) > 0)
-                                <a class="{{Request::get('id') == $lt->id ? 'btn btn-info' : ''}}" href="{{ request()->fullUrlWithQuery(['id' => $lt->id]) }}" class="product-category" style="font-size: 20px; font-weight: bolder; border: dashed; color: black">{{$lt->tenloaitin}}</a>
+                                <a class="{{Request::get('id') == $lt->id ? 'btn btn-info' : ''}}" href="{{ request()->fullUrlWithQuery(['id' => $lt->id]) }}" class="product-category" style="font-size: 20px; font-weight: bolder; border: solid 3px black; color: red">{{$lt->tenloaitin}}</a>
                             @endif
                             &nbsp;&nbsp;
                         @endforeach

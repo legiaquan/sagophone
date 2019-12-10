@@ -34,12 +34,11 @@
 			<!-- container -->
 			<div class="container">
 				<!-- /shop -->
-					{{-- <a href="hotdeals" ><img width="1140px" height="250px" src="./upload/imgKhuyenMai/{{$hinh}}" alt=""></a> --}}
 					<div class="w3-content w3-display-container">
 						@foreach($banner as $row)
-							@if($row->trangthai=='show' && isset($row->ngaybatdau))
+							@if($row->trangthai=='show' && isset($row->ngaybatdau) && count($row->danhsachbanner) > 0)
 							
-							<a href="banner/{{ $row->id }}"><img class="mySlides w3-animate-fading" src="./upload/imgKhuyenMai/{{$row->hinhbanner}}" style="width:100%;height:250px"></a>
+							<a href="cuahang?id_banner={{ $row->id }}"><img class="mySlides w3-animate-fading" src="./upload/imgKhuyenMai/{{$row->hinhbanner}}" style="width:100%;height:250px"></a>
 							
 							@endif
 						@endforeach
@@ -48,13 +47,13 @@
 						  <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
 						<?php $dem = 1;?>
 						  @foreach($banner as $row)
-							@if($row->trangthai=='show' && isset($row->ngaybatdau))
+							@if($row->trangthai=='show' && isset($row->ngaybatdau) && count($row->danhsachbanner) > 0)
 							<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv({{ $dem }})"></span>
 							<?php $dem++;?>
 							@endif
 						  @endforeach
 						</div>
-					  </div>
+					 </div>
 				<!-- row -->
 				<div class="row">
 								
@@ -66,7 +65,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>{{ $apple->hangdt->tenhang }}<br>Collection</h3>
-								<a href="cuahang?id_hang={{$apple->id}}" class="cta-btn">Đến Ngay<i class="fa fa-arrow-circle-right"></i></a>
+								<a href="cuahang?grand={{$apple->id}}" class="cta-btn">Đến Ngay<i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -79,7 +78,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>{{ $samsung->hangdt->tenhang }}<br>Collection</h3>
-								<a href="cuahang?id_hang={{$samsung->id}}" class="cta-btn">Đến Ngay<i class="fa fa-arrow-circle-right"></i></a>
+								<a href="cuahang?grand={{$samsung->id}}" class="cta-btn">Đến Ngay<i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -92,7 +91,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>{{ $nokia->hangdt->tenhang }}<br>Collection</h3>
-								<a href="cuahang?id_hang={{$nokia->id}}" class="cta-btn">Đến Ngay<i class="fa fa-arrow-circle-right"></i></a>
+								<a href="cuahang?grand={{$nokia->id}}" class="cta-btn">Đến Ngay<i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -142,10 +141,12 @@
 												</a>
 												
 												<div class="product-label">											
-													<span class="new">NEW</span>
-													@if($spm->id_banner == 4)
-														<span class="hot">HOT</span>
-													@endif									
+													@if(getBanner2($spm->id) == 4)				
+															<span class="new">NEW</span>
+															<span class="sale">HOT</span>
+													@else
+														<span class="new">NEW</span>
+													@endif					
 												</div>
 											</div>
 											
@@ -176,8 +177,12 @@
 														@else
 															<a style="font-size: 14px;">(Chưa có đánh giá)</a>
 														@endif
-													</div>											
+													</div>
+												<div class="product-btns">
+												<button class="quick-view" onclick="window.location.href = 'chitiet/{{$spm->id}}';"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></button>
+											</div>											
 											</div>
+
 											<div class="add-to-cart">
 											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$spm->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
 										</div>
@@ -204,10 +209,368 @@
 		</div>
 		<!-- /SECTION -->
 		@endif
-		
-		
-	<!-- SECTION -->
+
+		@if($bannernew->trangthai =='show')
 		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<!-- section title -->
+					<div class="col-md-12">
+						<div class="section-title">
+							<h3 class="title">Sản Phẩm Bán Chạy</h3>
+							{{-- <div class="section-nav">
+								<ul class="section-tab-nav tab-nav">
+									<li class="active"><a data-toggle="tab" href="#tab1">Apples</a></li>
+									<li><a data-toggle="tab" href="#tab1">Samsungs</a></li>
+									<li><a data-toggle="tab" href="#tab1">Phụ Kiện</a></li>
+								</ul>
+							</div> --}}
+						</div>
+					</div>
+					<!-- /section title -->
+
+					<!-- Products tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="products-tabs">
+								<!-- tab -->
+								<div id="tab1" class="tab-pane active">
+									<div class="products-slick" data-nav="#slick-nav-3">
+										@foreach($sanphambanchay as $spm)
+										<!-- product -->
+										<div class="product">
+											<div class="product-img">
+												<a href="chitiet/{{$spm->id}}"> 
+													<img width="250px" height="250px" src="./upload/imgSanPham/{{$spm->hinhchitiet}}" alt="">
+												</a>
+												
+												<div class="product-label">											
+													@if(getBanner($spm->id) == 3)
+														<span class="sale">HOT</span>				
+														<span class="new">NEW</span>
+													@else
+														<span class="sale">HOT</span>
+													@endif					
+												</div>
+											</div>
+											
+											<div class="product-body">
+												<p class="product-category">{{$spm->tenhang}}</p>
+												<h3 class="product-name"><a href="chitiet/{{$spm->id}}">{{$spm->tensp}} {{$spm->mau }}</a></h3>
+												<h4 class="product-price">
+													@if(getPhanTram($spm->id) != null)
+													<del class="product-old-price">{{number_format($spm->gia,0,',','.')}}</del>{{number_format($spm->gia * (100 - getPhanTram($spm->id)) / 100,0,',','.')}}VND
+													@else
+														{{number_format($spm->gia,0,',','.')}}VND
+												@endif
+												</h4>
+												<?php
+														$star = round((avgStarSanPham($spm->id)),2);
+														$starnguyen = floor(avgStarSanPham($spm->id));
+													?>
+													<div class="review-rating">
+														@if($star != null)
+															@for($i=0;$i<$starnguyen;$i++)
+																@if($i < $star)
+																	<i class="fa fa-star checked"></i>
+																@endif
+															@endfor
+															@if($star >= ($starnguyen + 0.5))
+																<i class="fa fa-star-half-o checked"></i>
+															@endif
+														@else
+															<a style="font-size: 14px;">(Chưa có đánh giá)</a>
+														@endif
+													</div>
+												<div class="product-btns">
+												<button class="quick-view" onclick="window.location.href = 'chitiet/{{$spm->id}}';"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></button>
+											</div>											
+											</div>
+
+											<div class="add-to-cart">
+											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$spm->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+										</div>
+										
+										</div>
+										<!-- /product -->
+										@endforeach
+
+										
+										
+									</div>
+								
+									<div id="slick-nav-3" class="products-slick-nav"></div>
+								</div>
+								<!-- /tab -->
+							</div>
+						</div>
+					</div>
+					<!-- Products tab & slick -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+		@endif
+	<!-- SECTION -->
+	<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<!-- section title -->
+					<div class="col-md-12">
+						<div class="section-title">
+							<h3 class="title">Điện Thoại</h3>
+							{{-- <div class="section-nav">
+								<ul class="section-tab-nav tab-nav">
+									<li class="active"><a data-toggle="tab" href="#tab1">Apples</a></li>
+									<li><a data-toggle="tab" href="#tab1">Samsungs</a></li>
+									<li><a data-toggle="tab" href="#tab1">Phụ Kiện</a></li>
+								</ul>
+							</div> --}}
+						</div>
+					</div>
+					<!-- /section title -->
+
+					<!-- Products tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="products-tabs">
+								<!-- tab -->
+								<div id="tab1" class="tab-pane active">
+									<div class="products-slick" data-nav="#slick-nav-4">
+										@foreach($dienthoai as $dt)
+										<!-- product -->
+										<div class="product">
+											<div class="product-img">
+												<a href="chitiet/{{$dt->id}}"> 
+													<img width="250px" height="250px" src="./upload/imgSanPham/{{$dt->hinhchitiet}}" alt="">
+												</a>
+												
+												<div class="product-label">											
+													@if(getBanner($dt->id) != null)
+														@if(getBanner($dt->id) == 3)
+															@if(getBanner2($dt->id) == 4)				
+																<span class="new">NEW</span>
+																<span class="sale">HOT</span>
+															@else
+																<span class="new">NEW</span>
+															@endif
+														@elseif(getBanner($dt->id) == 2)
+															@if(getBanner2($dt->id) == 4)				
+																<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
+																<span class="sale">HOT</span>
+															@else
+																<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
+															@endif
+														@elseif(getBanner($dt->id) == 4)
+															@if(getBanner2($dt->id) == 3)	
+																<span class="sale">HOT</span>			
+																<span class="new">NEW</span>
+															@elseif(getBanner2($dt->id) == 2)
+																<span class="sale">HOT</span>
+																<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
+															@else
+																<span class="sale">HOT</span>
+															@endif
+														@endif
+												@endif					
+												</div>
+											</div>
+											
+											<div class="product-body">
+												<p class="product-category">{{$dt->tenhang}}</p>
+												<h3 class="product-name"><a href="chitiet/{{$dt->id}}">{{$dt->tensp}} {{$dt->mau }}</a></h3>
+												<h4 class="product-price">
+													@if(getPhanTram($dt->id) != null)
+													<del class="product-old-price">{{number_format($dt->gia,0,',','.')}}</del>{{number_format($dt->gia * (100 - getPhanTram($dt->id)) / 100,0,',','.')}}VND
+													@else
+														{{number_format($dt->gia,0,',','.')}}VND
+												@endif
+												</h4>
+												<?php
+														$star = round((avgStarSanPham($dt->id)),2);
+														$starnguyen = floor(avgStarSanPham($dt->id));
+													?>
+													<div class="review-rating">
+														@if($star != null)
+															@for($i=0;$i<$starnguyen;$i++)
+																@if($i < $star)
+																	<i class="fa fa-star checked"></i>
+																@endif
+															@endfor
+															@if($star >= ($starnguyen + 0.5))
+																<i class="fa fa-star-half-o checked"></i>
+															@endif
+														@else
+															<a style="font-size: 14px;">(Chưa có đánh giá)</a>
+														@endif
+													</div>
+												<div class="product-btns">
+												<button class="quick-view" onclick="window.location.href = 'chitiet/{{$dt->id}}';"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></button>
+											</div>											
+											</div>
+
+											<div class="add-to-cart">
+											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$dt->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+										</div>
+										
+										</div>
+										<!-- /product -->
+										@endforeach
+
+										
+										
+									</div>
+								
+									<div id="slick-nav-4" class="products-slick-nav"></div>
+								</div>
+								<!-- /tab -->
+							</div>
+						</div>
+					</div>
+					<!-- Products tab & slick -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+	<!-- SECTION -->
+	<!-- SECTION -->
+	<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<!-- section title -->
+					<div class="col-md-12">
+						<div class="section-title">
+							<h3 class="title">Phụ Kiện</h3>
+							{{-- <div class="section-nav">
+								<ul class="section-tab-nav tab-nav">
+									<li class="active"><a data-toggle="tab" href="#tab1">Apples</a></li>
+									<li><a data-toggle="tab" href="#tab1">Samsungs</a></li>
+									<li><a data-toggle="tab" href="#tab1">Phụ Kiện</a></li>
+								</ul>
+							</div> --}}
+						</div>
+					</div>
+					<!-- /section title -->
+
+					<!-- Products tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="products-tabs">
+								<!-- tab -->
+								<div id="tab1" class="tab-pane active">
+									<div class="products-slick" data-nav="#slick-nav-4">
+										@foreach($phukien as $dt)
+										<!-- product -->
+										<div class="product">
+											<div class="product-img">
+												<a href="chitiet/{{$dt->id}}"> 
+													<img width="250px" height="250px" src="./upload/imgSanPham/{{$dt->hinhchitiet}}" alt="">
+												</a>
+												
+												<div class="product-label">											
+													@if(getBanner($dt->id) != null)
+														@if(getBanner($dt->id) == 3)
+															@if(getBanner2($dt->id) == 4)				
+																<span class="new">NEW</span>
+																<span class="sale">HOT</span>
+															@else
+																<span class="new">NEW</span>
+															@endif
+														@elseif(getBanner($dt->id) == 2)
+															@if(getBanner2($dt->id) == 4)				
+																<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
+																<span class="sale">HOT</span>
+															@else
+																<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
+															@endif
+														@elseif(getBanner($dt->id) == 4)
+															@if(getBanner2($dt->id) == 3)	
+																<span class="sale">HOT</span>			
+																<span class="new">NEW</span>
+															@elseif(getBanner2($dt->id) == 2)
+																<span class="sale">HOT</span>
+																<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
+															@else
+																<span class="sale">HOT</span>
+															@endif
+														@endif
+												@endif					
+												</div>
+											</div>
+											
+											<div class="product-body">
+												<p class="product-category">{{$dt->tenhang}}</p>
+												<h3 class="product-name"><a href="chitiet/{{$dt->id}}">{{$dt->tensp}} {{$dt->mau }}</a></h3>
+												<h4 class="product-price">
+													@if(getPhanTram($dt->id) != null)
+													<del class="product-old-price">{{number_format($dt->gia,0,',','.')}}</del>{{number_format($dt->gia * (100 - getPhanTram($dt->id)) / 100,0,',','.')}}VND
+													@else
+														{{number_format($dt->gia,0,',','.')}}VND
+												@endif
+												</h4>
+												<?php
+														$star = round((avgStarSanPham($dt->id)),2);
+														$starnguyen = floor(avgStarSanPham($dt->id));
+													?>
+													<div class="review-rating">
+														@if($star != null)
+															@for($i=0;$i<$starnguyen;$i++)
+																@if($i < $star)
+																	<i class="fa fa-star checked"></i>
+																@endif
+															@endfor
+															@if($star >= ($starnguyen + 0.5))
+																<i class="fa fa-star-half-o checked"></i>
+															@endif
+														@else
+															<a style="font-size: 14px;">(Chưa có đánh giá)</a>
+														@endif
+													</div>
+												<div class="product-btns">
+												<button class="quick-view" onclick="window.location.href = 'chitiet/{{$dt->id}}';"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></button>
+											</div>											
+											</div>
+
+											<div class="add-to-cart">
+											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$dt->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+										</div>
+										
+										</div>
+										<!-- /product -->
+										@endforeach
+
+										
+										
+									</div>
+								
+									<div id="slick-nav-4" class="products-slick-nav"></div>
+								</div>
+								<!-- /tab -->
+							</div>
+						</div>
+					</div>
+					<!-- Products tab & slick -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+	<!-- SECTION -->
+	<div class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
@@ -219,20 +582,20 @@
 							</div>
 						</div>
 						<!-- /section title -->
-					@foreach($khuyenmai as $km)
+					@foreach($tintuc as $tt)
 					<div>
 						<div>
 							<div class="product-widget">
 									<div class="product-img">
-										<a href="tintuc/{{$km->id}}">
-											<img src="upload/imgTinTuc/{{$km->img}}" alt="" width="160px" height="110px">
+										<a href="tintuc/{{$tt->id}}">
+											<img src="upload/imgTinTuc/{{$tt->img}}" alt="" width="160px" height="110px">
 										</a>		
 									</div>
-									<div class="product-body" style="margin-left: 100px">
-										<p class="product-category">{{ $km->tenloaitin }}</p>
-										<h3 class="product-name"><a href="tintuc/{{$km->id}}">{{$km->tieude,0,100}}</a></h3>
-										<a class="product-detail">
-											{{ mb_substr($km->mota,0,270,'UTF-8').'...' }}
+									<div class="product-body text-justify" style="margin-left: 100px">
+										<p class="product-category"><a href="loaitin?id={{ $tt->id_loaitin }}"> {{ $tt->tenloaitin }}</a></p>
+										<h3 class="product-name"><a href="tintuc/{{$tt->id}}">{{$tt->tieude,0,100}}</a></h3>
+										<a class="product-detail" href="tintuc/{{$tt->id}}">
+											{{ mb_substr($tt->mota,0,270,'UTF-8').'...' }}
 										</a>
 									</div>
 							</div>								
@@ -244,7 +607,7 @@
 					 <!-- Pagination -->
                     <div class="row text-center">
                         <div class="col-lg-12">
-                            {{$khuyenmai->links()}}
+                            {{$tintuc->links()}}
                         </div>
                     </div>
                     <!-- /.row -->
@@ -252,8 +615,9 @@
 				<!-- /row -->
 			</div>
 			<!-- /container -->
-		</div>
+	</div>
 	<!-- /SECTION -->
+	
 	<!-- NEWSLETTER -->
 		<div id="newsletter" class="section">
 			<!-- container -->

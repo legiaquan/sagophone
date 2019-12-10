@@ -34,8 +34,7 @@
 				            			<li class="divider"></li>
 				            			<li><a href="lichsumuahang"><i class="fa fa-list-alt"></i>Lịch sử mua hàng </a></li>
 		                        </ul>
-		                        &nbsp;&nbsp;
-		                        <a><i class="fa fa-dollar"></i> VND </a>		                    
+		                        &nbsp;&nbsp;	                    
 		                        <li>
 		                        	<i class="fa fa-sign-out"></i>
 		                        	<a href="dangxuat">Đăng xuất</a>
@@ -124,7 +123,7 @@
 													</div>
 													<div class="product-body">
 														<h3 class="product-name"><a href="#">{{$sanpham->name}}</a></h3>
-														<h4 class="product-price"><span class="qty">{{$sanpham->qty}}x</span>{{$sanpham->price}}VND</h4>
+														<h4 class="product-price"><span class="qty">{{$sanpham->qty}}x</span>{{number_format($sanpham->price,0,',','.')}}VND</h4>
 													</div>
 													<button class="delete" onclick="window.location.href = '{{route('delete.cart.item',$sanpham->rowId)}}';"><i class="fa fa-close"></i></button>
 												</div>

@@ -9,7 +9,6 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="trangchu">Trang Chủ</a></li>
-						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
 						<li class="active"><a href="cuahang">Cửa Hàng</a></li>									
 						<li><a href="lienhe">Liên Hệ</a></li>
@@ -30,11 +29,11 @@
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
-							<li><a>Trang Chủ</a></li>
-							<li class="active"><a>Cửa Hàng</a></li>
-							<li class="active"><a>{{$chitiet->sanpham->nhomsanpham->tennhom}}</a></li>
-							<li class="active"><a>{{$chitiet->sanpham->hangdt->tenhang}}</a></li>
-							<li class="active"><a>{{$chitiet->sanpham->tensp}}</a></li>
+							<li><a href="trangchu">Trang Chủ</a></li>
+							<li class="active"><a href="cuahang">Cửa Hàng</a></li>
+							<li class="active"><a href="cuahang?id_nhom={{ $chitiet->sanpham->id_nhom }}">{{$chitiet->sanpham->nhomsanpham->tennhom}}</a></li>
+							<li class="active"><a href="cuahang?grand={{ $chitiet->sanpham->id_hangdt }}">{{$chitiet->sanpham->hangdt->tenhang}}</a></li>
+							<li class="active"><a href="chitiet/{{ $chitiet->id }}">{{$chitiet->sanpham->tensp}}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -55,9 +54,9 @@
 						
 						<div id="product-main-img">
 							@foreach($hinhchitiet as $hinh)
-							<div class="product-preview">
-								<a href="chitiet/{{$hinh->id}}"><img src="upload/imgSanPham/{{$hinh->hinhchitiet}}" alt=""></a>
-							</div>
+								<div class="product-preview">
+									<a href="chitiet/{{$hinh->id}}"><img src="upload/imgSanPham/{{$hinh->hinhchitiet}}" alt=""></a>
+								</div>
 							@endforeach
 						</div>
 						
@@ -86,31 +85,36 @@
 								$getphantram = getPhanTram($chitiet->id);
 								$getdanhgia = getNhanXet($chitiet->id);
 								$dembinhluan = demBinhLuan($chitiet->id_sanpham);
+								$star = round((avgStarSanPham($chitiet->id)),1);
+								$starnguyen = floor(avgStarSanPham($chitiet->id));
 							?>
 							<h2 class="product-name">{{$chitiet->sanpham->tensp}}</h2>
 							<div>
 								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o"></i>
+									@if($star != null)
+										<div class="review-rating">
+											@for($i=0;$i<$starnguyen;$i++)
+												@if($i < $star)
+													<i class="fa fa-star checked"></i>
+												@endif
+											@endfor
+											@if($star >= ($starnguyen + 0.5))
+												<i class="fa fa-star-half-o checked"></i>
+											@endif
+											@if(avgStarSanPham($chitiet->id) != null)
+												({{ $star }} / 5 <i class="fa fa-star checked"></i>)
+										@endif
+										</div>
+										
+									@else
+										<a style="font-size: 12px">(Chưa có đánh giá)</a>
+									@endif
 								</div>
 								<a class="review-link" href="#">{{count($getdanhgia)}} Đánh giá(s)</a>
 							</div>
 							
 							<div>
 								<h3 class="product-price">
-									{{-- @if(Request::get('id_mau')!=null)					
-										{{$chitiet->gia}}
-										<del class="product-old-price">{{$chitiet->gia * $chitiet->phantramkhuyenmai}}</del>
-									@else
-										{{$chitiet->gia}}
-										@if($chitiet->phantramkhuyenmai != null)
-											<del class="product-old-price">{{$chitiet->id * $chitiet->phantramkhuyenmai}}</del>
-										@endif
-									@endif --}}
-									
 									@if($getphantram != null)
 										<del class="product-old-price">{{number_format($chitiet->gia,0,',','.')}} VND</del>
 										{{number_format($chitiet->gia * (100 - $getphantram) / 100,0,',','.')}} VND
@@ -265,14 +269,144 @@
 									<div class="row">
 										<!-- Rating -->
 										<div class="col-md-3">
+											@if($star != null)
 											<div id="rating">
 												<div class="rating-avg">
-													<span>4.5</span>
+													<div class="review-rating">
+														
+															<span>{{ $star }}</span>
+															
+															@for($i=0;$i<$starnguyen;$i++)
+																@if($i < $star)
+																	<i class="fa fa-star checked"></i>
+																@endif
+															@endfor
+															@if($star >= ($starnguyen + 0.5))
+																<i class="fa fa-star-half-o checked"></i>
+															@endif
+													
+													</div>
+												</div>
+												<ul class="rating">
+													<li>
+														<span class="sum">
+															<?php 
+																$star = getStar($chitiet->id);
+																$dem5 = 0;
+																$dem4 = 0;
+																$dem3 = 0;
+																$dem2 = 0;
+																$dem1 = 0;
+															 ?>
+															@foreach($star as $s)
+																@if($s->star == 5)
+																	<?php $dem5++?>
+																@endif
+															@endforeach
+														</span>
+														<div class="rating-stars">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</div>
+														<div class="rating-progress">
+															<div style="width: {{$dem5 / count($star) * 100 }}%;"></div>
+														</div>
+														{{$dem5}}
+													</li>
+													<li>
+														<span class="sum">
+															@foreach($star as $s)
+																@if($s->star == 4)
+																	<?php $dem4++?>
+																@endif
+															@endforeach
+														</span>
+														<div class="rating-stars">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o"></i>
+														</div>
+														<div class="rating-progress">
+															<div style="width: {{$dem4 / count($star) * 100 }}%;"></div>
+														</div>
+														{{$dem4}}
+													</li>
+													<li>
+														<span class="sum">
+															@foreach($star as $s)
+																@if($s->star == 3)
+																	<?php $dem3++?>
+																@endif
+															@endforeach
+														</span>
+														<div class="rating-stars">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+														</div>
+														<div class="rating-progress">
+															<div style="width: {{$dem3 / count($star) * 100 }}%;"></div>
+														</div>
+														{{$dem3}}
+													</li>
+													<li>
+														<span class="sum">
+															@foreach($star as $s)
+																@if($s->star == 2)
+																	<?php $dem2++?>
+																@endif
+															@endforeach
+														</span>
+														<div class="rating-stars">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+														</div>
+														<div class="rating-progress">
+															<div style="width: {{$dem2 / count($star) * 100 }}%;"></div>
+														</div>
+														{{$dem2}}
+													</li>
+													<li>
+														<span class="sum">
+															@foreach($star as $s)
+																@if($s->star == 1)
+																	<?php $dem1++?>
+																@endif
+															@endforeach
+														</span>
+														<div class="rating-stars">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+														</div>
+														<div class="rating-progress">
+															<div style="width: {{$dem1 / count($star) * 100 }}%;"></div>
+														</div>
+														{{$dem1}}
+													</li>
+												</ul>
+												</div>
+											@else
+												<div id="rating">
+												<div class="rating-avg">
+													<small>(Chưa có đánh giá)</small>
 													<div class="rating-stars">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
+														<i class="fa fa-star-o"></i>
+														<i class="fa fa-star-o"></i>
+														<i class="fa fa-star-o"></i>
+														<i class="fa fa-star-o"></i>
 														<i class="fa fa-star-o"></i>
 													</div>
 												</div>
@@ -286,9 +420,9 @@
 															<i class="fa fa-star"></i>
 														</div>
 														<div class="rating-progress">
-															<div style="width: 80%;"></div>
+															<div style="width: 0%;"></div>
 														</div>
-														<span class="sum">3</span>
+														<span class="sum">0</span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -299,9 +433,9 @@
 															<i class="fa fa-star-o"></i>
 														</div>
 														<div class="rating-progress">
-															<div style="width: 60%;"></div>
+															<div style="width: 0%;"></div>
 														</div>
-														<span class="sum">2</span>
+														<span class="sum">0</span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -344,7 +478,9 @@
 													</li>
 												</ul>
 											</div>
+											@endif
 										</div>
+											
 										<!-- /Rating -->
 
 										<!-- Reviews -->

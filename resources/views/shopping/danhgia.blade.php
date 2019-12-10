@@ -107,7 +107,7 @@
 								<h5>Màu : {{$chitiet->chitietsanpham->mau->mau }}</h5> 
 							</div>
 							<?php
-								$star = round((avgStarSanPham($chitiet->id_chitietsanpham)),2);
+								$star = round((avgStarSanPham($chitiet->id_chitietsanpham)),1);
 								$starnguyen = floor(avgStarSanPham($chitiet->id_chitietsanpham));
 							?>
 							<div class="product-preview" style="text-align: center">

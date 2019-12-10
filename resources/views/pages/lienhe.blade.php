@@ -11,7 +11,6 @@
                     <!-- NAV -->
 						<ul class="main-nav nav navbar-nav">
 						<li><a href="trangchu">Trang Chủ</a></li>
-						<li><a href="hotdeals">Hot Deals</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
 						<li><a href="cuahang">Cửa Hàng</a></li>									
 						<li class="active"><a href="lienhe">Liên Hệ</a></li>
@@ -67,9 +66,9 @@
 				    <div style="width: 60%;">
 						<form action="lienhe" class="review-form" method="POST">
 							<input type="hidden" name="_token" value="{{csrf_token()}}">
-								<input class="input" name="name" type="text" placeholder="Tên của bạn">
+								<input class="input" name="name" type="text" placeholder="Tên của bạn*">
 								<input class="input" name="email" type="email" placeholder="Email của bạn*">
-								<textarea name="phanhoi" class="input" placeholder="Phản hồi của bạn"></textarea>
+								<textarea name="phanhoi" class="input" placeholder="Phản hồi của bạn*"></textarea>
 								<button class="primary-btn">Gửi phản hồi</button>
 
 						</form>

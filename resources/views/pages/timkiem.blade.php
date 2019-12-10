@@ -32,48 +32,8 @@
                 <div class="row">
                     <!-- ASIDE -->
                     <div id="aside" class="col-md-3">
-                        <!-- aside Widget -->
-                        {{-- <div class="aside">                        
-                                <h3 class="aside-title"><a href="danhmuc" style="font-weight: bolder;">Danh Mục</a></h3>                        
-                            @foreach($nhomsanpham as $nsp)
-                            <div class="checkbox-filter">                           
-                                <div class="">
-                                    <label>
-                                        <a class="{{Request::get('id_nhom') == $nsp->id? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['id_nhom' => $nsp->id]) }}">
-                                            {{$nsp->tennhom}}
-                                        </a>
-                                    </label>
-                                    
-                                    @if($nsp->id == 1)
-                                        <small>({{count($sanphamdt)}})</small>
-                                    @elseif($nsp->id == 2)
-                                        <small>({{count($sanphampk)}})</small>
-                                    @else
-                                        <small>(0)</small>
-                                    @endif
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                        <!-- /aside Widget --> --}}
-
                        
-                        <!-- aside Widget -->
-                        <div class="aside">
-                            <h3 class="aside-title"><a style="font-weight: bolder;">Lọc Theo Giá</a></h3>
-                            
-                                <ul>
-                                    <li><a class="{{Request::get('gia') == 1 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 1]) }}">Dưới 1.000.000 VND</a></li><br>
-                                    <li><a class="{{Request::get('gia') == 2 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 2]) }}">1.000.000 - 3.000.000 VND</a></li><br>
-                                    <li><a class="{{Request::get('gia') == 3 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 3]) }}">3.000.000 - 5.000.000 VND</a></li><br>
-                                    <li><a class="{{Request::get('gia') == 4 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 4]) }}">5.000.000 - 7.000.000 VND</a></li><br>
-                                    <li><a class="{{Request::get('gia') == 5 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 5]) }}">7.000.000 - 10.000.000 VND</a></li><br>
-                                    <li><a class="{{Request::get('gia') == 6 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 6]) }}">Trên 10.000.000 VND</a></li><br>
-                                </ul>
-                        
-                            
-                            
-                        </div>
+                       
                         
                         <!-- /aside Widget -->
                         <div class="col-md-9">
@@ -88,7 +48,13 @@
                     
                     <!-- STORE -->
                     <div id="store" class="col-md-9">
-                        <h3> ({{count($tongsanpham)}}) Kết quả tìm kiếm : {{$keyword}} </h3>
+                        @if($keyword != null && $tenhang != null)
+                            <h3> ({{count($tongsanpham)}}) Kết quả tìm kiếm : ({{$tenhang}}) {{$keyword}} </h3>
+                        @elseif($keyword == null && $tenhang != null)
+                            <h3> ({{count($tongsanpham)}}) Kết quả tìm kiếm : ({{$tenhang}}) </h3>
+                        @else
+                            <h3> ({{count($tongsanpham)}}) Kết quả tìm kiếm : {{$keyword}} </h3>
+                        @endif
                         <div class="row">
                             <!-- product -->
                                 @foreach($sanpham as $sp)
@@ -99,12 +65,32 @@
                                                 <img width="260px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
                                             </a>
                                            <div class="product-label">  
-                                                @if($sp->id_banner == 3)                                    
-                                                    <span class="new">NEW</span>
-                                                @elseif($sp->id_banner == 2)
-                                                    <span class="sale">-30%</span>
-                                                @elseif($sp->id_banner == 4)
-                                                    <span class="sale">HOT</span>
+                                               @if(getBanner($sp->id) != null)
+                                                    @if(getBanner($sp->id) == 3)
+                                                        @if(getBanner2($sp->id) == 4)               
+                                                            <span class="new">NEW</span>
+                                                            <span class="sale">HOT</span>
+                                                        @else
+                                                            <span class="new">NEW</span>
+                                                        @endif
+                                                    @elseif(getBanner($sp->id) == 2)
+                                                        @if(getBanner2($sp->id) == 4)               
+                                                            <span class="sale">-{{ getPhanTram($sp->id) }}%</span>
+                                                            <span class="sale">HOT</span>
+                                                        @else
+                                                            <span class="sale">-{{ getPhanTram($sp->id) }}%</span>
+                                                        @endif
+                                                    @elseif(getBanner($sp->id) == 4)
+                                                        @if(getBanner2($sp->id) == 3)   
+                                                            <span class="sale">HOT</span>           
+                                                            <span class="new">NEW</span>
+                                                        @elseif(getBanner2($sp->id) == 2)
+                                                            <span class="sale">HOT</span>
+                                                            <span class="sale">-{{ getPhanTram($sp->id) }}%</span>
+                                                        @else
+                                                            <span class="sale">HOT</span>
+                                                        @endif
+                                                    @endif
                                                 @endif
                                             </div>                                          
                                         </div>
@@ -112,22 +98,32 @@
                                             <p class="product-category">{{$sp->tenhang}}</p>
                                             <h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id_sanpham}}/{{$sp->id}}">{{$sp->tensp}} {{ $sp->mau }}</a></h3>
                                             <h4 class="product-price">
-                                                @if($sp->phantramkhuyenmai != null)
-                                                    <del class="product-old-price">{{number_format($sp->gia,0,',','.')}}</del>{{number_format($sp->gia * (100 - $sp->phantramkhuyenmai) / 100,0,',','.')}}VND
+                                                @if(getPhanTram($sp->id) != null)
+                                                    <del class="product-old-price">{{number_format($sp->gia,0,',','.')}}</del>{{number_format($sp->gia * (100 - getPhanTram($sp->id)) / 100,0,',','.')}}VND
                                                     @else
                                                         {{number_format($sp->gia,0,',','.')}}VND
                                                 @endif
                                             </h4>
-                                            <div class="product-rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
+                                            <?php
+                                                $star = round((avgStarSanPham($sp->id)),2);
+                                                $starnguyen = floor(avgStarSanPham($sp->id));
+                                            ?>
+                                                <div class="review-rating" style="height: 10px; margin-bottom: 5px">
+                                                    @if($star != null)
+                                                        @for($i=0;$i<$starnguyen;$i++)
+                                                            @if($i < $star)
+                                                                <i class="fa fa-star checked"></i>
+                                                            @endif
+                                                        @endfor
+                                                        @if($star >= ($starnguyen + 0.5))
+                                                            <i class="fa fa-star-half-o checked"></i>
+                                                        @endif
+                                                    @else
+                                                        <a style="font-size: 10px">(Chưa có đánh giá)</a>
+                                                    @endif
+                                                </div>
                                             <div class="product-btns">
-                                                {{-- <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button> --}}
+                                                
                                                 <button class="quick-view"><a href="chitiet/{{$sp->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
                                             </div>
                                         </div>
@@ -144,7 +140,7 @@
                         <br>
                         <!-- store bottom filter -->
                         <div class="store-filter clearfix" style="text-align: center;">
-                           {{ $sanpham->appends(Request::except('timkiem'))->links() }}
+                           {{ $sanpham->appends(Request::except('find.product'))->links() }}
                         </div>
                         <!-- /store bottom filter -->
                     </div>

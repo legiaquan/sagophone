@@ -22,7 +22,7 @@
 			<!-- /container -->
 		</nav>
 <!-- /NAVIGATION -->
-		<!-- BREADCRUMB -->
+<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
 			<!-- container -->
 			<div class="container">
@@ -39,8 +39,16 @@
 			</div>
 			<!-- /container -->
 		</div>
-		<!-- /BREADCRUMB -->
-
+<!-- /BREADCRUMB -->
+<div class="section text-center">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				@if($hinhbanner != null)
+					<a href="cuahang?id_banner={{ $hinhbanner->id }}"><img src="./upload/imgKhuyenMai/{{ $hinhbanner->hinhbanner }}" style="width: 1000px; height: 200px">
+				@endif
+			</div>
+</div>
 <!-- ##### Hero Area Start ##### -->
     <div class="hero-area">
         <div class="container">
@@ -55,12 +63,14 @@
                         &nbsp;&nbsp;
                         @foreach($banner as $bn)
                             @if(count($bn->danhsachbanner) > 0)
-                                <a class="{{Request::get('id_banner') == $bn->id ? 'btn btn-success btn-lg active' : ''}}" href="{{ request()->fullUrlWithQuery(['id_banner' => $bn->id]) }}" class="product-category" style="font-size: 20px; font-weight: bolder; border: dotted; color: black">{{$bn->tenbanner}}</a>
+                                <a class="{{Request::get('id_banner') == $bn->id ? 'btn btn-default btn-lg active' : ''}}" href="{{ request()->fullUrlWithQuery(['id_banner' => $bn->id]) }}" class="product-category" style="font-size: 20px; font-weight: bolder; border: solid 3px black; color: red">{{$bn->tenbanner}}</a>
                             @endif
                             &nbsp;&nbsp;
                         @endforeach
                     </div>
+
                 </div>
+
             
         </div>
     </div>
@@ -75,7 +85,7 @@
 					<div id="aside" class="col-md-3">
 						<!-- aside Widget -->
 						<div class="aside">						
-								<h3 class="aside-title"><a href="cuahang" style="font-weight: bolder;">Danh Mục</a></h3>						
+								<h3 class="aside-title"><a style="font-weight: bolder;">Danh Mục</a></h3>						
 							@foreach($nhomsanpham as $nsp)
 							<div class="checkbox-filter">							
 								<div class="">
