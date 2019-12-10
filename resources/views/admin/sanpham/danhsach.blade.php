@@ -3,7 +3,7 @@
             <!-- Zero configuration table -->
             <section id="configuration">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-24" >
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">DANH SÁCH - SẢN PHẨM <i class="ft-smartphone"></i></h4>
@@ -18,7 +18,7 @@
                                             </div>
                                         @endif
                                     </p>
-                                    <table class="table table-striped table-bordered zero-configuration">
+                                    <table width="102%" class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
                                                 <th></th>
@@ -32,7 +32,7 @@
                                                 <th>Camera</th>
                                                 <th>CPU & Pin</th>
                                                 <th>Thẻ sim</th>
-                                                <th width="300px">Giá & Số lượng</th>                              
+                                                <th width="400px">Giá & Số lượng</th>                              
                                                 <th width="10px">Xử lý</th>
                                             </tr>
                                         </thead>
@@ -55,13 +55,13 @@
                                                  </td> -->
                                                 <td>{{ $row->manhinh }}</td>
                                                 <td>{{ $row->hedieuhanh }}</td>
-                                                <td>Trước:{{ $row->camtruoc }}<br/>Sau:{{ $row->camsau }}</td>
+                                                <td>@if($row->camtruoc)<b>Trước: </b>{{ $row->camtruoc }}@endif<br/>@if($row->camsau)<b>Sau: </b>{{ $row->camsau }}@endif</td>
                                                 <td>{{ $row->cpu }} <br><i>{{ $row->dungluongpin }} @if($row->dungluongpin)mAh @endif</i></td>
 
                                                 <td>{{ $row->thesim }}</td>
                                                 <td><?php $arrGia = getAllGia($row->id) ?>
                                                     @foreach($arrGia as $giasp)
-                                                        <span style="background: {{ $giasp->mamau }};color:#a6a6a6;border-radius: 5px;">{{ $giasp->mau }}:</span> {{ number_format($giasp->gia) }}₫ - 
+                                                        <span style="background: {{ $giasp->mamau }};color:#a6a6a6;border-radius: 5px;">{{ $giasp->mau }}</span> {{ number_format($giasp->gia) }}₫ - 
                                                         @if($giasp->soluong>0)
                                                             {{ $giasp->soluong }}
                                                         @else

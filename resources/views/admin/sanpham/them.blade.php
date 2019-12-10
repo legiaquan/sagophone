@@ -103,7 +103,7 @@
 												<option value="16" >16GB</option>
 												<option value="32" >32GB</option>
 												<option value="64" selected="" >64GB</option>
-												<option value="128" >128B</option>
+												<option value="128" >128GB</option>
 												<option value="256" >256GB</option>
 												<option value="512" >512GB</option>
 												<option value="1024" >1T</option>
@@ -149,7 +149,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="projectinput3">Thẻ sim</label>
-											<input type="text" id="projectinput3" class="form-control"  name="txtThesim">
+											<input type="text" id="projectinput3" class="form-control"  name="txtThesim" value="Nano Sim">
 										</div>
 									</div>
 								</div>
