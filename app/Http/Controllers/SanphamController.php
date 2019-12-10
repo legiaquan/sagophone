@@ -46,7 +46,7 @@ class SanPhamController extends Controller
         ]);
 
         $sanpham = new SanPham;
-        $sanpham->tensp = $request->txtTen;
+        $sanpham->tensp = $request->txtTen.' - '.$request->txtRam.'/'.$request->txtRom.'GB';
         $sanpham->id_hangdt = $request->txtHangDT;
         $sanpham->id_nhom = $request->txtNhomSP;
         //$sanpham->hinhsp = $request->flHinh;
@@ -97,7 +97,8 @@ class SanPhamController extends Controller
         }
        
 
-        return redirect('admin/sanpham/them')->with('thongbao','Thêm thành công '.$sanpham->tensp.' - '.$sanpham->ram.'/'.$sanpham->rom.'GB'.' vào CSDL!');
+        return redirect('admin/sanpham/them')->with('thongbao','Thêm thành công '.$sanpham->tensp.' vào CSDL!');
+        // return redirect('admin/sanpham/them')->with('thongbao','Thêm thành công '.$sanpham->tensp.' - '.$sanpham->ram.'/'.$sanpham->rom.'GB'.' vào CSDL!');
     }
 
     public function getSua($id)
