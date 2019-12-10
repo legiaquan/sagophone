@@ -317,3 +317,5 @@ Route::post('chitietdonhang/{id}','ShoppingCartController@cancelOrder');
 
 Route::get('lienhe','PageController@lienhe');
 
+Route::post('lienhe','PageController@postLienhe');
+

@@ -64,7 +64,24 @@
 				       
 				    </div>
 
+				    <div style="width: 60%;">
+						<form action="lienhe" class="review-form" method="POST">
+							<input type="hidden" name="_token" value="{{csrf_token()}}">
+								<input class="input" name="name" type="text" placeholder="Tên của bạn">
+								<input class="input" name="email" type="email" placeholder="Email của bạn*">
+								<textarea name="phanhoi" class="input" placeholder="Phản hồi của bạn"></textarea>
+								<button class="primary-btn">Gửi phản hồi</button>
+
+						</form>
+						@if(session('phanhoithanhcong'))
+				                     <div class="alert alert-success">
+				                         {{session('phanhoithanhcong')}}
+				                     </div>
+			                    @endif
+					</div>
+					
 				</div>
+				
 				<!-- /row -->
 			</div>
 			<!-- /container -->

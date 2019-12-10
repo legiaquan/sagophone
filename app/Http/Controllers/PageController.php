@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
-use Mapper;
+use Mail;
+
+use App\Mail\SendMail;
 
 use App\NhomSanPham;
 
@@ -430,15 +432,6 @@ class PageController extends Controller
 
     public function timkiem(Request $request)
     {
-        // $this->validate($request,
-        //     [
-        //     'keyword' => 'required'
-        //     ]
-        // ,
-        //     [
-        //         'keyword.required' => 'Vui lòng nhập từ khóa!'
-        //     ]);
-
         $keyword = $request->keyword;
         if($keyword == null && $request->timkiem == null)
         {
@@ -616,6 +609,38 @@ class PageController extends Controller
     public function lienhe()
     {
         return view('pages.lienhe');
+    }
+
+    public function postLienhe(Request $request)
+    {
+        $this->validate($request,
+            [
+                'name' => 'required',
+                'email' => 'required',
+                'phanhoi' => 'required'
+            ],
+            [
+                'name.required' => 'Chưa nhập tên!',
+                'email.required' => 'Chưa nhập email!',
+                'phanhoi.required' => 'Chưa nhập phản hồi!'
+            ]
+        );
+        // $mail = $request->email;
+        // $subject = $request->subject;
+        // $phanhoi = $request->phanhoi;
+
+        // Mail::to('momaomao1@gmail.com')->send($mail);
+        $data = ['name' => $request->name, 'email' => $request->email, 'content' => $request->phanhoi];
+        Mail::send('pages/blank',$data,function($msg){
+            $msg->from('momaomao1@gmail.com','Phản Hồi');
+            $msg->to('momaomao1@gmail.com','SagoPhone')->subject('Phản Hồi Của Người Dùng');
+        });
+        // $input = $request->all();
+        // Mail::send('pages/blank', array('name'=>$input["name"],'email'=>$input["email"], 'content'=>$input['phanhoi']), function($message){
+        //     $message->to('momaomao1@gmail.com', 'Sagophone')->subject('Phản Hồi Người Dùng!');
+        // });
+
+        return redirect('lienhe')->with('phanhoithanhcong','Gửi phản hồi thành công!');; 
     }
 
     public function getDangNhap()
