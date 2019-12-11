@@ -477,7 +477,7 @@
 							<div class="products-tabs">
 								<!-- tab -->
 								<div id="tab1" class="tab-pane active">
-									<div class="products-slick" data-nav="#slick-nav-4">
+									<div class="products-slick" data-nav="#slick-nav-5">
 										@foreach($phukien as $dt)
 										<!-- product -->
 										<div class="product">
@@ -562,7 +562,7 @@
 										
 									</div>
 								
-									<div id="slick-nav-4" class="products-slick-nav"></div>
+									<div id="slick-nav-5" class="products-slick-nav"></div>
 								</div>
 								<!-- /tab -->
 							</div>
