@@ -56,8 +56,9 @@
 					 </div>
 				<!-- row -->
 				<div class="row">
-								
+					
 					<!-- shop -->
+					<a href="cuahang?grand={{$apple->id}}">
 					<div class="col-md-4 col-xs-6">
 						<div class="shop">
 							<div class="shop-img">
@@ -69,8 +70,10 @@
 							</div>
 						</div>
 					</div>
+					</a>
 					<!-- /shop -->
 					<!-- shop -->
+					<a href="cuahang?grand={{$samsung->id}}">
 					<div class="col-md-4 col-xs-6">
 						<div class="shop">
 							<div class="shop-img">
@@ -82,8 +85,10 @@
 							</div>
 						</div>
 					</div>
+					</a>
 					<!-- /shop -->
 					<!-- shop -->
+					<a href="cuahang?grand={{$nokia->id}}">
 					<div class="col-md-4 col-xs-6">
 						<div class="shop">
 							<div class="shop-img">
@@ -95,6 +100,7 @@
 							</div>
 						</div>
 					</div>
+					</a>
 					<!-- /shop -->
 				</div>
 				<!-- /row -->
@@ -570,6 +576,7 @@
 		</div>
 		<!-- /SECTION -->
 	<!-- SECTION -->
+	<br>
 	<div class="section">
 			<!-- container -->
 			<div class="container">

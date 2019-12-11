@@ -83,7 +83,8 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="projectinput5">RAM</label>
-											<select id="projectinput5" name="txtRam" class="form-control">D	
+											<select id="projectinput5" name="txtRam" class="form-control">
+												<option value="">---Không có---</option>
 												<option value="1" >1GB</option>
 												<option value="2" >2GB</option>
 												<option value="3" >3GB</option>
@@ -99,7 +100,8 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="projectinput5">ROM</label>
-											<select id="projectinput5" name="txtRom" class="form-control">D	
+											<select id="projectinput5" name="txtRom" class="form-control">
+												<option value="">---Không có---</option>
 												<option value="16" >16GB</option>
 												<option value="32" >32GB</option>
 												<option value="64" selected="" >64GB</option>

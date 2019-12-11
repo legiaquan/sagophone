@@ -24,9 +24,9 @@
                                                 <th>ID</th>
                                                 <th>Tên banner & Hình banner</th>
                                                 <th>Admin thêm</th>
-                                                <th>Trạng thái</th>
+                                                <th width="10px">Trạng thái</th>
                                                 <th>Ngày bắt đầu</th>
-                                                <th>Ngày kết thúc</th>
+                                                <th width="100px">Ngày kết thúc</th>
 
                                                 <th>Xử lý</th>
                                             </tr>
@@ -41,7 +41,7 @@
                                                         <?php $dem++; ?>
                                                     @endif
                                                 @endforeach
-                                                <td align="center"><span  ><b>{{ $row->tenbanner }}</b> - hiện có ({{ $dem }}) sp</span><br><img width="550px"  src="upload/imgKhuyenMai/{{ $row->hinhbanner }}"/>
+                                                <td align="center"><span  ><b>{{ $row->tenbanner }}</b> - hiện có ({{ $dem }}) sp</span><br><img width="500px"  src="upload/imgKhuyenMai/{{ $row->hinhbanner }}"/>
                                                 </td>
                                                 <td>{{ $row->admins->username }}</td>
                                                 <td>
@@ -61,7 +61,9 @@
                                                     @if($checkNgay >0)
                                                     {{$row->ngayketthuc }}
                                                     @else
-                                                    <span style="color: tomato">{{$row->ngayketthuc }}</span>
+                                                        @if($row->ngayketthuc!=null)
+                                                        <b><span style="color: tomato"><i class="ft-alert-triangle"></i>{{$row->ngayketthuc }}</span></b>
+                                                        @endif
                                                     @endif
                                                 </td>
                                                 <td width="100px" align="center">

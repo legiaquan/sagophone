@@ -84,15 +84,13 @@ class BannerController extends Controller
     	$this->validate($request,
         [
             'txtTen'=>'required|min:2|max:255',
-            'txtNgaybatdau'=>'required',
-            'txtNgayketthuc'=>'required'
+  
         ],
         [
             'txtTen.required'=>'Bạn chưa nhập tên banner',
             'txtTen.min'=>'Tên banner phải có độ dài từ 2 cho đến 50 ký tự',
             'txtTen.max'=>'Tên banner phải có độ dài từ 2 cho đến 50 ký tự',
-            'txtNgaybatdau.required'=>'Bạn chưa chọn ngày bắt đầu',
-            'txtNgayketthuc.required'=>'Bạn chưa chọn ngày kết thúc'
+
         ]);
 
         $banner = Banner::find($id);

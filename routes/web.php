@@ -154,7 +154,10 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 
 		Route::get('sua/{id}','BannerController@getSua');
 		Route::post('sua/{id}','BannerController@postSua');
-		
+
+		Route::get('hide/{id}','BannerController@getHide');
+		Route::get('show/{id}','BannerController@getShow');
+
 		Route::get('them','BannerController@getThem');
 		Route::post('them/{id_admins}','BannerController@postThem');
 
@@ -167,8 +170,8 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		// admin/hangdt/danhsach
 		Route::get('danhsach/{id}','DanhSachBannerController@getDanhSach');
 
-		Route::get('sua/{id}/{id_sanpham}','DanhSachBannerController@getSua');
-		Route::post('sua/{id}/{id_sanpham}','DanhSachBannerController@postSua');
+		Route::get('sua/{id}','DanhSachBannerController@getSua');
+		Route::post('sua/{id}','DanhSachBannerController@postSua');
 
 		Route::get('them/{id}','DanhSachBannerController@getThem');
 		Route::get('them/{id}/{id_sanpham}','DanhSachBannerController@activeThem');

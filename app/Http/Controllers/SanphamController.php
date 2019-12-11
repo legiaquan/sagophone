@@ -13,7 +13,7 @@ class SanPhamController extends Controller
     //
     public function getDanhSach()
     {
-        $sanpham = SanPham::orderBy('tensp')->get();
+        $sanpham = SanPham::orderBy('id_hangdt')->orderBy('id_nhom')->orderBy('tensp')->get();
         return view('admin.sanpham.danhsach',['sanpham'=>$sanpham]);
     }
 
@@ -46,7 +46,11 @@ class SanPhamController extends Controller
         ]);
 
         $sanpham = new SanPham;
-        $sanpham->tensp = $request->txtTen.' - '.$request->txtRam.'/'.$request->txtRom.'GB';
+        if($request->txtRam || $request->txtRom)
+            $ten = $request->txtTen.' - '.$request->txtRam.'/'.$request->txtRom.'GB';
+        else
+            $ten = $request->txtTen;
+        $sanpham->tensp = $ten;
         $sanpham->id_hangdt = $request->txtHangDT;
         $sanpham->id_nhom = $request->txtNhomSP;
         //$sanpham->hinhsp = $request->flHinh;

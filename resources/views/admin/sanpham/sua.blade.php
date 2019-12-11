@@ -92,7 +92,8 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="projectinput5">RAM<span style="color: red">*</span></label>
-											<select id="projectinput5" name="txtRam" class="form-control">D	
+											<select id="projectinput5" name="txtRam" class="form-control">
+												<option @if($sanpham->rom==null){{ 'selected' }}  @endif value="">---Không có---</option>
 												<option @if($sanpham->ram==1){{ 'selected' }} @endif value="1" >1GB</option>
 												<option @if($sanpham->ram==2){{ 'selected' }} @endif value="2" >2GB</option>
 												<option @if($sanpham->ram==3){{ 'selected' }} @endif value="3" >3GB</option>
@@ -108,7 +109,8 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="projectinput5">ROM<span style="color: red">*</span></label>
-											<select id="projectinput5" name="txtRom" class="form-control">D	
+											<select id="projectinput5" name="txtRom" class="form-control">
+												<option @if($sanpham->rom==null){{ 'selected' }} @endif value="">---Không có---</option>
 												<option @if($sanpham->rom==16){{ 'selected' }} @endif value="16" >16GB</option>
 												<option @if($sanpham->rom==32){{ 'selected' }} @endif value="32" >32GB</option>
 												<option @if($sanpham->rom==64){{ 'selected' }} @endif value="64" >64GB</option>

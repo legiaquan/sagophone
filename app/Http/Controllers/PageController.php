@@ -83,20 +83,22 @@ class PageController extends Controller
         $bannerhotdeals = Banner::where('id',2)->first();
         $bannernew = Banner::where('id',3)->first();
         $bannerbanchay = Banner::where('id',4)->first();
+        
         $dienthoai = DB::table('tbchitietsanpham')
                             ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                             ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
                             ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                            ->where('tbsanpham.id_hangdt',1)
+                            ->where('tbsanpham.id_nhom',1)
                             ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau')
-                            ->get();
+                            ->inRandomOrder()->take(20)->get();
+        $id_nhom =2;
         $phukien = DB::table('tbchitietsanpham')
                             ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                             ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
                             ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                            ->where('tbsanpham.id_hangdt',2)
+                            ->where('tbsanpham.id_nhom',$id_nhom)
                             ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau')
-                            ->get();                
+                            ->inRandomOrder()->take(20)->get();                
         $tintuc = TinTuc::join('tbloaitin','tbtintuc.id_loaitin','tbloaitin.id')->select('tbloaitin.tenloaitin','tbtintuc.*');
 
         $tintuc = $tintuc->paginate(6);
@@ -173,6 +175,7 @@ class PageController extends Controller
                     ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                     ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
                     ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
+                    ->orderBy('tbsanpham.id_nhom')->orderBy('tbsanpham.created_at','desc')
                     ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
         if($request->price)
         {
