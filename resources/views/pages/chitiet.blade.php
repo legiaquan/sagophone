@@ -401,7 +401,7 @@
 											@else
 												<div id="rating">
 												<div class="rating-avg">
-													<small>(Chưa có đánh giá)</small>
+													
 													<div class="rating-stars">
 														<i class="fa fa-star-o"></i>
 														<i class="fa fa-star-o"></i>

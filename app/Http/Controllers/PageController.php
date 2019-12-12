@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 use Mail;
 
+use Hash;
+
+use Illuminate\Support\Str;
+
 use App\Mail\SendMail;
 
 use App\NhomSanPham;
@@ -37,6 +41,10 @@ use App\ThanhVien;
 use App\NhanVien;
 
 use App\KhoangGia;
+
+use App\Mail\verifyEmail;
+
+use App\Mail\forgotPassword;
 
 use DB;
 
@@ -382,56 +390,13 @@ class PageController extends Controller
                 'phanhoi.required' => 'Chưa nhập phản hồi!'
             ]
         );
-        // $mail = $request->email;
-        // $subject = $request->subject;
-        // $phanhoi = $request->phanhoi;
-
-        // Mail::to('momaomao1@gmail.com')->send($mail);
-        $data = ['name' => $request->name, 'email' => $request->email, 'content' => $request->phanhoi];
-        Mail::send('pages/blank',$data,function($msg){
-            $msg->from('momaomao1@gmail.com','Phản Hồi');
+        $data = ['name' => $request->name, 'mail' => $request->email, 'content' => $request->phanhoi];
+        Mail::send('pages/blank',$data,function($msg) use ($data){
+            $msg->from($data['mail'], $data['name']);
             $msg->to('momaomao1@gmail.com','SagoPhone')->subject('Phản Hồi Của Người Dùng');
         });
-        // $input = $request->all();
-        // Mail::send('pages/blank', array('name'=>$input["name"],'email'=>$input["email"], 'content'=>$input['phanhoi']), function($message){
-        //     $message->to('momaomao1@gmail.com', 'Sagophone')->subject('Phản Hồi Người Dùng!');
-        // });
 
         return redirect('lienhe')->with('phanhoithanhcong','Gửi phản hồi thành công!');; 
-    }
-
-    public function getDangNhap()
-    {
-        return view('pages.dangnhap');
-    }
-
-    public function postDangNhap(Request $request)
-    {
-        $this->validate($request,
-            [
-                'email' => 'required',
-                'password' => 'required'
-            ],
-            [
-                'email.required' => 'Bạn chưa nhập email!',
-                'password.required' => 'Bạn chưa nhập password!'
-            ]
-        );
-        if(Auth::attempt(['username' => $request->email, 'password' => $request->password])
-            || Auth::attempt(['email' => $request->email, 'password' => $request->password]))
-        {
-             return redirect('trangchu');
-        }
-        else
-        {
-            return redirect('dangnhap')->with('thongbao','Sai tên đăng nhập, Email hoặc mật khẩu');
-        }
-    }
-
-    public function dangxuat()
-    {
-        Auth::logout();
-        return redirect('trangchu');
     }
 
     public function binhluan(Request $request, $id)
@@ -472,25 +437,31 @@ class PageController extends Controller
         $user->diachi = $request->Address;
         if($request->changePassword == "on")
         {
-            $this->validate($request,
-            [
-                
-                'Password' => 'required|min:6|max:30',
-                'againPassword' => 'required|same:Password'
-            ],
-            [
-                'Password.required' => 'Bạn chưa nhập mật khẩu!',
-                'Password.min' => 'Mật khẩu phải có nhiều hơn 6 ký tự!',
-                'Password.max' => 'Mật khẩu không được nhiều hơn 30 ký tự!',
-                'againPassword.required' => 'Bạn chưa nhập lại mật khẩu!',
-                'againPassword.same' => 'Mật khẩu không trùng khớp!',             
-            ]
-        );
-            $user->password = bcrypt($request->Password);
+            if(Hash::check($request->oldPassword, $user->password,[]))
+            {
+                    $this->validate($request,
+                [
+                    
+                    'Password' => 'required|min:6|max:30',
+                    'againPassword' => 'required|same:Password'
+                ],
+                [
+                    'Password.required' => 'Bạn chưa nhập mật khẩu!',
+                    'Password.min' => 'Mật khẩu phải có nhiều hơn 6 ký tự!',
+                    'Password.max' => 'Mật khẩu không được nhiều hơn 30 ký tự!',
+                    'againPassword.required' => 'Bạn chưa nhập lại mật khẩu!',
+                    'againPassword.same' => 'Mật khẩu không trùng khớp!',             
+                ]);
+                $user->password = bcrypt($request->Password);
+            }
+            else
+            {
+                return redirect('nguoidung')->with('thongbaomatkhau','Mật khẩu cũ không đúng!');
+            }
         }
         $user->sdt = $request->Phone;
         $user->save();
-        return redirect('nguoidung')->with('thongbao','Bạn đã sửa thành công');
+        return redirect('nguoidung')->with('thongbaonguoidung','Bạn đã sửa thành công');
     }
 
     public function getDangKy()
@@ -525,8 +496,106 @@ class PageController extends Controller
         $user->username = $request->Ten;
         $user->email = $request->Email;
         $user->password = bcrypt($request->Password);
-        $user->trangthai = 1;
+        $user->verifyToken = Str::random(40);
         $user->save();
-        return redirect('dangky')->with('thongbao','Đăng ký tài khoản thành công!');
+        Mail::to($user->email)->send(new verifyEmail($user));
+        return redirect('dangky')->with('thongbaodangky','Đăng ký tài khoản thành công! Vui lòng truy cập mail để kích hoạt!');
+    }
+
+    public function sendEmailDone($id, $verifyToken)
+    {
+        $user = ThanhVien::where('id',$id)->where('verifyToken',$verifyToken)->first();
+        if($user)
+        {
+            $user->trangthai = 1;
+            $user->verifyToken = NULL;
+            $user->save();
+        }
+        else
+        {
+            echo "user not found";
+        }
+        return redirect('registersuccess');
+    }
+
+    public function registerSuccess()
+    {
+        return view('pages/registersuccess');
+    }
+
+    public function getDangNhap()
+    {
+        return view('pages.dangnhap');
+    }
+
+    public function postDangNhap(Request $request)
+    {
+        $this->validate($request,
+            [
+                'email' => 'required',
+                'password' => 'required'
+            ],
+            [
+                'email.required' => 'Bạn chưa nhập email!',
+                'password.required' => 'Bạn chưa nhập password!'
+            ]
+        );
+        if(Auth::attempt(['username' => $request->email, 'password' => $request->password, 'trangthai' => 1])
+        || Auth::attempt(['email' => $request->email, 'password' => $request->password, 'trangthai' => 1]))
+            {
+              return redirect('trangchu');
+            }          
+        else
+            {
+                if(Auth::attempt(['username' => $request->email, 'password' => $request->password, 'trangthai' => 0])
+        || Auth::attempt(['email' => $request->email, 'password' => $request->password, 'trangthai' => 0]))
+                {
+                    return redirect('dangnhap')->with('thongbaodangnhap','Tài khoản chưa được kích hoạt!');
+                }
+                else
+                    return redirect('dangnhap')->with('thongbaodangnhap','Sai tên đăng nhập, Email hoặc mật khẩu');
+            }
+    }
+
+   
+    public function dangxuat()
+    {
+        Auth::logout();
+        return redirect('trangchu');
+    }
+
+    public function forgotPassword()
+    {
+        return view('pages/quenmatkhau');
+    }
+
+    public function postForgotPassword(Request $request)
+    {
+         $user = ThanhVien::where('username',$request->name)->where('email', $request->email)->first();
+         if($user)
+         {
+            $user->verifyToken = Str::random(40);
+            $user->save();
+            Mail::to($request->email)->send(new forgotPassword($user));
+            return redirect('quenmatkhau')->with('thongbaoguiquen','Đã gửi thông tin reset password qua mail!');
+         }
+         else
+         {
+            return redirect('quenmatkhau')->with('thongbaoquen','Không tìm thấy tài khoản trong hệ thống!');
+         }
+    }
+
+    public function resetPassword($id, $verifyToken)
+    {
+        return view('pages/resetpassword',['id' => $id, 'verifyToken' => $verifyToken]);
+    }
+
+    public function postResetPassword(Request $request, $id)
+    {
+        $user = ThanhVien::find($id);
+        $user->password =  bcrypt($request->newPassword);
+        $user->verifyToken = NULL;
+        $user->save();
+        return redirect('dangnhap')->with('thongbaoreset','Reset mật khẩu thành công!');
     }
 }

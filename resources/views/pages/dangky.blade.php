@@ -1,7 +1,45 @@
 @extends('layouts.index')
 
 @section('content')
-<br>
+<!-- NAVIGATION -->
+        <nav id="navigation">
+            <!-- container -->
+            <div class="container">
+                <!-- responsive-nav -->
+                <div id="responsive-nav">
+                    <!-- NAV -->
+                    <ul class="main-nav nav navbar-nav">
+                        <li><a href="trangchu">Trang Chủ</a></li>
+                        <li><a href="loaitin">Tin Tức</a></li>
+                        <li><a href="cuahang">Cửa Hàng</a></li>                                  
+                        <li><a href="lienhe">Liên Hệ</a></li>
+                    </ul>
+                    <!-- /NAV -->
+                </div>
+                <!-- /responsive-nav -->
+            </div>
+            <!-- /container -->
+        </nav>
+<!-- /NAVIGATION -->
+
+<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a href="dangnhap">Trang Chủ</a></li>
+							<li class="active"><a href="dangky">Đăng Ký</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
 	<div class="container">
 
     	<!-- slider -->
@@ -20,9 +58,9 @@
                             </div>
                         @endif --}}
 
-                        @if(session('thongbao'))
+                        @if(session('thongbaodangky'))
                             <div class="alert alert-success">
-                                {{session('thongbao')}}
+                                {{session('thongbaodangky')}}
                             </div>
                         @endif
 				    	<form action="dangky" method="POST">

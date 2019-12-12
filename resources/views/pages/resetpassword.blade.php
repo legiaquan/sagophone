@@ -23,23 +23,25 @@
 <!-- /NAVIGATION -->
 
 <!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<ul class="breadcrumb-tree">
-							<li><a href="dangnhap">Trang Chủ</a></li>
-							<li class="active"><a href="dangnhap">Đăng Nhập</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /BREADCRUMB -->
+        <div id="breadcrumb" class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="breadcrumb-tree">
+                            <li><a href="dangnhap">Trang Chủ</a></li>
+                            <li><a href="dangnhap">Đăng Nhập</a></li>
+                            <li class="active"><a href="quenmatkhau">Quên Mật Khẩu</a></li>
+                            <li class="active"><a>Reset Password</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /BREADCRUMB -->
 <div class="container">
 
     	<!-- slider -->
@@ -47,7 +49,7 @@
     		<div class="col-md-4"></div>
             <div class="col-md-4">
                 <div class="panel panel-default">
-				  	<div class="panel-heading"><h3>Đăng nhập</h3></div>
+				  	<div class="panel-heading"><h3>Reset Password</h3></div>
 				  	<div class="panel-body">
 				  		@if(count($errors)>0)
                             <div class="alert alert-danger">
@@ -57,37 +59,34 @@
                             </div>
                         @endif
 
-                        @if(session('thongbaodangnhap'))
+                        @if(session('thongbaoquen'))
                             <div class="alert alert-danger">
-                                {{session('thongbaodangnhap')}}
+                                {{session('thongbaoquen')}}
                             </div>
                         @endif
 
-                        @if(session('thongbaoreset'))
+                        @if(session('thongbaoguiquen'))
                             <div class="alert alert-success">
-                                {{session('thongbaoreset')}}
+                                {{session('thongbaoguiquen')}}
                             </div>
                         @endif
 
-				    	<form action="dangnhap" method="POST">
+				    	<form action="resetpassword/{{ $id }}/{{$verifyToken}}" method="POST">
 				    		<input type="hidden" name="_token" value="{{csrf_token()}}">
 							<div>
-				    			&nbsp;<label>Tên đăng nhập hoặc Email</label>
-							  	<input type="text" class="form-control" placeholder="Nhập tên đăng nhập hoặc Email" name="email" 
+				    			&nbsp;<label>Nhập mật khẩu mới</label>
+							  	<input type="password" class="form-control" placeholder="Nhập mật khẩu mới" name="newPassword" 
 							  	>
 							</div>
 							<br>	
 							<div>
-				    			&nbsp;<label>Mật khẩu</label>
-							  	<input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu">
+				    			&nbsp;<label>Nhập lại mật khẩu mới</label>
+							  	<input type="password" class="form-control" placeholder="Nhập lại mật khẩu mới" name="againNewPassword" 
+							  	>
 							</div>
 							<br>
 							<div>
-								<button type="submit" class="btn btn-default">Đăng nhập</button>
-								Chưa có tài khoản?<a href="dangky" class="btn btn-link">Đăng ký</a><br>
-							</div>
-							<div class="text-right">
-								<a href="quenmatkhau" class="btn btn-link">Quên mật khẩu?</a><br>
+								<button type="submit" class="btn btn-default">Xác Nhận</button>
 							</div>
 				    	</form>
 				  	</div>

@@ -322,3 +322,14 @@ Route::get('lienhe','PageController@lienhe');
 
 Route::post('lienhe','PageController@postLienhe');
 
+Route::get('verify/{id}/{verifyToken}','PageController@sendEmailDone')->name('sendEmailDone');
+
+Route::get('registersuccess','PageController@registerSuccess');
+
+Route::get('quenmatkhau','PageController@forgotPassword');
+
+Route::post('quenmatkhau','PageController@postForgotPassword');
+
+Route::get('resetpassword/{id}/{verifyToken}','PageController@resetPassword')->name('resetPassword');
+
+Route::post('resetpassword/{id}/{verifyToken}','PageController@postResetPassword');

@@ -23,7 +23,24 @@
         </nav>
 
 <!-- /NAVIGATION -->
-        
+<!-- BREADCRUMB -->
+        <div id="breadcrumb" class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="breadcrumb-tree">
+                            <li><a href="dangnhap">Trang Chủ</a></li>
+                            <li><a>Tìm Kiếm</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /BREADCRUMB -->        
 <!-- SECTION -->
 <div class="section">
             <!-- container -->

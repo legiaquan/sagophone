@@ -1,0 +1,1 @@
+Reset Mật Khẩu. <a href="{{ route('resetPassword',["id" => $user->id, "verifyToken" => $user->verifyToken]) }}" class="btn btn-link">Click here.</a>

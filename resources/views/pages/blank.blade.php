@@ -6,7 +6,7 @@
 </head>
 <body>
 	Tên Người Phản Hồi : {{ $name }}<br>
-	Email Phản Hồi : {{ $email }}<br>
+	Email Phản Hồi : {{ $mail }}<br>
 	Nội Dung Phản Hồi : {{$content}}
 </body>
 </html>

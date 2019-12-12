@@ -12,7 +12,6 @@
                     <!-- NAV -->
                     <ul class="main-nav nav navbar-nav">
                         <li><a href="trangchu">Trang Chủ</a></li>
-                        <li><a href="hotdeals">Hot Deals</a></li>
                         <li><a href="loaitin">Tin Tức</a></li>
                         <li><a href="cuahang">Cửa Hàng</a></li>                                  
                         <li><a href="lienhe">Liên Hệ</a></li>
@@ -58,9 +57,15 @@
                                 </div>
                             @endif
 
-                            @if(session('thongbao'))
+                            @if(session('thongbaonguoidung'))
                                 <div class="alert alert-success">
-                                    {{session('thongbao')}}
+                                    {{session('thongbaonguoidung')}}
+                                </div>
+                            @endif
+
+                             @if(session('thongbaomatkhau'))
+                                <div class="alert alert-warning">
+                                    {{session('thongbaomatkhau')}}
                                 </div>
                             @endif
                             <form action="nguoidung" method="POST">
@@ -85,6 +90,11 @@
                                 <div class="form-group">
                                     <input type="checkbox" id="changePassword" name="changePassword"/>
                                     <label>(Click để đổi mật khẩu)</label>
+                                    <input type="password" class="form-control password" name="oldPassword" placeholder="Nhập mật khẩu cũ" disabled="" />
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label>Nhập Mật Khẩu Mới</label>
                                     <input type="password" class="form-control password" name="Password" placeholder="Nhập mật khẩu mới" disabled="" />
                                 </div>
                                 <div class="form-group">
