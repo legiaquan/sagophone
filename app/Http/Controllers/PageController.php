@@ -62,16 +62,18 @@ class PageController extends Controller
                             ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
                             ->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
                             ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
+                            ->join('tbbanner','tbdanhsachbanner.id_banner','tbbanner.id')
                             ->where('tbdanhsachbanner.id_banner','3')
-                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai', 'tbdanhsachbanner.id_banner','tbmau.mau')
+                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai', 'tbdanhsachbanner.id_banner','tbmau.mau','tbbanner.trangthai')
                             ->get();
 		$sanphambanchay =   DB::table('tbchitietsanpham')
                             ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                             ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
                             ->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
                             ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                            ->where('tbdanhsachbanner.id_banner','4')
-                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai', 'tbdanhsachbanner.id_banner','tbmau.mau')
+                            ->join('tbbanner','tbdanhsachbanner.id_banner','tbbanner.id')
+                            ->whereIn('tbchitietsanpham.id',getBanchay())
+                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai', 'tbdanhsachbanner.id_banner','tbmau.mau', 'tbbanner.trangthai')
                             ->get();
 		view()->share('nhomsanpham',$nhomsanpham);
 		view()->share('hangdt',$hangdt);
@@ -96,16 +98,19 @@ class PageController extends Controller
                             ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                             ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
                             ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
+                            ->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
+                            ->join('tbbanner','tbdanhsachbanner.id_banner','tbbanner.id')
                             ->where('tbsanpham.id_nhom',1)
-                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau')
+                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai', 'tbdanhsachbanner.id_banner','tbmau.mau', 'tbbanner.trangthai')
                             ->inRandomOrder()->take(20)->get();
-        $id_nhom =2;
         $phukien = DB::table('tbchitietsanpham')
                             ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                             ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
                             ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                            ->where('tbsanpham.id_nhom',$id_nhom)
-                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau')
+                            ->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
+                            ->join('tbbanner','tbdanhsachbanner.id_banner','tbbanner.id')
+                            ->where('tbsanpham.id_nhom',2)
+                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai', 'tbdanhsachbanner.id_banner','tbmau.mau', 'tbbanner.trangthai')
                             ->inRandomOrder()->take(20)->get();                
         $tintuc = TinTuc::join('tbloaitin','tbtintuc.id_loaitin','tbloaitin.id')->select('tbloaitin.tenloaitin','tbtintuc.*');
 

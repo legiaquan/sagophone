@@ -115,14 +115,26 @@ function getPhanTram($id)
 			->value('tbdanhsachbanner.phantramkhuyenmai');
 	return $phantram;
 }
-function getPhanTram2($id)
+
+function getBanchay()
 {
-	$phantram = DB::table('tbchitietsanpham')
-			->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
-			->where('id_chitietsanpham',$id)
-			->orderBy('id_banner','DESC')
-			->value('tbdanhsachbanner.phantramkhuyenmai');
-	return $phantram;
+	$banchay = DB::table('tbchitietdonhang')
+			->select(DB::raw('sum(soluong) as soluong'))
+			->select('id_chitietsanpham')
+			->groupBy('id_chitietsanpham')
+			->orderBy(DB::raw('sum(soluong)'),'DESC LIMIT 0,10');
+	return $banchay;
+}
+
+function getBanchay1($id)
+{
+	$banchay = DB::table('tbchitietdonhang')
+			->select(DB::raw('sum(soluong) as soluong'))
+			->select('id_chitietsanpham')
+			->groupBy('id_chitietsanpham')
+			->orderBy(DB::raw('sum(soluong)'),'DESC','LIMIT 0,10');
+	$banchay1 = $banchay->where('id_chitietsanpham',$id)->first();
+	return $banchay1;
 }
 
 function getStar($id)

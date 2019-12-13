@@ -147,7 +147,7 @@
 												</a>
 												
 												<div class="product-label">											
-													@if(getBanner2($spm->id) == 4)				
+													@if(getBanchay1($spm->id) != null)				
 															<span class="new">NEW</span>
 															<span class="sale">HOT</span>
 													@else
@@ -216,7 +216,6 @@
 		<!-- /SECTION -->
 		@endif
 
-		@if($bannernew->trangthai =='show')
 		<div class="section">
 			<!-- container -->
 			<div class="container">
@@ -254,11 +253,24 @@
 												</a>
 												
 												<div class="product-label">											
-													@if(getBanner($spm->id) == 3)
+													@if(getBanner($spm->id) == 3 && $spm->trangthai == 'show')
 														<span class="sale">HOT</span>				
 														<span class="new">NEW</span>
+													@elseif(getBanner($spm->id) == 7 && $spm->trangthai == 'show')
+														<span class="new">BlackFriday</span>
+														@if(getPhanTram($spm->id) != 0)
+															<span class="sale">-{{ getPhanTram($spm->id) }}%</span>
+														@endif
+													@elseif(getBanner2($spm->id) == 8 && $spm->trangthai == 'show')
+														<span class="new">SEA GAMES 30</span>
+														@if(getPhanTram($spm->id) != 0)
+															<span class="sale">-{{ getPhanTram($spm->id) }}%</span>
+														@endif
 													@else
 														<span class="sale">HOT</span>
+														@if(getPhanTram($spm->id) != 0)
+															<span class="sale">-{{ getPhanTram($spm->id) }}%</span>
+														@endif
 													@endif					
 												</div>
 											</div>
@@ -321,7 +333,6 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-		@endif
 	<!-- SECTION -->
 	<div class="section">
 			<!-- container -->
@@ -360,33 +371,25 @@
 												</a>
 												
 												<div class="product-label">											
-													@if(getBanner($dt->id) != null)
-														@if(getBanner($dt->id) == 3)
-															@if(getBanner2($dt->id) == 4)				
-																<span class="new">NEW</span>
-																<span class="sale">HOT</span>
-															@else
-																<span class="new">NEW</span>
-															@endif
-														@elseif(getBanner($dt->id) == 2)
-															@if(getBanner2($dt->id) == 4)				
-																<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
-																<span class="sale">HOT</span>
-															@else
-																<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
-															@endif
-														@elseif(getBanner($dt->id) == 4)
-															@if(getBanner2($dt->id) == 3)	
-																<span class="sale">HOT</span>			
-																<span class="new">NEW</span>
-															@elseif(getBanner2($dt->id) == 2)
-																<span class="sale">HOT</span>
-																<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
-															@else
-																<span class="sale">HOT</span>
-															@endif
+													@if(getBanner($dt->id) == 3 && $dt->trangthai == 'show')
+														<span class="sale">HOT</span>				
+														<span class="new">NEW</span>
+													@elseif(getBanner($dt->id) == 7 && $dt->trangthai == 'show')
+														<span class="new">BlackFriday</span>
+														@if(getPhanTram($dt->id) != 0)
+															<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
 														@endif
-												@endif					
+													@elseif(getBanner2($dt->id) == 8 && $dt->trangthai == 'show')
+														<span class="new">SEA GAMES 30</span>
+														@if(getPhanTram($dt->id) != 0)
+															<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
+														@endif
+													@else
+														<span class="sale">HOT</span>
+														@if(getPhanTram($dt->id) != 0)
+															<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
+														@endif
+													@endif					
 												</div>
 											</div>
 											
@@ -478,58 +481,50 @@
 								<!-- tab -->
 								<div id="tab1" class="tab-pane active">
 									<div class="products-slick" data-nav="#slick-nav-5">
-										@foreach($phukien as $dt)
+										@foreach($phukien as $pk)
 										<!-- product -->
 										<div class="product">
 											<div class="product-img">
-												<a href="chitiet/{{$dt->id}}"> 
-													<img width="250px" height="250px" src="./upload/imgSanPham/{{$dt->hinhchitiet}}" alt="">
+												<a href="chitiet/{{$pk->id}}"> 
+													<img wipkh="250px" height="250px" src="./upload/imgSanPham/{{$pk->hinhchitiet}}" alt="">
 												</a>
 												
 												<div class="product-label">											
-													@if(getBanner($dt->id) != null)
-														@if(getBanner($dt->id) == 3)
-															@if(getBanner2($dt->id) == 4)				
-																<span class="new">NEW</span>
-																<span class="sale">HOT</span>
-															@else
-																<span class="new">NEW</span>
-															@endif
-														@elseif(getBanner($dt->id) == 2)
-															@if(getBanner2($dt->id) == 4)				
-																<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
-																<span class="sale">HOT</span>
-															@else
-																<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
-															@endif
-														@elseif(getBanner($dt->id) == 4)
-															@if(getBanner2($dt->id) == 3)	
-																<span class="sale">HOT</span>			
-																<span class="new">NEW</span>
-															@elseif(getBanner2($dt->id) == 2)
-																<span class="sale">HOT</span>
-																<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
-															@else
-																<span class="sale">HOT</span>
-															@endif
+													@if(getBanner($pk->id) == 3 && $pk->trangthai == 'show')
+														<span class="sale">HOT</span>				
+														<span class="new">NEW</span>
+													@elseif(getBanner($pk->id) == 7 && $pk->trangthai == 'show')
+														<span class="new">BlackFriday</span>
+														@if(getPhanTram($pk->id) != 0)
+															<span class="sale">-{{ getPhanTram($pk->id) }}%</span>
 														@endif
-												@endif					
+													@elseif(getBanner2($pk->id) == 8 && $pk->trangthai == 'show')
+														<span class="new">SEA GAMES 30</span>
+														@if(getPhanTram($pk->id) != 0)
+															<span class="sale">-{{ getPhanTram($pk->id) }}%</span>
+														@endif
+													@else
+														<span class="sale">HOT</span>
+														@if(getPhanTram($pk->id) != 0)
+															<span class="sale">-{{ getPhanTram($pk->id) }}%</span>
+														@endif
+													@endif					
 												</div>
 											</div>
 											
 											<div class="product-body">
-												<p class="product-category">{{$dt->tenhang}}</p>
-												<h3 class="product-name"><a href="chitiet/{{$dt->id}}">{{$dt->tensp}} {{$dt->mau }}</a></h3>
+												<p class="product-category">{{$pk->tenhang}}</p>
+												<h3 class="product-name"><a href="chitiet/{{$pk->id}}">{{$pk->tensp}} {{$pk->mau }}</a></h3>
 												<h4 class="product-price">
-													@if(getPhanTram($dt->id) != null)
-													<del class="product-old-price">{{number_format($dt->gia,0,',','.')}}</del>{{number_format($dt->gia * (100 - getPhanTram($dt->id)) / 100,0,',','.')}}VND
+													@if(getPhanTram($pk->id) != null)
+													<del class="product-old-price">{{number_format($pk->gia,0,',','.')}}</del>{{number_format($pk->gia * (100 - getPhanTram($pk->id)) / 100,0,',','.')}}VND
 													@else
-														{{number_format($dt->gia,0,',','.')}}VND
+														{{number_format($pk->gia,0,',','.')}}VND
 												@endif
 												</h4>
 												<?php
-														$star = round((avgStarSanPham($dt->id)),2);
-														$starnguyen = floor(avgStarSanPham($dt->id));
+														$star = round((avgStarSanPham($pk->id)),2);
+														$starnguyen = floor(avgStarSanPham($pk->id));
 													?>
 													<div class="review-rating">
 														@if($star != null)
@@ -546,12 +541,12 @@
 														@endif
 													</div>
 												<div class="product-btns">
-												<button class="quick-view" onclick="window.location.href = 'chitiet/{{$dt->id}}';"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></button>
+												<button class="quick-view" onclick="window.location.href = 'chitiet/{{$pk->id}}';"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></button>
 											</div>											
 											</div>
 
 											<div class="add-to-cart">
-											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$dt->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$pk->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
 										</div>
 										
 										</div>
