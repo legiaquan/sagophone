@@ -184,7 +184,7 @@ class PageController extends Controller
                     ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
                     ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
                     ->orderBy('tbsanpham.id_nhom')->orderBy('tbsanpham.created_at','desc')
-                    ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
+                    ->select('tbsanpham.tensp','tbsanpham.id_nhom','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
         if($request->price)
         {
                 $price = $request->price;

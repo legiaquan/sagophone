@@ -42,23 +42,31 @@
         <!-- /BREADCRUMB -->
 
 <!-- ##### Hero Area Start ##### -->
+
     <div class="hero-area">
         <div class="container">
             <div class="row align-items-center">
-                
-                   
-
                 <!-- Hero Add -->
+                @if(Request::get('id')!=null)
+                <a href="loaitin" style="align-items: center;text-decoration: overline;color: grey"><i class="glyphicon glyphicon-chevron-left"></i>Quay về trang tin tức</a>
+                @endif
                 <div class="col-12 col-lg-12 text-center">
                     <div class="hero-add">
-
-                        &nbsp;&nbsp;
+                        
                         @foreach($loaitin as $lt)
                             @if(count($lt->tintuc) > 0)
-                                <a class="{{Request::get('id') == $lt->id ? 'btn btn-info' : ''}}" href="{{ request()->fullUrlWithQuery(['id' => $lt->id]) }}" class="product-category" style="font-size: 20px; font-weight: bolder; border: solid 3px black; color: red">{{$lt->tenloaitin}}</a>
+                                <a
+                                style="
+                                @if(Request::get('id')==$lt->id)
+                                   color: #AF1126; font-weight: bold;text-decoration: underline;
+                                @endif
+                                font-size:19px;
+                                "
+                                 href="{{ request()->fullUrlWithQuery(['id' => $lt->id]) }}" >{{$lt->tenloaitin}}</a>
                             @endif
-                            &nbsp;&nbsp;
+                            &nbsp;
                         @endforeach
+
                     </div>
                 </div>
             
@@ -85,7 +93,9 @@
                                         <h4>{{ $tinmoi->tieude }}</h4>
                                     </a>
                                     <div class="post-meta">
-                                        <p class="post-author">Đăng bởi <a>{{ $tinmoi->nhanvien->name }}</a></p>
+                                        <p class="post-author">Đăng bởi <a>{{ $tinmoi->nhanvien->name }}</a><span style="font-style: italic;font-size: 12px;color: grey">&nbsp;&nbsp;&nbsp;{{ $tinmoi->created_at }}</span></p>
+
+                                        
                                         <p class="post-excerp text-justify">
                                             {{ mb_substr($tinmoi->mota,0,270,'UTF-8').'...' }}
                                             <a href="tintuc/{{ $tinmoi->id }}" class="btn btn-link">Đọc tiếp</a>
@@ -103,7 +113,7 @@
                                     <div class="post-thumb">
                                         <a href="tintuc/{{ $tm1->id }}"><img src="upload/imgTinTuc/{{ $tm1->img }}" width="300px" height="200px" alt=""></a>
                                     </div>
-                                    <br>
+                                    <p class="post-author">Đăng bởi <a>{{ $tinmoi->nhanvien->name }}</a><span style="font-style: italic;font-size: 12px;color: grey">&nbsp;&nbsp;&nbsp;{{ $tinmoi->created_at }}</span></p>
                                     <div class="post-data">
                                         <a href="tintuc/{{ $tm1->id }}" class="post-catagory"><h5>{{ $tm1->tieude }}</h5></a>
                                         <div class="post-meta">
@@ -131,9 +141,12 @@
                                     <img src="upload/imgTinTuc/{{$tm2->img}}" alt="" width="90px" height="90px">
                                 </a>        
                             </div>
+
                             <div class="product-body text-justify" style="margin-left: 30px">
+
                                 <p class="product-category">{{ $tm2->tenloaitin }}</p>
                                     <h3 class="product-name"><a href="tintuc/{{$tm2->id}}">{{$tm2->tieude,0,100}}</a></h3>
+                                    <p class="post-author" style="font-size: 11px">Đăng bởi <a>{{ $tinmoi->nhanvien->name }}</a><span style="font-style: italic;font-size: 9px;color: grey">&nbsp;&nbsp;&nbsp;{{ $tinmoi->created_at }}</span></p>
                                     <a href="tintuc/{{ $tm2->id }}" class="product-detail">
                                             {{ mb_substr($tm2->mota,0,90,'UTF-8').'...' }}
                                     </a>

@@ -132,4 +132,11 @@ function getStar($id)
 		->select('star')->get();
 	return $star;
 }
-
+function demSPNhom($id_nhom)
+{
+	$dem = DB::table('tbchitietsanpham')
+                    ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
+                    ->where('tbsanpham.id_nhom',$id_nhom)
+                    ->count();
+    return $dem;
+}

@@ -40,7 +40,7 @@
                     <div class="col-md-12">
                         <ul class="breadcrumb-tree">
                             <li><a href="trangchu">Trang Chủ</a></li>
-                            <li class="active"><a href="tintuc">Tin Tức</a></li>
+                            <li class="active"><a href="loaitin">Tin Tức</a></li>
                             <li class="active"><a href="tintuc/{{ $tintuc->id }}">{{ mb_substr($tintuc->tieude,0,50,'UTF-8').'...' }}</a></li>
                         </ul>
                     </div>
@@ -54,7 +54,8 @@
 <br>
     <div class="container">
         <div class="row">
-            <div class="w3-content w3-display-container">
+            <div class="w3-display-container">
+
                         @foreach($banner as $row)
                             @if($row->trangthai=='show' && isset($row->ngaybatdau) && count($row->danhsachbanner) > 0)
                             
@@ -62,6 +63,7 @@
                             
                             @endif
                         @endforeach
+
                         <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
                           <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
                           <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
@@ -77,7 +79,7 @@
                      <br>
             <!-- Blog Post Content Column -->
             <div class="col-lg-9">
-               
+               <a href="javascript: window.history.go(-1)" style="align-items: center;text-decoration: overline;color: grey"><i class="glyphicon glyphicon-chevron-left"></i>Quay về trang trước</a>
                 <!-- Blog Post -->
 
                 <!-- Title -->

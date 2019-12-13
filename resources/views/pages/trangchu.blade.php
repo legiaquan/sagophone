@@ -34,7 +34,7 @@
 			<!-- container -->
 			<div class="container">
 				<!-- /shop -->
-					<div class="w3-content w3-display-container">
+					<div class="w3-display-container">
 						@foreach($banner as $row)
 							@if($row->trangthai=='show' && isset($row->ngaybatdau) && count($row->danhsachbanner) > 0)
 							

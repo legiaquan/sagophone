@@ -49,7 +49,7 @@
 				@endif
 			</div>
 </div>
-<!-- ##### Hero Area Start ##### -->
+{{-- <!-- ##### Hero Area Start ##### -->
     <div class="hero-area">
         <div class="container">
             <div class="row align-items-center">
@@ -74,7 +74,7 @@
             
         </div>
     </div>
-    <!-- ##### Hero Area End ##### -->
+    <!-- ##### Hero Area End ##### --> --}}
 <!-- SECTION -->
 <div class="section">
 			<!-- container -->
