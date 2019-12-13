@@ -1,3 +1,14 @@
+<?php
+	function demNhom($variable,$id_nhom)
+	{
+		$dem = 0;
+		foreach ($variable as $value) {
+			if($value->id_nhom == $id_nhom)
+				$dem++;
+		}
+		return $dem;
+	}
+?>
 <title>Cửa Hàng</title>
 @extends('layouts.index')
 
@@ -95,13 +106,9 @@
 										</a>
 									</label>
 									
-									@if($nsp->id == 1)
-										<small>({{count($sanphamdt)}})</small>
-									@elseif($nsp->id == 2)
-										<small>({{count($sanphampk)}})</small>
-									@else
-										<small>(0)</small>
-									@endif
+									<small>
+										{{ demNhom($countSanPham,$nsp->id) }}
+									</small>
 								</div>
 							</div>
 							@endforeach

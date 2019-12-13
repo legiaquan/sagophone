@@ -253,6 +253,7 @@ class PageController extends Controller
         }
         else
             $hinhbanner = null;
+        $countSanPham = $sanpham->get();
         $sanpham = $sanpham->paginate(6);
         $thuonghieu = HangDT::all();
         $rom = SanPham::select('rom')->distinct()->orderBy('rom','ASC')->get();
@@ -266,7 +267,8 @@ class PageController extends Controller
             'rom' => $rom,
             'khoanggia' => $khoanggia,
             'banner' => $banner,
-            'hinhbanner' => $hinhbanner
+            'hinhbanner' => $hinhbanner,
+            'countSanPham'=>$countSanPham
     	]);
         //var_dump($request->orderby);
     }
