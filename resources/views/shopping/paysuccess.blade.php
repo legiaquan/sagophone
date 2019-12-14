@@ -1,3 +1,4 @@
+<title>Pay Success</title>
 @extends('layouts.index')
 
 @section('content')

@@ -19,7 +19,8 @@
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="trangchu">Trang Chủ</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
-						<li><a href="cuahang">Cửa Hàng</a></li>									
+						<li><a href="dienthoai">Điện Thoại</a></li>
+						<li><a href="phukien">Phụ Kiện</a></li>									
 						<li><a href="lienhe">Liên Hệ</a></li>
 					</ul>
 					<!-- /NAV -->
@@ -371,15 +372,15 @@
 												</a>
 												
 												<div class="product-label">											
-													@if(getBanner($dt->id) == 3 && $dt->trangthai == 'show')
+													@if(getBanner($dt->id) == 3)
 														<span class="sale">HOT</span>				
 														<span class="new">NEW</span>
-													@elseif(getBanner($dt->id) == 7 && $dt->trangthai == 'show')
+													@elseif(getBanner($dt->id) == 7)
 														<span class="new">BlackFriday</span>
 														@if(getPhanTram($dt->id) != 0)
 															<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
 														@endif
-													@elseif(getBanner2($dt->id) == 8 && $dt->trangthai == 'show')
+													@elseif(getBanner2($dt->id) == 8)
 														<span class="new">SEA GAMES 30</span>
 														@if(getPhanTram($dt->id) != 0)
 															<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
@@ -490,21 +491,20 @@
 												</a>
 												
 												<div class="product-label">											
-													@if(getBanner($pk->id) == 3 && $pk->trangthai == 'show')
+													@if(getBanner($pk->id) == 3)
 														<span class="sale">HOT</span>				
 														<span class="new">NEW</span>
-													@elseif(getBanner($pk->id) == 7 && $pk->trangthai == 'show')
+													@elseif(getBanner($pk->id) == 7)
 														<span class="new">BlackFriday</span>
 														@if(getPhanTram($pk->id) != 0)
 															<span class="sale">-{{ getPhanTram($pk->id) }}%</span>
 														@endif
-													@elseif(getBanner2($pk->id) == 8 && $pk->trangthai == 'show')
+													@elseif(getBanner2($pk->id) == 8)
 														<span class="new">SEA GAMES 30</span>
 														@if(getPhanTram($pk->id) != 0)
 															<span class="sale">-{{ getPhanTram($pk->id) }}%</span>
 														@endif
 													@else
-														<span class="sale">HOT</span>
 														@if(getPhanTram($pk->id) != 0)
 															<span class="sale">-{{ getPhanTram($pk->id) }}%</span>
 														@endif
@@ -514,7 +514,7 @@
 											
 											<div class="product-body">
 												<p class="product-category">{{$pk->tenhang}}</p>
-												<h3 class="product-name"><a href="chitiet/{{$pk->id}}">{{$pk->tensp}} {{$pk->mau }}</a></h3>
+												<h3 class="product-name"><a href="chitiet/{{$pk->id}}" style="white-space: nowrap;">{{$pk->tensp}} {{$pk->mau }}</a></h3>
 												<h4 class="product-price">
 													@if(getPhanTram($pk->id) != null)
 													<del class="product-old-price">{{number_format($pk->gia,0,',','.')}}</del>{{number_format($pk->gia * (100 - getPhanTram($pk->id)) / 100,0,',','.')}}VND

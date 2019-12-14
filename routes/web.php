@@ -270,13 +270,16 @@ Route::get('loaitin/{id}','PageController@loaitin1');
 
 Route::get('tintuc/{id}','PageController@tintuc');
 
-Route::get('cuahang','PageController@cuahang');
+Route::get('dienthoai','PageController@dienthoai');
+
+Route::get('phukien','PageController@phukien');
 
 Route::get('chitiet/{id}', 'PageController@chitietsp');
 
 Route::get('hotdeals','PageController@hotdeals');
 
 Route::get('timkiem','PageController@timkiem')->name('find.product');
+
 
 Route::get('dangnhap','PageController@getDangNhap')->name('pages.dangnhap');
 

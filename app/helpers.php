@@ -89,7 +89,9 @@ function getBanner($id)
 	
 	$banner = DB::table('tbchitietsanpham')
 			->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
-			->where('id_chitietsanpham',$id)
+			->join('tbbanner','tbdanhsachbanner.id_banner','tbbanner.id')
+			->where('tbbanner.trangthai','show')
+			->where('tbdanhsachbanner.id_chitietsanpham',$id)
 			->orderBy('id_banner','ASC')
 			->value('tbdanhsachbanner.id_banner');
 	return $banner;
@@ -97,9 +99,11 @@ function getBanner($id)
 function getBanner2($id)
 {
 	
-	$banner = DB::table('tbchitietsanpham')
+	$banner =  DB::table('tbchitietsanpham')
 			->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
-			->where('id_chitietsanpham',$id)
+			->join('tbbanner','tbdanhsachbanner.id_banner','tbbanner.id')
+			->where('tbbanner.trangthai','show')
+			->where('tbdanhsachbanner.id_chitietsanpham',$id)
 			->orderBy('id_banner','DESC')
 			->value('tbdanhsachbanner.id_banner');
 	return $banner;
@@ -110,6 +114,8 @@ function getPhanTram($id)
 {
 	$phantram = DB::table('tbchitietsanpham')
 			->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
+			->join('tbbanner','tbdanhsachbanner.id_banner','tbbanner.id')
+			->where('tbbanner.trangthai','show')
 			->where('id_chitietsanpham',$id)
 			->orderBy('id_banner','ASC')
 			->value('tbdanhsachbanner.phantramkhuyenmai');

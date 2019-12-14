@@ -10,7 +10,13 @@
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="trangchu">Trang Chủ</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
-						<li class="active"><a href="cuahang">Cửa Hàng</a></li>									
+						@if($chitiet->sanpham->id_nhom == 1)
+							<li class="active"><a href="dienthoai">Điện Thoại</a></li>
+							<li><a href="phukien">Phụ Kiện</a></li>	
+						@else
+							<li><a href="dienthoai">Điện Thoại</a></li>
+							<li class="active"><a href="phukien">Phụ Kiện</a></li>
+						@endif								
 						<li><a href="lienhe">Liên Hệ</a></li>
 					</ul>
 					<!-- /NAV -->
@@ -30,10 +36,15 @@
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="trangchu">Trang Chủ</a></li>
-							<li class="active"><a href="cuahang">Cửa Hàng</a></li>
-							<li class="active"><a href="cuahang?id_nhom={{ $chitiet->sanpham->id_nhom }}">{{$chitiet->sanpham->nhomsanpham->tennhom}}</a></li>
-							<li class="active"><a href="cuahang?grand={{ $chitiet->sanpham->id_hangdt }}">{{$chitiet->sanpham->hangdt->tenhang}}</a></li>
-							<li class="active"><a href="chitiet/{{ $chitiet->id }}">{{$chitiet->sanpham->tensp}}</a></li>
+							@if($chitiet->sanpham->id_nhom == 1)
+								<li class="active"><a href="dienthoai">{{$chitiet->sanpham->nhomsanpham->tennhom}}</a></li>
+								<li class="active"><a href="dienthoai?grand={{ $chitiet->sanpham->id_hangdt }}">{{$chitiet->sanpham->hangdt->tenhang}}</a></li>
+								<li class="active"><a href="chitiet/{{ $chitiet->id }}">{{$chitiet->sanpham->tensp}}</a></li>
+							@else
+								<li class="active"><a href="phukien">{{$chitiet->sanpham->nhomsanpham->tennhom}}</a></li>
+								<li class="active"><a href="phukien?grand={{ $chitiet->sanpham->id_hangdt }}">{{$chitiet->sanpham->hangdt->tenhang}}</a></li>
+								<li class="active"><a href="chitiet/{{ $chitiet->id }}">{{$chitiet->sanpham->tensp}}</a></li>
+							@endif
 						</ul>
 					</div>
 				</div>

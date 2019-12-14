@@ -1,0 +1,324 @@
+<title>Điện Thoại</title>
+@extends('layouts.index')
+
+@section('content')
+<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li><a href="trangchu">Trang Chủ</a></li>
+						<li><a href="loaitin">Tin Tức</a></li>
+						<li class="active"><a href="dienthoai">Điện Thoại</a></li>
+						<li><a href="phukien">Phụ Kiện</a></li>									
+						<li><a href="lienhe">Liên Hệ</a></li>
+					</ul>
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+<!-- /NAVIGATION -->
+<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a href="trangchu">Trang Chủ</a></li>
+							<li class="active"><a href="dienthoai">Điện Thoại ({{ count($sanphamdt) }} Sản Phẩm)</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+<!-- /BREADCRUMB -->
+<div class="section text-center">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				@if($hinhbanner != null)
+					<a href="cuahang?id_banner={{ $hinhbanner->id }}"><img src="./upload/imgKhuyenMai/{{ $hinhbanner->hinhbanner }}" style="width: 1000px; height: 200px">
+				@endif
+			</div>
+</div>
+{{-- <!-- ##### Hero Area Start ##### -->
+    <div class="hero-area">
+        <div class="container">
+            <div class="row align-items-center">
+                
+                   
+
+                <!-- Hero Add -->
+                <div class="col-3 col-lg-15 text-center" style="padding-left: 100px; font-size: 20px; font-weight: bolder;">
+                    <div class="hero-add">
+
+                        &nbsp;&nbsp;
+                        @foreach($banner as $bn)
+                            @if(count($bn->danhsachbanner) > 0)
+                                <a class="{{Request::get('id_banner') == $bn->id ? 'btn btn-default btn-lg active' : ''}}" href="{{ request()->fullUrlWithQuery(['id_banner' => $bn->id]) }}" class="product-category" style="font-size: 20px; font-weight: bolder; border: solid 3px black; color: red">{{$bn->tenbanner}}</a>
+                            @endif
+                            &nbsp;&nbsp;
+                        @endforeach
+                    </div>
+
+                </div>
+
+            
+        </div>
+    </div>
+    <!-- ##### Hero Area End ##### --> --}}
+<!-- SECTION -->
+<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- ASIDE -->
+					<div id="aside" class="col-md-3">
+						<!-- aside Widget -->
+						
+						<!-- /aside Widget -->
+						<form class="tree-most" id="form_order1" method="GET">
+							<div class="aside">
+								<h3 class="aside-title">Giá</h3>
+								<div class="price-filter">
+									<div id="price-slider"></div>
+									<div class="input-number price-min">
+										<input id="pricemin" name="pricemin" type="number" >
+										<span class="qty-up">+</span>
+										<span class="qty-down">-</span>
+									</div>
+									<span>-</span>
+									<div class="input-number price-max">
+										<input id="pricemax" name="pricemax" type="number">
+										<span class="qty-up">+</span>
+										<span class="qty-down">-</span>
+									</div>
+								</div>
+
+							</div>
+							<div class="aside text-right">
+								<input type="submit" class="btn btn-success" value="Chọn">
+							</div>
+					</div>
+					<!-- /ASIDE -->
+
+					
+					<!-- STORE -->
+					<div id="store" class="col-md-9">
+							<!-- store top filter -->
+							<div class="store-filter clearfix">
+								<div class="store-sort">
+									
+										<label>
+											<a style="font-size: 13px; font-weight: bolder; padding-left: 15px">Sắp Xếp Theo</a>
+											<select name="sortby" class="input-select5 btn-sm">
+												<option {{Request::get('sortby') == "" ? "selected = 'selected'" : ""}}  value="">click chọn...</option>
+												<option {{Request::get('sortby') == 'tangdan' ? "selected = 'selected'" : ""}} value="tangdan">Giá Tăng Dần</option>
+												<option {{Request::get('sortby') == 'giamdan' ? "selected = 'selected'" : ""}} value="giamdan">Giá Giảm Dần</option>
+											</select>
+										</label>
+								</div>
+							</div>
+						<!-- /store top filter -->
+							<div class="store-filter" style="text-align: left;">
+						
+								<div class="store-sort col-lg-3">
+										<a>Thương Hiệu</a>			
+											<select name="grand" class="input-select1">
+												<option {{Request::get('grand') == "" ? "selected = 'selected'" : ""}}  value="">click chọn...</option>
+												@foreach($thuonghieu as $th)
+													<option {{Request::get('grand') == $th->id ? "selected = 'selected'" : ""}} value="{{ $th->id }}">{{ $th->tenhang }}</option>
+												@endforeach
+											</select>	
+									</label>
+								
+								</div>
+								<div class="store-sort col-lg-3">
+										<a>ROM</a>(Red Only Memory)			
+											<select name="rom" class="input-select2">
+												<option {{Request::get('rom') == "" ? "selected = 'selected'" : ""}}  value="">click chọn...</option>
+												@foreach($rom as $r)
+												@if($r->rom != null)
+													<option class="{{Request::get('rom') == $r->rom ? 'selected' : ''}}" {{Request::get('rom') == $r->rom ? "selected = 'selected'" : ""}} value="{{ $r->rom }}">{{ $r->rom }}GB
+													</option>
+												@endif
+												@endforeach
+											</select>		
+									</label>
+								
+								</div>
+
+								<div class="store-sort col-lg-3">
+										<a>Khoảng Giá</a>  			
+											<select name="price" class="input-select3">
+												<option class="{{Request::get('price') == "" ? 'selected' : ''}}" {{Request::get('price') == "" ? "selected = 'selected'" : ""}}  value="">click chọn...</option>
+												@foreach($khoanggia as $kg)
+													<option class="{{Request::get('price') == $kg->id ? 'selected' : ''}}" {{Request::get('price') == $kg->id ? "selected = 'selected'" : ""}} value="{{ $kg->id }}">{{ $kg->khoanggia }}</option>
+												@endforeach
+											</select>	
+									</label>
+								
+								</div>
+								</form>
+
+								<form class="tree-most text-right" id="form_order4" method="GET">
+									<div class="store-sort col-lg-3">
+											<a href="dienthoai" class="btn btn-primary">Reset bộ lọc</a>
+									</div>
+								</form>
+							
+						</div>
+							<!-- /store top filter -->
+							
+							<!-- /store top filter -->
+						
+						<!-- store products -->
+						<div class="row">
+							<!-- product -->
+								@foreach($sanpham as $sp)
+								<div class="col-md-4 col-xs-5">
+									<div class="product" style="height: 415px;margin-bottom: 50px ">
+										<div class="product-img">
+											<a href="chitiet/{{$sp->id}}">
+												<img width="260px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
+											</a>
+											<div class="product-label">	
+												@if(getBanner($sp->id) != null)
+													@if(getBanner($sp->id) == 3)
+														@if(getBanner2($sp->id) == 4)				
+															<span class="new">NEW</span>
+															<span class="sale">HOT</span>
+														@else
+															<span class="new">NEW</span>
+														@endif
+													@elseif(getBanner($sp->id) == 2)
+														@if(getBanner2($sp->id) == 4)				
+															<span class="sale">-{{ getPhanTram($sp->id) }}%</span>
+															<span class="sale">HOT</span>
+														@else
+															<span class="sale">-{{ getPhanTram($sp->id) }}%</span>
+														@endif
+													@elseif(getBanner($sp->id) == 4)
+														@if(getBanner2($sp->id) == 3)	
+															<span class="sale">HOT</span>			
+															<span class="new">NEW</span>
+														@elseif(getBanner2($sp->id) == 2)
+															<span class="sale">HOT</span>
+															<span class="sale">-{{ getPhanTram($sp->id) }}%</span>
+														@else
+															<span class="sale">HOT</span>
+														@endif
+													@endif
+												@endif
+											</div>									
+										</div>
+										<div class="product-body">
+											<p class="product-category">{{$sp->tenhang}}</p>
+											<h3 class="product-name"><a style="white-space: nowrap;font-size: 12px" href="chitiet/{{$sp->id}}">{{$sp->tensp}} {{ $sp->mau }}</a></h3>
+											<h4 class="product-price">
+												@if(getPhanTram($sp->id) != null)
+													<del class="product-old-price">{{number_format($sp->gia,0,',','.')}}</del>{{number_format($sp->gia * (100 - getPhanTram($sp->id)) / 100,0,',','.')}}VND
+													@else
+														{{number_format($sp->gia,0,',','.')}}VND
+												@endif
+											</h4>
+											<?php
+												$star = round((avgStarSanPham($sp->id)),2);
+												$starnguyen = floor(avgStarSanPham($sp->id));
+											?>
+												<div class="review-rating" style="height: 10px; margin-bottom: 5px">
+													@if($star != null)
+														@for($i=0;$i<$starnguyen;$i++)
+															@if($i < $star)
+																<i class="fa fa-star checked"></i>
+															@endif
+														@endfor
+														@if($star >= ($starnguyen + 0.5))
+															<i class="fa fa-star-half-o checked"></i>
+														@endif
+													@else
+														<a style="font-size: 10px">(Chưa có đánh giá)</a>
+													@endif
+												</div>				
+											<div class="product-btns">
+												<button class="quick-view" onclick="window.location.href = 'chitiet/{{$sp->id}}';"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></button>
+											</div>
+										</div>
+										<div class="add-to-cart">
+											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$sp->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+										</div>
+									</div>
+								</div>
+							<!-- /product -->
+								@endforeach
+		
+						</div>
+						<!-- /store products -->
+						<br>
+						<!-- store bottom filter -->
+						<div class="store-filter clearfix" style="text-align: center;">
+							{{ $sanpham->appends(request()->query())->links() }}
+						</div>
+						<!-- /store bottom filter -->
+					</div>
+					<!-- /STORE -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+</div>
+<!-- /SECTION -->
+
+@endsection
+
+@section('script')
+    <script>
+ 		$(function(){
+ 			$('.input-select1').change(function(){
+ 				$("#form_order1").submit();
+ 				$('.input-select1').val();
+ 				$('.input-select2').val();
+ 				$('.input-select3').val();
+ 				$('.input-select').val();
+ 			});
+ 			$('.input-select2').change(function(){
+ 				$("#form_order1").submit();
+ 				$('.input-select1').val();
+ 				$('.input-select2').val();
+ 				$('.input-select3').val();
+ 			});
+ 			$('.input-select3').change(function(){
+ 				$("#form_order1").submit();
+ 				$('.input-select1').val();
+ 				$('.input-select2').val();
+ 				$('.input-select3').val();
+ 				$('.input-select').val();
+ 			});
+ 			$('.input-select5').change(function(){
+ 				$("#form_order1").submit()
+ 				$('.input-select1').val();
+ 				$('.input-select2').val();
+ 				$('.input-select3').val();
+ 				$('.input-select5').val();
+ 			});
+ 			$("#form_order1").submit(function(){
+ 				$('.input-select1').val();
+ 				$('.input-select2').val();
+ 				$('.input-select3').val();
+ 				$('.input-select5').val();
+ 				$('#pricemin').val();
+ 				$('#pricemax').val();
+ 			});
+ 		});
+    </script>
+@endsection
