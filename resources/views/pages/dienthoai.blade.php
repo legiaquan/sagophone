@@ -1,4 +1,4 @@
-<title>Điện Thoại</title>
+<title>Sagophone - Điện Thoại</title>
 @extends('layouts.index')
 
 @section('content')

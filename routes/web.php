@@ -274,6 +274,8 @@ Route::get('dienthoai','PageController@dienthoai');
 
 Route::get('phukien','PageController@phukien');
 
+Route::get('cuahang','PageController@cuahang');
+
 Route::get('chitiet/{id}', 'PageController@chitietsp');
 
 Route::get('hotdeals','PageController@hotdeals');

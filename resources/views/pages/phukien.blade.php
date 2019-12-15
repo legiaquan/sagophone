@@ -1,4 +1,4 @@
-<title>Phụ Kiện/title>
+<title>Sagophone - Phụ Kiện</title>
 @extends('layouts.index')
 
 @section('content')
@@ -105,7 +105,7 @@
 							<div class="store-filter" style="text-align: left;">
 
 								<form class="tree-most" id="form_order1" method="GET">
-								<div class="store-sort col-lg-3">
+								<div class="store-sort col-lg-9">
 										<a>Thương Hiệu</a>			
 											<select name="grand" class="input-select1">
 												<option {{Request::get('grand') == "" ? "selected = 'selected'" : ""}}  value="">click chọn...</option>
@@ -116,7 +116,7 @@
 									</label>
 								
 								</div>
-								<div class="store-sort col-lg-3">
+								{{-- <div class="store-sort col-lg-3">
 										<a>ROM</a>(Red Only Memory)			
 											<select name="rom" class="input-select2">
 												<option {{Request::get('rom') == "" ? "selected = 'selected'" : ""}}  value="">click chọn...</option>
@@ -141,7 +141,7 @@
 											</select>	
 									</label>
 								
-								</div>
+								</div> --}}
 								</form>
 
 								<form class="tree-most text-right" id="form_order4" method="GET">
@@ -152,6 +152,7 @@
 							
 							
 						</div>
+						<br>
 							<!-- /store top filter -->
 							<!-- store top filter -->
 							

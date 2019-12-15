@@ -681,4 +681,74 @@ class PageController extends Controller
         $user->save();
         return redirect('dangnhap')->with('thongbaoreset','Reset mật khẩu thành công!');
     }
+    public function cuahang(Request $request)
+    {
+        $id_nhom = $request->id_nhom;
+        $sanpham = DB::table('tbchitietsanpham')
+                    ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
+                    ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+                    ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
+                    ->select('tbsanpham.tensp','tbsanpham.id_nhom','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
+        $countSanPham = $sanpham->get();
+        if($request->id_banner)
+        {
+            $sanpham = $sanpham->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
+                    ->where('id_banner',$request->id_banner);
+            $hinhbanner = Banner::where('id',$request->id_banner)->select('id','hinhbanner')->first();
+        }
+        else
+            $hinhbanner = null;
+
+        if($request->id_nhom)
+        {
+            $id_nhom = $request->id_nhom;
+            $sanpham = $sanpham->where('id_nhom',$id_nhom);
+        }
+        if(isset($request->maxprice) || isset($request->minprice))
+        {
+                $price = $request->price;
+                $maxprice = $request->maxprice;
+                $minprice = $request->minprice;
+                if($maxprice==null)
+                    $maxprice=100000000000;
+                if($minprice==null)
+                    $minprice=1;
+                
+                $sanpham->where('gia','>=',$minprice)->where('gia','<=',$maxprice);
+        }
+        if($request->rom)
+        {
+            $rom = $request->rom;
+            $sanpham = $sanpham->where('rom',$rom);
+                
+        }
+        if($request->sortby)
+        {
+            $sortby = $request->sortby;
+            switch ($sortby) {
+                case 'tangdan':
+                    $sanpham->orderBy('gia','ASC');
+                    break;
+                case 'giamdan':
+                    $sanpham->orderBy('gia','DESC');
+                    break;
+                default:
+                    
+                    break;
+            }
+        }
+        $sanpham = $sanpham->paginate(6);
+        $thuonghieu = HangDT::all();
+        $rom = SanPham::select('rom')->distinct()->orderBy('rom','ASC')->get();
+        $khoanggia = KhoangGia::all();
+        return view('pages/cuahang',
+            ['sanpham' => $sanpham, 
+            'thuonghieu' => $thuonghieu,
+            'rom' => $rom,
+            'khoanggia' => $khoanggia,
+            'hinhbanner' => $hinhbanner,
+            'countSanPham'=> $countSanPham,
+        ]);
+        //var_dump($request->orderby);
+    }
 }
