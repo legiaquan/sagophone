@@ -56,7 +56,7 @@
 			<div class="container">
 				<!-- row -->
 				@if($hinhbanner != null)
-					<a href="cuahang?id_banner={{ $hinhbanner->id }}"><img src="./upload/imgKhuyenMai/{{ $hinhbanner->hinhbanner }}" style="width: 1000px; height: 200px">
+					<a href="cuahang?id_banner={{ $hinhbanner->id }}"><img src="./upload/imgKhuyenMai/{{ $hinhbanner->hinhbanner }}" style="width: 100%" >
 				@endif
 			</div>
 </div>

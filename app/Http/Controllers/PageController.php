@@ -695,6 +695,7 @@ class PageController extends Controller
             $sanpham = $sanpham->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
                     ->where('id_banner',$request->id_banner);
             $hinhbanner = Banner::where('id',$request->id_banner)->select('id','hinhbanner')->first();
+            $countSanPham = $sanpham->get();
         }
         else
             $hinhbanner = null;
