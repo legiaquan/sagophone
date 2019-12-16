@@ -181,32 +181,36 @@
                                                 <img width="260px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
                                             </a>
                                            <div class="product-label">  
-                                               @if(getBanner($sp->id) != null)
-                                                    @if(getBanner($sp->id) == 3)
-                                                        @if(getBanner2($sp->id) == 4)               
+                                              @if(getBanner($sp->id) == 3)
+                                                        @if(getBanchay1($sp->id))           
                                                             <span class="new">NEW</span>
-                                                            <span class="sale">HOT</span>
+                                                            <span class="sale">HOT</span>   
                                                         @else
                                                             <span class="new">NEW</span>
                                                         @endif
-                                                    @elseif(getBanner($sp->id) == 2)
-                                                        @if(getBanner2($sp->id) == 4)               
-                                                            <span class="sale">-{{ getPhanTram($sp->id) }}%</span>
-                                                            <span class="sale">HOT</span>
-                                                        @else
+                                                    @elseif(getBanner($sp->id) == 7)
+                                                        <span class="new">BlackFriday</span>
+                                                        @if(getPhanTram($sp->id) != 0)
                                                             <span class="sale">-{{ getPhanTram($sp->id) }}%</span>
                                                         @endif
-                                                    @elseif(getBanner($sp->id) == 4)
-                                                        @if(getBanner2($sp->id) == 3)   
-                                                            <span class="sale">HOT</span>           
-                                                            <span class="new">NEW</span>
-                                                        @elseif(getBanner2($sp->id) == 2)
-                                                            <span class="sale">HOT</span>
-                                                            <span class="sale">-{{ getPhanTram($sp->id) }}%</span>
-                                                        @else
-                                                            <span class="sale">HOT</span>
+                                                        @if(getBanchay1($sp->id))           
+                                                            <span class="sale">HOT</span>   
                                                         @endif
-                                                    @endif
+                                                    @elseif(getBanner($sp->id) == 8)
+                                                        <span class="new">SEA GAMES 30</span>
+                                                        @if(getPhanTram($sp->id) != 0)
+                                                            <span class="sale">-{{ getPhanTram($sp->id) }}%</span>
+                                                        @endif
+                                                        @if(getBanchay1($sp->id))           
+                                                            <span class="sale">HOT</span>   
+                                                        @endif
+                                                    @else
+                                                        @if(getBanchay1($sp->id))           
+                                                            <span class="sale">HOT</span>   
+                                                        @endif
+                                                        @if(getPhanTram($sp->id) != 0)
+                                                            <span class="sale">-{{ getPhanTram($sp->id) }}%</span>
+                                                        @endif
                                                 @endif
                                             </div>                                          
                                         </div>

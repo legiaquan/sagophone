@@ -255,11 +255,13 @@
 														<span class="sale">HOT</span>				
 														<span class="new">NEW</span>
 													@elseif(getBanner($spm->id) == 7)
+														<span class="sale">HOT</span>
 														<span class="new">BlackFriday</span>
 														@if(getPhanTram($spm->id) != 0)
 															<span class="sale">-{{ getPhanTram($spm->id) }}%</span>
 														@endif
 													@elseif(getBanner($spm->id) == 8)
+														<span class="sale">HOT</span>
 														<span class="new">SEA GAMES 30</span>
 														@if(getPhanTram($spm->id) != 0)
 															<span class="sale">-{{ getPhanTram($spm->id) }}%</span>
@@ -370,20 +372,32 @@
 												
 												<div class="product-label">											
 													@if(getBanner($dt->id) == 3)
-														<span class="sale">HOT</span>				
-														<span class="new">NEW</span>
+														@if(getBanchay1($dt->id))			
+															<span class="new">NEW</span>
+															<span class="sale">HOT</span>	
+														@else
+															<span class="new">NEW</span>
+														@endif
 													@elseif(getBanner($dt->id) == 7)
 														<span class="new">BlackFriday</span>
 														@if(getPhanTram($dt->id) != 0)
 															<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
 														@endif
-													@elseif(getBanner2($dt->id) == 8)
+														@if(getBanchay1($dt->id))			
+															<span class="sale">HOT</span>	
+														@endif
+													@elseif(getBanner($dt->id) == 8)
 														<span class="new">SEA GAMES 30</span>
 														@if(getPhanTram($dt->id) != 0)
 															<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
 														@endif
+														@if(getBanchay1($dt->id))			
+															<span class="sale">HOT</span>	
+														@endif
 													@else
-														<span class="sale">HOT</span>
+														@if(getBanchay1($dt->id))			
+															<span class="sale">HOT</span>	
+														@endif
 														@if(getPhanTram($dt->id) != 0)
 															<span class="sale">-{{ getPhanTram($dt->id) }}%</span>
 														@endif
@@ -489,19 +503,32 @@
 												
 												<div class="product-label">											
 													@if(getBanner($pk->id) == 3)
-														<span class="sale">HOT</span>				
-														<span class="new">NEW</span>
+														@if(getBanchay1($pk->id))			
+															<span class="new">NEW</span>
+															<span class="sale">HOT</span>	
+														@else
+															<span class="new">NEW</span>
+														@endif
 													@elseif(getBanner($pk->id) == 7)
 														<span class="new">BlackFriday</span>
 														@if(getPhanTram($pk->id) != 0)
 															<span class="sale">-{{ getPhanTram($pk->id) }}%</span>
 														@endif
-													@elseif(getBanner2($pk->id) == 8)
+														@if(getBanchay1($pk->id))			
+															<span class="sale">HOT</span>	
+														@endif
+													@elseif(getBanner($pk->id) == 8)
 														<span class="new">SEA GAMES 30</span>
 														@if(getPhanTram($pk->id) != 0)
 															<span class="sale">-{{ getPhanTram($pk->id) }}%</span>
 														@endif
+														@if(getBanchay1($pk->id))			
+															<span class="sale">HOT</span>	
+														@endif
 													@else
+														@if(getBanchay1($pk->id))			
+															<span class="sale">HOT</span>	
+														@endif
 														@if(getPhanTram($pk->id) != 0)
 															<span class="sale">-{{ getPhanTram($pk->id) }}%</span>
 														@endif

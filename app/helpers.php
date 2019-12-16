@@ -96,19 +96,7 @@ function getBanner($id)
 			->value('tbdanhsachbanner.id_banner');
 	return $banner;
 }
-function getBanner2($id)
-{
-	
-	$banner =  DB::table('tbchitietsanpham')
-			->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
-			->join('tbbanner','tbdanhsachbanner.id_banner','tbbanner.id')
-			->where('tbbanner.trangthai','show')
-			->where('tbdanhsachbanner.id_chitietsanpham',$id)
-			->orderBy('id_banner','DESC')
-			->value('tbdanhsachbanner.id_banner');
-	return $banner;
 
-}
 
 function getPhanTram($id)
 {
@@ -120,16 +108,6 @@ function getPhanTram($id)
 			->orderBy('id_banner','ASC')
 			->value('tbdanhsachbanner.phantramkhuyenmai');
 	return $phantram;
-}
-
-function getBanchay()
-{
-	$banchay = DB::table('tbchitietdonhang')
-			->select(DB::raw('sum(soluong) as soluong'))
-			->select('id_chitietsanpham')
-			->groupBy('id_chitietsanpham')
-			->orderBy(DB::raw('sum(soluong)'),'DESC LIMIT 0,10');
-	return $banchay;
 }
 
 function getBanchay1($id)

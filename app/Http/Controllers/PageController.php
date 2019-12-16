@@ -76,7 +76,7 @@ class PageController extends Controller
                 ->orderBy('soluongbanchay','desc')
                 ->take(10)
                 ->get();
-        dd($sanphambanchay);
+        //dd($sanphambanchay);
 		view()->share('nhomsanpham',$nhomsanpham);
 		view()->share('hangdt',$hangdt);
 		view()->share('sanphammoi',$sanphammoi);
@@ -180,6 +180,41 @@ class PageController extends Controller
                     ->select('tbsanpham.tensp','tbsanpham.id_nhom','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
 
         $countSanPham = $sanpham->get();
+        $keyword = $request->keyword;
+        $finding = $request->timkiem;
+
+
+        if($keyword == null && $finding !=null)
+        {
+            $sanpham = DB::table('tbchitietsanpham')
+                        ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
+                        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+                        ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
+                        ->where('id_hangdt',$finding)
+                        ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
+        }
+
+        else if($keyword != null && $finding ==null)
+        {
+           
+                $sanpham = DB::table('tbchitietsanpham')
+                            ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
+                            ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+                            ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
+                            ->where('tensp','like','%'.$keyword.'%')
+                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
+            
+        }  
+        else if($keyword != null && $finding != null)
+        {
+             $sanpham = DB::table('tbchitietsanpham')
+                            ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
+                            ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+                            ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
+                            ->where('id_hangdt',$finding)
+                            ->where('tensp','like','%'.$keyword.'%')
+                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
+        }
 
         if($request->id_banner)
         {
@@ -197,7 +232,7 @@ class PageController extends Controller
             $sanpham = $sanpham->where('id_nhom',$id_nhom);
         }
 
-         if($request->brand)
+        if($request->brand)
         {
             $brand = $request->brand;
             $sanpham = $sanpham->where('id_hangdt',$brand);
@@ -275,116 +310,6 @@ class PageController extends Controller
     	return view('pages/chitiet',['chitiet' => $chitiet, 'sanphamlienquan' => $sanphamlienquan, 'hinhchitiet' => $hinhchitiet]);
     }
 
-
-    public function timkiem(Request $request)
-    {
-        $keyword = $request->keyword;
-        $finding = $request->timkiem;
-
-        if($keyword == null && $finding == null)
-        {
-            return redirect()->back()->with('thongbao','Vui lòng chọn hãng hoặc nhập từ khóa!');
-        }
-        if($keyword == null && $finding !=null)
-        {
-            $sanpham = DB::table('tbchitietsanpham')
-                        ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
-                        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-                        ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                        ->where('id_hangdt',$request->timkiem)
-                        ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
-        }
-
-        else if($keyword != null && $finding ==null)
-        {
-           
-                $sanpham = DB::table('tbchitietsanpham')
-                            ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
-                            ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-                            ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                            ->where('tensp','like','%'.$keyword.'%')
-                            ->orWhere('mota','like','%'.$keyword.'%')
-                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
-            
-        }  
-        else
-        {
-             $sanpham = DB::table('tbchitietsanpham')
-                            ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
-                            ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-                            ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                            ->where('id_hangdt',$request->timkiem)
-                            ->where('tensp','like','%'.$keyword.'%')
-                            ->orWhere('mota','like','%'.$keyword.'%')
-                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
-        }
-
-        $countSanPham = $sanpham->get();
-
-        if($request->id_banner)
-        {
-            $sanpham = $sanpham->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
-                    ->where('id_banner',$request->id_banner);
-            $hinhbanner = Banner::where('id',$request->id_banner)->select('id','hinhbanner')->first();
-            $countSanPham = $sanpham->get();
-        }
-        else
-            $hinhbanner = null;
-
-        if($request->id_nhom)
-        {
-            $id_nhom = $request->id_nhom;
-            $sanpham = $sanpham->where('id_nhom',$id_nhom);
-        }
-
-
-        if(isset($request->maxprice) || isset($request->minprice))
-        {
-                $price = $request->price;
-                $maxprice = $request->maxprice;
-                $minprice = $request->minprice;
-                if($maxprice==null)
-                    $maxprice=100000000000;
-                if($minprice==null)
-                    $minprice=1;
-                
-                $sanpham->where('gia','>=',$minprice)->where('gia','<=',$maxprice);
-        }
-        if($request->rom)
-        {
-            $rom = $request->rom;
-            $sanpham = $sanpham->where('rom',$rom);
-                
-        }
-        if($request->sortby)
-        {
-            $sortby = $request->sortby;
-            switch ($sortby) {
-                case 'tangdan':
-                    $sanpham->orderBy('gia','ASC');
-                    break;
-                case 'giamdan':
-                    $sanpham->orderBy('gia','DESC');
-                    break;
-                default:
-                    
-                    break;
-            }
-        }
-        $rom = SanPham::select('rom')->distinct()->orderBy('rom','ASC')->get();
-        $tongsanpham = $sanpham->get();
-        $khoanggia = KhoangGia::all();
-        $tenhang = HangDT::where('id',$request->timkiem)->value('tenhang');
-        $sanpham = $sanpham->paginate(6);
-        return view('pages/timkiem',['keyword' => $keyword, 'sanpham' => $sanpham, 
-            'tongsanpham' => $tongsanpham,
-            'tenhang' => $tenhang,
-            'rom' => $rom,
-            'khoanggia' => $khoanggia,
-            'finding' => $finding
-        ]);
-        
-    }
 
     public function lienhe()
     {

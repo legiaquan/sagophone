@@ -79,7 +79,7 @@
 		                            </div>
 		                        @endif
 
-								<form id="form_search" action="timkiem" class="tree-most"  role="search" method="GET">
+								<form id="form_search" action="cuahang" class="tree-most"  role="search" method="GET">
 									
  									<select name="timkiem" class="input-select col-lg-3">
 										<option value="">Chọn hãng</option>
