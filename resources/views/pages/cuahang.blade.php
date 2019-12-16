@@ -97,10 +97,9 @@
 						<div class="aside">						
 							<h3 class="aside-title">Thương Hiệu</h3>
 							<div class="checkbox-filter">
-								<?php $dem=0; ?>
 								@foreach($hangdt as $hdt)
 								<?php $dem++; ?>
-								<div class="input-radio1">
+								<div class="input-radio">
 									<input
 									@if($hdt->id == Request::get('brand'))
 										checked
