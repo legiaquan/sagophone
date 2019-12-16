@@ -67,6 +67,7 @@
 				<!-- row -->
 				<div class="row">
 					<!-- ASIDE -->
+					@if(!Request::get('keyword'))
 					<form class="tree-most" id="form_order1" method="GET">
 					<div id="aside" class="col-md-3">
 						<!-- aside Widget -->
@@ -205,6 +206,16 @@
 
 						<!-- /store top filter -->
 						</form>
+						@else
+							<div>
+								<p style="font-size:20px;font-weight: bold;"><i>Kết quả tìm kiếm '{{ Request::get('keyword') }}':</i></p>
+								@if($countTimKiem>0)
+									Tìm thấy {{ $countTimKiem }} sản phẩm
+								@else
+									Không có sản phẩm nào!
+								@endif
+							</div>
+						@endif
 						<!-- store products -->
 						<div class="row">
 							<!-- product -->

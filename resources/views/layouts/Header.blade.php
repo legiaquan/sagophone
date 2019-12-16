@@ -84,10 +84,14 @@
  									<select name="timkiem" class="input-select col-lg-3">
 										<option value="">Chọn hãng</option>
 										@foreach($hangdt as $hdt)
-											<option value="{{$hdt->id}}">{{$hdt->tenhang}}</option>
+											<option
+											@if(Request::get('timkiem')==$hdt->id)
+												selected
+											@endif
+											value="{{$hdt->id}}">{{$hdt->tenhang}}</option>
 										@endforeach
 									</select>								
-										<input class="input col-lg-3" name="keyword" placeholder="Nhập sản phẩm cần tìm">
+										<input class="input col-lg-3" name="keyword" value="{{ Request::get('keyword') }}" placeholder="Nhập sản phẩm cần tìm">
 									<button type="submit" class="search-btn col-lg-3">Tìm</button>
 								</form>
 							</div>

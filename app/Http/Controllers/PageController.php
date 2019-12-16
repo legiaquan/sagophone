@@ -177,43 +177,18 @@ class PageController extends Controller
                     ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                     ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
                     ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                    ->select('tbsanpham.tensp','tbsanpham.id_nhom','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
+                    ->select('tbsanpham.tensp','tbsanpham.id_hangdt','tbsanpham.id_nhom','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
 
         $countSanPham = $sanpham->get();
         $keyword = $request->keyword;
-        $finding = $request->timkiem;
-
-
-        if($keyword == null && $finding !=null)
+        if($request->keyword)
         {
-            $sanpham = DB::table('tbchitietsanpham')
-                        ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
-                        ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-                        ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                        ->where('id_hangdt',$finding)
-                        ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
+             $sanpham = $sanpham->where('tensp','like','%'.$keyword.'%');
+
         }
-
-        else if($keyword != null && $finding ==null)
+        if($request->timkiem)
         {
-           
-                $sanpham = DB::table('tbchitietsanpham')
-                            ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
-                            ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-                            ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                            ->where('tensp','like','%'.$keyword.'%')
-                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
-            
-        }  
-        else if($keyword != null && $finding != null)
-        {
-             $sanpham = DB::table('tbchitietsanpham')
-                            ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
-                            ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-                            ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                            ->where('id_hangdt',$finding)
-                            ->where('tensp','like','%'.$keyword.'%')
-                            ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
+            $sanpham = $sanpham->where('id_hangdt',$request->timkiem);
         }
 
         if($request->id_banner)
@@ -272,6 +247,7 @@ class PageController extends Controller
                     break;
             }
         }
+        $countTimKiem = $sanpham->count();
         $sanpham = $sanpham->paginate(6);
         $thuonghieu = HangDT::all();
         $rom = SanPham::select('rom')->distinct()->orderBy('rom','ASC')->get();
@@ -282,6 +258,7 @@ class PageController extends Controller
             'khoanggia' => $khoanggia,
             'hinhbanner' => $hinhbanner,
             'countSanPham'=> $countSanPham,
+            'countTimKiem'=> $countTimKiem,
         ]);
         //var_dump($request->orderby);
     }
