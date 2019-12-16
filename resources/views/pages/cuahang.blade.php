@@ -56,7 +56,7 @@
 			<div class="container">
 				<!-- row -->
 				@if($hinhbanner != null)
-					<a href="cuahang?id_banner={{ $hinhbanner->id }}"><img src="./upload/imgKhuyenMai/{{ $hinhbanner->hinhbanner }}" style="width: 100%" >
+					<a href="cuahang?id_banner={{ $hinhbanner->id }}"><img src="./upload/imgKhuyenMai/{{ $hinhbanner->hinhbanner }}" style="width: 100%; height: 200px" >
 				@endif
 			</div>
 </div>
@@ -92,7 +92,28 @@
 							</div>	
 						</div>
 						<!-- /aside Widget -->
-
+						<!-- aside Widget -->
+						<div class="aside">						
+							<h3 class="aside-title">Thương Hiệu</h3>
+							<div class="checkbox-filter">
+								<?php $dem=0; ?>
+								@foreach($hangdt as $hdt)
+								<?php $dem++; ?>
+								<div class="input-radio1">
+									<input
+									@if($hdt->id == Request::get('brand'))
+										checked
+									@endif
+									type="radio" name="brand" value="{{ $hdt->id }}" id="category-{{ $dem }}">
+									<label for="category-{{ $dem }}">
+										<span></span>
+										{{$hdt->tenhang}}
+									</label>
+								</div>
+								@endforeach
+							</div>	
+						</div>
+						<!-- /aside Widget -->
 						<!-- aside Widget -->
 						<div class="aside">
 							<h3 class="aside-title">Theo khoảng giá</h3>
@@ -109,11 +130,12 @@
 									<span class="qty-down">-</span>
 								</div>
 							</div>
+							<br>
 							<button type="submit" class="btn btn-raised btn-primary" style="width: 100%">
 									<i class="fa fa-check-square-o"></i> Chọn
 							</button>
 							<br>
-							<a><i>Khoảng Giá</i></a>  			
+							<h3 class="aside-title">Khoảng giá</h3>			
 							<div class="radio-filter">
 								@foreach($khoanggia as $kg)
 								<?php $dem++; ?>
@@ -162,45 +184,6 @@
 							<i class="ft-refresh-ccw"></i> Xóa tất cả lựa chọn
 						</a>
 						
-						<!-- /aside Widget -->
-
-						<!-- aside Widget
-						<div class="aside">
-							<h3 class="aside-title">Top selling</h3>
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product01.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Category</p>
-									<h3 class="product-name"><a href="#">product name goes here</a></h3>
-									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								</div>
-							</div>
-						
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product02.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Category</p>
-									<h3 class="product-name"><a href="#">product name goes here</a></h3>
-									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								</div>
-							</div>
-						
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product03.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Category</p>
-									<h3 class="product-name"><a href="#">product name goes here</a></h3>
-									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								</div>
-							</div>
-						</div>
-						/aside Widget -->
 					</div>
 					<!-- /ASIDE -->
 					
@@ -235,30 +218,23 @@
 											<div class="product-label">	
 												@if(getBanner($sp->id) != null)
 													@if(getBanner($sp->id) == 3)
-														@if(getBanner2($sp->id) == 4)				
-															<span class="new">NEW</span>
-															<span class="sale">HOT</span>
-														@else
-															<span class="new">NEW</span>
-														@endif
-													@elseif(getBanner($sp->id) == 2)
-														@if(getBanner2($sp->id) == 4)				
-															<span class="sale">-{{ getPhanTram($sp->id) }}%</span>
-															<span class="sale">HOT</span>
-														@else
+														<span class="sale">HOT</span>				
+														<span class="new">NEW</span>
+													@elseif(getBanner($sp->id) == 7)
+														<span class="new">BlackFriday</span>
+														@if(getPhanTram($sp->id) != 0)
 															<span class="sale">-{{ getPhanTram($sp->id) }}%</span>
 														@endif
-													@elseif(getBanner($sp->id) == 4)
-														@if(getBanner2($sp->id) == 3)	
-															<span class="sale">HOT</span>			
-															<span class="new">NEW</span>
-														@elseif(getBanner2($sp->id) == 2)
-															<span class="sale">HOT</span>
+													@elseif(getBanner($sp->id) == 8)
+														<span class="new">SEA GAMES 30</span>
+														@if(getPhanTram($sp->id) != 0)
 															<span class="sale">-{{ getPhanTram($sp->id) }}%</span>
-														@else
-															<span class="sale">HOT</span>
 														@endif
-													@endif
+													@else
+														@if(getPhanTram($sp->id) != 0)
+															<span class="sale">-{{ getPhanTram($sp->id) }}%</span>
+														@endif
+													@endif	
 												@endif
 											</div>									
 										</div>
@@ -327,24 +303,12 @@
  			$('.input-radio').change(function(){
  				$("#form_order1").submit();
  			});
- 			// $('.input-select3').change(function(){
- 			// 	$("#form_order1").submit();
- 			// 	$('.input-select1').val();
- 			// 	$('.input-select2').val();
- 			// 	$('.input-select3').val();
- 			// 	$('.input-select').val();
- 			// });
+ 			$('.input-radio1').change(function(){
+ 				$("#form_order1").submit();
+ 			});
  			$('.input-select5').change(function(){
  				$("#form_order1").submit()
  			});
- 			// $("#form_order1").submit(function(){
- 			// 	$('.input-select1').val();
- 			// 	$('.input-select2').val();
- 			// 	$('.input-select3').val();
- 			// 	$('.input-select5').val();
- 			// 	$('#pricemin').val();
- 			// 	$('#pricemax').val();
- 			// });
  			$('input[type=radio]').click(function(){
 			    if (this.previous) {
 			        this.checked = false;

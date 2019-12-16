@@ -19,8 +19,7 @@
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="trangchu">Trang Chủ</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
-						<li><a href="dienthoai">Điện Thoại</a></li>
-						<li><a href="phukien">Phụ Kiện</a></li>									
+						<li><a href="cuahang">Cửa Hàng</a></li>								
 						<li><a href="lienhe">Liên Hệ</a></li>
 					</ul>
 					<!-- /NAV -->
@@ -110,7 +109,6 @@
 		</div>
 		<!-- /SECTION -->
 
-		@if($bannernew->trangthai =='show')
 		<div class="section">
 			<!-- container -->
 			<div class="container">
@@ -215,7 +213,6 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-		@endif
 
 		<div class="section">
 			<!-- container -->
@@ -254,15 +251,15 @@
 												</a>
 												
 												<div class="product-label">											
-													@if(getBanner($spm->id) == 3 && $spm->trangthai == 'show')
+													@if(getBanner($spm->id) == 3)
 														<span class="sale">HOT</span>				
 														<span class="new">NEW</span>
-													@elseif(getBanner($spm->id) == 7 && $spm->trangthai == 'show')
+													@elseif(getBanner($spm->id) == 7)
 														<span class="new">BlackFriday</span>
 														@if(getPhanTram($spm->id) != 0)
 															<span class="sale">-{{ getPhanTram($spm->id) }}%</span>
 														@endif
-													@elseif(getBanner2($spm->id) == 8 && $spm->trangthai == 'show')
+													@elseif(getBanner($spm->id) == 8)
 														<span class="new">SEA GAMES 30</span>
 														@if(getPhanTram($spm->id) != 0)
 															<span class="sale">-{{ getPhanTram($spm->id) }}%</span>

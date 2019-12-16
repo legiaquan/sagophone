@@ -12,8 +12,7 @@
 						<ul class="main-nav nav navbar-nav">
 						<li><a href="trangchu">Trang Chủ</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
-						<li><a href="dienthoai">Điện Thoại</a></li>
-						<li><a href="phukien">Phụ Kiện</a></li>									
+						<li><a href="cuahang">Cửa Hàng</a></li>									
 						<li class="active"><a href="lienhe">Liên Hệ</a></li>
 					</ul>
                     <!-- /NAV -->

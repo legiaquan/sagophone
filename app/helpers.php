@@ -30,7 +30,7 @@ function getNhanXet($id)
 	$nhanxet = DB::table('tbchitietdonhang')
 			->where('id_chitietsanpham', $id)
 			->where('star','<>','null')
-			->select('star')->get();
+			->get();
 	return $nhanxet;
 }
 function demBinhLuan($id)

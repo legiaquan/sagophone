@@ -12,8 +12,7 @@
                     <ul class="main-nav nav navbar-nav">
                         <li><a href="trangchu">Trang Chủ</a></li>
                         <li><a href="loaitin">Tin Tức</a></li>
-                        <li><a href="dienthoai">Điện Thoại</a></li>
-                        <li><a href="phukien">Phụ Kiện</a></li>                              
+                        <li><a href="cuahang">Cửa Hàng</a></li>                               
                         <li><a href="lienhe">Liên Hệ</a></li>
                     </ul>
                     <!-- /NAV -->
@@ -49,30 +48,129 @@
                 <!-- row -->
                 <div class="row">
                     <!-- ASIDE -->
+                    <form class="tree-most" id="form_order1" method="GET" action="timkiem">
                     <div id="aside" class="col-md-3">
-                       
-                       
-                        
+                        <!-- aside Widget -->
+                        <div class="aside">                     
+                            <h3 class="aside-title">Nhóm Sản Phẩm</h3>
+                            <div class="checkbox-filter">
+                                <?php $dem=0; ?>
+                                @foreach($nhomsanpham as $nsp)
+                                <?php $dem++; ?>
+                                <div class="input-radio">
+                                    <input
+                                    @if($nsp->id == Request::get('id_nhom'))
+                                        checked
+                                    @endif
+                                    type="radio" name="id_nhom" value="{{ $nsp->id }}" id="category-{{ $dem }}">
+                                    <label for="category-{{ $dem }}">
+                                        <span></span>
+                                        {{$nsp->tennhom}}
+                                    </label>
+                                </div>
+                                @endforeach
+                            </div>  
+                        </div>
                         <!-- /aside Widget -->
-                        <div class="col-md-9">
-                            <br/>
-                            <div class="row filter_data">
-
+                        <!-- aside Widget -->
+                        <div class="aside">
+                            <h3 class="aside-title">Theo khoảng giá</h3>
+                            <div class="price-filter">
+                                <div class="input-number price-min">
+                                    <input id="price-min" type="number" name="minprice" value="{{ Request::get('minprice') }}" placeholder="Thấp nhất" >
+                                    <span class="qty-up">+</span>
+                                    <span class="qty-down">-</span>
+                                </div>
+                                <span>-</span>
+                                <div class="input-number price-max">
+                                    <input id="price-max" type="number" name="maxprice" value="{{ Request::get('maxprice') }}" placeholder="Lớn nhất">
+                                    <span class="qty-up">+</span>
+                                    <span class="qty-down">-</span>
+                                </div>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-raised btn-primary" style="width: 100%">
+                                    <i class="fa fa-check-square-o"></i> Chọn
+                            </button>
+                            <br>
+                            <h3 class="aside-title">Khoảng giá</h3>         
+                            <div class="radio-filter">
+                                @foreach($khoanggia as $kg)
+                                <?php $dem++; ?>
+                                <div>
+                                    <a
+                                    href="{{ request()->fullUrlWithQuery(['maxprice' => $kg->maxprice,'minprice'=>$kg->minprice]) }}"
+                                    @if(Request::get('maxprice')==$kg->maxprice && Request::get('minprice')==$kg->minprice)
+                                        style="color: #D10024"
+                                    @endif
+                                    id="category-{{ $dem }}" name="price" value="{{ $kg->id }}">
+                                    <label for="category-{{ $dem }}" >
+                                        <span></span>
+                                        {{$kg->khoanggia}}
+                                    </label>
+                                    </a>
+                                </div>
+                                @endforeach
                             </div>
                         </div>
+                        <!-- /aside Widget -->
 
+                        <!-- aside Widget -->
+                        <div class="aside">
+                            <h3 class="aside-title">ROM</h3>
+                            <div class="checkbox-filter">
+                                @foreach($rom as $r)
+                                    @if($r->rom !=null)
+                                        <?php $dem++; ?>
+                                        <div class="input-radio">
+                                            <input
+                                            @if($r->rom == Request::get('rom'))
+                                                checked
+                                            @endif
+                                            type="radio" id="category-{{ $dem }}" name="rom" value="{{ $r->rom }}">
+                                            <label for="category-{{ $dem }}">
+                                                <span></span>
+                                                {{$r->rom}} GB
+                                            </label>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        
+                        </div>
+                        <a href="timkiem?timkiem={{ $finding }}&keyword={{ $keyword }}"  class="btn btn-raised btn-warning mr-1" style="width: 100%">
+                            <i class="ft-refresh-ccw"></i> Xóa tất cả lựa chọn
+                        </a>
+                        
                     </div>
                     <!-- /ASIDE -->
-                    
-                    <!-- STORE -->
-                    <div id="store" class="col-md-9">
-                        @if($keyword != null && $tenhang != null)
+                     @if($keyword != null && $tenhang != null)
                             <h3> ({{count($tongsanpham)}}) Kết quả tìm kiếm : ({{$tenhang}}) {{$keyword}} </h3>
                         @elseif($keyword == null && $tenhang != null)
                             <h3> ({{count($tongsanpham)}}) Kết quả tìm kiếm : ({{$tenhang}}) </h3>
                         @else
                             <h3> ({{count($tongsanpham)}}) Kết quả tìm kiếm : {{$keyword}} </h3>
                         @endif
+                    <!-- STORE -->
+                    <div id="store" class="col-md-9">
+                        <div class="store-filter clearfix">
+                                <div class="store-sort">
+                                    
+                                        <label>
+                                            <a style="font-size: 13px; font-weight: bolder; padding-left: 15px">Sắp Xếp Theo</a>
+                                            <select name="sortby" class="input-select5 btn-sm">
+                                                <option value="">click chọn...</option>
+                                                <option {{Request::get('sortby') == 'tangdan' ? "selected = 'selected'" : ""}} value="tangdan">Giá Tăng Dần</option>
+                                                <option {{Request::get('sortby') == 'giamdan' ? "selected = 'selected'" : ""}} value="giamdan">Giá Giảm Dần</option>
+                                            </select>
+                                        </label>
+                                </div>
+                            </div>
+
+                        <!-- /store top filter -->
+                        </form>
+                        <!-- store products -->
+                       
                         <div class="row">
                             <!-- product -->
                                 @foreach($sanpham as $sp)
@@ -175,10 +273,23 @@
 @section('script')
     <script>
         $(function(){
-            $('.input-select').change(function(){
-                $("#form_order").submit();
-                $('.input-select').val();
+            $('.input-radio').change(function(){
+                $("#form_order1").submit();
+            });
+            $('.input-radio1').change(function(){
+                $("#form_order1").submit();
+            });
+            $('.input-select5').change(function(){
+                $("#form_order1").submit()
+            });
+            $('input[type=radio]').click(function(){
+                if (this.previous) {
+                    this.checked = false;
+                    $("#form_order1").submit();
+                }
+                this.previous = this.checked;
             });
         });
+
     </script>
 @endsection

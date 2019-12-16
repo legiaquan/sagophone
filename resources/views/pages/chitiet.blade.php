@@ -10,13 +10,7 @@
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="trangchu">Trang Chủ</a></li>
 						<li><a href="loaitin">Tin Tức</a></li>
-						@if($chitiet->sanpham->id_nhom == 1)
-							<li class="active"><a href="dienthoai">Điện Thoại</a></li>
-							<li><a href="phukien">Phụ Kiện</a></li>	
-						@else
-							<li><a href="dienthoai">Điện Thoại</a></li>
-							<li class="active"><a href="phukien">Phụ Kiện</a></li>
-						@endif								
+						<li class="active"><a href="cuahang">Cửa Hàng</a></li>									
 						<li><a href="lienhe">Liên Hệ</a></li>
 					</ul>
 					<!-- /NAV -->
@@ -37,8 +31,8 @@
 						<ul class="breadcrumb-tree">
 							<li><a href="trangchu">Trang Chủ</a></li>
 							@if($chitiet->sanpham->id_nhom == 1)
-								<li class="active"><a href="dienthoai">{{$chitiet->sanpham->nhomsanpham->tennhom}}</a></li>
-								<li class="active"><a href="dienthoai?grand={{ $chitiet->sanpham->id_hangdt }}">{{$chitiet->sanpham->hangdt->tenhang}}</a></li>
+								<li class="active"><a href="cuahang?id_nhom={{ $chitiet->sanpham->id_nhom }}">{{$chitiet->sanpham->nhomsanpham->tennhom}}</a></li>
+								<li class="active"><a href="cuahang?grand={{ $chitiet->sanpham->id_hangdt }}">{{$chitiet->sanpham->hangdt->tenhang}}</a></li>
 								<li class="active"><a href="chitiet/{{ $chitiet->id }}">{{$chitiet->sanpham->tensp}}</a></li>
 							@else
 								<li class="active"><a href="phukien">{{$chitiet->sanpham->nhomsanpham->tennhom}}</a></li>
@@ -114,7 +108,7 @@
 											@endif
 											@if(avgStarSanPham($chitiet->id) != null)
 												({{ $star }} / 5 <i class="fa fa-star checked"></i>)
-										@endif
+											@endif
 										</div>
 										
 									@else
@@ -258,7 +252,8 @@
 							<!-- product tab nav -->
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Mô Tả</a></li>				
-								<li><a data-toggle="tab" href="#tab2">Bình Luận ({{$dembinhluan}})</a></li>
+								<li><a data-toggle="tab" href="#tab2">Đánh Giá ({{count(getNhanXet($chitiet->id))}})</a></li>
+								<li><a data-toggle="tab" href="#tab3">Bình Luận ({{$dembinhluan}})</a></li>
 							</ul>
 							<!-- /product tab nav -->
 
@@ -279,7 +274,14 @@
 								<div id="tab2" class="tab-pane fade in">
 									<div class="row">
 										<!-- Rating -->
-										<div class="col-md-3">
+										<div class="col-md-2">
+											
+										</div>
+											
+										<!-- /Rating -->
+
+										<!-- Reviews -->
+										<div class="col-md-5">
 											@if($star != null)
 											<div id="rating">
 												<div class="rating-avg">
@@ -491,36 +493,58 @@
 											</div>
 											@endif
 										</div>
+										<!-- /Reviews -->
+										<div class="col-md-3">
+											@if(count($getdanhgia) > 0)
+												@foreach($chitiet->chitietdonhang as $danhgia)
+												<div id="reviews">
+													<ul class="reviews">
+														<li>
+															<div class="review-heading">
+																<h5 class="name">{{$danhgia->donhang->thanhvien->name}}</h5>
+																<p class="date">
+																	@for($i=0;$i<$danhgia->star;$i++)
+																		@if($i < $danhgia->star)
+																			<i class="fa fa-star checked"></i>
+																		@endif
+																	@endfor
+																	
+																</p>
+																
+															</div>
+															<div class="review-body">
+																<p>{{$danhgia->nhanxet}}</p>
+															</div>
+														</li>
+														
+													</ul>
+													
+												</div>
+												<hr/>
+												@endforeach
+											@else
+												<div id="reviews">
+													<h4>(CHƯA CÓ ĐÁNH GIÁ ... )</h4>
+												</div>
+											@endif
+										</div>
+									
+									</div>
+								</div>
+								<!-- /tab2  -->
+
+								<!-- tab3  -->
+								<div id="tab3" class="tab-pane fade in">
+									<div class="row">
+										<!-- Rating -->
+										<div class="col-md-2">
 											
+										</div>
 										<!-- /Rating -->
 
 										<!-- Reviews -->
+										@if(Auth::user() != null)	
 										<div class="col-md-6">
-											@foreach($chitiet->sanpham->binhluan as $cmt)
-											<div id="reviews">
-												<ul class="reviews">
-													<li>
-														<div class="review-heading">
-															<h5 class="name">{{$cmt->thanhvien->name}}</h5>
-															<p class="date">{{$cmt->created_at}}</p>
-															
-														</div>
-														<div class="review-body">
-															<p>{{$cmt->binhluan}}</p>
-														</div>
-													</li>
-													
-												</ul>
-												
-											</div>
-										
-											@endforeach
-										</div>
-										<!-- /Reviews -->
-
-										<!-- Review Form -->
-										@if(Auth::user() != null)		
-										<div class="col-md-3">	
 											<h4><span class="glyphicon glyphicon-pencil"></span>&nbsp;...Bình luận</h4>
 
 											@if(session('thongbao'))
@@ -541,7 +565,7 @@
 											</div>
 										</div>
 										@else
-											<div class="col-md-3">	
+											<div class="col-md-5">	
 											<h4><span class="glyphicon glyphicon-pencil"></span>&nbsp;...Bình luận</h4>
 
 											@if(session('thongbao'))
@@ -561,10 +585,43 @@
 											</div>
 										</div>
 										@endif
+										<!-- /Reviews -->
+
+										<!-- Review Form -->
+		
+										<div class="col-md-3">	
+											@if($dembinhluan > 0)
+												@foreach($chitiet->sanpham->binhluan as $cmt)
+												<div id="reviews">
+													<ul class="reviews">
+														<li>
+															<div class="review-heading">
+																<h5 class="name">{{$cmt->thanhvien->name}}</h5>
+																<p class="date">{{$cmt->created_at}}</p>
+																
+															</div>
+															<div class="review-body">
+																<p>{{$cmt->binhluan}}</p>
+															</div>
+														</li>
+														
+													</ul>
+													
+												</div>
+												<hr/>
+												@endforeach
+											@else
+												<div id="reviews">
+													<h4>(CHƯA CÓ BÌNH LUẬN ... )</h4>
+												</div>
+											@endif
+										</div>
 										<!-- /Review Form -->
 									</div>
 								</div>
-								<!-- /tab2  -->
+								<!-- /tab3  -->
+
+
 							</div>
 							<!-- /product tab content  -->
 						</div>

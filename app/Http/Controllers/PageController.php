@@ -66,16 +66,7 @@ class PageController extends Controller
                             ->where('tbdanhsachbanner.id_banner',3)
                             ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai', 'tbdanhsachbanner.id_banner','tbmau.mau','tbbanner.trangthai')
                             ->get();
-		// $sanphambanchay =   DB::table('tbchitietsanpham')
-  //                           ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
-  //                           ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-  //                           ->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
-  //                           ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-  //                           ->join('tbbanner','tbdanhsachbanner.id_banner','tbbanner.id')
-  //                           ->whereIn('tbchitietsanpham.id',getBanchay())
-  //                           ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbdanhsachbanner.phantramkhuyenmai', 'tbdanhsachbanner.id_banner','tbmau.mau', 'tbbanner.trangthai')
-  //                           ->get();
-        $sanphambanchay = DB::table('tbchitietdonhang')
+    	$sanphambanchay = DB::table('tbchitietdonhang')
                 ->join('tbchitietsanpham','tbchitietdonhang.id_chitietsanpham','tbchitietsanpham.id')
                 ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                 ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
@@ -101,9 +92,6 @@ class PageController extends Controller
         ->where('id_hangdt',2)->inRandomOrder()->first();
         $nokia = SanPham::join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
         ->where('id_hangdt',4)->inRandomOrder()->first();
-        $bannerhotdeals = Banner::where('id',2)->first();
-        $bannernew = Banner::where('id',3)->first();
-        $bannerbanchay = Banner::where('id',4)->first();
         
         $dienthoai = DB::table('tbchitietsanpham')
                             ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
@@ -127,9 +115,6 @@ class PageController extends Controller
             'banner' => $banner,
             'samsung' => $samsung,
             'nokia' => $nokia,
-            'bannerhotdeals' => $bannerhotdeals,
-            'bannernew' => $bannernew,
-            'bannerbanchay' => $bannerbanchay,
             'dienthoai' => $dienthoai,
             'phukien' => $phukien,
             'tintuc' => $tintuc
@@ -186,41 +171,50 @@ class PageController extends Controller
         ]);
     }
 
-    public function dienthoai(Request $request)
+    public function cuahang(Request $request)
     {
-    	$sanphamdt = DB::table('tbchitietsanpham')->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')->where('id_nhom','1')->get();
         $sanpham = DB::table('tbchitietsanpham')
                     ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                     ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
                     ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                    ->where('tbsanpham.id_nhom',1)
                     ->select('tbsanpham.tensp','tbsanpham.id_nhom','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
-        if($request->price)
+
+        $countSanPham = $sanpham->get();
+
+        if($request->id_banner)
+        {
+            $sanpham = $sanpham->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
+                    ->where('id_banner',$request->id_banner);
+            $hinhbanner = Banner::where('id',$request->id_banner)->select('id','hinhbanner')->first();
+            $countSanPham = $sanpham->get();
+        }
+        else
+            $hinhbanner = null;
+
+        if($request->id_nhom)
+        {
+            $id_nhom = $request->id_nhom;
+            $sanpham = $sanpham->where('id_nhom',$id_nhom);
+        }
+
+         if($request->brand)
+        {
+            $brand = $request->brand;
+            $sanpham = $sanpham->where('id_hangdt',$brand);
+               
+        }
+
+        if(isset($request->maxprice) || isset($request->minprice))
         {
                 $price = $request->price;
-                switch ($price) {
-                    case '1':
-                        $sanpham->where('gia','<',1000000)->orderBy('gia','ASC');
-                        break;
-                    case '2' :
-                        $sanpham->whereBetween('gia',[1000000,3000000])->orderBy('gia','ASC');
-                        break;
-                    case '3' :
-                        $sanpham->whereBetween('gia',[3000000,5000000])->orderBy('gia','ASC');
-                        break;
-                    case '4' :
-                        $sanpham->whereBetween('gia',[5000000,7000000])->orderBy('gia','ASC');
-                        break;
-                    case '5' :
-                        $sanpham->whereBetween('gia',[7000000,1000000])->orderBy('gia','ASC');
-                        break;
-                     case '6':
-                        $sanpham->where('gia','>',10000000)->orderBy('gia','ASC');
-                        break;
-                    default:
-                       
-                }
+                $maxprice = $request->maxprice;
+                $minprice = $request->minprice;
+                if($maxprice==null)
+                    $maxprice=100000000000;
+                if($minprice==null)
+                    $minprice=1;
                 
+                $sanpham->where('gia','>=',$minprice)->where('gia','<=',$maxprice);
         }
         if($request->rom)
         {
@@ -228,38 +222,6 @@ class PageController extends Controller
             $sanpham = $sanpham->where('rom',$rom);
                 
         }
-
-        if($request->id_nhom)
-        {
-            $id_nhom = $request->id_nhom;
-            switch ($id_nhom) {
-                case '1':
-                    $sanpham->where('id_nhom','1');
-                    break;
-                case '2':
-                    $sanpham->where('id_nhom','2');
-                default:
-                    # code...
-                    break;
-            }
-        }
-
-        if($request->grand)
-        {
-            $grand = $request->grand;
-            $sanpham = $sanpham->where('id_hangdt',$grand);
-               
-        }
-
-        if($request->id_banner)
-        {
-            $sanpham = $sanpham->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
-                    ->where('id_banner',$request->id_banner);
-            $hinhbanner = Banner::where('id',$request->id_banner)->select('id','hinhbanner')->first();
-        }
-        else
-            $hinhbanner = null;
-
         if($request->sortby)
         {
             $sortby = $request->sortby;
@@ -275,116 +237,18 @@ class PageController extends Controller
                     break;
             }
         }
-
-        if(isset($request->pricemin) && isset($request->pricemax))
-        {
-            $max = $request->pricemax;
-            $min = $request->pricemin;
-            $sanpham->where('gia','>=',$min)->where('gia','<=',$max);
-        }
-
         $sanpham = $sanpham->paginate(6);
         $thuonghieu = HangDT::all();
         $rom = SanPham::select('rom')->distinct()->orderBy('rom','ASC')->get();
         $khoanggia = KhoangGia::all();
-    	return view('pages/dienthoai',
-    		['sanpham' => $sanpham,
-    		'sanphamdt' => $sanphamdt, 
-    		'thuonghieu' => $thuonghieu,
+        return view('pages/cuahang',
+            ['sanpham' => $sanpham, 
             'rom' => $rom,
             'khoanggia' => $khoanggia,
             'hinhbanner' => $hinhbanner,
-    	]);
-        //var_dump($request->orderby);
-    }
-
-    public function phukien(Request $request)
-    {
-        $sanphampk = DB::table('tbchitietsanpham')->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')->where('id_nhom','2')->get();
-        $sanpham = DB::table('tbchitietsanpham')
-                    ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
-                    ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-                    ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                    ->where('tbsanpham.id_nhom',2)
-                    ->orderBy('tbsanpham.created_at','desc')
-                    ->select('tbsanpham.tensp','tbsanpham.id_nhom','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
-        if($request->price)
-        {
-                $price = $request->price;
-                switch ($price) {
-                    case '1':
-                        $sanpham->where('gia','<',1000000)->orderBy('gia','ASC');
-                        break;
-                    case '2' :
-                        $sanpham->whereBetween('gia',[1000000,3000000])->orderBy('gia','ASC');
-                        break;
-                    case '3' :
-                        $sanpham->whereBetween('gia',[3000000,5000000])->orderBy('gia','ASC');
-                        break;
-                    case '4' :
-                        $sanpham->whereBetween('gia',[5000000,7000000])->orderBy('gia','ASC');
-                        break;
-                    case '5' :
-                        $sanpham->whereBetween('gia',[7000000,1000000])->orderBy('gia','ASC');
-                        break;
-                     case '6':
-                        $sanpham->where('gia','>',10000000)->orderBy('gia','ASC');
-                        break;
-                    default:
-                       
-                }
-                
-        }
-        if($request->rom)
-        {
-            $rom = $request->rom;
-            $sanpham = $sanpham->where('rom',$rom);
-                
-        }
-
-        if($request->id_nhom)
-        {
-            $id_nhom = $request->id_nhom;
-            switch ($id_nhom) {
-                case '1':
-                    $sanpham->where('id_nhom','1');
-                    break;
-                case '2':
-                    $sanpham->where('id_nhom','2');
-                default:
-                    # code...
-                    break;
-            }
-        }
-
-        if($request->grand)
-        {
-            $grand = $request->grand;
-            $sanpham = $sanpham->where('id_hangdt',$grand);
-               
-        }
-        if($request->id_banner)
-        {
-            $sanpham = $sanpham->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
-                    ->where('id_banner',$request->id_banner);
-            $hinhbanner = Banner::where('id',$request->id_banner)->select('id','hinhbanner')->first();
-        }
-        else
-            $hinhbanner = null;
-        $sanpham = $sanpham->paginate(6);
-        $thuonghieu = HangDT::all();
-        $rom = SanPham::select('rom')->distinct()->orderBy('rom','ASC')->get();
-        $khoanggia = KhoangGia::all();
-        $banner = Banner::all();
-        return view('pages/phukien',
-            ['sanpham' => $sanpham,
-            'sanphampk' => $sanphampk,
-            'thuonghieu' => $thuonghieu,
-            'rom' => $rom,
-            'khoanggia' => $khoanggia,
-            'banner' => $banner,
-            'hinhbanner' => $hinhbanner
+            'countSanPham'=> $countSanPham,
         ]);
+        //var_dump($request->orderby);
     }
 
     public function chitietsp($id, Request $request)
@@ -415,11 +279,13 @@ class PageController extends Controller
     public function timkiem(Request $request)
     {
         $keyword = $request->keyword;
-        if($keyword == null && $request->timkiem == null)
+        $finding = $request->timkiem;
+
+        if($keyword == null && $finding == null)
         {
             return redirect()->back()->with('thongbao','Vui lòng chọn hãng hoặc nhập từ khóa!');
         }
-        if($keyword == null && $request->timkiem !=null)
+        if($keyword == null && $finding !=null)
         {
             $sanpham = DB::table('tbchitietsanpham')
                         ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
@@ -429,7 +295,7 @@ class PageController extends Controller
                         ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
         }
 
-        else if($keyword != null && $request->timkiem ==null)
+        else if($keyword != null && $finding ==null)
         {
            
                 $sanpham = DB::table('tbchitietsanpham')
@@ -453,7 +319,59 @@ class PageController extends Controller
                             ->select('tbsanpham.tensp','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
         }
 
-       
+        $countSanPham = $sanpham->get();
+
+        if($request->id_banner)
+        {
+            $sanpham = $sanpham->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
+                    ->where('id_banner',$request->id_banner);
+            $hinhbanner = Banner::where('id',$request->id_banner)->select('id','hinhbanner')->first();
+            $countSanPham = $sanpham->get();
+        }
+        else
+            $hinhbanner = null;
+
+        if($request->id_nhom)
+        {
+            $id_nhom = $request->id_nhom;
+            $sanpham = $sanpham->where('id_nhom',$id_nhom);
+        }
+
+
+        if(isset($request->maxprice) || isset($request->minprice))
+        {
+                $price = $request->price;
+                $maxprice = $request->maxprice;
+                $minprice = $request->minprice;
+                if($maxprice==null)
+                    $maxprice=100000000000;
+                if($minprice==null)
+                    $minprice=1;
+                
+                $sanpham->where('gia','>=',$minprice)->where('gia','<=',$maxprice);
+        }
+        if($request->rom)
+        {
+            $rom = $request->rom;
+            $sanpham = $sanpham->where('rom',$rom);
+                
+        }
+        if($request->sortby)
+        {
+            $sortby = $request->sortby;
+            switch ($sortby) {
+                case 'tangdan':
+                    $sanpham->orderBy('gia','ASC');
+                    break;
+                case 'giamdan':
+                    $sanpham->orderBy('gia','DESC');
+                    break;
+                default:
+                    
+                    break;
+            }
+        }
+        $rom = SanPham::select('rom')->distinct()->orderBy('rom','ASC')->get();
         $tongsanpham = $sanpham->get();
         $khoanggia = KhoangGia::all();
         $tenhang = HangDT::where('id',$request->timkiem)->value('tenhang');
@@ -461,7 +379,10 @@ class PageController extends Controller
         return view('pages/timkiem',['keyword' => $keyword, 'sanpham' => $sanpham, 
             'tongsanpham' => $tongsanpham,
             'tenhang' => $tenhang,
-            'khoanggia' => $khoanggia]);
+            'rom' => $rom,
+            'khoanggia' => $khoanggia,
+            'finding' => $finding
+        ]);
         
     }
 
@@ -692,75 +613,6 @@ class PageController extends Controller
         $user->save();
         return redirect('dangnhap')->with('thongbaoreset','Reset mật khẩu thành công!');
     }
-    public function cuahang(Request $request)
-    {
-        $id_nhom = $request->id_nhom;
-        $sanpham = DB::table('tbchitietsanpham')
-                    ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
-                    ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
-                    ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
-                    ->select('tbsanpham.tensp','tbsanpham.id_nhom','tbhangdt.tenhang','tbsanpham.hinhsp','tbchitietsanpham.*','tbmau.mau');
-        $countSanPham = $sanpham->get();
-        if($request->id_banner)
-        {
-            $sanpham = $sanpham->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
-                    ->where('id_banner',$request->id_banner);
-            $hinhbanner = Banner::where('id',$request->id_banner)->select('id','hinhbanner')->first();
-            $countSanPham = $sanpham->get();
-        }
-        else
-            $hinhbanner = null;
 
-        if($request->id_nhom)
-        {
-            $id_nhom = $request->id_nhom;
-            $sanpham = $sanpham->where('id_nhom',$id_nhom);
-        }
-        if(isset($request->maxprice) || isset($request->minprice))
-        {
-                $price = $request->price;
-                $maxprice = $request->maxprice;
-                $minprice = $request->minprice;
-                if($maxprice==null)
-                    $maxprice=100000000000;
-                if($minprice==null)
-                    $minprice=1;
-                
-                $sanpham->where('gia','>=',$minprice)->where('gia','<=',$maxprice);
-        }
-        if($request->rom)
-        {
-            $rom = $request->rom;
-            $sanpham = $sanpham->where('rom',$rom);
-                
-        }
-        if($request->sortby)
-        {
-            $sortby = $request->sortby;
-            switch ($sortby) {
-                case 'tangdan':
-                    $sanpham->orderBy('gia','ASC');
-                    break;
-                case 'giamdan':
-                    $sanpham->orderBy('gia','DESC');
-                    break;
-                default:
-                    
-                    break;
-            }
-        }
-        $sanpham = $sanpham->paginate(6);
-        $thuonghieu = HangDT::all();
-        $rom = SanPham::select('rom')->distinct()->orderBy('rom','ASC')->get();
-        $khoanggia = KhoangGia::all();
-        return view('pages/cuahang',
-            ['sanpham' => $sanpham, 
-            'thuonghieu' => $thuonghieu,
-            'rom' => $rom,
-            'khoanggia' => $khoanggia,
-            'hinhbanner' => $hinhbanner,
-            'countSanPham'=> $countSanPham,
-        ]);
-        //var_dump($request->orderby);
-    }
+
 }
