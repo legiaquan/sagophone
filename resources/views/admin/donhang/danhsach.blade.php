@@ -97,10 +97,10 @@
                                                                 @if($row->tinhtrang != 'confirmed' and $row->tinhtrang != 'delivery' )
                                                                 <a class="btn btn-raised btn-primary" style="width: 100%" href="admin/donhang/xuly/{{ $row->id }}/confirmed/{{ auth('admin')->user()->id }}">Đã xác nhận</a>
                                                                 @endif
-                                                                @if($row->tinhtrang != 'delivery' and $row->tinhtrang !='pending')
+                                                                @if($row->tinhtrang != 'delivery' and $row->tinhtrang !='apending')
                                                                 <a class="btn btn-raised btn-info" style="width: 100%" href="admin/donhang/xuly/{{ $row->id }}/delivery/{{ auth('admin')->user()->id }}">Đang giao hàng</a>
                                                                 @endif
-                                                                @if($row->tinhtrang !='pending' and $row->tinhtrang != 'confirmed')
+                                                                @if($row->tinhtrang !='apending' and $row->tinhtrang != 'confirmed')
                                                                 <a class="btn btn-raised btn-success" style="width: 100%" href="admin/donhang/xuly/{{ $row->id }}/complete/{{ auth('admin')->user()->id }}">Thành công</a>
                                                                 @endif
                                                             </div>

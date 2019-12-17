@@ -68,7 +68,7 @@ class DonHangController extends Controller
         }
         if($tinhtrang == 'cancel')
         {
-            if($donhang->tinhtrang != 'pending')
+            if($donhang->tinhtrang != 'apending')
             {
                 foreach($chitietdonhang as $row){
                     $chitietsanpham = ChiTietSanPham::find($row->id_chitietsanpham);

@@ -7,6 +7,9 @@ use App\Admin;
 use Illuminate\Support\Facades\Auth;
 use App\NhanVien;
 use App\Level;
+use App\ThanhVien;
+use App\DonHang;
+use DB;
 class AdminController extends Controller
 {
     //
@@ -14,7 +17,28 @@ class AdminController extends Controller
    
    public function index()
    {
-      return view('admin.trang-chu');
+        $sothanhvien = ThanhVien::where('trangthai',1)->count();
+        $sodonhangpending = DonHang::where('tinhtrang','apending')->count();
+        $soluongsanphamdaban = DB::table('tbchitietdonhang')
+                ->join('tbdonhang','tbchitietdonhang.id_chitietsanpham','tbdonhang.id')
+                ->where('tbdonhang.tinhtrang','complete')
+                ->sum('tbchitietdonhang.soluong');
+        $doanhthu = DB::table('tbchitietdonhang')
+                ->join('tbdonhang','tbchitietdonhang.id_chitietsanpham','tbdonhang.id')
+                ->where('tbdonhang.tinhtrang','complete')
+                ->sum('tbchitietdonhang.giamua');
+        $sanphambanchay = DB::table('tbchitietdonhang')
+                ->join('tbchitietsanpham','tbchitietdonhang.id_chitietsanpham','tbchitietsanpham.id')
+                ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
+                ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
+                ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
+                ->selectRaw('sum(tbchitietdonhang.soluong) as soluongbanchay,tbsanpham.tensp,tbhangdt.tenhang,tbsanpham.hinhsp,tbchitietsanpham.*,tbmau.mau,tbmau.mamau')
+                ->groupBy('tbchitietdonhang.id_chitietsanpham')
+                ->orderBy('soluongbanchay','desc')
+                ->take(10)
+                ->get();
+        //dd($sanphambanchay);
+        return view('admin.trang-chu',compact('sothanhvien','sodonhangpending','soluongsanphamdaban','doanhthu','sanphambanchay'));
    }
 	public function getLogin()
 	{
