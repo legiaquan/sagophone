@@ -32,6 +32,8 @@ class AdminController extends Controller
                 ->join('tbsanpham','tbchitietsanpham.id_sanpham','tbsanpham.id')
                 ->join('tbhangdt','tbsanpham.id_hangdt','tbhangdt.id')
                 ->join('tbmau','tbchitietsanpham.id_mau','tbmau.id')
+                ->join('tbdonhang','tbchitietdonhang.id_chitietsanpham','tbdonhang.id')
+                ->where('tbdonhang.tinhtrang','complete')
                 ->selectRaw('sum(tbchitietdonhang.soluong) as soluongbanchay,tbsanpham.tensp,tbhangdt.tenhang,tbsanpham.hinhsp,tbchitietsanpham.*,tbmau.mau,tbmau.mamau')
                 ->groupBy('tbchitietdonhang.id_chitietsanpham')
                 ->orderBy('soluongbanchay','desc')

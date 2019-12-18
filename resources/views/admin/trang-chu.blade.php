@@ -101,6 +101,7 @@
                                     <th>Màu</th>
                                     <th>Giá niêm yết</th>
                                     <th>Số lượng đã bán</th>
+                                    <th>Doanh thu</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -114,6 +115,7 @@
                                     <td bgcolor="{{ $row->mamau }}">{{ $row->mau }}</td>
                                     <td>{{ number_format($row->gia) }}₫</td>
                                     <td>{{ $row->soluongbanchay }}</td>
+                                    <td>{{ number_format($row->gia*$row->soluongbanchay) }}₫</td>
                                 </tr>
                               @endforeach
                             </tbody>
