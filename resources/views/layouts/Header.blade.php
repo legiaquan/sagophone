@@ -139,15 +139,15 @@
 											<h5>Tổng tiền : {{Cart::subtotal()}}VND</h5>
 										</div>
 										<div class="cart-btns">
-											<a href="{{route('get.list.shopping.cart')}}">Xem Giỏ Hàng</a>
+											<a style="width: 100%" href="{{route('get.list.shopping.cart')}}">Xem Giỏ Hàng</a>
 											@if(Auth::user() != null)
 												@if(Cart::count() == 0)
-													<a href="cuahang">Thanh Toán<i class="fa fa-arrow-circle-right"></i></a>			
+													<a style="width: 100%" href="cuahang">Thanh Toán<i class="fa fa-arrow-circle-right"></i></a>			
 												@else
-													<a href="{{route('pay.cart')}}">Thanh Toán<i class="fa fa-arrow-circle-right"></i></a>
+													<a style="width: 100%" href="{{route('pay.cart')}}">Thanh Toán<i class="fa fa-arrow-circle-right"></i></a>
 												@endif
 											@else
-												<a href="dangnhap">Thanh Toán<i class="fa fa-arrow-circle-right"></i></a>
+												<a style="width: 100%" href="dangnhap">Thanh Toán<i class="fa fa-arrow-circle-right"></i></a>
 											@endif
 										</div>
 									</div>
