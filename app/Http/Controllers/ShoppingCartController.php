@@ -142,7 +142,7 @@ class ShoppingCartController extends Controller
 
     public function lichsumuahang()
     {
-        $donhang = DonHang::where('id_thanhvien',Auth::user()->id)->get();
+        $donhang = DonHang::where('id_thanhvien',Auth::user()->id)->orderBy('created_at','desc')->get();
         return view('shopping.lichsumuahang',['donhang' => $donhang]);
     }
 

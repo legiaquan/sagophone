@@ -9,11 +9,10 @@
                 <div id="responsive-nav">
                     <!-- NAV -->
                     <ul class="main-nav nav navbar-nav">
-                        <li><a href="trangchu">Trang Chủ</a></li>
-                        <li><a href="loaitin">Tin Tức</a></li>
-                        <li><a href="dienthoai">Điện Thoại</a></li>
-						<li><a href="phukien">Phụ Kiện</a></li>                                  
-                        <li><a href="lienhe">Liên Hệ</a></li>
+						<li><a href="trangchu">Trang Chủ</a></li>
+						<li><a href="loaitin">Tin Tức</a></li>
+						<li><a href="cuahang">Cửa Hàng</a></li>									
+						<li><a href="lienhe">Liên Hệ</a></li>
                     </ul>
                     <!-- /NAV -->
                 </div>
@@ -58,7 +57,7 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				  	<?php $i = 1 ?>
+				  	<?php $i = count($donhang); ?>
 				  	@foreach($donhang as $dh)
 				
 					    <tr>
@@ -67,7 +66,7 @@
 							<td>{{$dh->tennguoinhan}}</td>
 							<td>{{$dh->diachinguoinhan}}</td>
 							<td>{{$dh->sdtnguoinhan}}</td>
-							<td>{{$dh->tongtien}}</td>
+							<td>{{number_format($dh->tongtien)}}₫</td>
 							<td>
 								@if($dh->tinhtrang == "apending")
 									<a class="btn btn-warning">Đang xử lý</a>
@@ -85,7 +84,7 @@
 								<a href="chitietdonhang/{{$dh->id}}"><i class="fa fa-spinner"></i>Chi tiết</a>
 					      	</td>
 					    </tr>
-					<?php $i++ ?>
+					<?php $i-- ?>
 					@endforeach
 				  </tbody>
 				</table>

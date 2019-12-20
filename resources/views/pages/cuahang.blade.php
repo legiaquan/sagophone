@@ -220,10 +220,10 @@
 							<!-- product -->
 								@foreach($sanpham as $sp)
 								<div class="col-md-4 col-xs-5">
-									<div class="product" style="height: 415px;margin-bottom: 50px ">
-										<div class="product-img">
-											<a href="chitiet/{{$sp->id}}">
-												<img width="260px" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
+									<div class="product" style="height: 54,5%;margin-bottom: 50px ">
+										<div class="product-img text-center">
+											<a href="chitiet/{{$sp->id}}" >
+												<img width="95%" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
 											</a>
 											<div class="product-label">	
 												@if(getBanner($sp->id) == 3)
