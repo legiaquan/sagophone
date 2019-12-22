@@ -149,8 +149,15 @@ class ShoppingCartController extends Controller
     public function chitietdonhang($id)
     {
         $chitietdonhang = ChiTietDonHang::where('id_donhang',$id)->get();
+        $countRow = $chitietdonhang->count();
+        if($countRow<=0)
+        {
+            echo "";
+            return redirect('/');
+        }
+        $id_thanhvien = DonHang::where('id',$id)->value('id_thanhvien');
         $tinhtrang = DonHang::where('id',$id)->select('id','tinhtrang','madh')->first();
-        return view('shopping.chitietdonhang',['chitietdonhang' => $chitietdonhang, 'tinhtrang' => $tinhtrang]);
+        return view('shopping.chitietdonhang',['chitietdonhang' => $chitietdonhang, 'tinhtrang' => $tinhtrang,'id_thanhvien'=>$id_thanhvien,'countRow'=>$countRow]);
     }
 
     public function cancelOrder($id)

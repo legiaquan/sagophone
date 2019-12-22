@@ -20,7 +20,7 @@ class UserLoginMiddleware
         if(!Auth::user())
         {
             return redirect()->back();
-           
+            
         }
         else
         {

@@ -1,6 +1,12 @@
+
 <title>Chi Tiết Đơn Hàng</title>
 @extends('layouts.index')
-
+@if($id_thanhvien != Auth::user()->id)
+	<script type="text/javascript">
+		window.location="/";
+		alert('Không thể truy cập trang');
+	</script>
+@endif
 @section('content')
 <!-- NAVIGATION -->
         <nav id="navigation">
