@@ -32,7 +32,8 @@
 						<div class="col-md-12 text-center">						
 							<span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+								<p class="text-muted text-center col-12 py-1">Copyright  &copy; 2019 <a>Sagophone </a>, Xây dựng website bán điện thoại di động <i class="ft-heart font-small-3"></i><br> by  LÊ GIA QUÂN  - <a><i class="ft-github" ></i></a>NGUYỄN MINH TRƯỜNG </p>
+                                
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</span>
 						</div>
