@@ -329,7 +329,10 @@ class PageController extends Controller
 
     public function getNguoiDung()
     {
-        return view('pages.nguoidung');
+        if(!Auth::user())
+            return view('errors.404');
+        else
+            return view('pages.nguoidung');
     }
 
     public function postNguoiDung(Request $request)

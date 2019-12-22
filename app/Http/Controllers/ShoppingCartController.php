@@ -83,7 +83,6 @@ class ShoppingCartController extends Controller
     public function payCart()
     {
         $products = Cart::content();
-
         return view('shopping.pay',['products' => $products]);
     }
 
@@ -137,20 +136,38 @@ class ShoppingCartController extends Controller
 
     public function successCart()
     {
-        return view('shopping.paysuccess');
+        if(Cart::content() == NULL)
+            return view('errors.404');
+        else
+            return view('shopping.paysuccess');
     }
 
     public function lichsumuahang()
     {
-        $donhang = DonHang::where('id_thanhvien',Auth::user()->id)->orderBy('created_at','desc')->get();
-        return view('shopping.lichsumuahang',['donhang' => $donhang]);
+        if(!Auth::user())
+            return view('errors.404');
+        else
+        {
+            $donhang = DonHang::where('id_thanhvien',Auth::user()->id)->orderBy('created_at','desc')->get();
+            return view('shopping.lichsumuahang',['donhang' => $donhang]);
+        }
     }
 
     public function chitietdonhang($id)
     {
-        $chitietdonhang = ChiTietDonHang::where('id_donhang',$id)->get();
-        $tinhtrang = DonHang::where('id',$id)->select('id','tinhtrang','madh')->first();
-        return view('shopping.chitietdonhang',['chitietdonhang' => $chitietdonhang, 'tinhtrang' => $tinhtrang]);
+        if(!Auth::user())
+            return view('errors.404');
+        else
+        {
+            $chitietdonhang = ChiTietDonHang::where('id_donhang',$id)->get();
+            $tinhtrang = DonHang::where('id',$id)->select('id','tinhtrang','madh')->first();
+            $thanhvien = DonHang::where('id',$id)->value('id_thanhvien');
+            if(Auth::user()->id != $thanhvien)
+                return view('errors.404');
+            else
+                return view('shopping.chitietdonhang',['chitietdonhang' => $chitietdonhang, 'tinhtrang' => $tinhtrang]);
+        }
+        
     }
 
     public function cancelOrder($id)
@@ -169,7 +186,11 @@ class ShoppingCartController extends Controller
         ->paginate(3);
         $sodanhgia = count(ChiTietDonHang::where('id_chitietsanpham',$chitiet->id_chitietsanpham)
         ->where('star','!=','null')->get());
-        return view('shopping.danhgia',['chitiet' => $chitiet, 'danhgia' => $danhgia, 'sodanhgia' => $sodanhgia]);
+        $thanhvien = DonHang::where('id',$chitiet->id_donhang)->value('id_thanhvien');
+        if(Auth::user()->id != $thanhvien)
+            return view('errors.404');
+        else
+            return view('shopping.danhgia',['chitiet' => $chitiet, 'danhgia' => $danhgia, 'sodanhgia' => $sodanhgia]);
     }
     public function postDanhgia($id, Request $request)
     {

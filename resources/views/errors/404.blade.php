@@ -72,7 +72,7 @@
                             </div>
                             <div class="row py-2 justify-content-center">
                                 <div class="col-8">
-                                    <a class="btn btn-brown btn-raised btn-block font-medium-2" href="/"><i class="ft-home"></i> Quay về trang chủ</a>
+                                    <a class="btn btn-brown btn-raised btn-block font-medium-2" href="trangchu"><i class="ft-home"></i> Quay về trang chủ</a>
                                 </div>
                             </div>
                         </div>
