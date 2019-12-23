@@ -417,6 +417,7 @@ class PageController extends Controller
         $user->email = $request->Email;
         $user->password = bcrypt($request->Password);
         $user->verifyToken = Str::random(40);
+        $user->trangthai = 0;
         $user->save();
         Mail::to($user->email)->send(new verifyEmail($user));
         return redirect('dangky')->with('thongbaodangky','Đăng ký tài khoản thành công! Vui lòng truy cập mail để kích hoạt!');
