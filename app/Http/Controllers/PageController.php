@@ -329,7 +329,10 @@ class PageController extends Controller
 
     public function getNguoiDung()
     {
-        return view('pages.nguoidung');
+        if(!Auth::user())
+            return view('errors.404');
+        else
+            return view('pages.nguoidung');
     }
 
     public function postNguoiDung(Request $request)
@@ -414,6 +417,7 @@ class PageController extends Controller
         $user->email = $request->Email;
         $user->password = bcrypt($request->Password);
         $user->verifyToken = Str::random(40);
+        $user->trangthai = 0;
         $user->save();
         Mail::to($user->email)->send(new verifyEmail($user));
         return redirect('dangky')->with('thongbaodangky','Đăng ký tài khoản thành công! Vui lòng truy cập mail để kích hoạt!');

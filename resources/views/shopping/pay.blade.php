@@ -99,6 +99,7 @@
                                 <div class="col-md-12">
                                     @if(Cart::count() == 0)
 									   <button type="submit" class="btn btn-success" disabled="">Xác Nhận</button>
+                                       <a href="cuahang" class="btn btn-primary" style="text-align: right;">Cửa Hàng</a>
                                     @else
                                         <button type="submit" class="btn btn-success">Xác Nhận</button>
                                     @endif

@@ -58,11 +58,9 @@
 					<div class="col-md-5 col-md-push-2">
 						
 						<div id="product-main-img">
-							@foreach($hinhchitiet as $hinh)
 								<div class="product-preview">
-									<a href="chitiet/{{$hinh->id}}"><img src="upload/imgSanPham/{{$hinh->hinhchitiet}}" alt=""></a>
+									<img src="upload/imgSanPham/{{$chitiet->hinhchitiet}}" alt="">
 								</div>
-							@endforeach
 						</div>
 						
 					</div>
@@ -72,11 +70,9 @@
 					<div class="col-md-2  col-md-pull-5">
 						
 						<div id="product-imgs">
-							@foreach($hinhchitiet as $hinh1)
 							<div class="product-preview">
-								<a href="chitiet/{{$hinh1->id}}"><img src="upload/imgSanPham/{{$hinh1->hinhchitiet}}" alt=""></a>
+								<a href="chitiet/{{$chitiet->id}}"><img src="upload/imgSanPham/{{$chitiet->hinhchitiet}}" alt=""></a>
 							</div>
-							@endforeach
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->

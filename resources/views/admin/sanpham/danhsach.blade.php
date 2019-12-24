@@ -18,22 +18,22 @@
                                             </div>
                                         @endif
                                     </p>
-                                    <table width="102%" class="table table-striped table-bordered zero-configuration">
+                                    <table width="103%" class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
-                                                <th></th>
-                                                <th width="1px">ID</th>
-                                                <th>Tên sp</th>
-                                                <th>Hãng</th>
-                                                <th width="30px">Nhóm</th>                            
+                                                <th width="10px"></th>
+                                                <th width="10px">ID</th>
+                                                <th width="10px">Tên sp</th>
+                                                <th width="10px">Hãng</th>
+                                                <th width="10px">Nhóm</th>                            
                                                 <!-- <th>Mô tả</th> -->
-                                                <th>Màn hình</th>
-                                                <th>OS</th>
-                                                <th>Camera</th>
-                                                <th>CPU & Pin</th>
-                                                <th>Thẻ sim</th>
-                                                <th width="400px">Giá & Số lượng</th>                              
-                                                <th width="10px">Xử lý</th>
+                                                <th width="10px">Màn hình</th>
+                                                <th width="10px">OS</th>
+                                                <th width="10px">CAM</th>
+                                                <th width="10px" >CPU & Pin</th>
+                                                <th width="10px" >Thẻ sim</th>
+                                                <th width="300px">Giá & Số lượng</th>                              
+                                                <th width="10px" >Xử lý</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -72,9 +72,9 @@
                                                         <br>
                                                     @endforeach</td>                                                              
                                                 <td align="center">
-                                                    <a href="admin/sanpham/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit mr-1"></i>Sửa</span></a><br>
+                                                    <a href="admin/sanpham/sua/{{ $row->id }}"><span class="badge badge-primary mr-2"><i class="ft-edit"></i>Sửa</span></a><br>
                                                     <a href="admin/sanpham/xoa/{{ $row->id }}"><span class="badge badge-danger mr-2"><i class="ft-trash-2">Xóa</i></span></a><br>
-                                                    <a href="admin/chitietsanpham/them/{{ $row->id }}"><span class="badge badge-success mr-2"><i class="ft-image mr-1"></i>Thêm<br> màu</span></a>
+                                                    <a href="admin/chitietsanpham/them/{{ $row->id }}"><span class="badge badge-success mr-2"><!-- <i class="ft-image"></i> -->Thêm<br>màu</span></a>
                                                     {{-- <a href="admin/chitietsanpham/danhsach/{{ $row->id }}"><span class="badge badge-info mr-2"><i class="ft-eye "></i>Xem<br>chi tiết</span></a> --}}
                                                 </td>
                                                 

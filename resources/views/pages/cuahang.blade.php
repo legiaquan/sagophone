@@ -223,7 +223,13 @@
 									<div class="product" style="height: 54,5%;margin-bottom: 50px ">
 										<div class="product-img text-center">
 											<a href="chitiet/{{$sp->id}}" >
-												<img width="95%" height="250px" src="./upload/imgSanPham/{{$sp->hinhsp}}" alt="">
+												<img
+												@if(!Request::get('keyword'))
+												width="95%"
+												@else
+												width="75%"
+												@endif
+												height="250px" src="./upload/imgSanPham/{{$sp->hinhchitiet}}" alt="">
 											</a>
 											<div class="product-label">	
 												@if(getBanner($sp->id) == 3)
