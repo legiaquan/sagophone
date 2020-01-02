@@ -71,6 +71,11 @@
                                 		{{session('thongbao')}}
                             		</div>
                        			@endif
+                       			@if(session('loitimkiem'))
+                            		<div class="alert alert-warning">
+                                		{{session('loitimkiem')}}
+                            		</div>
+                       			@endif
 								@if(count($errors)>0)
 		                            <div class="alert alert-danger">
 		                                @foreach($errors->all() as $err)
@@ -80,7 +85,6 @@
 		                        @endif
 
 								<form id="form_search" action="cuahang" class="tree-most"  role="search" method="GET">
-									
  									<select name="timkiem" class="input-select col-lg-3">
 										<option value="">Chọn hãng</option>
 										@foreach($hangdt as $hdt)
@@ -126,7 +130,7 @@
 														<img src="upload/imgSanPham/{{$sanpham->options->avatar}}" alt="">
 													</div>
 													<div class="product-body">
-														<h3 class="product-name"><a href="#">{{$sanpham->name}}</a></h3>
+														<h3 class="product-name"><a href="chitiet/{{$sanpham->id}}">{{$sanpham->name}}</a></h3>
 														<h4 class="product-price"><span class="qty">{{$sanpham->qty}}x</span>{{number_format($sanpham->price,0,',','.')}}VND</h4>
 													</div>
 													<button class="delete" onclick="window.location.href = '{{route('delete.cart.item',$sanpham->rowId)}}';"><i class="fa fa-close"></i></button>

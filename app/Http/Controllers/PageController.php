@@ -28,6 +28,8 @@ use App\Mau;
 
 use App\ChiTietSanPham;
 
+use App\ChiTietDonHang;
+
 use App\LoaiTin;
 
 use App\TinTuc;
@@ -119,7 +121,7 @@ class PageController extends Controller
             'phukien' => $phukien,
             'tintuc' => $tintuc
         ]);
-    	
+    
     }
 
     public function loaitin(Request $request)
@@ -181,21 +183,25 @@ class PageController extends Controller
 
         $countSanPham = $sanpham->get();
         $keyword = $request->keyword;
-        if($request->keyword)
+        if($keyword != null)
         {
              $sanpham = $sanpham->where('tensp','like','%'.$keyword.'%');
 
         }
+       
         if($request->timkiem)
         {
             $sanpham = $sanpham->where('id_hangdt',$request->timkiem);
+            $tenhang = HangDT::where('id',$request->timkiem)->value('tenhang');
         }
+        else
+            $tenhang = null;
 
         if($request->id_banner)
         {
             $sanpham = $sanpham->join('tbdanhsachbanner','tbchitietsanpham.id','tbdanhsachbanner.id_chitietsanpham')
                     ->where('id_banner',$request->id_banner);
-            $hinhbanner = Banner::where('id',$request->id_banner)->select('id','hinhbanner')->first();
+            $hinhbanner = Banner::where('id',$request->id_banner)->select('id','hinhbanner','tenbanner')->first();
             $countSanPham = $sanpham->get();
         }
         else
@@ -259,6 +265,7 @@ class PageController extends Controller
             'hinhbanner' => $hinhbanner,
             'countSanPham'=> $countSanPham,
             'countTimKiem'=> $countTimKiem,
+            'tenhang' => $tenhang
         ]);
         //var_dump($request->orderby);
     }
@@ -284,7 +291,15 @@ class PageController extends Controller
         else
             $chitiet = $chitiet;
         
-    	return view('pages/chitiet',['chitiet' => $chitiet, 'sanphamlienquan' => $sanphamlienquan, 'hinhchitiet' => $hinhchitiet]);
+        $binhluan = BinhLuan::where('id_sanpham',$chitiet->id_sanpham)->paginate(3);
+        $danhgia = ChiTietDonHang::where('id_chitietsanpham',$chitiet->id)->paginate(3);
+
+    	return view('pages/chitiet',['chitiet' => $chitiet, 
+            'sanphamlienquan' => $sanphamlienquan, 
+            'hinhchitiet' => $hinhchitiet,
+            'binhluan' => $binhluan,
+            'danhgia' => $danhgia
+        ]);
     }
 
 
@@ -313,18 +328,18 @@ class PageController extends Controller
             $msg->to('momaomao1@gmail.com','SagoPhone')->subject('Phản Hồi Của Người Dùng');
         });
 
-        return redirect('lienhe')->with('phanhoithanhcong','Gửi phản hồi thành công!');; 
+        return redirect('lienhe')->with('phanhoithanhcong','Gửi phản hồi thành công!');
     }
 
     public function binhluan(Request $request, $id)
     {
-        $sanpham = SanPham::find($id);
+        $sanpham = ChiTietSanPham::find($id);
         $binhluan = new BinhLuan;
-        $binhluan->id_sanpham = $id;
+        $binhluan->id_sanpham = $sanpham->id_sanpham;
         $binhluan->id_thanhvien = Auth::user()->id;
         $binhluan->binhluan = $request->binhluan;
         $binhluan->save();
-        return redirect("chitiet/$id/".$sanpham->id.".html")->with('thongbao','Bình luận thành công!');
+        return redirect("chitiet/$id/".$sanpham->id)->with('thongbaobinhluan','Bình luận thành công!');
     }
 
     public function getNguoiDung()
@@ -396,7 +411,8 @@ class PageController extends Controller
                 'Ten' => 'required|min:5|unique:tbthanhvien,username',
                 'Email' => 'required|unique:tbthanhvien,email',
                 'Password' => 'required|min:6|max:30',
-                'againPassword' => 'required|same:Password'
+                'againPassword' => 'required|same:Password',
+                'againEmail' => 'required|same:Email'
             ],
             [
                 'Ten.required' => 'Bạn chưa nhập tên đăng nhập!',
@@ -405,6 +421,8 @@ class PageController extends Controller
                 'Email.required' => 'Bạn chưa nhập email!',
                 'Email.email' => 'Bạn nhập chưa đúng định dạng email!',
                 'Email.unique' => 'Email đã có người sử dụng!',
+                'againEmail.required' => 'Bạn chưa nhập lại email!',
+                'againEmail.same' => 'Email không trùng khớp!',
                 'Password.required' => 'Bạn chưa nhập mật khẩu!',
                 'Password.min' => 'Mật khẩu phải có nhiều hơn 6 ký tự!',
                 'Password.max' => 'Mật khẩu không được nhiều hơn 30 ký tự!',

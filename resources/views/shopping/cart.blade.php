@@ -63,16 +63,27 @@
 				  	@foreach($products as $pds)
 					    <tr>
 					    <th scope="row">#{{$i}}</th>
-					      <th scope="row"><a href="#">{{$pds->name}}</a></th>
+					      <th scope="row">
+					      	<a href="chitiet/{{$pds->id}}">{{$pds->name}}</a><br/>
+					      	<small>Hiện có ({{$pds->options->soluonghienco}})</small>
+					      </th>
 					      <td><img style="width: 120px; height: 120px" src="upload/imgSanPham/{{$pds->options->avatar}}"></td>
 					      <td>
 							<form action="shopping/update/{{$pds->rowId}}" method="POST" id="form_update">
 								<input type="hidden" name="_token" value="{{csrf_token()}}">
-								<input type="number" value="{{$pds->qty}}" name="qty" id="qty" min="1">
+								<input type="number" value="{{$pds->qty}}" name="qty" class="qty{{$i}}" min="1"  style="width: 150px">
 								<input type="hidden" value="{{$pds->rowId}}" name="rowId">
-								<i class="fa fa-pencil"></i>
+								<button><i class="fa fa-pencil"></i>Sửa</button>
 					      	</form>
-					      	
+					      {{-- 	 @section('script')
+							    <script>
+							 		$(function(){
+							 			$('.qty{{$i}}').change(function(){
+							 				$("#form_update").submit();
+							 			});
+							 		});
+							    </script>
+							@endsection --}}
 					      </td>
 					      <td>{{$pds->options->color}}</td>
 					      <td>{{number_format($pds->price,0,',','.')}} VND</td>
@@ -80,10 +91,15 @@
 					      <td>		    
 					      	<a href="{{route('delete.cart.item',$pds->rowId)}}"><i class="fa fa-trash-o"></i>Xóa</a>
 					      </td>
-						
 					    </tr>
+					   
 					<?php $i++ ?>
 				    @endforeach
+				    @if(session('loisoluong'))
+                        <div class="alert alert-warning">
+                              {{session('loisoluong')}}
+                         </div>
+                    @endif
 				  </tbody>
 				</table>
 				@if(Auth::user() != null)
@@ -96,13 +112,4 @@
 		</div>
 		<!-- /SECTION -->
 	
-@endsection
-@section('script')
-    <script>
- 		$(function(){
- 			$('#qty').change(function(){
- 				$("#form_update").submit();
- 			});
- 		});
-    </script>
 @endsection

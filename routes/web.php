@@ -299,7 +299,7 @@ Route::group(['prefix' => 'shopping'],function(){
 	Route::get('/add/{id}','ShoppingCartController@addProduct')->name('add.shopping.cart');//thêm mới vào giỏ hàng
 	Route::get('/cart','ShoppingCartController@getListShoppingCart')->name('get.list.shopping.cart');//trang giỏ hàng
 	Route::get('/delete/{rowId}','ShoppingCartController@deleteCart')->name('delete.cart.item');//xoa item
-	Route::post('/update/{rowId}','ShoppingCartController@updateCart');//update item
+	Route::post('/update/{rowId}','ShoppingCartController@updateCart')->name('update.cart.item');//update item
 	Route::group(['middleware' => 'userLogin'],function(){
 		Route::get('pay','ShoppingCartController@payCart')->name('pay.cart');//trang thanh toán
 		Route::post('pay','ShoppingCartController@saveCart');//lưu thông tin thanh toán

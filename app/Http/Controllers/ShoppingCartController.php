@@ -54,7 +54,7 @@ class ShoppingCartController extends Controller
     		'name' => $product->sanpham->tensp,
     		'qty' => 1, 
     		'price' => $price, 
-    		'options' => ['avatar' => $product->sanpham->hinhsp, 'color' => $product->mau->mau]
+    		'options' => ['avatar' => $product->hinhchitiet, 'color' => $product->mau->mau, 'soluonghienco' => $product->soluong]
 
         ]);
 
@@ -76,7 +76,19 @@ class ShoppingCartController extends Controller
 
     public function updateCart(Request $request)
     {
-    	Cart::update($request->rowId, $request->qty);
+        $soluong = Cart::content();
+        foreach($soluong as $sl)
+        {
+            if($request->qty > $sl->options->soluonghienco)
+            {
+                return redirect('shopping/cart')->with('loisoluong','Vượt số lượng hiện có!');
+            }
+            else
+            {
+                Cart::update($request->rowId, $request->qty);
+            }
+        }
+        
     	return redirect('shopping/cart');
     }
 

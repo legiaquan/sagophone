@@ -42,7 +42,13 @@
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="trangchu">Trang Chủ</a></li>
-							<li class="active"><a href="cuahang">Cửa Hàng</a></li>
+							@if(Request::get('id_banner'))
+								<li class="active"><a href="cuahang?id_banner={{$hinhbanner->id}}">{{$hinhbanner->tenbanner}}</a></li>
+							@elseif(Request::get('keyword'))
+								<li class="active"><a>Tìm Kiếm : {{Request::get('keyword')}}</a></li>
+							@else
+								<li class="active"><a href="cuahang">Cửa Hàng</a></li>
+							@endif
 						</ul>
 					</div>
 				</div>
@@ -55,19 +61,25 @@
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
-				@if($hinhbanner != null)
-					<a href="cuahang?id_banner={{ $hinhbanner->id }}"><img src="./upload/imgKhuyenMai/{{ $hinhbanner->hinhbanner }}" style="width: 100%; height: 200px" >
+				@if(Request::get('id_banner'))
+					<a href="cuahang?id_banner={{ $hinhbanner->id }}"><img src="./upload/imgKhuyenMai/{{ $hinhbanner->hinhbanner }}" style="width: 100%; height: 200px" >	
 				@endif
 			</div>
+
 </div>
 <!-- SECTION -->
 <div class="section">
 			<!-- container -->
 			<div class="container">
+				@if(Request::get('id_banner'))
+						<div class="text-right">
+									<a href="cuahang" style="align-items: center;text-decoration: overline;color: grey; text-align: right">Ghé Qua Cửa Hàng <i class="glyphicon glyphicon-chevron-right"></i> </a>
+						</div>
+				@endif
 				<!-- row -->
 				<div class="row">
 					<!-- ASIDE -->
-					@if(!Request::get('keyword'))
+					@if(!Request::get('keyword') && !Request::get('id_banner'))
 					<form class="tree-most" id="form_order1" method="GET">
 					<div id="aside" class="col-md-3">
 						<!-- aside Widget -->
@@ -101,7 +113,7 @@
 								<?php $dem++; ?>
 								<div class="input-radio">
 									<input
-									@if($hdt->id == Request::get('brand'))
+									@if($hdt->id == Request::get('brand') || $hdt->id == Request::get('timkiem'))
 										checked
 									@endif
 									type="radio" name="brand" value="{{ $hdt->id }}" id="category-{{ $dem }}">
@@ -205,15 +217,33 @@
 
 						<!-- /store top filter -->
 						</form>
-						@else
-							<div>
-								<p style="font-size:20px;font-weight: bold;"><i>Kết quả tìm kiếm '{{ Request::get('keyword') }}':</i></p>
-								@if($countTimKiem>0)
-									Tìm thấy {{ $countTimKiem }} sản phẩm
-								@else
-									Không có sản phẩm nào!
-								@endif
-							</div>
+						@elseif(!Request::get('id_banner'))
+							@if(Request::get('timkiem') && Request::get('keyword'))
+								<div>
+									<p style="font-size:20px;font-weight: bold;">Kết quả tìm kiếm : Hãng <i>'{{$tenhang}}'</i> - Từ khóa <i>'{{ Request::get('keyword') }}'</i></p>
+									@if($countTimKiem>0)
+										Tìm thấy ({{ $countTimKiem }}) sản phẩm
+									@else
+										Không có sản phẩm nào!
+									@endif
+								</div>
+								<div class="text-right">
+									<a href="cuahang" style="align-items: center;text-decoration: overline;color: grey; text-align: right">Ghé Qua Cửa Hàng <i class="glyphicon glyphicon-chevron-right"></i> </a>
+								</div>
+							@else
+								<div>
+									<p style="font-size:20px;font-weight: bold;">Kết quả tìm kiếm : <i>Từ khóa '{{ Request::get('keyword') }}'</i></p>
+									@if($countTimKiem>0)
+										Tìm thấy ({{ $countTimKiem }}) sản phẩm
+									@else
+										Không có sản phẩm nào!
+									@endif
+									
+								</div>
+								<div class="text-right">
+									<a href="cuahang" style="align-items: center;text-decoration: overline;color: grey; text-align: right">Ghé Qua Cửa Hàng <i class="glyphicon glyphicon-chevron-right"></i> </a>
+								</div>
+							@endif
 						@endif
 						<!-- store products -->
 						<div class="row">
@@ -224,7 +254,7 @@
 										<div class="product-img text-center">
 											<a href="chitiet/{{$sp->id}}" >
 												<img
-												@if(!Request::get('keyword'))
+												@if(!Request::get('keyword') && !Request::get('id_banner'))
 												width="95%"
 												@else
 												width="75%"

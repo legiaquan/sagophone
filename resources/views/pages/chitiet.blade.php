@@ -30,15 +30,9 @@
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="trangchu">Trang Chủ</a></li>
-							@if($chitiet->sanpham->id_nhom == 1)
-								<li class="active"><a href="cuahang?id_nhom={{ $chitiet->sanpham->id_nhom }}">{{$chitiet->sanpham->nhomsanpham->tennhom}}</a></li>
-								<li class="active"><a href="cuahang?grand={{ $chitiet->sanpham->id_hangdt }}">{{$chitiet->sanpham->hangdt->tenhang}}</a></li>
-								<li class="active"><a href="chitiet/{{ $chitiet->id }}">{{$chitiet->sanpham->tensp}}</a></li>
-							@else
-								<li class="active"><a href="phukien">{{$chitiet->sanpham->nhomsanpham->tennhom}}</a></li>
-								<li class="active"><a href="phukien?grand={{ $chitiet->sanpham->id_hangdt }}">{{$chitiet->sanpham->hangdt->tenhang}}</a></li>
-								<li class="active"><a href="chitiet/{{ $chitiet->id }}">{{$chitiet->sanpham->tensp}}</a></li>
-							@endif
+							<li class="active"><a href="cuahang?id_nhom={{ $chitiet->sanpham->id_nhom }}">{{$chitiet->sanpham->nhomsanpham->tennhom}}</a></li>
+							<li class="active"><a href="cuahang?brand={{ $chitiet->sanpham->id_hangdt }}">{{$chitiet->sanpham->hangdt->tenhang}}</a></li>
+							<li class="active"><a href="chitiet/{{ $chitiet->id }}">{{$chitiet->sanpham->tensp}}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -491,16 +485,16 @@
 										</div>
 										<!-- /Reviews -->
 										<div class="col-md-3">
-											@if(count($getdanhgia) > 0)
-												@foreach($chitiet->chitietdonhang as $danhgia)
+											@if(count($danhgia) > 0)
+												@foreach($danhgia as $dg)
 												<div id="reviews">
 													<ul class="reviews">
 														<li>
 															<div class="review-heading">
-																<h5 class="name">{{$danhgia->donhang->thanhvien->name}}</h5>
+																<h5 class="name">{{$dg->donhang->thanhvien->name}}</h5>(Màu : {{$dg->chitietsanpham->mau->mau}})
 																<p class="date">
-																	@for($i=0;$i<$danhgia->star;$i++)
-																		@if($i < $danhgia->star)
+																	@for($i=0;$i<$dg->star;$i++)
+																		@if($i < $dg->star)
 																			<i class="fa fa-star checked"></i>
 																		@endif
 																	@endfor
@@ -509,7 +503,7 @@
 																
 															</div>
 															<div class="review-body">
-																<p>{{$danhgia->nhanxet}}</p>
+																<p>{{$dg->nhanxet}}</p>
 															</div>
 														</li>
 														
@@ -523,6 +517,9 @@
 													<h4>(CHƯA CÓ ĐÁNH GIÁ ... )</h4>
 												</div>
 											@endif
+											<div class="store-filter clearfix" style="text-align: center;">
+												{{ $danhgia->links() }}
+											</div>
 										</div>
 									
 									</div>
@@ -540,7 +537,7 @@
 
 										<!-- Reviews -->
 										@if(Auth::user() != null)	
-										<div class="col-md-6">
+										<div class="col-md-5">
 											<h4><span class="glyphicon glyphicon-pencil"></span>&nbsp;...Bình luận</h4>
 
 											@if(session('thongbao'))
@@ -564,9 +561,9 @@
 											<div class="col-md-5">	
 											<h4><span class="glyphicon glyphicon-pencil"></span>&nbsp;...Bình luận</h4>
 
-											@if(session('thongbao'))
+											@if(session('thongbaobinhluan'))
 												<div class="alert alert-success">
-													{{session('thongbao')}}
+													{{session('thongbaobinhluan')}}
 												</div>
 											@endif
 										
@@ -587,7 +584,7 @@
 		
 										<div class="col-md-3">	
 											@if($dembinhluan > 0)
-												@foreach($chitiet->sanpham->binhluan as $cmt)
+												@foreach($binhluan as $cmt)
 												<div id="reviews">
 													<ul class="reviews">
 														<li>
@@ -606,11 +603,15 @@
 												</div>
 												<hr/>
 												@endforeach
+
 											@else
 												<div id="reviews">
 													<h4>(CHƯA CÓ BÌNH LUẬN ... )</h4>
 												</div>
 											@endif
+											<div class="store-filter clearfix" style="text-align: center;" id="table_data">
+												{{ $binhluan->links() }}
+											</div>
 										</div>
 										<!-- /Review Form -->
 									</div>
@@ -651,21 +652,43 @@
 						<div class="product">
 							
 							<div class="product-img">
-								<a href="chitiet/{{$splq->id_sanpham}}/{{$splq->id}}">				
-									<img src="upload/imgSanPham/{{$splq->hinhsp}}" alt="" width="250px" height="250px"> 
+								<a href="chitiet/{{$splq->id}}">				
+									<img src="upload/imgSanPham/{{$splq->hinhchitiet}}" alt="" width="250px" height="250px"> 
 								</a>
 							
-		
-								
-								<div class="product-label">
-									@if($splq->id_banner == 2)
-										<span class="sale">-30%</span>
-									@elseif($splq->id_banner == 3)
+							<div class="product-label">	
+								@if(getBanner($splq->id) == 3)
+									@if(getBanchay1($splq->id))			
 										<span class="new">NEW</span>
+										<span class="sale">HOT</span>	
 									@else
-										<span class="new">HOT</span>
+										<span class="new">NEW</span>
 									@endif
-								</div>
+								@elseif(getBanner($splq->id) == 7)
+									<span class="new">BlackFriday</span>
+									@if(getPhanTram($splq->id) != 0)
+										<span class="sale">-{{ getPhanTram($splq->id) }}%</span>
+									@endif
+									@if(getBanchay1($splq->id))			
+										<span class="sale">HOT</span>	
+									@endif
+								@elseif(getBanner($splq->id) == 8)
+									<span class="new">SEA GAMES 30</span>
+										@if(getPhanTram($splq->id) != 0)
+											<span class="sale">-{{ getPhanTram($splq->id) }}%</span>
+										@endif
+										@if(getBanchay1($splq->id))			
+											<span class="sale">HOT</span>	
+										@endif
+								@else
+									@if(getBanchay1($splq->id))			
+										<span class="sale">HOT</span>	
+									@endif
+									@if(getPhanTram($splq->id) != 0)
+										<span class="sale">-{{ getPhanTram($splq->id) }}%</span>
+									@endif
+								@endif
+							</div>
 							
 							</div>
 							<div class="product-body">
@@ -678,13 +701,24 @@
 													{{number_format($splq->gia,0,',','.')}}VND
 											@endif
 								</h4>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
+								<?php
+									$starlq = round((avgStarSanPham($splq->id)),2);
+									$starnguyenlq = floor(avgStarSanPham($splq->id));
+								?>
+												<div class="review-rating" style="height: 10px; margin-bottom: 5px">
+													@if($starlq != null)
+														@for($i=0;$i<$starnguyenlq;$i++)
+															@if($i < $starlq)
+																<i class="fa fa-star checked"></i>
+															@endif
+														@endfor
+														@if($starlq >= ($starnguyenlq + 0.5))
+															<i class="fa fa-star-half-o checked"></i>
+														@endif
+													@else
+														<a style="font-size: 10px">(Chưa có đánh giá)</a>
+													@endif
+												</div>				
 								<div class="product-btns">								
 									<button class="quick-view"><a href="chitiet/{{$splq->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Xem chi tiết</span></a></button>
 								</div>

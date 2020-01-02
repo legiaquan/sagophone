@@ -71,13 +71,19 @@
 							</div>
 							<br>
 							<div>
-				    			<label>Email</label>
+				    			<label>Địa chỉ Email</label>
 							  	<input type="email" class="form-control" placeholder="Nhập email" name="Email" aria-describedby="basic-addon1"
+							  	>
+							</div>
+							<br>
+							<div>
+				    			<label>Nhập lại địa chỉ Email</label>
+							  	<input type="email" class="form-control" placeholder="Nhập lại email" name="againEmail" aria-describedby="basic-addon1"
 							  	>
 							</div>
 							<br>	
 							<div>								
-				    			<label>Nhập mật khẩu</label>
+				    			<label>Mật khẩu</label>
 							  	<input type="password" class="form-control" name="Password" placeholder="Nhập mật khẩu" aria-describedby="basic-addon1">
 							</div>
 							<br>
@@ -86,8 +92,9 @@
 							  	<input type="password" class="form-control" name="againPassword" aria-describedby="basic-addon1" placeholder="Nhập lại mật khẩu">
 							</div>
 							<br>
-							<button type="submit" class="btn btn-default">Đăng ký
-							</button>
+							<div>
+								<button type="submit" class="btn btn-primary">Đăng ký</button>
+							</div>
 
 				    	</form>
 				  	</div>

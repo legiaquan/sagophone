@@ -66,7 +66,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>{{ $apple->hangdt->tenhang }}<br>Collection</h3>
-								<a href="cuahang?grand={{$apple->id}}" class="cta-btn">Đến Ngay<i class="fa fa-arrow-circle-right"></i></a>
+								<a href="cuahang?brand={{$apple->id}}&minprice=&maxprice=&sortby=" class="cta-btn">Đến Ngay<i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -81,7 +81,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>{{ $samsung->hangdt->tenhang }}<br>Collection</h3>
-								<a href="cuahang?grand={{$samsung->id}}" class="cta-btn">Đến Ngay<i class="fa fa-arrow-circle-right"></i></a>
+								<a href="cuahang?brand={{$samsung->id}}&minprice=&maxprice=&sortby=" class="cta-btn">Đến Ngay<i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -96,7 +96,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>{{ $nokia->hangdt->tenhang }}<br>Collection</h3>
-								<a href="cuahang?grand={{$nokia->id}}" class="cta-btn">Đến Ngay<i class="fa fa-arrow-circle-right"></i></a>
+								<a href="cuahang?brand={{$nokia->id}}&minprice=&maxprice=&sortby=" class="cta-btn">Đến Ngay<i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -538,7 +538,7 @@
 											
 											<div class="product-body">
 												<p class="product-category">{{$pk->tenhang}}</p>
-												<h3 class="product-name"><a href="chitiet/{{$pk->id}}" style="white-space: nowrap;">{{$pk->tensp}} {{$pk->mau }}</a></h3>
+												<h3 class="product-name"><a href="chitiet/{{$pk->id}}" style="white-space: nowrap;">{{ mb_substr($pk->tensp,0,30,'UTF-8').'...' }}</a></h3>
 												<h4 class="product-price">
 													@if(getPhanTram($pk->id) != null)
 													<del class="product-old-price">{{number_format($pk->gia,0,',','.')}}</del>{{number_format($pk->gia * (100 - getPhanTram($pk->id)) / 100,0,',','.')}}VND
