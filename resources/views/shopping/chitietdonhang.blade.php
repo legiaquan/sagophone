@@ -107,7 +107,7 @@
                         		@foreach($chitietdonhang as $chitiet)        
 		                            <div class="form-group">
 		                                <div class="col-sm-3 col-xs-3">
-		                                    <img class="img-responsive" width="100px" height="70px" src="upload/imgSanPham/{{$chitiet->chitietsanpham->sanpham->hinhsp}}" />
+		                                    <img class="img-responsive" width="100px" height="70px" src="upload/imgSanPham/{{$chitiet->chitietsanpham->hinhchitiet}}" />
 		                                </div>
 		                                <div class="col-sm-6 col-xs-6">
 		                                    <div class="col-xs-12">{{$chitiet->chitietsanpham->sanpham->tensp}} {{$chitiet->chitietsanpham->mau->mau}}</div>

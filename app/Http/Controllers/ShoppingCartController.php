@@ -115,7 +115,8 @@ class ShoppingCartController extends Controller
                 'address.required' => 'Bạn chưa nhập Địa chỉ!',
                 'address.min' => 'Địa chỉ phải từ 10 ký tử trở lên!',
                 'phone.required' => 'Bạn chưa nhập Số điện thoại người nhận!',
-                'address.numeric' => 'Vui lòng nhập số!',
+                'phone.numeric' => 'Vui lòng nhập số!',
+            
             ]
         );
         $donhang = new DonHang;
@@ -136,6 +137,10 @@ class ShoppingCartController extends Controller
                 $chitietdonhang->id_donhang = $donhang->id;
                 $chitietdonhang->id_chitietsanpham = $sanpham->id;
                 $chitietdonhang->soluong = $sanpham->qty;
+                $soluong = Cart::content();
+                $sanphamdonhang = ChiTietSanPham::where('id',$chitietdonhang->id_chitietsanpham)->first();
+                $sanphamdonhang->soluong = $sanphamdonhang->soluong - $sanpham->qty;
+                $sanphamdonhang->save();
                 $chitietdonhang->giamua = (float)$total;
                 $chitietdonhang->save();  
             }
@@ -143,7 +148,7 @@ class ShoppingCartController extends Controller
         }
         Cart::destroy();
 
-        return redirect('shopping/paysuccess')->with('thongbao','Thanh Toán Thành Công!');
+        return redirect('shopping/paysuccess');
     }
 
     public function successCart()

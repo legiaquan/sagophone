@@ -118,7 +118,7 @@
 									@endif
 								</h3>
 								@if($chitiet->soluong > 0)
-									<span class="product-available">Còn Hàng</span>
+									<span class="product-available">Còn {{$chitiet->soluong}} (SP)</span>
 								@else
 									<span class="product-available">Hết Hàng</span>
 								@endif
@@ -229,7 +229,7 @@
 								@if($chitiet->soluong > 0)
 									<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$chitiet->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 								@else
-									<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$chitiet->id)}}';" disabled=""><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+									<button class="btn btn-default" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$chitiet->id)}}';" disabled=""><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 								@endif
 							</div>
 						</div>

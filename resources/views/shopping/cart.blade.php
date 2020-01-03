@@ -84,7 +84,7 @@
 									    });
 									});
 									// $(function(){
-							 	// 		$('input[type="number"]').change(function(){
+							 	// 		$('#qty').change(function(){
 							 	// 			$("#form_update").submit();
 							 	// 		});
 							 	// 	});
