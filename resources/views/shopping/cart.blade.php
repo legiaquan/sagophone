@@ -71,19 +71,25 @@
 					      <td>
 							<form action="shopping/update/{{$pds->rowId}}" method="POST" id="form_update">
 								<input type="hidden" name="_token" value="{{csrf_token()}}">
-								<input type="number" value="{{$pds->qty}}" name="qty" class="qty{{$i}}" min="1"  style="width: 150px">
+								<input type="number" value="{{$pds->qty}}" name="qty" id="qty" min="1"  style="width: 150px">
 								<input type="hidden" value="{{$pds->rowId}}" name="rowId">
 								<button><i class="fa fa-pencil"></i>Sửa</button>
 					      	</form>
-					      {{-- 	 @section('script')
+					      	 @section('script')
 							    <script>
-							 		$(function(){
-							 			$('.qty{{$i}}').change(function(){
-							 				$("#form_update").submit();
-							 			});
-							 		});
+							 		$(document).ready(function(){
+							 			$('button').attr('disabled','disabled');
+									    $('input[type="number"]').change(function(){
+									           $('button').removeAttr('disabled');
+									    });
+									});
+									// $(function(){
+							 	// 		$('input[type="number"]').change(function(){
+							 	// 			$("#form_update").submit();
+							 	// 		});
+							 	// 	});
 							    </script>
-							@endsection --}}
+							@endsection
 					      </td>
 					      <td>{{$pds->options->color}}</td>
 					      <td>{{number_format($pds->price,0,',','.')}} VND</td>
