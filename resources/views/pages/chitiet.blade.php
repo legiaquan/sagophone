@@ -229,7 +229,7 @@
 								@if($chitiet->soluong > 0)
 									<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$chitiet->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 								@else
-									<button class="btn btn-default" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$chitiet->id)}}';" disabled=""><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+									<button class="btn btn-default" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$chitiet->id)}}';" disabled=""><i class="fa fa-shopping-cart"></i>Hết hàng</button>
 								@endif
 							</div>
 						</div>

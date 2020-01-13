@@ -189,7 +189,11 @@
 											</div>
 
 											<div class="add-to-cart">
-											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$spm->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+												@if($spm->soluong > 0)
+													<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$spm->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+												@else
+													<button class="btn btn-default" type="button" disable=""><i class="fa fa-shopping-cart"></i>Hết hàng</button>
+												@endif
 										</div>
 										
 										</div>
@@ -309,7 +313,11 @@
 											</div>
 
 											<div class="add-to-cart">
-											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$spm->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+											@if($spm->soluong > 0)
+													<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$spm->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+												@else
+													<button class="btn btn-default" type="button" disable=""><i class="fa fa-shopping-cart"></i>Hết hàng</button>
+												@endif
 										</div>
 										
 										</div>
@@ -439,7 +447,11 @@
 											</div>
 
 											<div class="add-to-cart">
-											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$dt->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+											@if($dt->soluong > 0)
+													<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$dt->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+												@else
+													<button class="btn btn-default" type="button" disable=""><i class="fa fa-shopping-cart"></i>Hết hàng</button>
+												@endif
 										</div>
 										
 										</div>
@@ -570,7 +582,11 @@
 											</div>
 
 											<div class="add-to-cart">
-											<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$pk->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+											@if($pk->soluong > 0)
+													<button class="add-to-cart-btn" type="button" onclick="window.location.href = '{{route('add.shopping.cart',$pk->id)}}';"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+												@else
+													<button class="btn btn-default" type="button" disable=""><i class="fa fa-shopping-cart"></i>Hết hàng</button>
+												@endif
 										</div>
 										
 										</div>
