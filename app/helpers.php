@@ -136,3 +136,12 @@ function demSPNhom($id_nhom)
                     ->count();
     return $dem;
 }
+function getSPBanner($id_chitietsanpham,$id_banner)
+{
+	//echo $id_banner;
+	$check = DB::table('tbdanhsachbanner')
+			->where('tbdanhsachbanner.id_chitietsanpham',$id_chitietsanpham)
+			->where('tbdanhsachbanner.id_banner','!=',$id_banner)
+			->get();
+	return $check;
+}

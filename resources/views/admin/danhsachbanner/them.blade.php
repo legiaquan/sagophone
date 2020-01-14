@@ -1,3 +1,4 @@
+{{-- {{ dd(count(getSPBanner(7,9))) }} --}}
 @extends('admin.layout.index')
 @section('content')
             <!-- Zero configuration table -->
@@ -44,12 +45,16 @@
                                                         
                                                         <span style="background: {{ $giasp->mamau }};color:#a6a6a6;border-radius: 5px;">{{ $giasp->mau }}:</span> {{ number_format($giasp->gia) }}₫ - {{ $giasp->soluong }}
                                                         
-                                                        @if(checkTonTaiSPBanner($giasp->id,$banner->id)==0)
+                                                        @if(count(getSPBanner($giasp->id,$banner->id))>0)
+                                                        <a><span style="float: right;" class="badge badge-warning mr-2"><i class="ft-alert-circle"></i> Đang chạy KM khác</span></a>
+                                                        
+                                                        @elseif(checkTonTaiSPBanner($giasp->id,$banner->id)==0)
                                                         <a href="admin/danhsachbanner/them/{{ $banner->id }}/{{ $giasp->id}}"><span style="float: right;" class="badge badge-primary mr-2"><i class="ft-plus-circle"></i> Thêm</span></a>
+                                                        
                                                         @else
-                                                        <a><span style="float: right;" class="badge badge-warning mr-2"><i class="ft-alert-circle"></i> Đã có</span></a>
-                                                        
-                                                        
+                                                        <a><span style="float: right;" class="badge badge-danger mr-2"><i class="ft-alert-circle"></i> Đã có</span></a>
+
+                                                       
                                                         @endif
                                                         <br><br>
                                                     @endforeach
